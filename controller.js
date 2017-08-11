@@ -1,5 +1,6 @@
 
 const fs = require('fs');
+const koaBody  = require('koa-body');
 
 // add url-route in /controllers:
 
@@ -11,7 +12,12 @@ function addMapping(router, mapping) {
             console.log(`register URL mapping: GET ${path}`);
         } else if (url.startsWith('POST ')) {
             var path = url.substring(5);
-            router.post(path, mapping[url]);
+            if(path.trim()=="/file"){
+                 console.log(`register multipart URL mapping: POST ${path}`);
+                router.post(path, koaBody({ multipart: true }),mapping[url]);
+            }else{
+                router.post(path, mapping[url]);
+            }
             console.log(`register URL mapping: POST ${path}`);
         } else if (url.startsWith('PUT ')) {
             var path = url.substring(4);
@@ -33,6 +39,7 @@ function addControllers(router, dir) {
     }).forEach((f) => {
         console.log(`process controller: ${f}...`);
         let mapping = require(__dirname + '/' + dir + '/' + f);
+        // 'POST /img': async (ctx, next) => {}
         addMapping(router, mapping);
     });
 }
