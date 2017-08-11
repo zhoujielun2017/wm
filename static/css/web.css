@@ -1,0 +1,17 @@
+/*.bd-sidebar {
+	float: left;
+	width: 25%;
+}
+.bd-content{
+	width: 75%;
+	float: left;
+}
+@media (max-width: 767px){
+	.bd-sidebar {
+	    display: none;
+	}	
+	.bd-content{
+		width: 100%;
+	}
+}
+*/

@@ -1,0 +1,24 @@
+{% extends './base.html' %}
+
+
+
+{% block head %}
+
+{% endblock %}
+
+{% block left %}
+
+{% endblock %}
+
+{% block main %}
+<ul class="list-group menu">
+    {% for e in list %}
+    <li class="list-group-item"><a href="/article/{{e.id}}">{{e.name}}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
+{% block foot %}
+
+{% endblock %}

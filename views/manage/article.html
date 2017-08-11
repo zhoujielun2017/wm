@@ -1,0 +1,81 @@
+{% extends './base.html' %}
+
+{% block main %}
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in list %}
+    <tr>
+        <td>{{item.title}}</td>
+        <td><a href="/api/article/{{item.id}}" class="btn btn-danger" role="button" data-id="">del</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<form class="form-horizontal" action="/api/article">
+    <input type="hidden" name="id" value="{{bean.id}}">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">title</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="title" placeholder="title" value="{{bean.title}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label">content</label>
+        <div class="col-sm-10">
+            <textarea name="content">{{bean.content}}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">保存</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+{% block foot %}
+<script src="http://cdn.ckeditor.com/4.7.1/standard-all/ckeditor.js"></script>
+<script>
+    var config = {
+        extraPlugins: 'codesnippet',
+        codeSnippet_theme: 'monokai_sublime',
+        height: 356
+
+    };
+
+    var editor = CKEDITOR.replace( 'content' );
+    $("form").on('submit',function(e){
+
+        var fd=new FormData(this);
+        var method=fd.get('id')?"PUT":"POST";
+        console.log(this.method);
+
+        $.ajax({
+            type: method,
+            url: this.action,
+            data:{id:fd.get('id'),title:fd.get('title'),content:editor.getData()},
+            dataType:"json",
+            success:function(json){
+                console.log(json);
+            }
+        });
+
+        return false;
+    });
+    $(".btn-danger").on("click",function () {
+        $.ajax({
+            type: "DELETE",
+            url: this.href,
+            dataType:"json",
+            success:function(json){
+                console.log(json);
+            }
+        });
+    });
+</script>
+{% endblock %}

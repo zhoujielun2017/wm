@@ -1,0 +1,196 @@
+{% extends './base.html' %}
+
+{% block main %}
+<ul class="nav nav-pills">
+   {% for e in roots %}
+  <li role="presentation"><a href="#{{e.id}}">{{e.name}}</a></li>
+    {% endfor %}
+</ul>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <ul class="list-group menu">
+          <li class="list-group-item">data...</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <ul class="list-group wiki">
+      {% for e in wikis %}
+      <li class="list-group-item" data-id="{{e.id}}">{{e.title}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
+
+<form class="form-horizontal addform" action="/api/wikimenus">
+        
+      <div class="form-group wiki">
+        <label class="col-sm-2 control-label">name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="name" placeholder="name" value="{{name}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">root_id</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="root_id" placeholder="root_id" value="{{root_id}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">parent_id</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="parent_id" placeholder="parent_id" value="{{parent_id}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">wiki_id</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="wiki_id" placeholder="wiki_id" value="{{wiki_id}}">
+        </div>
+      </div>
+       <div class="form-group">
+        <label class="col-sm-2 control-label">sort</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="sort" placeholder="sort" value="{{sort}}">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary">add</button>
+        </div>
+      </div>
+    </form>
+<form class="form-horizontal updateform" action="/api/wikimenus">
+    <input type="hidden" name="id" value="{{id}}">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="name" placeholder="name" value="{{name}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">root_id</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="root_id" placeholder="root_id" value="{{root_id}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">parent_id</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="parent_id" placeholder="parent_id" value="{{parent_id}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">wiki_id</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="wiki_id" placeholder="wiki_id" value="{{wiki_id}}">
+      </div>
+    </div>
+      <div class="form-group">
+      <label class="col-sm-2 control-label">sort</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="sort" placeholder="sort" value="{{sort}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">update</button>
+      </div>
+    </div>
+  </form>    
+{% endblock %}
+{% block foot %}
+<script>
+    
+    $(".addform,.updateform").on('submit',function(e){
+      var that = $(this);
+      var fd=new FormData(this);
+      var method=fd.get('id')?"PUT":"POST";
+      console.log(this.method);
+      
+      $.ajax({
+          type: method,
+          url: this.action,
+          data:that.serializeArray(),
+          dataType:"json",
+          success:function(json){
+              if(json.code=="success"){
+                  alert("success")
+              }else{
+                alert("fail");
+              }
+          }
+      });
+      
+      return false;
+    });
+
+    $(".nav-pills").on("click","a",function(){
+        console.log(this.href);
+        console.log(this.hash);
+        var root_id=this.hash.replace("#","");
+        var that=$(this);
+        var listgroup=$(".list-group.menu");
+        listgroup.empty();
+        $.ajax({
+            type: "GET",
+            url: "/api/wikimenus",
+            data:{root_id:root_id},
+            dataType:"json",
+            success:function(json){
+                if(json){
+                    for(var i in json){
+                      listgroup.append('<li class="list-group-item" data-id='+json[i].id+'>'+json[i].name+'</li>')
+                    }
+                }else{
+                  alert("保存失败");
+                }
+            }
+        });
+        var form=$("form");
+        form[0].reset();
+        form.find("input[name=root_id]").val(root_id);
+        form.find("input[name=parent_id]").val(root_id);
+        return false;
+    });
+    $(".list-group.menu").on("click",".list-group-item",function(){
+       
+        var id = $(this).data("id");
+         $.ajax({
+            type: "GET",
+            url: "/api/wikimenus/"+id,
+            dataType:"json",
+            success:function(json){
+
+                var addform=$(".addform");
+                addform[0].reset();
+                addform.find("input[name=root_id]").val(json.root_id);
+                addform.find("input[name=parent_id]").val(json.root_id);
+
+                var updateform=$(".updateform");
+                updateform[0].reset();
+                updateform.find("input[name=id]").val(json.id);
+                updateform.find("input[name=name]").val(json.name);
+                updateform.find("input[name=root_id]").val(json.root_id);
+                updateform.find("input[name=parent_id]").val(json.parent_id);
+                updateform.find("input[name=wiki_id]").val(json.wiki_id);
+                updateform.find("input[name=sort]").val(json.sort);
+            }
+        });
+    });
+    $(".list-group.wiki").on("click",".list-group-item",function(){
+       
+        var id = $(this).data("id");
+        console.log(id);
+        var updateform=$(".updateform");
+        updateform.find("input[name=wiki_id]").val(id);
+        updateform.find("input[name=name]").val($(this).text());
+            
+        
+    });
+</script>
+{% endblock %}

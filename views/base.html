@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/web.css" rel="stylesheet">
+    {% block head %} {% endblock %}
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body>
+<header class="navbar navbar-light navbar-expand-md bd-navbar">
+  <nav class="container">
+    <div class="d-flex justify-content-between d-lg-none">
+      <a class="navbar-brand" href="/">
+        Bootstrap
+      </a>
+    </div>
+    <div class="collapse navbar-collapse" id="bd-main-nav">
+      <ul class="nav navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-item nav-link " href="/" >Bootstrap</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link active" href="/getting-started/introduction/" >中文文档</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link " href="/examples/" >实例</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="https://themes.getbootstrap.com" >主题/模板</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="http://www.youzhan.org" >优站精选</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="https://blog.getbootstrap.com" >博客</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            {% block left %} {% endblock %}
+        </div>
+        <div class="col-xs-12 col-md-9" >
+            {% block main %} {% endblock %}
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+{% block foot %} {% endblock %}
+</body>
+</html>
