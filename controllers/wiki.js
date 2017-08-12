@@ -2,16 +2,38 @@ var Wiki=require("../model/Wiki"),
     Wikimenu=require("../model/Wikimenu");
 
 module.exports = {
-    'GET /wiki/:id': async (ctx, next) => {
+    'GET /wikis': async (ctx, next) => {
         var id=ctx.params.id;
         var wiki = await Wiki.findById(id);
         var menus=await Wikimenu.findAll({
             where:{
                 root_id:"3ae38b8e4b224bdaad7ac41e0b1f10f6"
-            }
+            },
+             order: [['sort', 'ASC']]
         });
         console.log(wiki);
-        ctx.render('wiki.html',{wiki:wiki,menus:menus});
+        ctx.render('wikis.html',{wiki:wiki,menus:menus});
+    },
+    'GET /wiki/:id': async (ctx, next) => {
+        var id=ctx.params.id;
+        var wiki = await Wiki.findById(id)||{};
+        var menu=await Wikimenu.findOne({
+            where:{
+                wiki_id:id
+            }
+        });
+        var menus =[];
+        if(menu&&menu.root_id){
+            menus =await Wikimenu.findAll({
+                where:{
+                    root_id:menu.root_id
+                },
+                 order: [['sort', 'ASC']]
+            });
+        }
+        
+        console.log(wiki);
+        ctx.render('wiki.html',{siteTitle:wiki.title,wiki:wiki,menus:menus});
     },
     'GET /manage/wiki': async (ctx, next) => {
         var list= await Wiki.findAll();
@@ -29,18 +51,15 @@ module.exports = {
          var title = ctx.request.body.title || '',
             content = ctx.request.body.content || '';
 
-        console.log(title);
-        console.log(content);
-        var data={title:title,content:content};
         var wiki = await Wiki.create({
             visit:0,
             title: title,
             tag:"",
             content: content
         });
-        console.log('created: ' + JSON.stringify(wiki));
+        
         ctx.response.type = 'application/json';
-        ctx.response.body = JSON.stringify(data);
+        ctx.response.body = JSON.stringify({"code":"success"});
     },
     'PUT /api/wiki': async (ctx, next) => {
          

@@ -26,12 +26,11 @@ module.exports = {
     'POST /api/wikimenus': async (ctx, next) => {
          var name = ctx.request.body.name || '',
             sort = ctx.request.body.sort||1 ,
-            parent_id = ctx.request.body.parent_id||null,
             root_id = ctx.request.body.root_id || 1,
             wiki_id = ctx.request.body.wiki_id || 1;
 
         var wikimenu = await Wikimenu.create({
-            parent_id:parent_id,
+            parent_id:null,
             root_id:root_id,
             wiki_id:wiki_id,
             name: name,
@@ -45,18 +44,18 @@ module.exports = {
          
          var id = ctx.request.body.id || '',
             name = ctx.request.body.name || '',
-            sort = ctx.request.body.sort || 1,
+            sort = ctx.request.body.sort || 0,
             parent_id = ctx.request.body.parent_id||null,
-            root_id = ctx.request.body.root_id || 1,
-            wiki_id = ctx.request.body.wiki_id || 1;
+            root_id = ctx.request.body.root_id || 0,
+            wiki_id = ctx.request.body.wiki_id || 0;
 
 
         var wikimenu = await Wikimenu.findById(id);
-        wikimenu.visit++;
-        wikimenu.name=name;
-        wikimenu.wiki_id=wiki_id;
-        wikimenu.parent_id=parent_id;
-        wikimenu.sort=sort;
+        wikimenu.version++;
+        name&&(wikimenu.name=name);
+        wiki_id&&(wikimenu.wiki_id=wiki_id);
+        parent_id&&(wikimenu.parent_id=parent_id);
+        sort&&(wikimenu.sort=sort);
         await wikimenu.save();
         console.log('updated: ' + JSON.stringify(wikimenu));
         ctx.response.type = 'application/json';
