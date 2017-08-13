@@ -3,9 +3,9 @@ var User=require("../model/User");
 
 module.exports = {
     //个人中心
-    'GET /user': async (ctx, next) => {
-       
-        ctx.render('./user/user.html',{});
+    'GET /user/center': async (ctx, next) => {
+        var user=ctx.session.user;
+        ctx.render('./user/center.html',{user:user});
     },
     'PUT /user/:id/password': async (ctx, next) => {
         var id=ctx.params.id;
