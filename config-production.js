@@ -2,7 +2,7 @@ var config = {
     dialect: 'mysql',
     database: 'wiki',
     username: 'root',
-    password: 'YYcoder666!@#',
+    password: 'Lwj2017!@#$',
     host: 'localhost',
     port: 3306
 };
