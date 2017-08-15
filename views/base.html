@@ -21,39 +21,25 @@
 <body>
 <header class="navbar navbar-light navbar-expand-md bd-navbar">
   <nav class="container">
-    <!-- <div class="d-flex justify-content-between d-lg-none">
-      <a class="navbar-brand" href="/">
-        Bootstrap
-      </a>
-    </div>
-    <div class="collapse navbar-collapse" id="bd-main-nav">
-      <ul class="nav navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-item nav-link " href="/" >Bootstrap</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item nav-link active" href="/getting-started/introduction/" >中文文档</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item nav-link " href="/examples/" >实例</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item nav-link" href="https://themes.getbootstrap.com" >主题/模板</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item nav-link" href="http://www.youzhan.org" >优站精选</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-item nav-link" href="https://blog.getbootstrap.com" >博客</a>
-        </li>
-      </ul>
-    </div> -->
+    
   </nav>
 </header>
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-3">
-            {% block left %} {% endblock %}
+            
+              <div class="list-group">
+                  <a href="/company" class="list-group-item">公司管理</a>
+                  <a href="#" class="list-group-item">基本信息</a>
+                  <a href="#" class="list-group-item">产品信息</a>
+                  <a href="#" class="list-group-item">公司动态</a>
+                  <a href="#" class="list-group-item">资质证书</a>
+                  <a href="#" class="list-group-item">消息管理</a>
+                  <a href="#" class="list-group-item">会员管理</a>
+                  <a href="#" class="list-group-item">成为会员</a>
+                  <a href="#" class="list-group-item">购买记录</a>
+              </div>
+          
         </div>
         <div class="col-xs-12 col-md-9" >
             {% block main %} {% endblock %}
