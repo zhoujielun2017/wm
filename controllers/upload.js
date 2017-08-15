@@ -49,7 +49,11 @@ module.exports = {
         var CKEditorFuncNum=ctx.request.query.CKEditorFuncNum;
         console.log("type1"+type);
         console.log("CKEditorFuncNum1"+CKEditorFuncNum);
-        var encoding=encodeURI("http://localhost"+url.replace("\\","/"));
+        var domain="http://localhost";
+        if(process.env.NODE_ENV == 'production'){
+            domain="upload.js";
+        }
+        var encoding=encodeURI(domain+url.replace("\\","/"));
         if("Images"==type){
             ctx.response.type = 'text/html';
             ctx.response.body='<script type="text/javascript">'+
@@ -60,8 +64,7 @@ module.exports = {
             ctx.response.body = JSON.stringify({
                 "uploaded": 1,
                 "fileName": file.name,
-                "url": "http://localhost"+url,
-                "domain":"http://domain.com"+url
+                "url": domain+url
             });
         }
         

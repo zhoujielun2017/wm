@@ -5,8 +5,9 @@
   <meta charset="utf-8">
   <meta name="robots" content="noindex, nofollow">
   <title>Uploading Dropped and Pasted Images</title>
-  <script src="http://cdn.ckeditor.com/4.7.1/standard-all/ckeditor.js"></script>
-  <!--<script src="http://cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>-->
+<!--   <script src="http://cdn.ckeditor.com/4.7.1/standard-all/ckeditor.js"></script> -->
+<script src="/ckeditor/ckeditor.js"></script>
+
 </head>
 
 <body>
@@ -14,7 +15,13 @@
 <textarea cols="10" id="editor2" name="editor2" rows="10" >&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;
 	</textarea>
 
+<textarea cols="10" id="editor3
+" name="editor3" rows="10" >&lt;p&gt;This is some &lt;strong&gt;sample text&lt;/strong&gt;. You are using &lt;a href="http://ckeditor.com/"&gt;CKEditor&lt;/a&gt;.&lt;/p&gt;
+    </textarea>
+
 <script>
+    // CKEDITOR.replace( 'editor3' );
+    CKEDITOR.replace( 'editor3');
     CKEDITOR.replace( 'editor2', {
 
         extraPlugins: 'uploadimage,image2,codesnippet',
