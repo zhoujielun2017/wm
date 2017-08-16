@@ -5,38 +5,34 @@ var User=require("../model/User");
 
 module.exports = {
     'GET /login/login': async (ctx, next) => {
-        ctx.render('login.html',{});
+        ctx.render('./user/login.html',{});
     },
-    'POST /login/login': async (ctx, next) => {
-        // var id=ctx.params.id;        
+    //登陆
+    'POST /login/login': async (ctx, next) => { 
         var email = ctx.request.body.email,
             password = ctx.request.body.password;
         if(!email||!password){
             ctx.body ={code:"param_null",data:"param is null"};
             return ;
         }            
+        password=crypto.createHash('md5').update(password).digest('hex');
+        var user = await User.findOne({
+          where: {
+            email: email,
+            password:password
+          }
+        });
+        if(!user){
+            ctx.body ={code:"not_found"};
+            return;
+        }
         
-        var user = await User.findOne({
-          where: {
-            email: email,
-            password:password
-          }
-        });
-        console.log(email+password);
-
-        var user = await User.findOne({
-          where: {
-            email: email,
-            password:password
-          }
-        });
-
-        console.log(email+password);
+        ctx.session.user = user;
         ctx.body ={code:"success"};
     },
     'GET /login/reg': async (ctx, next) => {
-       
-        ctx.render('reg.html',{});
+        //邮件发送 https://help.aliyun.com/document_detail/29440.html?spm=5176.doc29439.6.574.JGrkVV
+        ctx.render('./user/reg.html',{});
     },
     'POST /login/reg': async (ctx, next) => {
         var email = ctx.request.body.email,
@@ -82,8 +78,27 @@ module.exports = {
         ctx.session.user = user;
         ctx.render('./user/email_sucess.html',{});
     },
+    'GET /login/sendemail': async (ctx, next) => {
+        ctx.render('./user/email_send_sucess.html',{});
+    },
+    //忘记密码页面
     'GET /login/forget': async (ctx, next) => {
         ctx.render('./user/forget.html',{});
+    },
+    //忘记密码发送链接
+    'POST /login/forget': async (ctx, next) => {
+        var email = ctx.request.body.email;
+        var user = await User.findOne({
+          where: {
+            email: email
+          }
+        });
+        if(!user){
+            ctx.body ={code:"not_exist"};
+            return;
+        }
+        //TODO 发送邮件
+        ctx.body ={code:"success"};
     },
     'GET /login/reset': async (ctx, next) => {
         var email = ctx.request.query.email,

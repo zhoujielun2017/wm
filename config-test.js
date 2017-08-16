@@ -1,6 +1,6 @@
 var config = {
     dialect: 'postgres',
-    database: 'wiki',
+    database: 'wm',
     username: 'postgres',
     password: 'postgres',
     host: 'localhost',
