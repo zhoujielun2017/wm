@@ -8,7 +8,8 @@
     <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/web.css" rel="stylesheet">
     {% block head %} {% endblock %}
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -29,15 +30,17 @@
         <div class="col-xs-12 col-md-3">
             
               <div class="list-group">
-                  <a href="/company" class="list-group-item">公司管理</a>
-                  <a href="#" class="list-group-item">基本信息</a>
-                  <a href="#" class="list-group-item">产品信息</a>
+                  <a href="#" class="list-group-item"><h3>公司管理</h3></a>
+                  <a href="/company" class="list-group-item">基本信息</a>
+                  <a href="/cooperation" class="list-group-item">商务信息</a>
+                  <a href="/product" class="list-group-item">产品信息</a>
                   <a href="#" class="list-group-item">公司动态</a>
                   <a href="#" class="list-group-item">资质证书</a>
-                  <a href="#" class="list-group-item">消息管理</a>
-                  <a href="#" class="list-group-item">会员管理</a>
-                  <a href="#" class="list-group-item">成为会员</a>
-                  <a href="#" class="list-group-item">购买记录</a>
+                  <a href="#" class="list-group-item"><h3>消息管理</h3></a>
+                   <a href="/message" class="list-group-item"> <span class="badge unread"></span>全部消息</a>
+                  <a href="#" class="list-group-item"><h3>会员管理</h3></a>
+                  <a href="/user/buy" class="list-group-item">成为会员</a>
+                  <a href="/ord" class="list-group-item">购买记录</a>
               </div>
           
         </div>
@@ -47,7 +50,21 @@
     </div>
 </div>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script type="text/javascript">
+  // 
+  $.ajax({
+        type: "GET",
+        url: "/api/messageGroup",
+        dataType:"json",
+        success:function(json){
+            if(json.code="success"){
+                $(".unread").text(json.count);
+            }
+        }
+    });
+</script>
 {% block foot %} {% endblock %}
 </body>
 </html>

@@ -1,0 +1,69 @@
+{% extends '../base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+<h2>选择付款方式</h2>
+<p>请您在24小时内完成支付，否则订单会被自动取消</p>
+<form class="form-horizontal" action="/pay/result">
+  <div class="media">
+    <div class="media-left">
+      <a href="#">
+        <input type="checkbox" name="paytype">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">银联支付</h4>
+    </div>
+
+    <div class="media-right">
+      <span>支付 ￥4566 元</span>
+    </div>
+  </div>
+
+  <div class="media">
+    <div class="media-left">
+      <a href="#">
+        <input type="checkbox" name="paytype">
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">Paypal支付</h4>
+    </div>
+
+    <div class="media-right">
+      <span>支付 ￥4566 元</span>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-default">save</button>
+   
+</form>
+{% endblock %}
+
+{% block foot %}
+<script>
+$("form").on('submit',function(e){
+
+    var fd=new FormData(this);
+    $.ajax({
+        type: "POST",
+        url: "/api/ord",
+        data:{id:fd.get('paytype')},
+        dataType:"json",
+        success:function(json){
+            if(json.code=='success'){
+              //TODO 支付
+              // location.href="/pay/payment?ord_id="+json.id;
+              location.href="/ord";
+            }else{
+              // location.reload();
+            }
+        }
+    });
+
+    return false;
+});
+</script>  
+{% endblock %}

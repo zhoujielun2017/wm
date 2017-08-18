@@ -5,6 +5,7 @@ const session = require('koa-session');
 const bodyParser = require('koa-bodyparser');
 
 const koastatic = require('koa-static-cache');
+const moment = require('moment');
 const controller = require('./controller');
 
 const templating = require('./templating');
@@ -59,12 +60,12 @@ app.use(templating('views', {
     filters: {
         formatdate: function(str, format, meridiem) {
             console.log(str,format);
-           if (str !== undefined) {
+           if (str !== undefined&&str) {
              if (!meridiem) {
-               return moment(str).format(format);
+               return moment(+str).format(format);
              }
              else {
-               return moment(str).format(format).replace(/(a{1,2}|p)\.?m{1}?\.?/i, "$1.m.");
+               return moment(+str).format(format).replace(/(a{1,2}|p)\.?m{1}?\.?/i, "$1.m.");
              }
            }
        }

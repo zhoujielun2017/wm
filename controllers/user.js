@@ -7,6 +7,10 @@ module.exports = {
         var user=ctx.session.user;
         ctx.render('./user/center.html',{user:user});
     },
+    'GET /user/buy': async (ctx, next) => {
+        var user=ctx.session.user;
+        ctx.render('./user/buy.html',{user:user});
+    },
     //会员管理
     'GET /users': async (ctx, next) => {
         var user=ctx.session.user;

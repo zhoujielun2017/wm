@@ -1,0 +1,47 @@
+{% extends '../base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+<a href="/message/add">add</a>
+<div class="media">
+    <div class="media-left">
+        1
+    </div>
+    <div class="media-body">
+     2
+    </div>
+    <div class="media-right">
+    	3
+    </div>
+</div>
+  {% for e in result.rows %}
+  <div class="media">
+    <div class="media-left">
+        <img src="/{{e.img}}" alt="" class="img-rounded">
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">
+        {{e.name}}
+      </h4>
+      <p>{{e.content}}</p>
+    </div>
+    <div class="media-right">
+    	<a href="/message/{{e.id}}">查看</a><a href="#">删除</a>
+    </div>
+  </div>
+   {% endfor %}
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+	{{page}}
+  </ul>
+</nav>
+{% endblock %}
+
+{% block foot %}
+<script>
+
+</script>  
+{% endblock %}

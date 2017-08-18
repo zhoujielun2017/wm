@@ -32,11 +32,11 @@
    <div class="form-group">
     <label for="inputPassword3" class="col-sm-2 control-label">商家类型</label>
     <div class="col-sm-10">
-     <select class="form-control" name="role">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-    </select>
+     <select class="form-control" name="type">
+        <option value="seller">零售商</option>
+        <option value="agency">代理商</option>
+        <option value="factory">代理商</option>
+      </select>
     </div>
   </div>
     
@@ -74,7 +74,9 @@ $("form").on("submit",function(){
         },
         dataType:"json",
         success:function(json){
-            console.log(json);
+            if(json.code=='success'){
+                location.href="/login/sendemail";
+            }
         }
     });
 	return false;

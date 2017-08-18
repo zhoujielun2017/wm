@@ -1,0 +1,60 @@
+{% extends '../base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+<h1>订单信息</h1> 
+<table class="table table-hover">
+  <tr>
+    <th>订单号</th>
+    <th>产品</th>
+    <th>创建时间</th>
+    <th>会员到期时间</th>
+    <th>状态</th>
+    <th>操作</th>
+  </tr>
+  {% for e in result.rows %}
+  <tr>
+    <td>{{e.id}}</td>
+    <td>
+    <h3>{{e.name}}</h3>
+    <p>{{e.sub_name}}</p>
+    </td>
+    <td>
+    {{e.create_time|formatdate("YYYY-MM-DD HH:mm:ss")}}</td>
+    <td>{{e.end_time|formatdate("YYYY-MM-DD HH:mm:ss")}}</td>
+    <td>
+    {% if e.status==0 %}
+      待付款
+    {% endif %}
+    {% if e.status==1 %}
+      支付成功
+    {% endif %}
+    {% if e.status==-1 %}
+      取消
+    {% endif %}
+    </td>
+    <td>
+    {% if e.status==0 %}
+      <a href="/pay/payment?ord_id={{e.id}}">去付款</a>
+    {% endif %}
+    </td>
+  </tr>
+   {% endfor %}
+</table>
+
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+  {{page}}
+</ul>
+</nav>
+{% endblock %}
+
+{% block foot %}
+<script>
+
+</script>  
+{% endblock %}

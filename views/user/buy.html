@@ -4,28 +4,14 @@
 
 {% endblock %}
 
-{% block left %}
-<div class="list-group">
-  
-    <a href="#" class="list-group-item">公司管理</a>
-    <a href="#" class="list-group-item">基本信息</a>
-    <a href="#" class="list-group-item">产品信息</a>
-    <a href="#" class="list-group-item">公司动态</a>
-    <a href="#" class="list-group-item">资质证书</a>
-    <a href="#" class="list-group-item">消息管理</a>
-    <a href="#" class="list-group-item">会员管理</a>
-    <a href="#" class="list-group-item">成为会员</a>
-    <a href="#" class="list-group-item">购买记录</a>
-  
-</div>
-{% endblock %}
 
 {% block main %}
 <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWRkYmUxNWE4YSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZGRiZTE1YThhIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" alt="..." class="img-circle">
- <h3>{{user.email}}</h3>
- <p>会员类型:{{user.role}} <a href="#">升级为高级会员</a></p>
- <p>全部消息:(18)</p>
- 
+ <h3>开通套餐：全球饰品信息网高级会员</h3>
+ <p>付费模式：按年付费</p>
+ <p>优惠信息：即日起购买会员一年送两个月</p>
+ <p>应付价格：&yen;789.00</p>
+ <a href="/pay/payment">去付款</a>
 {% endblock %}
 
 {% block foot %}

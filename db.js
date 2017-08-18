@@ -10,6 +10,8 @@ function generateId() {
     return uuid.v4().replace(new RegExp("-",'gm'),"");
 }
 
+
+
 var sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: config.dialect,
@@ -109,6 +111,9 @@ var exp = {
         } else {
             throw new Error('Cannot sync() when NODE_ENV is set to \'production\'.');
         }
+    },
+    shortId:function() {
+        return uuid.v4().replace(new RegExp("-",'gm'),"").substring(0,16);
     }
 };
 
