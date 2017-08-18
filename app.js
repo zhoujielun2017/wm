@@ -55,7 +55,20 @@ app.use(bodyParser());
 app.use(templating('views', {
     noCache: !isProduction,
     watch: !isProduction,
-    autoescape:false
+    autoescape:false,
+    filters: {
+        formatdate: function(str, format, meridiem) {
+            console.log(str,format);
+           if (str !== undefined) {
+             if (!meridiem) {
+               return moment(str).format(format);
+             }
+             else {
+               return moment(str).format(format).replace(/(a{1,2}|p)\.?m{1}?\.?/i, "$1.m.");
+             }
+           }
+       }
+    }
 }));
 
 // add controller:
