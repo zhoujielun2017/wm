@@ -15,6 +15,6 @@
 	}
 }
 */
-.unread{
+.unread,.error{
 	color: red;
 }

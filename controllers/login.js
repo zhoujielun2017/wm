@@ -30,6 +30,12 @@ module.exports = {
         ctx.session.user = user;
         ctx.body ={code:"success"};
     },
+    //登陆
+    'DELETE /login/login': async (ctx, next) => { 
+
+        ctx.session.user = null;
+        ctx.body ={code:"success"};
+    },
     'GET /login/reg': async (ctx, next) => {
         //邮件发送 https://help.aliyun.com/document_detail/29440.html?spm=5176.doc29439.6.574.JGrkVV
         ctx.render('./user/reg.html',{});

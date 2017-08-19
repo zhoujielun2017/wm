@@ -1,7 +1,12 @@
 {% extends '../base.html' %}
 
 {% block head %}
-
+<style type="text/css">
+.glyphicon-user{
+  font-size: 70px;
+  color: #eee;
+}
+</style>
 {% endblock %}
 
 {% block left %}
@@ -21,9 +26,19 @@
 {% endblock %}
 
 {% block main %}
-<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNWRkYmUxNWE4YSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE1ZGRiZTE1YThhIj48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" alt="..." class="img-circle">
+{% if not user.head_url %}
+<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+{% endif %}
+{% if  user.head_url  %}
+22222222
+<img src="{{user.head_url }}" alt="" class="img-rounded">
+{% endif %}
+
  <h3>{{user.email}}</h3>
- <p>会员类型:{{user.role}} <a href="#">升级为高级会员</a></p>
+ <p>会员类型:{{user.role}}
+{% if user.role==0 %}
+  <a href="/user/buy">升级为高级会员</a></p>
+{% endif %}
  <p>全部消息:(18)</p>
  
 {% endblock %}

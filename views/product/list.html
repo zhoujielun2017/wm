@@ -1,7 +1,12 @@
 {% extends '../base.html' %}
 
 {% block head %}
-
+<style type="text/css">
+.glyphicon-picture{
+  font-size: 70px;
+  color: #777;
+}
+</style>
 {% endblock %}
 
 {% block main %}
@@ -11,7 +16,13 @@
   <div class="media">
     <div class="media-left">
        <a href="/product/{{e.id}}">
-        <img src="/{{e.default_img}}" alt="" class="img-rounded">
+       
+      {% if not e.default_img %}
+        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+      {% endif %}
+      {% if  e.default_img  %}
+        <img src="/{{e.default_img }}" alt="" class="img-rounded">
+      {% endif %}
       </a>
     </div>
     <div class="media-body">
