@@ -10,12 +10,23 @@ module.exports = {
             return ;
         }
         var company = await Company.findById(user.id);
-        var list = await Product.findAll({
+        var list = await Cooperation.findAll({
             where: {
                 user_id: user.id
             }
         });
-        ctx.render('./company/cooperation.html',{bean:company,list:list});
+        var customer=[];
+        var factory=[];
+        for (var i = 0; i < list.length; i++) {
+            if(list[i].type=='factory'){
+                factory.push(list[i]);
+            }
+            if(list[i].type!='factory'){
+                customer.push(list[i]);
+            }
+        }
+        ctx.render('./company/cooperation.html',{bean:company,
+            list:list,customer:customer,factory:factory});
     },
     'POST /api/cooperation': async (ctx, next) => {
 

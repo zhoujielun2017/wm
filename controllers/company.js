@@ -1,5 +1,6 @@
 var Company=require("../model/Company");
 var User=require("../model/User");
+var Cooperation=require("../model/Cooperation");
 
 module.exports = {
     'GET /company': async (ctx, next) => {
@@ -48,7 +49,11 @@ module.exports = {
         ctx.body = {"code":"success","id":company.id};
     },
     'PUT /api/company': async (ctx, next) => {
-         var user=ctx.session.user;
+        var user=ctx.session.user;
+        if(!user){
+            ctx.body = {"code":"not_login"};
+            return;
+        }
          var id = ctx.request.body.id||'',
             name = ctx.request.body.name||'',
             ename = ctx.request.body.ename||'',
@@ -78,6 +83,8 @@ module.exports = {
     'PUT /api/companydetail': async (ctx, next) => {
          var user=ctx.session.user;
          var id = ctx.request.body.id||'',
+            types = ctx.request.body.types,
+            names = ctx.request.body.names,
             acreage = ctx.request.body.acreage||'',
             type_per_month = ctx.request.body.type_per_month||'',
             count_person = ctx.request.body.count_person||'',
@@ -85,7 +92,26 @@ module.exports = {
             able_per_month = ctx.request.body.able_per_month||'',
             major = ctx.request.body.major||'';
 
-       
+        var typearr=types.split(",");
+        var namearr=names.split(",");
+
+        await Cooperation.destroy({
+          where: {
+            user_id:user.id
+          }
+        });
+
+        for (var i = 0; i < typearr.length; i++) {
+            var type=typearr[i];
+            var name=namearr[i];
+           
+            var cooperation = await Cooperation.create({
+                user_id:user.id,
+                name: name,
+                type:type
+            });
+        }
+        
         var company = await Company.findById(id);
         company.acreage=acreage;
         
@@ -98,11 +124,4 @@ module.exports = {
        
         ctx.body = {"code":"success","id":company.id};
     }
-    // 'GET /api/company/:id': async (ctx, next) => {
-         
-    //     var id = ctx.params.id;
-    //     var data = await Company.findById(id);
-    //     ctx.response.type = 'application/json';
-    //     ctx.response.body = JSON.stringify(data);
-    // }
 };
