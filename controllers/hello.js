@@ -3,6 +3,7 @@ var Wiki=require("../model/Wiki");
 var fn_hello = async (ctx, next) => {
     var name = ctx.params.name;
     ctx.response.body = `<h1>Hello, ${name}!</h1>`;
+    
 };
 function getPageNums(cur_page, total_page,url) {
     var result = "";

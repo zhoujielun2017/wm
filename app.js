@@ -7,15 +7,19 @@ const bodyParser = require('koa-bodyparser');
 const koastatic = require('koa-static-cache');
 const moment = require('moment');
 const controller = require('./controller');
+const locale = require('koa-locale');
+const i18n = require('koa-i18n');
 
 const templating = require('./templating');
 
 let staticFiles = require('./static-files');
 
 const app = new Koa();
+locale(app)
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+//session
 app.keys = ['some aaa hurr'];
 
 const CONFIG = {
@@ -31,6 +35,21 @@ const CONFIG = {
 };
 
 app.use(session(CONFIG, app));
+
+//i18n
+app.use(i18n(app, {
+  directory: './i18n',
+  locales: ['zh-CN', 'en'], //  `zh-CN` defualtLocale, must match the locales to the filenames
+  modes: [
+    'query',                //  optional detect querystring - `/?locale=en-US`
+    'subdomain',            //  optional detect subdomain   - `zh-CN.koajs.com`
+    'cookie',               //  optional detect cookie      - `Cookie: locale=zh-TW`
+    'header',               //  optional detect header      - `Accept-Language: zh-CN,zh;q=0.5`
+    'url',                  //  optional detect url         - `/en`
+    'tld',                  //  optional detect tld(the last domain) - `koajs.cn`
+    function() {}           //  optional custom function (will be bound to the koa context)
+  ]
+}))
 
 // log request URL:
 app.use(async (ctx, next) => {
@@ -78,4 +97,5 @@ app.use(controller());
 
 
 app.listen(8080);
+
 console.log('app started at port 8080...');
