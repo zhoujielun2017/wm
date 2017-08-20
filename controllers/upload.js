@@ -23,6 +23,8 @@ module.exports = {
 
     //详见http://docs.ckeditor.com/#!/guide/dev_file_upload
     'POST /file': async (ctx, next) => {
+        console.log(ctx.request.body.files);
+        console.log(ctx.request.body.files.upload);
         const file = ctx.request.body.files.upload;
         const reader = fs.createReadStream(file.path);
         var now=new Date();

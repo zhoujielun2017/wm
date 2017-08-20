@@ -152,7 +152,8 @@ module.exports = {
                 user_id:user.id
             }
         });
-        ctx.body={code:"success",count:group.count};
+        count=group&&group.count||0
+        ctx.body={code:"success",count:count};
     }
 
 };

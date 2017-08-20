@@ -11,34 +11,34 @@
 
 {% for e in customer %}
  <div class="form-group {% if loop.last %}customer{% endif %}" >
-      <label for="inputEmail3" class="col-sm-3 control-label">现合作客户名称</label>
+      <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation customer name')}}</label>
       <div class="col-sm-9" >
         <div class="row">
           <div class="col-xs-8 col-sm-6">
             <select class="form-control" name="type">
-              <option value="seller">零售商</option>
-              <option value="agency">代理商</option>
+              <option value="seller">{{__('seller')}}</option>
+              <option value="agency">{{__('agency')}}</option>
             </select>
           </div>
           <div class="col-xs-4 col-sm-6">
-             <input type="text" name="customer" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="公司面积">
+             <input type="text" name="customer" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="">
           </div>
         </div>
       </div>
     </div>
   {% else %}
   <div class="form-group customer" >
-      <label for="inputEmail3" class="col-sm-3 control-label">现合作客户名称</label>
+      <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation customer name')}}</label>
       <div class="col-sm-9" >
         <div class="row">
           <div class="col-xs-8 col-sm-6">
             <select class="form-control" name="type">
-              <option value="seller">零售商</option>
-              <option value="agency">代理商</option>
+              <option value="seller">{{__('seller')}}</option>
+              <option value="agency">{{__('agency')}}</option>
             </select>
           </div>
           <div class="col-xs-4 col-sm-6">
-             <input type="text" name="customer" value="" class="form-control" id="inputEmail3" placeholder="公司面积">
+             <input type="text" name="customer" value="" class="form-control" id="inputEmail3" placeholder="">
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
 
      <div class="form-group">
       <div class="col-sm-offset-3 col-sm-9">
-        <a href="javascript:void(0);" class="btn btn-default addC">add</a>
+        <a href="javascript:void(0);" class="btn btn-default addC">{{__('add')}}</a>
       </div>
     </div>
 
@@ -56,64 +56,64 @@
 {% for e in factory %}
   
     <div class="form-group {% if loop.last %}factory{% endif %}">
-      <label for="inputEmail3" class="col-sm-3 control-label">已通过验厂</label>
+      <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation factory name')}}</label>
       <div class="col-sm-9">
           
-         <input type="text" name="factory" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="已通过验厂">
+         <input type="text" name="factory" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="{{__('cooperation factory name')}}">
       </div>
     </div>
   {% else %}
   <div class="form-group factory">
-    <label for="inputEmail3" class="col-sm-3 control-label">已通过验厂</label>
+    <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation factory name')}}</label>
     <div class="col-sm-9">
         
-       <input type="text" name="factory" value="" class="form-control" id="inputEmail3" placeholder="已通过验厂">
+       <input type="text" name="factory" value="" class="form-control" id="inputEmail3" placeholder="{{__('cooperation factory name')}}">
     </div>
   </div>
 {% endfor %}
  
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-9">
-        <a href="#" class="btn btn-default addF">add</a>
+        <a href="#" class="btn btn-default addF">{{__('add')}}</a>
       </div>
     </div>
 
   <div class="form-group">
-    <label for="inputEmail3" class="col-sm-3 control-label">公司面积</label>
+    <label for="inputEmail3" class="col-sm-3 control-label">{{__('company acreage')}}</label>
     <div class="col-sm-9">
-      <input type="text" name="acreage" value="{{bean.acreage}}" class="form-control" id="inputEmail3" placeholder="公司面积">
+      <input type="text" name="acreage" value="{{bean.acreage}}" class="form-control" id="inputEmail3" placeholder="{{__('company acreage')}}">
     </div>
   </div>
 
 
 
   <div class="form-group">
-    <label for="inputEmail3" class="col-sm-3 control-label">月开发款式数量</label>
+    <label for="inputEmail3" class="col-sm-3 control-label">{{__('type per month')}}</label>
     <div class="col-sm-9">
-      <input type="text" name="type_per_month" value="{{bean.type_per_month}}" class="form-control" id="inputEmail3" placeholder="月开发款式数量">
+      <input type="text" name="type_per_month" value="{{bean.type_per_month}}" class="form-control" id="inputEmail3" placeholder="{{__('type per month')}}">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-3 control-label">生产人数</label>
+    <label for="inputPassword3" class="col-sm-3 control-label">{{__('produce person')}}</label>
     <div class="col-sm-9">
       <input type="text" name="count_person" value="{{bean.count_person}}" class="form-control" placeholder="name">
     </div>
   </div>
   
    <div class="form-group">
-    <label  class="col-sm-3 control-label">QC人数</label>
+    <label  class="col-sm-3 control-label">{{__('QC person')}}</label>
     <div class="col-sm-9">
      	<textarea name="count_qc"  class="form-control">{{bean.count_qc}}</textarea>
     </div>
   </div>
    <div class="form-group">
-    <label  class="col-sm-3 control-label">月生产能力</label>
+    <label  class="col-sm-3 control-label">{{__('produce per month')}}</label>
     <div class="col-sm-9">
       <input type="text" name="able_per_month" value="{{bean.able_per_month}}" class="form-control" placeholder="name">
     </div>
   </div>
   <div class="form-group">
-    <label  class="col-sm-3 control-label">公司特长</label>
+    <label  class="col-sm-3 control-label">{{__('company major')}}</label>
     <div class="col-sm-9">
       <input type="text" name="major" value="{{bean.major}}"  class="form-control" placeholder="name">
     </div>
@@ -121,7 +121,7 @@
    
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-default">save</button>
+      <button type="submit" class="btn btn-default">{{__('confirm')}}</button>
     </div>
   </div>
 </form>

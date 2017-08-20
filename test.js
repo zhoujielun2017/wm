@@ -1,3 +1,3 @@
-const moment = require('moment');
-console.log(moment(new Date().getTime()+"").format("YYYY"))
+var lang = require('./i18n/zh-CN.js');
+console.log(lang);
             

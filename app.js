@@ -39,11 +39,11 @@ app.use(session(CONFIG, app));
 //i18n
 app.use(i18n(app, {
   directory: './i18n',
-  locales: ['zh-CN', 'en'], //  `zh-CN` defualtLocale, must match the locales to the filenames
+  locales: [ 'en','zh-CN'], //  `zh-CN` defualtLocale, must match the locales to the filenames
   modes: [
     'query',                //  optional detect querystring - `/?locale=en-US`
     'subdomain',            //  optional detect subdomain   - `zh-CN.koajs.com`
-    'cookie',               //  optional detect cookie      - `Cookie: locale=zh-TW`
+    'cookie',               //  optional detect cookie      - `Cookie: locale=zh-CH`
     'header',               //  optional detect header      - `Accept-Language: zh-CN,zh;q=0.5`
     'url',                  //  optional detect url         - `/en`
     'tld',                  //  optional detect tld(the last domain) - `koajs.cn`
