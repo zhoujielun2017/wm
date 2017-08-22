@@ -42,5 +42,28 @@ module.exports = {
         user.password=password;
         await user.save();
         ctx.body={code:"success"};
-    }
+    },
+    'GET /manage/user': async (ctx, next) => {
+        var id=ctx.request.query.id;
+        var result;
+        if(id){
+            result = await User.findById(id);
+        }
+        ctx.render('./manage/user/add.html', {bean:result});
+    },
+    'GET /manage/users': async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await User.findAndCountAll({
+            'limit': Util.pageSize,
+            'offset': Util.pageSize*(page-1)
+        });
+        result.page=page;
+        result.pageCount=Math.ceil(result.count/Util.pageSize);
+        console.log(result);
+
+        ctx.render('./manage/user/list.html', {
+            result:result,
+            page:Util.getPageNums(page,result.pageCount,"/manage/user")}
+        );
+    },
 };

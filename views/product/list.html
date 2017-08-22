@@ -33,13 +33,10 @@
       <p>{{__('price')}}:{{e.price}}</p>
     </div>
     <div class="media-right">
-    	<a href="/product/add?id={{e.id}}">{{__('edit')}}</a><a href="#">{{__('delete')}}</a>
+    	<a href="/product/add?id={{e.id}}">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}" class="del">{{__('delete')}}</a>
     </div>
   </div>
    {% endfor %}
-
-
-
 <nav aria-label="Page navigation">
   <ul class="pagination">
   {{page}}
@@ -49,6 +46,18 @@
 
 {% block foot %}
 <script>
-
+$(".del").click(function(){
+  var id=$(this).data("id");
+  $.ajax({
+      type: "DELETE",
+      url: "/api/product/"+id,
+      dataType:"json",
+      success:function(json){
+          if(json.code="success"){
+              location.reload();
+          }
+      }
+  });
+})
 </script>  
 {% endblock %}

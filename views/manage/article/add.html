@@ -1,22 +1,6 @@
-{% extends './base.html' %}
+{% extends '../base.html' %}
 
 {% block main %}
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>operation</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for item in list %}
-    <tr>
-        <td>{{item.title}}</td>
-        <td><a href="/api/article/{{item.id}}" class="btn btn-danger" role="button" data-id="">del</a></td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
 <form class="form-horizontal" action="/api/article">
     <input type="hidden" name="id" value="{{bean.id}}">
     <div class="form-group">
@@ -62,20 +46,14 @@
             dataType:"json",
             success:function(json){
                 console.log(json);
+                if(json.code="success"){
+                    $("input[name=id]").val(json.id);
+                }
             }
         });
 
         return false;
     });
-    $(".btn-danger").on("click",function () {
-        $.ajax({
-            type: "DELETE",
-            url: this.href,
-            dataType:"json",
-            success:function(json){
-                console.log(json);
-            }
-        });
-    });
+
 </script>
 {% endblock %}

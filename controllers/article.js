@@ -1,4 +1,5 @@
 var Article=require("../model/Article");
+var Util=require("../util/Util");
 
 module.exports = {
     'GET /article': async (ctx, next) => {
@@ -11,8 +12,27 @@ module.exports = {
         ctx.render('article.html',{bean:article});
     },
     'GET /manage/article': async (ctx, next) => {
-        var list= await Article.findAll();
-        ctx.render('./manage/article.html', {list:list});
+        var id=ctx.request.query.id;
+        var result;
+        if(id){
+            result = await Article.findById(id);
+        }
+        ctx.render('./manage/article/add.html', {bean:result});
+    },
+    'GET /manage/articles': async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Article.findAndCountAll({
+            'limit': Util.pageSize,
+            'offset': Util.pageSize*(page-1)
+        });
+        result.page=page;
+        result.pageCount=Math.ceil(result.count/Util.pageSize);
+        console.log(result);
+
+        ctx.render('./manage/article/list.html', {
+            result:result,
+            page:Util.getPageNums(page,result.pageCount,"/manage/article")}
+        );
     },
      'GET /manage/article/:id': async (ctx, next) => {
         var id=ctx.params.id;
@@ -25,7 +45,6 @@ module.exports = {
          var title = ctx.request.body.title || '',
             content = ctx.request.body.content || '';
 
-
         var data={title:title,content:content};
         var article = await Article.create({
             visit:0,
@@ -34,8 +53,7 @@ module.exports = {
             content: content
         });
 
-        ctx.response.type = 'application/json';
-        ctx.response.body = JSON.stringify(data);
+        ctx.body = {code:"success",id:article.id};
     },
     'PUT /api/article': async (ctx, next) => {
          

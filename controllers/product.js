@@ -122,12 +122,15 @@ module.exports = {
         await product.save();
         
         ctx.body = {"code":"success","id":product.id};
-    }
-    // 'GET /api/product/:id': async (ctx, next) => {
+    },
+    'DELETE /api/product/:id': async (ctx, next) => {
          
-    //     var id = ctx.params.id;
-    //     var data = await Product.findById(id);
-    //     ctx.response.type = 'application/json';
-    //     ctx.response.body = JSON.stringify(data);
-    // }
+        var id = ctx.params.id;
+        await Product.destroy({
+          where: {
+            id:id
+          }
+        });
+        ctx.body = {"code":"success"};
+    }
 };

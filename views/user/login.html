@@ -48,10 +48,35 @@
 {% block foot %}
 <script type="text/javascript">
 
+$("form").validate({
+  rules: {
+    password: {
+      required: true,
+      minlength: 5
+    },
+    email: {
+      required: true,
+      email: true
+    }
+  },
+  messages: {
+    
+    password: {
+      required: "Please provide a password",
+      minlength: "Your password must be at least 5 characters long"
+    },
+    email: "Please enter a valid email address"
+  },
+  errorElement: "em"
+
+});
+
 $("form").on("submit",function(){
 
 	var fd=new FormData(this);
-	
+	 if(!$(this).valid()){
+    return false;
+   }
 	 $.ajax({
         type: "POST",
         url: "/login/login",

@@ -55,5 +55,7 @@
 	"status": "status",
 	"operation": "operation",
 	"attachment": "attachment",
-	"all": "all"
+	"all": "all",
+	"edit": "edit",
+	"delete": "delete"
 }
