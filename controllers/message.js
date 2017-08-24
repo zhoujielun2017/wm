@@ -147,6 +147,10 @@ module.exports = {
     },
     'GET /api/messageGroup': async (ctx, next) => {
         var user=ctx.session.user;
+        if(!user){
+            ctx.body={code:"not_login"};
+            return 
+        }
         var group=await MessageGroup.findOne({
             where: {
                 user_id:user.id

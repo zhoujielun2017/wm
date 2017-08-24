@@ -62,6 +62,23 @@ app.use(async (ctx, next) => {
     ctx.response.set('X-Response-Time', `${execTime}ms`);
 });
 
+//后台登陆
+app.use(async (ctx, next) => {
+    var url=ctx.request.url;
+    if(~url.indexOf("manage")){
+      var user=ctx.session.user;
+      if(!user){
+          console.log("未登录",url);
+          ctx.response.redirect('/login/login');
+          return ;
+        
+      }
+     
+    }
+     await next();
+});
+
+
 // static file support:
 // app.use(staticFiles('/static/', __dirname + '/static'));
 // app.use(koastatic('./static', {maxAge: 60 * 60* 24 * 7}));

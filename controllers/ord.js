@@ -28,6 +28,29 @@ module.exports = {
             page:Util.getPageNums(page,result.pageCount,"/ord")}
         );
     },
+    'GET /manage/ords': async (ctx, next) => {
+        var user=ctx.session.user;
+        var page=ctx.request.query.page||1;
+        var result = await Ord.findAndCountAll({
+            'limit': Util.pageSize,
+            'offset': Util.pageSize*(page-1)
+        });
+        result.page=page;
+        result.pageCount=Math.ceil(result.count/Util.pageSize);
+        console.log(result);
+
+        ctx.render('./manage/ord/list.html', {
+            result:result,
+            page:Util.getPageNums(page,result.pageCount,"/ord")}
+        );
+    },
+    'GET /manage/ord/:id': async (ctx, next) => {
+        
+        var id=ctx.params.id;
+        var result = await Ord.findById(id);
+        var user= await User.findById(result.user_id);
+        ctx.render('./manage/ord/detail.html', {bean:result,user:user});
+    },
     'POST /api/ord': async (ctx, next) => {
 
         var user=ctx.session.user;
@@ -49,14 +72,7 @@ module.exports = {
             amount:470000,
             end_time: new Date().getTime()
         });
-        // var ordPay = await OrdPay.create({
-        //     user_id:user.id,
-        //     ord_id: ord.id,
-        //     platform:paytype,
-        //     status:0,
-        //     outrade_no:""
-        // });
-        
+       
         ctx.body = {"code":"success","id":ord.id};
     },
     'PUT /api/ord': async (ctx, next) => {

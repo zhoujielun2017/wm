@@ -2,11 +2,29 @@
 
 {% block main %}
 <div class="form-horizontal">
-    <input type="hidden" name="id" value="{{bean.id}}">
+    
+    <div class="form-group">
+        <label class="col-sm-2 control-label">订单号</label>
+        <div class="col-sm-10">
+             <p class="form-control-static">{{bean.id}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">产品</label>
+        <div class="col-sm-10">
+             <p class="form-control-static">{{bean.name}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">产品到期时间</label>
+        <div class="col-sm-10">
+             <p class="form-control-static">{{bean.end_time|formatdate("YYYY-MM-DD HH:mm:ss")}}</p>
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">email</label>
         <div class="col-sm-10">
-             <p class="form-control-static">{{bean.email}}</p>
+             <p class="form-control-static">{{user.email}}</p>
         </div>
     </div>
     <div class="form-group">
@@ -19,23 +37,23 @@
         <label  class="col-sm-2 control-label">状态</label>
         <div class="col-sm-10">
             <p class="form-control-static">
-            {% if bean.role==0 %}
-              普通用户
+            {% if bean.status==0 %}
+              待付款
             {% endif %}
             {% if bean.role==1 %}
-              高级会员
+              已付款
             {% endif %}
-            {% if bean.role==9 %}
-              管理员
+            {% if bean.role==-1 %}
+              已取消
             {% endif %}
             </p>
         </div>
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="btn btn-primary">审核</button>
         </div>
-    </div>
+    </div> -->
 </div>
 {% endblock %}
 {% block foot %}

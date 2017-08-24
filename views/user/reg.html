@@ -73,7 +73,8 @@ $("form").validate({
     },
     email: {
       required: true,
-      email: true
+      email: true,
+      remote:"/api/user/email"
     }
   },
   messages: {
@@ -87,7 +88,11 @@ $("form").validate({
       minlength: "Your password must be at least 5 characters long",
       equalTo: "Please enter the same password as above"
     },
-    email: "Please enter a valid email address"
+    email: {
+        required:"Please enter a valid email address",
+        email:"Please enter a valid email address",
+        remote:"email address already exits"
+    }
   },
   errorElement: "em"
 

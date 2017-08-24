@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 var User=require("../model/User");
+var Util=require("../util/Util");
 
 module.exports = {
     //个人中心
@@ -15,10 +16,6 @@ module.exports = {
     'GET /users': async (ctx, next) => {
         var user=ctx.session.user;
         var page=ctx.request.query.page||1;
-        // if(!user){
-        //     ctx.response.redirect('/login/login');
-        //     return;
-        // }
         var list = await User.findAll({
             where:{
                 
@@ -51,6 +48,14 @@ module.exports = {
         }
         ctx.render('./manage/user/add.html', {bean:result});
     },
+    'GET /manage/user/:id': async (ctx, next) => {
+        var id=ctx.request.params.id;
+        var result;
+        if(id){
+            result = await User.findById(id);
+        }
+        ctx.render('./manage/user/add.html', {bean:result});
+    },
     'GET /manage/users': async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await User.findAndCountAll({
@@ -66,4 +71,21 @@ module.exports = {
             page:Util.getPageNums(page,result.pageCount,"/manage/user")}
         );
     },
+    'GET /api/user/email': async (ctx, next) => {
+        var email=ctx.request.query.email;
+        console.log("email",email);
+        var result = await User.findOne({
+            where:{
+                'email': email    
+            }
+            
+        });
+        console.log(result);
+        if(result){
+            ctx.body=false;    
+        }else{
+            ctx.body=true;    
+        }
+        
+    }
 };

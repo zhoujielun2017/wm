@@ -42,39 +42,7 @@ module.exports = {
         }
         ctx.render('./product/add.html',{bean:product});
     },
-    // 'GET /product/:id': async (ctx, next) => {
-    //     var id=ctx.params.id;
-    //     var product = await Product.findById(id)||{};
-    //     var menu=await Productmenu.findOne({
-    //         where:{
-    //             product_id:id
-    //         }
-    //     });
-    //     var menus =[];
-    //     if(menu&&menu.root_id){
-    //         menus =await Productmenu.findAll({
-    //             where:{
-    //                 root_id:menu.root_id
-    //             },
-    //              order: [['sort', 'ASC']]
-    //         });
-    //     }
-        
-    //     console.log(product);
-    //     ctx.render('product.html',{siteTitle:product.title,product:product,menus:menus});
-    // },
-    // 'GET /manage/product': async (ctx, next) => {
-    //     var list= await Product.findAll();
-    //     ctx.render('./manage/product.html', {
-    //         list: list
-    //     });
-    // },
-    //  'GET /manage/product/:id': async (ctx, next) => {
-    //     var id=ctx.params.id;
-    //     var product = await Product.findById(id);
-
-    //     ctx.render('./manage/product.html', {bean:product});
-    // },
+    
     'POST /api/product': async (ctx, next) => {
 
         var user=ctx.session.user;
