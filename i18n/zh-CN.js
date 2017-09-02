@@ -98,6 +98,7 @@
 	"parttime":"兼职",
 	"QC person": "QC人数",
 	"Reads": "阅读",
+	"reset": "重置",
 	"Read more": "继续阅读",
 	"Recent articles": "最新发表",
 	"Refresh": "刷新",

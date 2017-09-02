@@ -93,7 +93,9 @@ module.exports = {
         var id = ctx.request.query.id;
         var user = await User.findById(id);
         // login/fromemail?email=11@22&pass=2222&time=1502549978197
-        ctx.render('./user/email_send_sucess.html',{bean:user});
+        var token=crypto.createHash('md5').update(id+user.password).digest('hex');
+
+        ctx.render('./user/email_send_sucess.html',{bean:user,token:token});
     },
     //忘记密码页面
     'GET /login/forget': async (ctx, next) => {
@@ -112,15 +114,16 @@ module.exports = {
             return;
         }
         //TODO 发送邮件
-        ctx.body ={code:"success"};
+        ctx.body ={code:"success",id:user.id};
     },
+    //重置密码页 
     'GET /login/reset': async (ctx, next) => {
         var email = ctx.request.query.email,
             password = ctx.request.query.pass,
             time = ctx.request.query.time;
         console.log("param",ctx.request.query);
         if(!email||!password||!time){
-            ctx.render('./user/email_fail.html',{msg:"邀请链接错误"});
+            ctx.render('./user/reset_email_fail.html',{msg:"邀请链接错误"});
             return;
         }
         var user = await User.findOne({
@@ -129,12 +132,38 @@ module.exports = {
             password:password
           }
         });
+
         if(user.update_time!=time){
-            ctx.render('./user/email_fail.html',{msg:"邀请链接已经过期"});
+            ctx.render('./user/reset_email_fail.html',{msg:"邀请链接已经过期"});
             return;
         }
         user.update_time = Date.now();
         await user.save();    
-        ctx.render('./user/reset.html',{user:user});
+
+        var token=crypto.createHash('md5').update(user.id+user.password).digest('hex');
+        ctx.render('./user/reset.html',{bean:user,token:token});
+    },
+    //重置密码
+    'POST /login/reset': async (ctx, next) => {
+        var id = ctx.request.body.id,
+            token = ctx.request.body.token,
+            password = ctx.request.body.password,
+            password2 = ctx.request.body.password2;
+        if(password!=password2){
+            ctx.body ={code:"param_not_equal",data:"param not equal"};
+            return ;
+        } 
+        var user = await User.findById(id);
+        //id+旧密码 作为token
+        var tokenMd5=crypto.createHash('md5').update(id+user.password).digest('hex');
+        if(tokenMd5!=token){
+             ctx.body ={code:"token_not_equal",data:"token not equal"};
+            return ;
+        }
+        password=crypto.createHash('md5').update(password).digest('hex');
+       
+        user.password=password;
+        await user.save();    
+        ctx.body ={code:"success"};
     }
 };

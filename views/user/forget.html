@@ -37,7 +37,7 @@ $("form").on("submit",function(){
         dataType:"json",
         success:function(json){
             if(json.code="success"){
-                location.href="/login/sendemail";
+                location.href="/login/sendemail?id="+json.id;
             }
         }
     });
