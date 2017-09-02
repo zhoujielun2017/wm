@@ -1,6 +1,6 @@
 const db = require('../db');
 
-module.exports = db.defineModel('company', {
+module.exports = db.defineModel('factory', {
     name: db.STRING(500),
     ename: db.STRING(500),
     address: db.STRING(500),
@@ -22,14 +22,17 @@ module.exports = db.defineModel('company', {
         type: db.STRING(20),
         allowNull: true
     },
+    //qc数量
     count_qc:{
         type: db.STRING(20),
         allowNull: true
     },
+    //月产量
     able_per_month:{
         type: db.STRING(20),
         allowNull: true
     },
+    //特长
     major:{
         type: db.STRING(500),
         allowNull: true

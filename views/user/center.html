@@ -18,12 +18,33 @@
 {% endif %}
 
  <h3>{{user.email}}</h3>
- <p>{{__('type user')}}:{{user.role}}
+ <p>{{__('type user')}}:
+ 	{% if user.type=='factory' %}
+  		{{__('factory')}}
+	{% endif %}
+	{% if user.type=='agency' %}
+	  	{{__('agency')}}
+	{% endif %}
+	{% if user.type=='seller' %}
+	  	{{__('seller')}}
+	{% endif %}
+	{% if user.type=='design' %}
+	  	{{__('design')}}
+	{% endif %}
+ </p>
+ <p>{{__('role of user')}}:
 {% if user.role==0 %}
-  <a href="/user/buy">{{__('to be vip')}}</a></p>
+  <a href="/user/buy">{{__('to be vip')}}</a>
 {% endif %}
+{% if user.role==1 %}
+  高级会员
+{% endif %}
+{% if user.role==9 %}
+  管理员
+{% endif %}
+</p>
  <p>{{__('all message')}}:(18)</p>
- 
+ <p>{{__('last login time')}}:{{user.last_login_time|formatdate("YYYY-MM-DD HH:mm:ss")}}</p>
 {% endblock %}
 
 {% block foot %}

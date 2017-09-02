@@ -42,6 +42,8 @@
     {% endif %}
     </td>
   </tr>
+   {% else %}
+   <tr><td>{{__('data empty')}}</td></tr>
    {% endfor %}
 </table>
 

@@ -115,7 +115,15 @@
   <div class="form-group">
     <label  class="col-sm-3 control-label">{{__('company major')}}</label>
     <div class="col-sm-9">
-      <input type="text" name="major" value="{{bean.major}}"  class="form-control" placeholder="name">
+      <div class="btn-group major" role="group">
+
+
+      {% for e in major %}
+      <button type="button" class="btn btn-default  {% for d in bean.major %}{% if  e==d  %}btn-primary{% endif %}{% endfor %}" data-code="{{e}}" >{{__(e)}}</button>
+      {% endfor %}
+        
+
+      </div>
     </div>
   </div>
    
@@ -129,6 +137,11 @@
 
 {% block foot %}
 <script>
+//major click
+$(".major").on("click","button",function(){
+  $(this).toggleClass("btn-primary");
+});
+
 $(".addC").click(function(){
   var temp=$(".customer");
   var clone=temp.clone();
@@ -148,12 +161,12 @@ $("form").on('submit',function(e){
 
     var fd=new FormData(this);
     var method=fd.get('id')?"PUT":"POST";
-
+    //类型
     var types=[];
     $("select[name=type]").each(function(){
       types.push($(this).val())
     });
-
+    //名称
     var names=[];
     $("input[name=customer]").each(function(){
       names.push($(this).val())
@@ -162,12 +175,15 @@ $("form").on('submit',function(e){
         types.push("factory");
         names.push($(this).val())
     })
-
-    console.log(types);
-    console.log(names);
+    //特长
+    var majors=[];
+    $(".major .btn-primary").each(function(){
+        var code=$(this).data("code");
+        majors.push(code);
+    })
     $.ajax({
         type: method,
-        url: "/api/companydetail",
+        url: "/api/factorydetail",
         data:{
           id:fd.get('id'),
           types:types.join(","),
@@ -177,7 +193,7 @@ $("form").on('submit',function(e){
 	        count_person:fd.get('count_person'),
 	        count_qc:fd.get('count_qc'),
 	        able_per_month:fd.get('able_per_month'),
-	        major:fd.get('major')
+	        majors:majors.join(",")
     	},
         dataType:"json",
         success:function(json){

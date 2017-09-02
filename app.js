@@ -62,10 +62,17 @@ app.use(async (ctx, next) => {
     ctx.response.set('X-Response-Time', `${execTime}ms`);
 });
 
+var loginUrl=['/user/center'];
 //后台登陆
 app.use(async (ctx, next) => {
     var url=ctx.request.url;
-    if(~url.indexOf("manage")){
+    var needLogin=false;
+    for (var i = 0; i < loginUrl.length; i++) {
+      if(loginUrl[i]==url){
+        needLogin=true;
+      }
+    }
+    if(~url.indexOf("manage")||needLogin){
       var user=ctx.session.user;
       if(!user){
           console.log("未登录",url);

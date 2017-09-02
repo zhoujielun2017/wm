@@ -38,6 +38,26 @@
 
 {% block foot %}
 <script type="text/javascript">
+var valid_en={  
+    password: {
+      required: "Please provide a password",
+      minlength: "Your password must be at least 5 characters long"
+    },
+    email: "Please enter a valid email address"
+  }
+var valid_zh={
+    
+    password: {
+      required: "请输入密码",
+      minlength: "密码最少6位"
+    },
+    email: "请输入正确的邮箱"
+  }  
+var messages=valid_en;
+
+if($.cookie("locale")=="zh-CH"){
+  messages=valid_zh;
+}
 
 $("form").validate({
   rules: {
@@ -50,14 +70,7 @@ $("form").validate({
       email: true
     }
   },
-  messages: {
-    
-    password: {
-      required: "Please provide a password",
-      minlength: "Your password must be at least 5 characters long"
-    },
-    email: "Please enter a valid email address"
-  },
+  messages: messages,
   errorElement: "em"
 
 });

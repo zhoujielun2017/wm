@@ -1,54 +1,54 @@
-var Agency=require("../model/Agency");
+var Design=require("../model/Design");
 var User=require("../model/User");
 var Cooperation=require("../model/Cooperation");
 
 module.exports = {
-    'GET /agency': async (ctx, next) => {
+    'GET /design': async (ctx, next) => {
         var user=ctx.session.user;
         console.log(user);
         if(!user){
             ctx.response.redirect('/login/login');
             return ;
         }
-        var agency = await Agency.findById(user.id);
-        
-        ctx.render('./company/agency.html',{bean:agency});
+        var design = await Design.findById(user.id);
+        if(design&&design.work_experience)
+        design.work_experience=design.work_experience.split(",");
+        ctx.render('./company/design.html',{bean:design});
     },
     
-    'POST /api/agency': async (ctx, next) => {
+    'POST /api/design': async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
-            ename = ctx.request.body.ename||'',
-            address = ctx.request.body.address||'',
-            legal_person = ctx.request.body.legal_person||'',
-            phone = ctx.request.body.phone||'',
-            custom_service = ctx.request.body.custom_service||'',
-            email = ctx.request.body.email||'',
+            gender = ctx.request.body.gender||'',
+            age = ctx.request.body.age||'',
+            status = ctx.request.body.status||'',
+            major = ctx.request.body.major||'',
+            exps = ctx.request.body.exps,
             content = ctx.request.body.content||'';
+
         if(!user){
             ctx.body = {"code":"not_login"};
             return;
         }
         console.log("test user:",user.id);
-        var agency = await Agency.create({
+        var design = await Design.create({
             id:user.id,
             user_id:user.id,
             name: name,
-            ename:ename,
-            address:address,
-            legal_person:legal_person,
-            phone:phone,
-            custom_service:custom_service,
-            email:email,
-            content: content
+            gender:gender,
+            age:age,
+            status:status,
+            major:major,
+            work_experience:exps,
+            content:content
         });
         var dbUser = await User.findById(user.id);
         dbUser.name=name;
         dbUser.save();
-        ctx.body = {"code":"success","id":agency.id};
+        ctx.body = {"code":"success","id":design.id};
     },
-    'PUT /api/agency': async (ctx, next) => {
+    'PUT /api/design': async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
             ctx.body = {"code":"not_login"};
@@ -56,31 +56,30 @@ module.exports = {
         }
          var id = ctx.request.body.id||'',
             name = ctx.request.body.name||'',
-            ename = ctx.request.body.ename||'',
-            address = ctx.request.body.address||'',
-            legal_person = ctx.request.body.legal_person||'',
-            phone = ctx.request.body.phone||'',
-            custom_service = ctx.request.body.custom_service||'',
-            email = ctx.request.body.email||'',
+            gender = ctx.request.body.gender||'',
+            age = ctx.request.body.age||'',
+            status = ctx.request.body.status||'',
+            major = ctx.request.body.major||'',
+            exps = ctx.request.body.exps,
             content = ctx.request.body.content||'';
 
        
-         var agency = await Agency.findById(id);
-        agency.name=name;
-        agency.ename=ename;
-        agency.address=address;
-        agency.legal_person=legal_person;
-        agency.phone=phone;
-        agency.custom_service=custom_service;
-        agency.email=email;
-        agency.content=content;
-        await agency.save();
+         var design = await Design.findById(id);
+        design.name=name;
+        design.gender=gender;
+        design.age=age;
+        design.status=status;
+        design.major=major;
+        design.work_experience=exps;
+        design.content=content;
+
+        await design.save();
          var dbUser = await User.findById(user.id);
         dbUser.name=name;
         dbUser.save();
-        ctx.body = {"code":"success","id":agency.id};
+        ctx.body = {"code":"success","id":design.id};
     },
-    'PUT /api/agencydetail': async (ctx, next) => {
+    'PUT /api/designdetail': async (ctx, next) => {
          var user=ctx.session.user;
          var id = ctx.request.body.id||'',
             types = ctx.request.body.types,
@@ -112,16 +111,16 @@ module.exports = {
             });
         }
         
-        var agency = await Agency.findById(id);
-        agency.acreage=acreage;
+        var design = await Design.findById(id);
+        design.acreage=acreage;
         
-        agency.type_per_month=type_per_month;
-        agency.count_person=count_person;
-        agency.count_qc=count_qc;
-        agency.able_per_month=able_per_month;
-        agency.major=major;
-        await agency.save();
+        design.type_per_month=type_per_month;
+        design.count_person=count_person;
+        design.count_qc=count_qc;
+        design.able_per_month=able_per_month;
+        design.major=major;
+        await design.save();
        
-        ctx.body = {"code":"success","id":agency.id};
+        ctx.body = {"code":"success","id":design.id};
     }
 };

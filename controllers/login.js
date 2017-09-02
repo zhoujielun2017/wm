@@ -22,11 +22,13 @@ module.exports = {
             password:password
           }
         });
+
         if(!user){
             ctx.body ={code:"not_found"};
             return;
         }
-        
+        user.last_login_time=Date.now();
+        user.save();
         ctx.session.user = user;
         ctx.body ={code:"success"};
     },
@@ -42,6 +44,7 @@ module.exports = {
     },
     'POST /login/reg': async (ctx, next) => {
         var email = ctx.request.body.email,
+            type = ctx.request.body.type,
             password = ctx.request.body.password;
         if(!email||!password){
             ctx.body ={code:"param_null"};
@@ -52,21 +55,23 @@ module.exports = {
             role:0,
             email: email,
             name:email,
+            type:type,
             password:password,
             verified:0,
-            head_url: ""
+            head_url: "",
+            last_login_time:Date.now()
         });
 
-        ctx.body ={code:"success"};
+        ctx.body ={code:"success",id:user.id};
     },
-    //邀请码从邮箱过来
+    //注册邀请码从邮箱过来
     'GET /login/fromemail': async (ctx, next) => {
         var email = ctx.request.query.email,
             password = ctx.request.query.pass,
             time = ctx.request.query.time;
         console.log("param",ctx.request.query);
         if(!email||!password||!time){
-            ctx.render('./user/email_fail.html',{msg:"邀请链接错误"});
+            ctx.render('./user/reg_email_fail.html',{msg:"邀请链接错误"});
             return;
         }
         var user = await User.findOne({
@@ -76,16 +81,19 @@ module.exports = {
           }
         });
         if(user.update_time!=time){
-            ctx.render('./user/email_fail.html',{msg:"邀请链接已经过期"});
+            ctx.render('./user/reg_email_fail.html',{msg:"邀请链接已经过期"});
             return;
         }
         user.update_time = Date.now();
         await user.save();    
         ctx.session.user = user;
-        ctx.render('./user/email_sucess.html',{});
+        ctx.render('./user/reg_email_sucess.html',{});
     },
     'GET /login/sendemail': async (ctx, next) => {
-        ctx.render('./user/email_send_sucess.html',{});
+        var id = ctx.request.query.id;
+        var user = await User.findById(id);
+        // login/fromemail?email=11@22&pass=2222&time=1502549978197
+        ctx.render('./user/email_send_sucess.html',{bean:user});
     },
     //忘记密码页面
     'GET /login/forget': async (ctx, next) => {

@@ -1,0 +1,179 @@
+{% extends '../base.html' %}
+
+{% block head %}
+<style type="text/css">
+  .glyphicon{
+    font-size: 3em;
+    padding: 15px;
+    border:1px solid #777;
+    color: #777;
+  }
+  .imgs img{
+    width: 100px;
+    height: 100px;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+<form class="form-horizontal">
+    <input name="id" type="hidden" value="{{bean.id}}">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputEmail3">
+                {{__('title')}}
+            </label>
+            <div class="col-sm-10">
+                <input class="form-control" id="inputEmail3" name="title" placeholder="{{__('title')}}" type="text" value="{{bean.title}}">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputPassword3">
+                {{__('price')}}
+            </label>
+            <div class="col-sm-10">
+                <input class="form-control" name="price" placeholder="name" type="text" value="{{bean.price}}">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('material')}}
+            </label>
+            <div class="col-sm-10">
+                <input class="form-control" name="material" placeholder="name" type="text" value="{{bean.material}}">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('image')}}
+            </label>
+            <div class=" col-sm-10">
+                <div class="imgs">
+                    {% for e in bean.imgs %}
+                    <img class="img-rounded" src="{{img_domain}}{{e}}">
+                        <input name="img" type="hidden" value="{{e}}">
+                            {% endfor %}
+                        </input>
+                    </img>
+                </div>
+                <div class="fileselect">
+                    <label class="glyphicon glyphicon-plus" for="file">
+                    </label>
+                    <input class="hidden" id="file" name="upload" type="file">
+                    </input>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default" type="submit">
+                    {{__('add')}}
+                </button>
+            </div>
+        </div>
+    </input>
+</form>
+{% endblock %}
+
+{% block foot %}
+<script>
+    var valid_en={  
+    title: {
+      required: "Please provide title",
+      maxlength: "title can not more than 100 characters long"
+    },
+    price: "Please enter a valid price"
+  }
+var valid_zh={
+    
+    title: {
+      required: "请输入标题",
+      maxlength: "标题最长100个字符"
+    },
+    price: "请输入正确的价格"
+  }  
+var messages=valid_en;
+
+if($.cookie("locale")=="zh-CH"){
+  messages=valid_zh;
+}
+
+$("form").validate({
+  rules: {
+    title: {
+      required: true,
+      maxlength: 100
+    },
+    price: {
+      required: true
+    }
+  },
+  messages: messages,
+  errorElement: "em"
+
+});
+
+var imgCount=$(".imgs input").length;
+if(imgCount>=10){
+  $(".fileselect").hide();
+}
+$("#file").on("change",function(){
+    console.log("change")
+    var fd=new FormData();
+    fd.append("upload",this.files[0]);
+    $.ajax({
+        type: "POST",
+        url: "/file",
+        data:fd,
+        processData: false,  // 不处理数据
+        contentType: false,
+        success:function(json){
+          $(".imgs").append('<img src="'+json.url+'" class="img-rounded">'+
+            '<input type="hidden" name="img" value="'+json.path+'">')
+            console.log(json);
+            imgCount++;
+            if(imgCount>=10){
+              $(".fileselect").hide();
+            }
+        }
+    });
+  })
+
+$("form").on('submit',function(e){
+
+    var fd=new FormData(this);
+    var method=fd.get('id')?"PUT":"POST";
+    
+    var imgs=[];
+    $(".imgs input[name=img]").each(function(){
+      imgs.push($(this).val());
+    
+    })
+    $.ajax({
+        type: method,
+        url: "/api/works",
+        data:{id:fd.get('id'),
+          title:fd.get('title'),
+          price:fd.get('price'),
+          material:fd.get('material'),
+          content:fd.get('content'),
+          imgs:imgs.join(",")
+      },
+        dataType:"json",
+        success:function(json){
+            if(json.code=='success'){
+              $("input[name=id]").val(json.id);
+              alert(json.code);
+              // location.href="/works";
+            }else{
+              // location.reload();
+            }
+        }
+    });
+
+    return false;
+});
+</script>
+{% endblock %}

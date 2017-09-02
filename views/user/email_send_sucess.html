@@ -8,6 +8,11 @@
 {% block main %}
 
 <h1 class="text-center">email send success</h1>
+<p class="text-center">
+	<a href="/login/fromemail?email={{bean.email}}&pass={{bean.password}}&time={{bean.update_time}}">注册是邮件接收的链接</a>
+</p>
+
+
 {% endblock %}
 
 {% block foot %}

@@ -24,6 +24,10 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
 
 const ID_TYPE = Sequelize.STRING(32);
 
+/**
+ *   name:表名 
+ *   attributes:db.STRING(100),
+ **/
 function defineModel(name, attributes) {
     var attrs = {};
     for (let key in attributes) {
@@ -32,6 +36,7 @@ function defineModel(name, attributes) {
             value.allowNull = value.allowNull || false;
             attrs[key] = value;
         } else {
+            
             attrs[key] = {
                 type: value,
                 allowNull: false
@@ -83,17 +88,19 @@ function defineModel(name, attributes) {
             beforeValidate: function (obj) {
                 let now = Date.now();
                 if (obj.isNewRecord) {
-                    console.log('will create entity...' + obj);
+                    
                     if (!obj.id) {
                         obj.id = generateId();
                     }
                     obj.create_time = now;
                     obj.update_time = now;
                     obj.version = 0;
+                    console.log('will create entity...' , obj.dataValues);
                 } else {
-                    console.log('will update entity...');
+                    
                     obj.update_time = now;
                     obj.version++;
+                    console.log('will update entity...',obj);
                 }
             }
         }

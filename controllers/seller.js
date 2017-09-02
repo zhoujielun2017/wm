@@ -1,21 +1,23 @@
-var Agency=require("../model/Agency");
+var Seller=require("../model/Seller");
 var User=require("../model/User");
 var Cooperation=require("../model/Cooperation");
 
 module.exports = {
-    'GET /agency': async (ctx, next) => {
+    'GET /seller': async (ctx, next) => {
         var user=ctx.session.user;
         console.log(user);
         if(!user){
             ctx.response.redirect('/login/login');
             return ;
         }
-        var agency = await Agency.findById(user.id);
-        
-        ctx.render('./company/agency.html',{bean:agency});
+        var seller = await Seller.findById(user.id);
+        if(seller&&seller.brand){
+            seller.brand=seller.brand.split(",");
+        }
+        ctx.render('./company/seller.html',{bean:seller});
     },
     
-    'POST /api/agency': async (ctx, next) => {
+    'POST /api/seller': async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
@@ -25,30 +27,45 @@ module.exports = {
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+            offical_website = ctx.request.body.offical_website||'',
+            position = ctx.request.body.position||'',
+            count_shop = ctx.request.body.count_shop||'',
+            sale_per_year = ctx.request.body.sale_per_year||'',
+            firsthand = ctx.request.body.firsthand||'',
+            payment_days = ctx.request.body.payment_days||'',
+            create_time = ctx.request.body.create_time||Date.now(),
+            brands = ctx.request.body.brands||'',
             content = ctx.request.body.content||'';
+
         if(!user){
             ctx.body = {"code":"not_login"};
             return;
         }
         console.log("test user:",user.id);
-        var agency = await Agency.create({
+        var seller = await Seller.create({
             id:user.id,
             user_id:user.id,
             name: name,
             ename:ename,
             address:address,
-            legal_person:legal_person,
             phone:phone,
             custom_service:custom_service,
             email:email,
-            content: content
+            position:position,
+            count_shop:count_shop,
+            payment_days:payment_days,
+            sale_per_year:sale_per_year,
+            firsthand:firsthand,
+            brand:brands,
+            offical_website:offical_website,
+            create_time:create_time
         });
         var dbUser = await User.findById(user.id);
         dbUser.name=name;
         dbUser.save();
-        ctx.body = {"code":"success","id":agency.id};
+        ctx.body = {"code":"success","id":seller.id};
     },
-    'PUT /api/agency': async (ctx, next) => {
+    'PUT /api/seller': async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
             ctx.body = {"code":"not_login"};
@@ -62,25 +79,42 @@ module.exports = {
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+            offical_website = ctx.request.body.offical_website||'',
+            position = ctx.request.body.position||'',
+            count_shop = ctx.request.body.count_shop||'',
+            sale_per_year = ctx.request.body.sale_per_year||'',
+            firsthand = ctx.request.body.firsthand||'',
+            payment_days = ctx.request.body.payment_days||'',
+            create_time = ctx.request.body.create_time||Date.now(),
+            brands = ctx.request.body.brands||'',
             content = ctx.request.body.content||'';
 
        
-         var agency = await Agency.findById(id);
-        agency.name=name;
-        agency.ename=ename;
-        agency.address=address;
-        agency.legal_person=legal_person;
-        agency.phone=phone;
-        agency.custom_service=custom_service;
-        agency.email=email;
-        agency.content=content;
-        await agency.save();
+         var seller = await Seller.findById(id);
+        seller.name=name;
+        seller.ename=ename;
+        seller.address=address;
+        seller.legal_person=legal_person;
+        seller.phone=phone;
+        seller.custom_service=custom_service;
+        seller.email=email;
+        seller.offical_website=offical_website;
+        seller.position=position;
+        seller.count_shop=count_shop;
+        seller.sale_per_year=sale_per_year;
+        seller.firsthand=firsthand;
+        seller.payment_days=payment_days;
+        seller.content=content;
+        seller.brand=brands;
+        seller.create_time=create_time;
+
+        await seller.save();
          var dbUser = await User.findById(user.id);
         dbUser.name=name;
         dbUser.save();
-        ctx.body = {"code":"success","id":agency.id};
+        ctx.body = {"code":"success","id":seller.id};
     },
-    'PUT /api/agencydetail': async (ctx, next) => {
+    'PUT /api/sellerdetail': async (ctx, next) => {
          var user=ctx.session.user;
          var id = ctx.request.body.id||'',
             types = ctx.request.body.types,
@@ -112,16 +146,16 @@ module.exports = {
             });
         }
         
-        var agency = await Agency.findById(id);
-        agency.acreage=acreage;
+        var seller = await Seller.findById(id);
+        seller.acreage=acreage;
         
-        agency.type_per_month=type_per_month;
-        agency.count_person=count_person;
-        agency.count_qc=count_qc;
-        agency.able_per_month=able_per_month;
-        agency.major=major;
-        await agency.save();
+        seller.type_per_month=type_per_month;
+        seller.count_person=count_person;
+        seller.count_qc=count_qc;
+        seller.able_per_month=able_per_month;
+        seller.major=major;
+        await seller.save();
        
-        ctx.body = {"code":"success","id":agency.id};
+        ctx.body = {"code":"success","id":seller.id};
     }
 };

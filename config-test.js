@@ -4,7 +4,8 @@ var config = {
     username: 'postgres',
     password: 'postgres',
     host: 'localhost',
-    port: 5432
+    port: 5432,
+    img_domain:"http://localhost"
 };
 
 module.exports = config;

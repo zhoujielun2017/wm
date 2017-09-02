@@ -1,0 +1,67 @@
+{% extends '../base.html' %}
+
+{% block head %}
+<style type="text/css">
+.glyphicon-picture{
+  font-size: 70px;
+  color: #777;
+}
+.media-left img{
+  width: 100px;
+  height: 100px;
+}
+</style>
+{% endblock %}
+
+{% block main %}
+<h1>{{__('product info')}}</h1> <a href="/works/add" class="btn btn-primary">{{__('add')}}</a>
+
+  {% for e in result.rows %}
+  <div class="media">
+    <div class="media-left">
+       <a href="/works/{{e.id}}">
+       
+      {% if not e.default_img %}
+        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+      {% endif %}
+      {% if  e.default_img  %}
+        <img src="{{img_domain}}{{e.default_img }}" alt="" class="img-rounded">
+      {% endif %}
+      </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">
+        <a href="/works/{{e.id}}">{{e.title}}</a>
+      </h4>
+      <p>{{__('material')}}:{{e.material}}</p>
+      <p>{{__('price')}}:{{e.price}}</p>
+    </div>
+    <div class="media-right">
+    	<a href="/works/add?id={{e.id}}">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}" class="del">{{__('delete')}}</a>
+    </div>
+  </div>
+   {% endfor %}
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+  {{page}}
+  </ul>
+</nav>
+{% endblock %}
+
+{% block foot %}
+<script>
+$(".del").click(function(){
+  var id=$(this).data("id");
+  $.ajax({
+      type: "DELETE",
+      url: "/api/works/"+id,
+      dataType:"json",
+      success:function(json){
+          if(json.code="success"){
+              location.reload();
+          }
+      }
+  });
+})
+</script>  
+{% endblock %}

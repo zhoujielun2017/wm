@@ -1,5 +1,5 @@
 const nunjucks = require('nunjucks');
-
+const config = require('./config');
 function createEnv(path, opts) {
     var
         autoescape = opts.autoescape === undefined ? true : opts.autoescape,
@@ -27,7 +27,8 @@ function templating(path, opts) {
     return async (ctx, next) => {
         ctx.render = function (view, model) {
             var user=ctx.session.user;
-            ctx.response.body = env.render(view, Object.assign({}, ctx.state || {}, model || {},{sessionuser:user}));
+            ctx.response.body = env.render(view, 
+                Object.assign({}, ctx.state , model ,{sessionuser:user},config));
             ctx.response.type = 'text/html';
         };
         await next();

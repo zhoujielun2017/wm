@@ -51,7 +51,8 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      
+        
+      <li><a href="#">{{__('hot line')}}</a></li>
       {% if  sessionuser.role==9  %}
         <li><a href="/manage/users" class="lang" lang="zh-CN">后台管理</a></li>
         {% endif %}
@@ -70,28 +71,43 @@
   </div>
 </nav>
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-md-3">
-            
-              <div class="list-group">
-                  <a href="#" class="list-group-item"><h3>{{__('company manage')}}</h3></a>
-                  <a href="/company" class="list-group-item">{{__('base info')}}</a>
-                  <a href="/cooperation" class="list-group-item">{{__('cooperation info')}}</a>
-                  <a href="/product" class="list-group-item">{{__('product info')}}</a>
-                  <a href="#" class="list-group-item">公司动态</a>
-                  <a href="#" class="list-group-item">资质证书</a>
-                  <a href="#" class="list-group-item"><h3>{{__('message manage')}}</h3></a>
-                   <a href="/message" class="list-group-item"> <span class="badge unread"></span>{{__('all message')}}</a>
-                  <a href="#" class="list-group-item"><h3>{{__('user message')}}</h3></a>
-                  <a href="/user/buy" class="list-group-item">{{__('to be vip')}}</a>
-                  <a href="/ord" class="list-group-item">{{__('buy record')}}</a>
-              </div>
-          
-        </div>
-        <div class="col-xs-12 col-md-9" >
-            {% block main %} {% endblock %}
-        </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-3">
+        
+      <div class="list-group">
+          <a href="#" class="list-group-item"><h3>{{__('company manage')}}</h3></a>
+          {% if  sessionuser.type=="factory"  %}
+          <a href="/factory" class="list-group-item">{{__('base info')}}</a>
+          <a href="/cooperation" class="list-group-item">{{__('cooperation info')}}</a>
+          <a href="/product" class="list-group-item">{{__('product info')}}</a>
+          <a href="#" class="list-group-item">公司动态</a>
+          <a href="#" class="list-group-item">资质证书</a>
+          {% endif %}
+
+          {% if  sessionuser.type=="seller"  %}
+          <a href="/seller" class="list-group-item">{{__('base info')}}</a>
+          {% endif %}
+
+           {% if  sessionuser.type=="agency"  %}
+          <a href="/agency" class="list-group-item">{{__('base info')}}</a>
+          {% endif %}
+           {% if  sessionuser.type=="design"  %}
+          <a href="/design" class="list-group-item">{{__('base info')}}</a>
+          <a href="/works" class="list-group-item">{{__('works info')}}</a>
+          {% endif %}
+
+          <a href="#" class="list-group-item"><h3>{{__('message manage')}}</h3></a>
+           <a href="/message" class="list-group-item"> <span class="badge unread"></span>{{__('all message')}}</a>
+          <a href="#" class="list-group-item"><h3>{{__('user message')}}</h3></a>
+          <a href="/user/buy" class="list-group-item">{{__('to be vip')}}</a>
+          <a href="/ord" class="list-group-item">{{__('buy record')}}</a>
+      </div>
+      
     </div>
+    <div class="col-xs-12 col-md-9" >
+        {% block main %} {% endblock %}
+    </div>
+  </div>
 </div>
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

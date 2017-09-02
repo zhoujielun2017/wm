@@ -1,8 +1,8 @@
-var Product=require("../model/Product");
+var Works=require("../model/Works");
 var Util=require("../util/Util");
 module.exports = {
     //产品列表页
-    'GET /product': async (ctx, next) => {
+    'GET /works': async (ctx, next) => {
         var user=ctx.session.user;
         var page=ctx.request.query.page||1;
         
@@ -10,7 +10,7 @@ module.exports = {
             ctx.response.redirect('/login/login');
             return ;
         }
-        var result = await Product.findAndCountAll({
+        var result = await Works.findAndCountAll({
             where: {
                 user_id: user.id
             },
@@ -21,14 +21,14 @@ module.exports = {
         result.pageCount=Math.ceil(result.count/Util.pageSize);
         console.log(result);
 
-        ctx.render('./product/list.html', {
+        ctx.render('./works/list.html', {
             result:result,
-            page:Util.getPageNums(page,result.pageCount,"/product")}
+            page:Util.getPageNums(page,result.pageCount,"/works")}
         );
 
     },
     //产品添加页
-    'GET /product/add': async (ctx, next) => {
+    'GET /works/add': async (ctx, next) => {
         var user=ctx.session.user;
         console.log(user);
         if(!user){
@@ -36,66 +36,67 @@ module.exports = {
             return ;
         }
         var id=ctx.request.query.id;
-        var product = {};
+        
         if(id){
-            product = await Product.findById(id);
-            product.imgs=product.imgs.split(",");
+            var works = await Works.findById(id);
         }
-        ctx.render('./product/add.html',{bean:product});
+        if(works){
+            works.imgs=works.imgs.split(",");
+        }
+        ctx.render('./works/add.html',{bean:works});
     },
     
-    'POST /api/product': async (ctx, next) => {
+    'POST /api/works': async (ctx, next) => {
 
         var user=ctx.session.user;
         var title = ctx.request.body.title||'',
             material = ctx.request.body.material||'',
             price = ctx.request.body.price||0,
-            imgs = ctx.request.body.imgs||[],
+            imgs = ctx.request.body.imgs,
             content = ctx.request.body.content||'';
         if(!user){
             ctx.body = {"code":"not_login"};
             return;
         }
         console.log("test user:",user.id);
-        var product = await Product.create({
-            id:user.id,
+        var works = await Works.create({
             user_id:user.id,
             title: title,
             price:price,
             material:material,
-            default_img:imgs[0],
-            imgs:imgs.join(","),
+            default_img:imgs.split(",")[0],
+            imgs:imgs,
             status:1,
             content: content
         });
         
-        ctx.body = {"code":"success","id":product.id};
+        ctx.body = {"code":"success","id":works.id};
     },
-    'PUT /api/product': async (ctx, next) => {
+    'PUT /api/works': async (ctx, next) => {
          
-         var id = ctx.request.body.id||'',
+        var id = ctx.request.body.id||'',
             title = ctx.request.body.title||'',
             material = ctx.request.body.material||'',
             price = ctx.request.body.price||0,
-            imgs = ctx.request.body.imgs||[],
+            imgs = ctx.request.body.imgs,
             content = ctx.request.body.content||'';
 
-       
-         var product = await Product.findById(id);
-        product.title=title;
-        product.material=material;
-        product.price=price;
-        product.imgs=imgs.join(",");
-        product.default_img=imgs[0];
-        product.content=content;
-        await product.save();
+       console.log(imgs,imgs.slice(0,imgs.indexOf(",")+1));
+        var works = await Works.findById(id);
+        works.title=title;
+        works.material=material;
+        works.price=price;
+        works.imgs=imgs;
+        works.default_img=imgs.split(",")[0];
+        works.content=content;
+        await works.save();
         
-        ctx.body = {"code":"success","id":product.id};
+        ctx.body = {"code":"success","id":works.id};
     },
-    'DELETE /api/product/:id': async (ctx, next) => {
+    'DELETE /api/works/:id': async (ctx, next) => {
          
         var id = ctx.params.id;
-        await Product.destroy({
+        await Works.destroy({
           where: {
             id:id
           }

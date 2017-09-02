@@ -63,7 +63,8 @@ module.exports = {
             ctx.response.body = JSON.stringify({
                 "uploaded": 1,
                 "fileName": file.name,
-                "url": domain+url
+                "url": domain+url,
+                "path":url
             });
         }
         

@@ -35,8 +35,16 @@
    <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('image')}}</label>
     <div class="imgs col-sm-10">
-         <label for="file" class="glyphicon glyphicon-plus"></label>
+        <div class="imgs">
+          {% for e in bean.imgs %}
+        <img src="{{img_domain}}{{e}}" class="img-rounded">
+        <input type="hidden" name="img" value="{{e}}">
+         {% endfor %}
+        </div>
+        <div class="fileselect">
+           <label for="file" class="glyphicon glyphicon-plus"></label>
          <input type="file" name="upload" id="file" class="hidden">
+        </div>
     </div>
   </div>
    
@@ -51,6 +59,46 @@
 
 {% block foot %}
 <script>
+var valid_en={  
+    title: {
+      required: "Please provide title",
+      maxlength: "title can not more than 100 characters long"
+    },
+    price: "Please enter a valid price"
+  }
+var valid_zh={
+    
+    title: {
+      required: "请输入标题",
+      maxlength: "标题最长100个字符"
+    },
+    price: "请输入正确的价格"
+  }  
+var messages=valid_en;
+
+if($.cookie("locale")=="zh-CH"){
+  messages=valid_zh;
+}
+
+$("form").validate({
+  rules: {
+    title: {
+      required: true,
+      maxlength: 100
+    },
+    price: {
+      required: true
+    }
+  },
+  messages: messages,
+  errorElement: "em"
+
+});
+
+var imgCount=$(".imgs input").length;
+if(imgCount>=10){
+  $(".fileselect").hide();
+}
 $("#file").on("change",function(){
     console.log("change")
     var fd=new FormData();
@@ -62,8 +110,13 @@ $("#file").on("change",function(){
         processData: false,  // 不处理数据
         contentType: false,
         success:function(json){
-          $(".imgs").prepend('<img src="'+json.url+'" class="img-rounded">')
+          $(".imgs").append('<img src="'+json.url+'" class="img-rounded">'+
+            '<input type="hidden" name="img" value="'+json.path+'">')
             console.log(json);
+            imgCount++;
+            if(imgCount>=10){
+              $(".fileselect").hide();
+            }
         }
     });
   })
