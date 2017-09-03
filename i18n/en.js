@@ -83,5 +83,6 @@
 	"fulltime": "fulltime",
 	"parttime": "parttime",
 	"work experience": "work experience",
-	"data empty": "data empty"
+	"data empty": "data empty",
+	"login": "login"
 }

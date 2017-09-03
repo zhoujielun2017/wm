@@ -119,6 +119,7 @@
 
 
       {% for e in major %}
+      
       <button type="button" class="btn btn-default  {% for d in bean.major %}{% if  e==d  %}btn-primary{% endif %}{% endfor %}" data-code="{{e}}" >{{__(e)}}</button>
       {% endfor %}
         

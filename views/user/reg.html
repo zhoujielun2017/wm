@@ -1,61 +1,95 @@
 {% extends '../empty.html' %}
 
 {% block head %}
-<style type="text/css">
-    h1,.center-block{
-        text-align: center;
-    }
-</style>
+<link href="/css/signin.css" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 {% block main %}
-<p><a href="#" class="lang" lang="zh-CH">简体中文</a><a href="#" class="lang" lang="en">English</a></p>
-<h1>{{__('website')}}</h1>
-<form class="form-horizontal">
-  <div class="form-group">
-    <label class="col-sm-2 control-label">{{__('email')}}</label>
-    <div class="col-sm-10">
-      <input type="email" name="email" class="form-control" placeholder="email" required>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">{{__('password')}}</label>
-    <div class="col-sm-10">
-      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">{{__('confirm password')}}</label>
-    <div class="col-sm-10">
-      <input type="password" name="password2" class="form-control" id="inputPassword3" placeholder="Password">
-    </div>
-  </div>
-   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">{{__('type user')}}</label>
-    <div class="col-sm-10">
-     <select class="form-control" name="type">
-        <option value="seller">{{__('seller')}}</option>
-        <option value="agency">{{__('agency')}}</option>
-        <option value="factory">{{__('factory')}}</option>
-        <option value="design">{{__('design')}}</option>
-      </select>
-    </div>
-  </div>
-    
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">{{__('register')}}</button>
-    </div>
-  </div>
-</form>
-<div class="center-block">{{__('have acount')}}<a href="/login/login">{{__('please sign in')}}</a></div>
-<p></p>
-<p><a href="/login/fromemail?email=11@22&pass=2222&time=1502549978197">/login/fromemail?email=11@22&pass=2222&time=1502549978197</a></p>
+
+<div class="container">
+
+    <form class="form-horizontal">
+        <p class="text-right">
+            <a class="lang" href="#" lang="zh-CH">
+                简体中文
+            </a> 
+            <a class="lang" href="#" lang="en">
+                English
+            </a>
+        </p>
+        <h3 class="text-center">
+             {{__('register')}}
+        </h3>
+        <div class="form-group">
+           <!--  <label class="col-sm-2 control-label">
+                {{__('email')}}
+            </label> -->
+            <div class="col-sm-12">
+                <input class="form-control" name="email" placeholder="{{__('email')}}" required="" type="email">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+           <!--  <label class="col-sm-2 control-label" for="inputPassword3">
+                {{__('password')}}
+            </label> -->
+            <div class="col-sm-12">
+                <input class="form-control" id="inputPassword3" name="password" placeholder="{{__('password')}}" type="password">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+           <!--  <label class="col-sm-2 control-label" for="inputPassword3">
+                {{__('confirm password')}}
+            </label> -->
+            <div class="col-sm-12">
+                <input class="form-control" id="inputPassword3" name="password2" placeholder="{{__('confirm password')}}" type="password">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- <label class="col-sm-2 control-label" for="inputPassword3">
+                {{__('type user')}}
+            </label> -->
+            <div class="col-sm-12">
+                <select class="form-control" name="type">
+                    <option value="seller">
+                        {{__('seller')}}
+                    </option>
+                    <option value="agency">
+                        {{__('agency')}}
+                    </option>
+                    <option value="factory">
+                        {{__('factory')}}
+                    </option>
+                    <option value="design">
+                        {{__('design')}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button class="btn btn-primary  btn-block" type="submit">
+                    {{__('register')}}
+                </button>
+            </div>
+        </div>
+        <div class="center-block">
+    {{__('have acount')}}
+    <a href="/login/login">
+        {{__('please sign in')}}
+    </a>
+</div>
+    </form>
+</div>
+
+
 {% endblock %}
 
 {% block foot %}
 <script type="text/javascript">
-$("form").validate({
+    $("form").validate({
   rules: {
     password: {
       required: true,
@@ -98,13 +132,13 @@ $("form").on("submit",function(){
   if(!$(this).valid()){
     return false;
   }
-	var fd=new FormData(this);
-	 $.ajax({
+  var fd=new FormData(this);
+   $.ajax({
         type: "POST",
         url: "/login/reg",
          data:{
-        	email:fd.get("email"),
-        	password:fd.get("password"),
+          email:fd.get("email"),
+          password:fd.get("password"),
           password2:fd.get("password2"),
           type:fd.get("type")
         },
@@ -115,9 +149,7 @@ $("form").on("submit",function(){
             }
         }
     });
-	return false;
+  return false;
 });
-</script>  
+</script>
 {% endblock %}
-
-

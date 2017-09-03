@@ -1,44 +1,90 @@
 {% extends '../empty.html' %}
 
 {% block head %}
+<link href="/css/signin.css" type="text/css" rel="stylesheet"/>
+<style type="text/css">
 
+</style>
 {% endblock %}
 
 {% block main %}
-<p><a href="#" class="lang" lang="zh-CH">简体中文</a><a href="#" class="lang" lang="en">English</a></p>
-<h1 class="text-center">{{__('website')}}</h1>
-<form class="form-horizontal">
-  <div class="form-group">
-    <label for="inputEmail3" class="col-sm-2 control-label">{{__('email')}}</label>
-    <div class="col-sm-10">
-      <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">{{__('password')}}</label>
-    <div class="col-sm-10">
-      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">{{__('sign in')}}</button>
-    </div>
-  </div>
-</form>
-<div class="center-block">
-<span class="pull-left">{{__('have not account')}}<a href="/login/reg">{{__('please register')}}</a></span>
-<span class="pull-right"><a href="/login/forget">{{__('forget password')}}</a></span>
+<div class="container">
+    
+    <form class="form-horizontal" >
+        <p class="text-right">
+            <a class="lang" href="#" lang="zh-CH">
+                简体中文
+            </a> 
+            <a class="lang" href="#" lang="en">
+                English
+            </a>
+        </p>
+        <h3 class="text-center">
+            {{__('sign in')}}
+        </h3>
+        <div class="form-group">
+            <!-- <label class="col-sm-3 control-label" for="inputEmail3">
+                {{__('email')}}
+            </label> -->
+            <div class="col-sm-12">
+                <input class="form-control" id="inputEmail3" name="email" placeholder="{{__('email')}}" type="email">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- <label class="col-sm-3 control-label" for="inputPassword3">
+                {{__('password')}}
+            </label> -->
+            <div class="col-sm-12">
+                <input class="form-control" id="inputPassword3" name="password" placeholder="{{__('password')}}" type="password">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <button class="btn btn-primary btn-block" type="submit">
+                    {{__('sign in')}}
+                </button>
+            </div>
+        </div>
+        <div class="form-group foot-line">
+            <label class="col-sm-6">
+                {{__('have not account')}}
+                <a href="/login/reg">
+                    {{__('please register')}}
+                </a>
+            </label>
+            <div class="col-sm-6">
+              <p class=" text-right">
+                <a href="/login/forget">
+                    {{__('forget password')}}
+                </a>
+              </p>
+            </div>
+        </div>
+   <!--      <div class="center-block">
+            <span class="pull-left">
+                {{__('have not account')}}
+                <a href="/login/reg">
+                    {{__('please register')}}
+                </a>
+            </span>
+            <span class="pull-right">
+                <a href="/login/forget">
+                    {{__('forget password')}}
+                </a>
+            </span>
+        </div> -->
+    </form>
 </div>
-<div class="clearfix"></div>
 
-
-
+<div class="clearfix">
+</div>
 {% endblock %}
 
 {% block foot %}
 <script type="text/javascript">
-var valid_en={  
+    var valid_en={  
     password: {
       required: "Please provide a password",
       minlength: "Your password must be at least 5 characters long"
@@ -59,7 +105,7 @@ if($.cookie("locale")=="zh-CH"){
   messages=valid_zh;
 }
 
-$("form").validate({
+var validator=$("form").validate({
   rules: {
     password: {
       required: true,
@@ -77,16 +123,16 @@ $("form").validate({
 
 $("form").on("submit",function(){
 
-	var fd=new FormData(this);
-	 if(!$(this).valid()){
+   var fd=new FormData(this);
+   if(!$(this).valid()){
     return false;
    }
-	 $.ajax({
+   $.ajax({
         type: "POST",
         url: "/login/login",
          data:{
-        	email:fd.get("email"),
-        	password:fd.get("password")
+          email:fd.get("email"),
+          password:fd.get("password")
         },
         dataType:"json",
         success:function(json){
@@ -94,11 +140,16 @@ $("form").on("submit",function(){
             if(json.code=="success"){
                 location.href="/user/center";
             }
+            if(json.code=="not_found"){
+              // var error='<em class="error" style="display: inline;">邮箱或者密码错误</em>';
+              // $("input[name=password]").after(error);
+              validator.showErrors({
+                "password": "邮箱或者密码错误"
+              });
+            }
         }
     });
-	return false;
+  return false;
 });
-</script>  
+</script>
 {% endblock %}
-
-
