@@ -1,38 +1,31 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-    <head>
-        <meta charset="utf-8"/>
-        <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
-        <meta content="width=device-width, initial-scale=1" name="viewport"/>
-        <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-        <title>
-            Bootstrap 101 Template
-        </title>
-        <!-- Bootstrap -->
-        <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="/static/css/web.css" rel="stylesheet"/>
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    </head>
-    <body>
-        <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-        <div class="row">
-            <div class="col-xs-12 col-md-3">
-                .col-xs-12 .col-md-3
-            </div>
-            <div class="col-xs-12 col-md-9">
-                .col-xs-12 .col-md-9
-            </div>
-        </div>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js">
-        </script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="/static/js/bootstrap.min.js">
-        </script>
-    </body>
-</html>
+{% extends './toolbar_index.html' %}
+
+{% block head %}
+<style type="text/css">
+body{
+    background: #eee;
+}
+.bg{
+    background: #eee;
+    height: 100%;
+}
+h2{
+    margin-top: 30%;
+}
+</style>
+{% endblock %}
+
+{% block main %}
+<div class="jumbotron masthead">
+    <div class="container">
+    <!-- <div class="bg"> -->
+        <h2 class="text-center">全球xx信息网：搭起xx供求信息的桥梁</h2>
+        <p>我们的辅导团队主要来自于Harvard GSD, Columbia, UPenn, HKU, TUD等学校，拥有丰富的作品集辅导及申请文书辅导经验，在成立的四年时间里，辅导成功案例遍布欧洲，美洲，澳洲，新加坡及香港等地，已帮助学员成功申请到UPenn, Cornell, UCL, TUD, HKU, KTH, RMIT等学校。我们是您值得信赖的专业团队。</p>
+    <!-- </div> -->
+    </div>
+</div>
+{% endblock %}
+
+{% block foot %}
+<script></script>  
+{% endblock %}

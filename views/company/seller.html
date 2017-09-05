@@ -1,254 +1,75 @@
-{% extends '../base.html' %}
+{% extends '../toolbar_index.html' %}
 
 {% block head %}
-
+<style type="text/css">
+  .row{
+    margin-bottom: 30px;
+  }
+  .img{
+      width: 150px;
+  }
+</style>
 {% endblock %}
 
 {% block main %}
-<form class="form-horizontal">
-    <input name="id" type="hidden" value="{{bean.id}}">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('company name')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="name" placeholder="{{__('company name')}}" type="text" value="{{bean.name}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('company english name')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="ename" placeholder="{{__('company english name')}}" type="text" value="{{bean.ename}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('offical website')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="offical_website" placeholder="{{__('offical website')}}" type="text" value="{{bean.offical_website}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('company address')}}
-            </label>
-            <div class="col-sm-10">
-                <textarea class="form-control" name="address" placeholder="{{__('company address')}}">{{bean.address}}</textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('company custom service')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="custom_service" placeholder="{{__('company custom service')}}" type="text" value="{{bean.custom_service}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('company position')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="position" placeholder="{{__('company position')}}" type="text" value="{{bean.position}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('company email')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="email" placeholder="{{__('company email')}}" type="text" value="{{bean.email}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('build time')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="create_time" placeholder="{{__('build time')}}" type="date" value="{{bean.create_time|formatdate("YYYY-MM-DD")}}">
-                </input>
-            </div>
-        </div>
-        {% for e in bean.brand %}
-        <div class="form-group {% if loop.last %}brand{% endif %}">
-            <label class="col-sm-2 control-label">
-                {{__('cooperation brand')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="brand" placeholder="{{__('cooperation brand')}}" type="text" value="{{e}}">
-                </input>
-            </div>
-        </div>
-        {% else %}
-        <div class="form-group brand">
-            <label class="col-sm-2 control-label">
-                {{__('cooperation brand')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="brand" placeholder="{{__('cooperation brand')}}" type="text" value="">
-                </input>
-            </div>
-        </div>
-        {% endfor %}
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <a href="javascript:void(0);" class="btn btn-default addC">{{__('add')}}</a>
-          </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('count of shop')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="count_shop" placeholder="{{__('count of shop')}}" type="number" value="{{bean.count_shop}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('sale per year')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="payment_days" placeholder="{{__('sale per year')}}" type="text" value="{{bean.payment_days}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('firsthand')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="firsthand" placeholder="{{__('firsthand')}}" type="text" value="{{bean.firsthand}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('payment days')}}
-            </label>
-            <div class="col-sm-10">
-            <input class="form-control" name="payment_days" placeholder="{{__('payment days')}}" type="text" value="{{bean.payment_days}}"></input>
-               
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default" type="submit">
-                    {{__('confirm')}}
-                </button>
-            </div>
-        </div>
-    </input>
-</form>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3 img">
+      <img src="/images/default.png">
+    </div>
+    <div class="col-xs-9">
+      <h3>{{bean.name}}</h3>
+      <a>发站内信</a>
+      <form class="msgform">
+      <input type="hidden" name="receiver_id" value="{{bean.user_id}}">
+      <textarea name="content"></textarea>
+      <button>发送</button>
+      </form>
+    </div>
+  </div>
+   <div class="row">
+    <div class="col-xs-6">
+      <p>{{__('company custom service')}}:{{bean.custom_service}}   {{bean.position}}</p>
+      <p>{{__('company phone')}}:{{bean.phone}}</p>
+      <p>{{__('offical website')}}:{{bean.offical_website}}</p>
+      <p>{{__('company email')}}:{{bean.email}}</p>
+      <p>{{__('company address')}}:{{bean.address}}</p>
+    </div>
+    <div class="col-xs-6">
+      <p>{{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
+      <p>{{__('count of shop')}}:{{bean.count_shop}}</p>
+      <p>{{__('cooperation brand')}}:{% for d in bean.brand %}{{d}} {% endfor %}
+       </p>
+      <p>{{__('sale per year')}}:{{bean.sale_per_year}}{{__('unit money')}}</p>
+      <p>{{__('firsthand')}}:{{bean.firsthand}}</p>
+      <p>{{__('payment days')}}:{{bean.payment_days}}{{__('unit day')}}</p>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block foot %}
-<script>
-    var valid_en={  
-    name: {
-      required: "Please provide name",
-      maxlength: "name can not more than 100 characters long"
-    },
-    ename: {
-      required: "Please provide ename",
-      maxlength: "ename can not more than 100 characters long"
-    },
-    price: "Please enter a valid price"
-  }
-var valid_zh={
-    
-    name: {
-      required: "请输入标题",
-      maxlength: "标题最长100个字符"
-    },
-    ename: {
-      required: "请输入英文标题",
-      maxlength: "英文标题最长100个字符"
-    },
-    price: "请输入正确的价格"
-  }  
-var messages=valid_en;
-
-if($.cookie("locale")=="zh-CH"){
-  messages=valid_zh;
-}
-
-$("form").validate({
-  rules: {
-    title: {
-      required: true,
-      maxlength: 100
-    },
-    price: {
-      required: true
-    }
-  },
-  messages: messages,
-  errorElement: "em"
-
-});
-
-$(".addC").click(function(){
-  var temp=$(".brand");
-  var clone=temp.clone();
-  temp.after(clone);
-  temp.removeClass("brand")
-  clone.find("input").val("");
-});
-
-
-$("form").on('submit',function(e){
-
-    var fd=new FormData(this);
-    var method=fd.get('id')?"PUT":"POST";
-    
-    var create_time=Date.parse(fd.get('create_time'));
-     var brands=[];
-    $("input[name=brand]").each(function(){
-      brands.push($(this).val());
-    })
-    $.ajax({
-        type: method,
-        url: "/api/seller",
-        data:{id:fd.get('id'),
-          name:fd.get('name'),
-          ename:fd.get('ename'),
-          phone:fd.get('phone'),
-          address:fd.get('address'),
-          email:fd.get('email'),
-          custom_service:fd.get('custom_service'),
-          legal_person:fd.get('legal_person'),
-          offical_website:fd.get('offical_website'),
-          position:fd.get('position'),
-          count_shop:fd.get('count_shop'),
-          sale_per_year:fd.get('sale_per_year'),
-          firsthand:fd.get('firsthand'),
-          payment_days:fd.get('payment_days'),
-          sale_per_year:fd.get('sale_per_year'),
-          brands:brands.join(","),
-          create_time:create_time
-      },
+<script type="text/javascript">
+  $(".msgform").on("submit",function(){
+     var fd = new FormData(this);
+     $.ajax({
+        type: "POST",
+        url: "/api/message",
+        data:{
+          receiver_id:fd.get("receiver_id"),
+          content:fd.get("content")
+        },
         dataType:"json",
         success:function(json){
             if(json.code=='success'){
-              $("input[name=id]").val(json.id);
-              alert("保存成功");
-            }else{
-              // location.reload();
+              alert(json.code);
+            }
+            if(json.code=='not_login'){
+              alert("请先登录");
             }
         }
     });
-
-    return false;
-});
+     return false;
+  });
 </script>
 {% endblock %}

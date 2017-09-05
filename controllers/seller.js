@@ -1,8 +1,41 @@
 var Seller=require("../model/Seller");
 var User=require("../model/User");
 var Cooperation=require("../model/Cooperation");
+var PageUtil=require("../util/PageUtil");
 
 module.exports = {
+    //前台列表
+    'GET /sellers': async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Seller.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        for (var i = 0; i < result.length; i++) {
+            var bean=result[i];
+            if(bean.brand){
+                bean.brand=bean.brand.split(",");
+            }
+        }
+        ctx.render('./company/sellers.html',{
+            result:result,
+            nav:"sellers",
+            page:PageUtil.getPage(page, result.count)
+        });
+    },
+    //前台详情
+    'GET /seller/:id': async (ctx, next) => {
+        var id=ctx.params.id||1;
+        var seller = await Seller.findById(id);
+        if(seller&&seller.brand){
+            seller.brand=seller.brand.split(",");
+        }
+        ctx.render('./company/seller.html',{bean:seller});
+    },
+    //个人中心
     'GET /seller': async (ctx, next) => {
         var user=ctx.session.user;
         console.log(user);
@@ -14,7 +47,7 @@ module.exports = {
         if(seller&&seller.brand){
             seller.brand=seller.brand.split(",");
         }
-        ctx.render('./company/seller.html',{bean:seller});
+        ctx.render('./company/add_seller.html',{bean:seller});
     },
     
     'POST /api/seller': async (ctx, next) => {

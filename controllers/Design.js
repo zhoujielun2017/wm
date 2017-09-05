@@ -1,8 +1,54 @@
 var Design=require("../model/Design");
+var Works=require("../model/Works");
 var User=require("../model/User");
 var Cooperation=require("../model/Cooperation");
+var PageUtil=require("../util/PageUtil");
 
 module.exports = {
+    //前台列表
+    'GET /designs': async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Design.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        for (var i = 0; i < result.length; i++) {
+            var bean=result[i];
+            if(bean.brand){
+                bean.brand=bean.brand.split(",");
+            }
+        }
+        ctx.render('./company/designs.html',{
+            result:result,
+            nav:"designs",
+            page:PageUtil.getPage(page, result.count)
+        });
+    },
+    //前台详情
+    'GET /design/:id': async (ctx, next) => {
+        var id=ctx.params.id;
+        var page=ctx.request.query.page||1;
+        var design = await Design.findById(id);
+        if(design&&design.brand){
+            design.brand=design.brand.split(",");
+        }
+
+         var workses = await Works.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        ctx.render('./company/design.html',{
+            bean:design,
+            workses:workses,
+            page:PageUtil.getPage(page, workses.count)
+        });
+    },
     'GET /design': async (ctx, next) => {
         var user=ctx.session.user;
         console.log(user);
@@ -13,7 +59,7 @@ module.exports = {
         var design = await Design.findById(user.id);
         if(design&&design.work_experience)
         design.work_experience=design.work_experience.split(",");
-        ctx.render('./company/design.html',{bean:design});
+        ctx.render('./company/add_design.html',{bean:design});
     },
     
     'POST /api/design': async (ctx, next) => {

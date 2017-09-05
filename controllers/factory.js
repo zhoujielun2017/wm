@@ -1,8 +1,58 @@
 var Factory=require("../model/Factory");
 var User=require("../model/User");
+var Product=require("../model/Product");
 var Cooperation=require("../model/Cooperation");
+var PageUtil=require("../util/PageUtil");
 
 module.exports = {
+    //前台列表
+    'GET /factorys': async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Factory.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        for (var i = 0; i < result.length; i++) {
+            var bean=result[i];
+            if(bean.brand){
+                bean.brand=bean.brand.split(",");
+            }
+        }
+        ctx.render('./company/factorys.html',{
+            result:result,
+            nav:"factorys",
+            page:PageUtil.getPage(page, result.count)
+        });
+    },
+    //前台详情
+    'GET /factory/:id': async (ctx, next) => {
+        var id=ctx.params.id;
+        var page=ctx.request.query.page||1;
+        var factory = await Factory.findById(id);
+        if(factory&&factory.brand){
+            factory.brand=factory.brand.split(",");
+        }
+        if(factory&&factory.major){
+            factory.major=factory.major.split(",");
+        }
+
+
+        var pros = await Product.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        ctx.render('./company/factory.html',{
+            bean:factory,
+            pros:pros,
+            page:PageUtil.getPage(page, pros.count)
+        });
+    },
     'GET /factory': async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
@@ -11,7 +61,7 @@ module.exports = {
         }
         var factory = await Factory.findById(user.id);
         
-        ctx.render('./company/factory.html',{bean:factory});
+        ctx.render('./company/add_factory.html',{bean:factory});
     },
     
     'POST /api/factory': async (ctx, next) => {

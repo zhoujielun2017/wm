@@ -1,8 +1,40 @@
 var Agency=require("../model/Agency");
 var User=require("../model/User");
 var Cooperation=require("../model/Cooperation");
+var PageUtil=require("../util/PageUtil");
 
 module.exports = {
+    //前台列表
+    'GET /agencys': async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Agency.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        for (var i = 0; i < result.length; i++) {
+            var bean=result[i];
+            if(bean.brand){
+                bean.brand=bean.brand.split(",");
+            }
+        }
+        ctx.render('./company/agencys.html',{
+            result:result,
+            nav:"agencys",
+            page:PageUtil.getPage(page, result.count)
+        });
+    },
+    //前台详情
+    'GET /agency/:id': async (ctx, next) => {
+        var id=ctx.params.id||1;
+        var agency = await Agency.findById(id);
+        if(agency&&agency.brand){
+            agency.brand=agency.brand.split(",");
+        }
+        ctx.render('./company/agency.html',{bean:agency});
+    },
     'GET /agency': async (ctx, next) => {
         var user=ctx.session.user;
         console.log(user);
@@ -15,7 +47,7 @@ module.exports = {
             agency.brand=agency.brand.split(",");    
         }
         
-        ctx.render('./company/agency.html',{bean:agency});
+        ctx.render('./company/add_agency.html',{bean:agency});
     },
     
     'POST /api/agency': async (ctx, next) => {

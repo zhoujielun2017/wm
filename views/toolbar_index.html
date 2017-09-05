@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>{{__('website')}}</title>
+
+    <!-- Bootstrap -->
+    
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/web.css" rel="stylesheet">
+    {% block head %} {% endblock %}
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body>
+ <!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <!-- <a class="navbar-brand" href="#"> -->
+        <img src="/images/logo.png">
+      <!-- </a> -->
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+
+        <li {% if  nav=="index"  %}class="active"{% endif %}><a href="/">{{__('index')}}</a></li>
+        <li {% if  nav=="sellers"  %}class="active"{% endif %}><a href="/sellers">{{__('seller')}}</a></li>
+        <li {% if  nav=="agencys"  %}class="active"{% endif %}><a href="/agencys">{{__('agency')}}</a></li>
+        <li {% if  nav=="factorys"  %}class="active"{% endif %}><a href="/factorys">{{__('factory')}}</a></li>
+        <li {% if  nav=="designs"  %}class="active"{% endif %}><a href="/designs">{{__('design')}}</a></li>
+        <li {% if  nav=="contact"  %}class="active"{% endif %}><a href="/contact">{{__('contact')}}</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+ 
+       
+       <!--  <li><a href="#" class="lang" lang="zh-CN">简体中文</a></li>
+        <li><a href="#" class="lang" lang="en">English</a></li> -->
+       
+        {% if  sessionuser  %}
+         <li><a href="#">{{sessionuser.email}}</a></li>
+        <li><a href="#" class="loginout">{{__('sign out')}}</a></li>
+        {% endif %}
+        {% if  not sessionuser  %}
+        <li><a href="/login/login">{{__('sign in')}}</a></li>
+        <li><a href="/login/login">{{__('register')}}</a></li>
+        {% endif %}
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+   {% block main %} {% endblock %}
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script type="text/javascript">
+  $(".lang").click(function(){
+    var lang=$(this).attr("lang")||en;
+    $.cookie('locale', lang, { expires: 7 }); 
+    location.reload();
+  });
+  // 
+  if($(".unread").length){
+     $.ajax({
+        type: "GET",
+        url: "/api/messageGroup",
+        dataType:"json",
+        success:function(json){
+            if(json.code="success"){
+                $(".unread").text(json.count);
+            }
+        }
+    });
+  }
+ 
+  $(".loginout").click(function(){
+     $.ajax({
+        type: "DELETE",
+        url: "/login/login",
+        dataType:"json",
+        success:function(json){
+            if(json.code="success"){
+                location.reload();
+            }
+        }
+    });
+  });
+</script>
+{% block foot %} {% endblock %}
+</body>
+</html>

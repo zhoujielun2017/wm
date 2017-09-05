@@ -3,11 +3,12 @@
 module.exports = {
     'GET /': async (ctx, next) => {
         ctx.render('index.html', {
-            title: 'Welcome'
+            title: 'Welcome',
+            nav:"index"
         });
     },
-    'GET /editor': async (ctx, next) => {
-        ctx.render('editor.html', {
+    'GET /contact': async (ctx, next) => {
+        ctx.render('contact.html', {
             title: 'Welcome'
         });
     }

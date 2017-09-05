@@ -1,0 +1,85 @@
+{% extends './toolbar_index.html' %}
+
+{% block head %}
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<style type="text/css">
+body{
+    background: #eee;
+}
+
+h2{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+h4 {
+    margin-bottom: 90px;
+    color: #999;
+}
+.col-md-4{
+    text-align: center;
+}
+.img-circle{
+    background: #999;
+    width: 200px;
+    display: inline-block;
+    height: 200px;
+    font-size: 110px;
+    line-height: 200px;
+}
+i{
+    color: #FFF;
+}
+.row:last-child{
+    margin-top: 30px;
+}
+</style>
+{% endblock %}
+
+{% block main %}
+<div class="jumbotron masthead">
+    <div class="container">
+  
+        <h2 class="text-center">Contact | 联系我们</h2>
+        <h4 class="text-center">我们期待收到你的消息</h4>
+
+        <div class="row">
+          <div class="col-xs-4 col-md-4">
+                
+                <span class="img-circle">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>     
+                </span>
+          </div>
+          <div class="col-xs-4 col-md-4">
+                <span class="img-circle">
+                    <i class="fa fa-qq" aria-hidden="true"></i>     
+                </span>
+               
+          </div>
+          <div class="col-xs-4 col-md-4">
+            <img src="/images/qr.png">
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-md-4">
+                
+                <p>Email|邮箱</p>
+                <p>xx@122.com</p>
+          </div>
+          <div class="col-xs-4 col-md-4">
+    
+                <p class="text-center">QQ</p>
+                <p class="text-center">123123</p>
+          </div>
+          <div class="col-xs-4 col-md-4" >
+     
+            <p class="text-center">WeChat | 微信公众号</p>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot %}
+<script></script>  
+{% endblock %}

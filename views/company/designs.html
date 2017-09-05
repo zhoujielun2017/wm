@@ -1,0 +1,45 @@
+{% extends '../toolbar_index.html' %}
+
+{% block head %}
+<style type="text/css">
+  .list{
+    margin-bottom: 10px;
+  }
+  .list .col-md-3:first-child{
+      width: 150px;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    {% for e in result.rows %}
+    <div class="row list">
+        <div class="col-xs-3 col-md-3">
+            <a href="/design/{{e.id}}">
+                <img alt="" class="img-rounded" src="/images/default.png">
+                </img>
+            </a>
+        </div>
+        <div class="col-xs-9 col-md-9">
+             <h4>
+                <a href="/design/{{e.id}}">
+                    {{e.name}}
+                </a>
+            </h4>
+            <p>工作经历：卡地亚  施华洛世奇</p>
+            <p>设计特长：{{e.major}}</p>      
+        </div>
+    </div>
+    {% endfor %}
+    <nav aria-label="Page navigation ">
+        <ul class="pagination" >
+            {{page.html}}
+        </ul>
+    </nav>
+</div>
+{% endblock %}
+
+{% block foot %}
+
+{% endblock %}

@@ -1,201 +1,129 @@
-{% extends '../base.html' %}
+{% extends '../toolbar_index.html' %}
 
 {% block head %}
-
+<style type="text/css">
+    .row{
+    margin-bottom: 30px;
+  }
+  .img{
+      width: 150px;
+  }
+</style>
 {% endblock %}
 
 {% block main %}
-<form class="form-horizontal">
-    <input name="id" type="hidden" value="{{bean.id}}">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('name')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="name" placeholder="{{__('name')}}" type="text" value="{{bean.name}}" maxlength="20">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('age')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="age" placeholder="{{__('age')}}" type="number" value="{{bean.age}}">
-                </input>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('gender')}}
-            </label>
-            <div class="col-sm-10">
-                <label class="radio-inline">
-                    <input type="radio" value="1" name="gender" {% if bean.gender==1 %}checked="true"{% endif %}>
-                       {{__('male')}}
-                    </input>
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" value="0"  name="gender" {% if bean.gender==0 %}checked="true"{% endif %}>
-                       {{__('female')}}
-                    </input>
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('status')}}
-            </label>
-            <div class="col-sm-10">
-              <select class="form-control" name="status">
-                <option value="fulltime"  {% if bean.status=='fulltime' %}selected{% endif %}>{{__('fulltime')}}</option>
-                <option value="parttime" {% if bean.status=='parttime' %}selected{% endif %}>{{__('parttime')}}</option>
-              </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('major')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="major" placeholder="{{__('major')}}" type="text" value="{{bean.major}}"  maxlength="100">
-                </input>
-            </div>
-        </div>
-        {% for e in bean.work_experience %}
-        <div class="form-group  {% if loop.last %}experience{% endif %}">
-            <label class="col-sm-2 control-label">
-                {{__('work experience')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="work_experience" placeholder="{{__('work experience')}}" type="text" value="{{e}}" maxlength="200">
-                </input>
-            </div>
-        </div>
-         {% else %}
-        <div class="form-group experience">
-            <label class="col-sm-2 control-label">
-                {{__('work experience')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="work_experience" placeholder="{{__('work experience')}}" type="text" value=""  maxlength="200">
-                </input>
-            </div>
-        </div>
+<div class="container">
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 text-center">
+      <img src="/images/default.png"/>
+      <h3>
+          {{bean.name}}
+      </h3>
+      <a>
+          发站内信
+      </a>
+      <form class="msgform">
+          <input name="receiver_id" type="hidden" value="{{bean.user_id}}">
+              <textarea name="content">
+              </textarea>
+              <button>
+                  发送
+              </button>
+          </input>
+      </form>
 
-        {% endfor %}
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <a href="javascript:void(0);" class="btn btn-default addC">{{__('add')}}</a>
-          </div>
+  </div>
+</div>
+
+    <div>
+        <p>
+            {{__('company custom service')}}:{{bean.custom_service}}   {{bean.position}}
+        </p>
+        <p>
+            {{__('company phone')}}:{{bean.phone}}
+        </p>
+        <p>
+            {{__('offical website')}}:{{bean.offical_website}}
+        </p>
+        <p>
+            {{__('company email')}}:{{bean.email}}
+        </p>
+        <p>
+            {{__('company address')}}:{{bean.address}}
+        </p>
+        <p>
+            {{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}
+        </p>
+        <p>
+            {{__('count of shop')}}:{{bean.count_shop}}
+        </p>
+        <p>
+            {{__('cooperation brand')}}:{% for d in bean.brand %}{{d}} {% endfor %}
+        </p>
+        <p>
+            {{__('sale per year')}}:{{bean.sale_per_year}}{{__('unit money')}}
+        </p>
+        <p>
+            {{__('firsthand')}}:{{bean.firsthand}}
+        </p>
+        <p>
+            {{__('payment days')}}:{{bean.payment_days}}{{__('unit day')}}
+        </p>
+    </div>
+
+    <h3>ta的作品</h3>
+    {% for e in workses.rows %}
+
+    <div class="row list">
+        <div class="col-xs-4 col-md-4 img">
+            <a href="/seller/{{e.id}}">
+                <img alt="" class="img-rounded" src="/images/default.png">
+                </img>
+            </a>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('design content')}}
-            </label>
-            <div class="col-sm-10">
-                <textarea class="form-control" name="content" placeholder="{{__('design content')}}"  maxlength="1000">{{bean.content}}</textarea>
-            </div>
+        <div class="col-xs-8 col-md-8">
+            <h4>
+                <a href="/seller/{{e.id}}">
+                    {{e.title}}
+                </a>
+            </h4>
+            <p>
+                材质: 混合材质
+            </p>
         </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button class="btn btn-default" type="submit">
-                    {{__('confirm')}}
-                </button>
-            </div>
-        </div>
-    </input>
-</form>
+    </div>
+        
+    {% endfor %}
+    <nav aria-label="Page navigation ">
+        <ul class="pagination">
+            {{page.html}}
+        </ul>
+    </nav>
+</div>
 {% endblock %}
 
 {% block foot %}
-<script>
-    var valid_en={  
-    name: {
-      required: "Please provide name",
-      maxlength: "name can not more than 100 characters long"
-    },
-    ename: {
-      required: "Please provide ename",
-      maxlength: "ename can not more than 100 characters long"
-    },
-    price: "Please enter a valid price"
-  }
-var valid_zh={
-    
-    name: {
-      required: "请输入标题",
-      maxlength: "标题最长100个字符"
-    },
-    ename: {
-      required: "请输入英文标题",
-      maxlength: "英文标题最长100个字符"
-    },
-    price: "请输入正确的价格"
-  }  
-var messages=valid_en;
-
-if($.cookie("locale")=="zh-CH"){
-  messages=valid_zh;
-}
-
-$("form").validate({
-  rules: {
-    title: {
-      required: true,
-      maxlength: 100
-    },
-    price: {
-      required: true
-    }
-  },
-  messages: messages,
-  errorElement: "em"
-
-});
-
-$(".addC").click(function(){
-  var temp=$(".experience");
-  var clone=temp.clone();
-  temp.after(clone);
-  temp.removeClass("experience")
-  clone.find("input").val("");
-});
-
-$("form").on('submit',function(e){
-
-    var fd=new FormData(this);
-    var method=fd.get('id')?"PUT":"POST";
-    
-    var create_time=Date.parse(fd.get('create_time'));
-    var exps=[];
-    $("input[name=work_experience]").each(function(){
-      exps.push($(this).val());
-    })
-    $.ajax({
-        type: method,
-        url: "/api/design",
-        data:{id:fd.get('id'),
-          name:fd.get('name'),
-          gender:fd.get('gender'),
-          age:fd.get('age'),
-          status:fd.get('status'),
-          content:fd.get('content'),
-          major:fd.get('major'),
-          exps:exps.join(",")
-      },
-      dataType:"json",
-      success:function(json){
-          if(json.code=='success'){
-            $("input[name=id]").val(json.id);
-            alert("保存成功");
-          }else{
-            // location.reload();
-          }
-      }
+<script type="text/javascript">
+    $(".msgform").on("submit",function(){
+     var fd = new FormData(this);
+     $.ajax({
+        type: "POST",
+        url: "/api/message",
+        data:{
+          receiver_id:fd.get("receiver_id"),
+          content:fd.get("content")
+        },
+        dataType:"json",
+        success:function(json){
+            if(json.code=='success'){
+              alert(json.code);
+            }
+            if(json.code=='not_login'){
+              alert("请先登录");
+            }
+        }
     });
-
-    return false;
-});
+     return false;
+  });
 </script>
 {% endblock %}

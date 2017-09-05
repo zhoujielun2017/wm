@@ -1,152 +1,122 @@
-{% extends '../base.html' %}
+{% extends '../toolbar_index.html' %}
 
 {% block head %}
-
+<style type="text/css">
+  .row{
+    margin-bottom: 30px;
+  }
+  .img{
+      width: 100px;
+  }
+  img{
+    width: 90px;
+  }
+</style>
 {% endblock %}
 
 {% block main %}
-<form class="form-horizontal">
-<input type="hidden" name="id" value="{{bean.id}}">
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company name')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="name" value="{{bean.name}}" class="form-control" placeholder="{{__('company name')}}">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-3 img">
+      <img src="/images/default.png">
+    </div>
+    <div class="col-xs-9">
+      <h3>{{bean.name}}</h3>
+      <a>发站内信</a>
+      <form class="msgform">
+      <input type="hidden" name="receiver_id" value="{{bean.user_id}}">
+      <textarea name="content"></textarea>
+      <button>发送</button>
+      </form>
     </div>
   </div>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company english name')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="ename" value="{{bean.ename}}" class="form-control" placeholder="{{__('company english name')}}">
+   <div class="row">
+    <div class="col-xs-6">
+      <p>{{__('company custom service')}}:{{bean.custom_service}}   {{bean.position}}</p>
+      <p>{{__('company phone')}}:{{bean.phone}}</p>
+      <p>{{__('offical website')}}:{{bean.offical_website}}</p>
+      <p>{{__('company email')}}:{{bean.email}}</p>
+      <p>{{__('company address')}}:{{bean.address}}</p>
+    </div>
+    <div class="col-xs-6">
+      <p>{{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
+      <p>{{__('count of shop')}}:{{bean.count_shop}}</p>
+      <p>{{__('cooperation brand')}}:{% for d in bean.brand %}{{d}} {% endfor %}
+       </p>
+      <p>{{__('sale per year')}}:{{bean.sale_per_year}}{{__('unit money')}}</p>
+      <p>{{__('firsthand')}}:{{bean.firsthand}}</p>
+      <p>{{__('payment days')}}:{{bean.payment_days}}{{__('unit day')}}</p>
     </div>
   </div>
-   <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('create time')}}</label>
-    <div class="col-sm-10">
-      <input type="date" name="create_time" value="{{bean.create_time|formatdate('YYYY-MM-DD')}}" class="form-control" placeholder="{{__('create time')}}">
+  <div>
+    公司简介:{{bean.content}}
+  </div>
+  <h3>公司产品</h3>
+  <div class="row">
+    <div class="col-xs-6">.col-xs-12 .col-md-8</div>
+    <div class="col-xs-6">.col-xs-6 .col-md-4</div>
+  </div>
+
+  {% for e in pros.rows %}
+  
+  {% if loop.index0%2==0 %}
+  <div class="row">
+  {% endif %}
+  <div class="col-xs-6">
+    <div class="row list">
+        <div class="col-xs-4 col-md-4 img">
+            <a href="/seller/{{e.id}}">
+                <img alt="" class="img-rounded" src="/images/default.png">
+                </img>
+            </a>
+        </div>
+        <div class="col-xs-8 col-md-8">
+             <h4>
+                <a href="/seller/{{e.id}}">
+                    {{e.title}}
+                </a>
+            </h4>
+            <p>材质: 混合材质</p>
+            <p>价格: ￥9.99元</p>
+        </div>
     </div>
   </div>
- 
-   <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company address')}}</label>
-    <div class="col-sm-10">
-     	<textarea name="address"  class="form-control" placeholder="{{__('company address')}}">{{bean.address}}</textarea>
-    </div>
+  {% if loop.index%2==0 %}
   </div>
-   <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company legal person')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="legal_person" value="{{bean.legal_person}}" class="form-control" placeholder="{{__('company legal person')}}">
-    </div>
-  </div>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company phone')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="phone" value="{{bean.phone}}"  class="form-control" placeholder="{{__('company phone')}}">
-    </div>
-  </div>
-   <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company custom service')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="custom_service" value="{{bean.custom_service}}" class="form-control" placeholder="{{__('company custom service')}}">
-    </div>
-  </div>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company email')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="email"  value="{{bean.email}}" class="form-control" placeholder="{{__('company email')}}">
-    </div>
-  </div>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company summary')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="content"  value="{{bean.content}}" class="form-control" placeholder="{{__('company summary')}}">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">{{__('confirm')}}</button>
-    </div>
-  </div>
-</form>
+  {% endif %}
+  {% endfor %}
+
+    <nav aria-label="Page navigation ">
+        <ul class="pagination" >
+            {{page.html}}
+        </ul>
+    </nav>
+
+</div>
 {% endblock %}
 
 {% block foot %}
-<script>
-var valid_en={  
-    name: {
-      required: "Please provide name",
-      maxlength: "name can not more than 100 characters long"
-    },
-    ename: {
-      required: "Please provide ename",
-      maxlength: "ename can not more than 100 characters long"
-    },
-    price: "Please enter a valid price"
-  }
-var valid_zh={
-    
-    name: {
-      required: "请输入标题",
-      maxlength: "标题最长100个字符"
-    },
-    ename: {
-      required: "请输入英文标题",
-      maxlength: "英文标题最长100个字符"
-    },
-    price: "请输入正确的价格"
-  }  
-var messages=valid_en;
-
-if($.cookie("locale")=="zh-CH"){
-  messages=valid_zh;
-}
-
-$("form").validate({
-  rules: {
-    title: {
-      required: true,
-      maxlength: 100
-    },
-    price: {
-      required: true
-    }
-  },
-  messages: messages,
-  errorElement: "em"
-
-});
-
-$("form").on('submit',function(e){
-
-    var fd=new FormData(this);
-    var method=fd.get('id')?"PUT":"POST";
-    console.log(fd.get('id'));
-    $.ajax({
-        type: method,
-        url: "/api/factory",
-        data:{id:fd.get('id'),
-	        name:fd.get('name'),
-	        ename:fd.get('ename'),
-	        phone:fd.get('phone'),
-	        address:fd.get('address'),
-	        email:fd.get('email'),
-	        custom_service:fd.get('custom_service'),
-	        content:fd.get('content'),
-	        legal_person:fd.get('legal_person'),
-	        create_time:fd.get('create_time')
-    	},
+<script type="text/javascript">
+  $(".msgform").on("submit",function(){
+     var fd = new FormData(this);
+     $.ajax({
+        type: "POST",
+        url: "/api/message",
+        data:{
+          receiver_id:fd.get("receiver_id"),
+          content:fd.get("content")
+        },
         dataType:"json",
         success:function(json){
             if(json.code=='success'){
-            	$("input[name=id]").val(json.id);
-            	alert("保存成功");
-            }else{
-            	// location.reload();
+              alert(json.code);
+            }
+            if(json.code=='not_login'){
+              alert("请先登录");
             }
         }
     });
-
-    return false;
-});
-</script>  
+     return false;
+  });
+</script>
 {% endblock %}
