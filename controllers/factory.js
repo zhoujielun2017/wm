@@ -1,8 +1,9 @@
-var Factory=require("../model/Factory");
-var User=require("../model/User");
-var Product=require("../model/Product");
-var Cooperation=require("../model/Cooperation");
-var PageUtil=require("../util/PageUtil");
+var Factory=require("../model/Factory"),
+    User=require("../model/User"),
+    Product=require("../model/Product"),
+    City=require("../model/City"),
+    Cooperation=require("../model/Cooperation"),
+    PageUtil=require("../util/PageUtil");
 
 module.exports = {
     //前台列表
@@ -15,15 +16,43 @@ module.exports = {
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
-        for (var i = 0; i < result.length; i++) {
-            var bean=result[i];
-            if(bean.brand){
-                bean.brand=bean.brand.split(",");
+        for (var i = 0; i < result.count; i++) {
+            var bean=result.rows[i];
+
+            if(bean.major){
+                bean.major=bean.major.split(",");
+                console.log("bean.major",bean.major);
             }
+            var cops = await Cooperation.findAll({
+                where:{
+                    user_id:bean.user_id
+                },
+                order: [['create_time', 'DESC']]
+            });
+            bean.cops=cops;
+
+            if(bean.area){
+                bean.area=bean.area.split("_");
+            }else{
+                bean.area=[];
+            }
+            // console.log("bean.area",bean.area);
+            var areas = await City.findAll({
+                where:{
+                    id:{
+                    "$in":bean.area
+                    }
+                }
+                
+            });
+            bean.areas=areas;
+
         }
+       
         ctx.render('./company/factorys.html',{
             result:result,
             nav:"factorys",
+            cops:cops,
             page:PageUtil.getPage(page, result.count)
         });
     },
@@ -74,6 +103,7 @@ module.exports = {
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+            area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
         if(!user){
             ctx.body = {"code":"not_login"};
@@ -90,6 +120,7 @@ module.exports = {
             phone:phone,
             custom_service:custom_service,
             email:email,
+            area:area,
             content: content
         });
         var dbUser = await User.findById(user.id);
@@ -111,6 +142,7 @@ module.exports = {
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+            area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
        
@@ -122,6 +154,7 @@ module.exports = {
         factory.phone=phone;
         factory.custom_service=custom_service;
         factory.email=email;
+        factory.area=area;
         factory.content=content;
         await factory.save();
          var dbUser = await User.findById(user.id);

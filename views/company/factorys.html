@@ -28,16 +28,31 @@
                 </a>
             </h4>
             <p>
-                所在地区:中国广州
+                {{__('location')}}:
+                {% for d in e.areas %}
+                {{d.name}}
+                {% endfor %}
             </p>
             <p>
-                合作品牌:{% for d in e.brand %}{{d}}{% endfor %}
+                现合作客户名称:
+                {% for d in e.cops %}
+                    {% if d.type=="seller" %}
+                    {{d.name}}
+                    {% endif %}
+                {% endfor %}
             </p>
             <p>
                 已通过验厂:
+                {% for d in e.cops %}
+                    {% if d.type=="factory" %}
+                    {{d.name}}
+                    {% endif %}
+                {% endfor %}
             </p>
             <p>
-                公司特长:{% for d in e.major %}{{d}}{% endfor %}
+                
+                公司特长:{% for d in e.major %}{{__(d)}} {% endfor %}
+                
             </p>
         </div>
         <div class="col-xs-2 col-md-2">

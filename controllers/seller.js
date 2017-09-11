@@ -1,7 +1,8 @@
-var Seller=require("../model/Seller");
-var User=require("../model/User");
-var Cooperation=require("../model/Cooperation");
-var PageUtil=require("../util/PageUtil");
+var Seller=require("../model/Seller"),
+    User=require("../model/User"),
+    City=require("../model/City"),
+    Cooperation=require("../model/Cooperation"),
+    PageUtil=require("../util/PageUtil");
 
 module.exports = {
     //前台列表
@@ -14,11 +15,28 @@ module.exports = {
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
-        for (var i = 0; i < result.length; i++) {
-            var bean=result[i];
+        // console.log("for out",result.count);
+        for (var i = 0,len=result.count; i < len; i++) {
+            // console.log("for");
+            var bean=result.rows[i];
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }
+            if(bean.area){
+                bean.area=bean.area.split("_");
+            }else{
+                bean.area=[];
+            }
+            // console.log("bean.area",bean.area);
+            var areas = await City.findAll({
+                where:{
+                    id:{
+                    "$in":bean.area
+                }
+                }
+                
+            });
+            bean.areas=areas;
         }
         ctx.render('./company/sellers.html',{
             result:result,
@@ -33,6 +51,16 @@ module.exports = {
         if(seller&&seller.brand){
             seller.brand=seller.brand.split(",");
         }
+        if(seller&&seller.area){
+            seller.area=seller.area.split("_");
+        }
+        var areas = await City.findAll({
+            id:{
+                $in:seller.area
+            }
+        });
+        seller.areas=areas;
+
         ctx.render('./company/seller.html',{bean:seller});
     },
     //个人中心
@@ -58,6 +86,8 @@ module.exports = {
             address = ctx.request.body.address||'',
             legal_person = ctx.request.body.legal_person||'',
             phone = ctx.request.body.phone||'',
+            contact_phone = ctx.request.body.contact_phone||'',
+            
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
             offical_website = ctx.request.body.offical_website||'',
@@ -68,6 +98,7 @@ module.exports = {
             payment_days = ctx.request.body.payment_days||'',
             create_time = ctx.request.body.create_time||Date.now(),
             brands = ctx.request.body.brands||'',
+            area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
         if(!user){
@@ -82,6 +113,7 @@ module.exports = {
             ename:ename,
             address:address,
             phone:phone,
+            contact_phone:contact_phone,
             custom_service:custom_service,
             email:email,
             position:position,
@@ -91,6 +123,7 @@ module.exports = {
             firsthand:firsthand,
             brand:brands,
             offical_website:offical_website,
+            area:area,
             create_time:create_time
         });
         var dbUser = await User.findById(user.id);
@@ -110,6 +143,8 @@ module.exports = {
             address = ctx.request.body.address||'',
             legal_person = ctx.request.body.legal_person||'',
             phone = ctx.request.body.phone||'',
+            contact_phone = ctx.request.body.contact_phone||'',
+            
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
             offical_website = ctx.request.body.offical_website||'',
@@ -120,15 +155,17 @@ module.exports = {
             payment_days = ctx.request.body.payment_days||'',
             create_time = ctx.request.body.create_time||Date.now(),
             brands = ctx.request.body.brands||'',
+            area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
        
-         var seller = await Seller.findById(id);
+        var seller = await Seller.findById(id);
         seller.name=name;
         seller.ename=ename;
         seller.address=address;
         seller.legal_person=legal_person;
         seller.phone=phone;
+        seller.contact_phone=contact_phone;
         seller.custom_service=custom_service;
         seller.email=email;
         seller.offical_website=offical_website;
@@ -139,6 +176,7 @@ module.exports = {
         seller.payment_days=payment_days;
         seller.content=content;
         seller.brand=brands;
+        seller.area=area;
         seller.create_time=create_time;
 
         await seller.save();

@@ -6,7 +6,7 @@
 
 {% block main %}
 <form class="form-horizontal">
-    <input name="id" type="hidden" value="{{bean.id}}">
+    <input name="id" type="hidden" value="{{bean.id}}"/>
         <div class="form-group">
             <label class="col-sm-2 control-label">
                 {{__('company name')}}
@@ -57,6 +57,24 @@
             </label>
             <div class="col-sm-10">
                 <input class="form-control" name="position" placeholder="{{__('company position')}}" type="text" value="{{bean.position}}">
+                </input>
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('contact phone')}}
+            </label>
+            <div class="col-sm-10">
+                <input class="form-control" name="contact_phone" placeholder="{{__('contact phone')}}" type="text" value="{{bean.contact_phone}}">
+                </input>
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('company phone')}}
+            </label>
+            <div class="col-sm-10">
+                <input class="form-control" name="phone" placeholder="{{__('company phone')}}" type="text" value="{{bean.phone}}">
                 </input>
             </div>
         </div>
@@ -117,9 +135,12 @@
             <label class="col-sm-2 control-label">
                 {{__('sale per year')}}
             </label>
-            <div class="col-sm-10">
+            <div class="col-sm-5">
                 <input class="form-control" name="sale_per_year" placeholder="{{__('sale per year')}}" type="number" value="{{bean.sale_per_year}}">
-                </input>万元
+                </input>
+            </div>
+            <div class="col-sm-5">
+                <p class="form-control-static">万元</p>
             </div>
         </div>
         <div class="form-group">
@@ -127,8 +148,16 @@
                 {{__('firsthand')}}
             </label>
             <div class="col-sm-10">
-                <input class="form-control" name="firsthand" placeholder="{{__('firsthand')}}" type="text" value="{{bean.firsthand}}">
-                </input>
+                <!-- <input class="form-control" name="firsthand" placeholder="{{__('firsthand')}}" type="text" value="{{bean.firsthand}}">
+                </input> -->
+                
+              <label class="radio-inline">
+                <input type="radio" name="firsthand" value="1" {% if bean.firsthand==1 %}checked{% endif%}> 是
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="firsthand" value="0" {% if bean.firsthand==0 %}checked{% endif%}> 否
+              </label>
+
             </div>
         </div>
         <div class="form-group">
@@ -140,6 +169,30 @@
                
             </div>
         </div>
+         <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('location')}}
+            </label>
+            <div class="col-sm-10">
+              <div class="row city">
+                <div class="col-xs-4 col-sm-4">
+                  <select name="area1" class="form-control">
+                    <option value="1">aaa</option>
+                  </select>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                 <select name="area2" class="form-control">
+                  <option value="2">bbbb</option>
+                </select>
+                 </div>
+                <div class="col-xs-4 col-sm-4">
+                 <select name="area3" class="form-control">
+                  <option value="3">cccc</option>
+                </select>
+                 </div>
+              </div>
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default" type="submit">
@@ -147,12 +200,17 @@
                 </button>
             </div>
         </div>
-    </input>
+    
+
 </form>
+
 {% endblock %}
 
 {% block foot %}
+<script type="text/javascript" src="/js/city.js"></script>
 <script>
+    var city=$(".city").city();  
+  
     var valid_en={  
     name: {
       required: "Please provide name",
@@ -216,6 +274,10 @@ $("form").on('submit',function(e){
     $("input[name=brand]").each(function(){
       brands.push($(this).val());
     })
+    var area=[];
+    $("select").each(function(){
+      area.push(this.value);
+    })
     $.ajax({
         type: method,
         url: "/api/seller",
@@ -223,6 +285,7 @@ $("form").on('submit',function(e){
           name:fd.get('name'),
           ename:fd.get('ename'),
           phone:fd.get('phone'),
+          contact_phone:fd.get('contact_phone'),
           address:fd.get('address'),
           email:fd.get('email'),
           custom_service:fd.get('custom_service'),
@@ -235,7 +298,8 @@ $("form").on('submit',function(e){
           payment_days:fd.get('payment_days'),
           sale_per_year:fd.get('sale_per_year'),
           brands:brands.join(","),
-          create_time:create_time
+          create_time:create_time,
+          area:"_"+area.join("_")+"_"
       },
         dataType:"json",
         success:function(json){

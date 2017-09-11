@@ -31,5 +31,9 @@ module.exports = db.defineModel('agency', {
     payment_days:{
          type: db.STRING(20),
         allowNull: true
+    },
+    area:{
+         type: db.STRING(100),
+        allowNull: true
     }
 });

@@ -37,12 +37,12 @@
     </div>
     <div class="col-xs-6">
       <p>{{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
-      <p>{{__('count of shop')}}:{{bean.count_shop}}</p>
+     <!--  <p>{{__('count of shop')}}:{{bean.count_shop}}</p> -->
       <p>{{__('cooperation brand')}}:{% for d in bean.brand %}{{d}} {% endfor %}
        </p>
-      <p>{{__('sale per year')}}:{{bean.sale_per_year}}</p>
-      <p>{{__('firsthand')}}:{{bean.firsthand}}</p>
-      <p>{{__('payment days')}}:{{bean.payment_days}}</p>
+      <p>{{__('purchase per year')}}:{{bean.purchase_per_year}}万元</p>
+      <!-- <p>{{__('firsthand')}}:{{bean.firsthand}}</p> -->
+      <p>{{__('payment days')}}:{{bean.payment_days}}天</p>
     </div>
   </div>
 </div>

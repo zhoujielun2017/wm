@@ -36,5 +36,10 @@ module.exports = db.defineModel('factory', {
     major:{
         type: db.STRING(500),
         allowNull: true
+    },
+    //所在地
+    area:{
+        type: db.STRING(100),
+        allowNull: true
     }
 });

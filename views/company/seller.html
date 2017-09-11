@@ -30,6 +30,8 @@
    <div class="row">
     <div class="col-xs-6">
       <p>{{__('company custom service')}}:{{bean.custom_service}}   {{bean.position}}</p>
+
+      <p>{{__('contact phone')}}:{{bean.contact_phone}}</p>
       <p>{{__('company phone')}}:{{bean.phone}}</p>
       <p>{{__('offical website')}}:{{bean.offical_website}}</p>
       <p>{{__('company email')}}:{{bean.email}}</p>
@@ -41,7 +43,10 @@
       <p>{{__('cooperation brand')}}:{% for d in bean.brand %}{{d}} {% endfor %}
        </p>
       <p>{{__('sale per year')}}:{{bean.sale_per_year}}{{__('unit money')}}</p>
-      <p>{{__('firsthand')}}:{{bean.firsthand}}</p>
+      <p>{{__('firsthand')}}:
+      {% if bean.firsthand==1 %}是{% endif%}
+      {% if bean.firsthand==0 %}否{% endif%}
+      </p>
       <p>{{__('payment days')}}:{{bean.payment_days}}{{__('unit day')}}</p>
     </div>
   </div>

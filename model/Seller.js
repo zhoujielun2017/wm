@@ -17,6 +17,10 @@ module.exports = db.defineModel('seller', {
         type: db.STRING(30),
         allowNull: true
     },
+    contact_phone:{
+        type: db.STRING(30),
+        allowNull: true
+    },
     //店面数量
     count_shop:{
         type: db.STRING(20),
@@ -40,6 +44,10 @@ module.exports = db.defineModel('seller', {
     //账期
     payment_days:{
          type: db.STRING(20),
+        allowNull: true
+    },
+    area:{
+         type: db.STRING(100),
         allowNull: true
     }
 });

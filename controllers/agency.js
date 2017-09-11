@@ -1,7 +1,8 @@
-var Agency=require("../model/Agency");
-var User=require("../model/User");
-var Cooperation=require("../model/Cooperation");
-var PageUtil=require("../util/PageUtil");
+var Agency=require("../model/Agency"),
+    User=require("../model/User"),
+    City=require("../model/City"),
+    Cooperation=require("../model/Cooperation"),
+    PageUtil=require("../util/PageUtil");
 
 module.exports = {
     //前台列表
@@ -14,11 +15,26 @@ module.exports = {
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
-        for (var i = 0; i < result.length; i++) {
-            var bean=result[i];
+        for (var i = 0,len=result.count; i < len; i++) {
+            var bean=result.rows[i];
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }
+            if(bean.area){
+                bean.area=bean.area.split("_");
+            }else{
+                bean.area=[];
+            }
+            // console.log("bean.area",bean.area);
+            var areas = await City.findAll({
+                where:{
+                    id:{
+                    "$in":bean.area
+                    }
+                }
+                
+            });
+            bean.areas=areas;
         }
         ctx.render('./company/agencys.html',{
             result:result,
@@ -68,6 +84,7 @@ module.exports = {
             payment_days = ctx.request.body.payment_days||'',
             create_time = ctx.request.body.create_time||'',
             brands = ctx.request.body.brands||'',
+            area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
         if(!user){
@@ -91,6 +108,7 @@ module.exports = {
             firsthand:firsthand,
             offical_website:offical_website,
             brand:brands,
+            area:area,
             create_time:create_time
         });
         var dbUser = await User.findById(user.id);
@@ -120,6 +138,7 @@ module.exports = {
             payment_days = ctx.request.body.payment_days||'',
             create_time = ctx.request.body.create_time||'',
             brands = ctx.request.body.brands||'',
+            area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
        
@@ -139,6 +158,7 @@ module.exports = {
         agency.payment_days=payment_days;
         agency.content=content;
         agency.brand=brands;
+        agency.area=area;
         agency.create_time=create_time;
 
         await agency.save();
