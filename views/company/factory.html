@@ -34,18 +34,27 @@
     <div class="col-xs-6">
       <p>{{__('company custom service')}}:{{bean.custom_service}}   {{bean.position}}</p>
       <p>{{__('company phone')}}:{{bean.phone}}</p>
-      <p>{{__('offical website')}}:{{bean.offical_website}}</p>
+     <!--  <p>{{__('offical website')}}:{{bean.offical_website}}</p> -->
       <p>{{__('company email')}}:{{bean.email}}</p>
+      <p>{{__('company legal person')}}:{{bean.legal_person}}</p>
       <p>{{__('company address')}}:{{bean.address}}</p>
+      <p>{{__('company major')}}:
+ {% for d in bean.major %}{{__(d)}} {% endfor %}
+      </p>
+
     </div>
     <div class="col-xs-6">
       <p>{{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
-      <p>{{__('count of shop')}}:{{bean.count_shop}}</p>
-      <p>{{__('cooperation brand')}}:{% for d in bean.brand %}{{d}} {% endfor %}
+      <p>{{__('cooperation customer name')}}:
+      {% for d in customers %}{{d.name}} {% endfor %}
+      </p>
+      <p>{{__('cooperation factory name')}}:{% for d in factorys %}{{d.name}} {% endfor %}
        </p>
-      <p>{{__('sale per year')}}:{{bean.sale_per_year}}{{__('unit money')}}</p>
-      <p>{{__('firsthand')}}:{{bean.firsthand}}</p>
-      <p>{{__('payment days')}}:{{bean.payment_days}}{{__('unit day')}}</p>
+       <p>{{__('company acreage')}}:{{bean.acreage}}平米</p>
+      <p>{{__('type per month')}}:{{bean.type_per_month}}</p>
+      <p>{{__('produce person')}}:{{bean.count_person}}</p>
+      <p>{{__('QC person')}}:{{bean.count_qc}}</p>
+      <p>{{__('produce per month')}}:{{bean.able_per_month}}</p>
     </div>
   </div>
   <div>

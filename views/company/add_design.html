@@ -98,6 +98,30 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('location')}}
+            </label>
+            <div class="col-sm-10">
+              <div class="row city">
+                <div class="col-xs-4 col-sm-4">
+                  <select name="area1" class="form-control">
+                    <option value="1">aaa</option>
+                  </select>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                 <select name="area2" class="form-control">
+                  <option value="2">bbbb</option>
+                </select>
+                 </div>
+                <div class="col-xs-4 col-sm-4">
+                 <select name="area3" class="form-control">
+                  <option value="3">cccc</option>
+                </select>
+                 </div>
+              </div>
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default" type="submit">
                     {{__('confirm')}}
@@ -109,7 +133,10 @@
 {% endblock %}
 
 {% block foot %}
+<script type="text/javascript" src="/js/city.js">
+</script>
 <script>
+var city=$(".city").city();  
     var valid_en={  
     name: {
       required: "Please provide name",
@@ -171,7 +198,11 @@ $("form").on('submit',function(e){
     var exps=[];
     $("input[name=work_experience]").each(function(){
       exps.push($(this).val());
-    })
+    });
+    var area=[];
+    $("select").each(function(){
+      area.push(this.value);
+    });
     $.ajax({
         type: method,
         url: "/api/design",
@@ -182,7 +213,8 @@ $("form").on('submit',function(e){
           status:fd.get('status'),
           content:fd.get('content'),
           major:fd.get('major'),
-          exps:exps.join(",")
+          exps:exps.join(","),
+          area:"_"+area.join("_")+"_"
       },
       dataType:"json",
       success:function(json){

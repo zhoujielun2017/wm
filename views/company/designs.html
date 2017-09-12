@@ -27,8 +27,18 @@
                     {{e.name}}
                 </a>
             </h4>
-            <p>工作经历：卡地亚  施华洛世奇</p>
-            <p>设计特长：{{e.major}}</p>      
+            <p>{{__('location')}}:
+               {% for d in e.areas %}
+            {{d.name}}
+            {% endfor %}
+            </p>
+            
+            <p>{{__('work experience')}}:
+ {% for d in e.work_experience %}
+            {{d}}
+            {% endfor %}
+            </p>
+            <p>{{__('design content')}}:{{e.content}}</p>      
         </div>
     </div>
     {% endfor %}

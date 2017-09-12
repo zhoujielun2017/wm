@@ -10,6 +10,7 @@ module.exports = db.defineModel('factory', {
     custom_service: db.STRING(100),
     email: db.STRING(100),
     content: db.STRING(1000),
+    //面积
     acreage:{
         type: db.STRING(20),
         allowNull: true
@@ -18,6 +19,7 @@ module.exports = db.defineModel('factory', {
         type: db.STRING(20),
         allowNull: true
     },
+    //生产人数
     count_person:{
         type: db.STRING(20),
         allowNull: true

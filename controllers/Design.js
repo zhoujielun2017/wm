@@ -1,8 +1,9 @@
-var Design=require("../model/Design");
-var Works=require("../model/Works");
-var User=require("../model/User");
-var Cooperation=require("../model/Cooperation");
-var PageUtil=require("../util/PageUtil");
+var Design=require("../model/Design"),
+    Works=require("../model/Works"),
+    User=require("../model/User"),
+    City=require("../model/City"),
+    Cooperation=require("../model/Cooperation"),
+    PageUtil=require("../util/PageUtil");
 
 module.exports = {
     //前台列表
@@ -15,11 +16,30 @@ module.exports = {
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
-        for (var i = 0; i < result.length; i++) {
-            var bean=result[i];
+        for (var i = 0,len=result.count; i < len; i++) {
+            var bean=result.rows[i];
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }
+            if(bean.work_experience){
+                bean.work_experience=bean.work_experience.split(",");
+            }
+
+            if(bean.area){
+                bean.area=bean.area.split("_");
+            }else{
+                bean.area=[];
+            }
+            // console.log("bean.area",bean.area);
+            var areas = await City.findAll({
+                where:{
+                    id:{
+                    "$in":bean.area
+                    }
+                }
+                
+            });
+            bean.areas=areas;
         }
         ctx.render('./company/designs.html',{
             result:result,
@@ -35,7 +55,25 @@ module.exports = {
         if(design&&design.brand){
             design.brand=design.brand.split(",");
         }
-
+        if(design&&design.work_experience){
+            design.work_experience=design.work_experience.split(",");
+        }
+        if(design.area){
+            design.area=design.area.split("_");
+        }else{
+            design.area=[];
+        }
+        
+        // console.log("design.area",design.area);
+        var areas = await City.findAll({
+            where:{
+                id:{
+                "$in":design.area
+                }
+            }
+            
+        });
+        design.areas=areas;
          var workses = await Works.findAndCountAll({
             where: {
                 
@@ -71,6 +109,7 @@ module.exports = {
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
             exps = ctx.request.body.exps,
+            area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
         if(!user){
@@ -87,6 +126,7 @@ module.exports = {
             status:status,
             major:major,
             work_experience:exps,
+            area:area,
             content:content
         });
         var dbUser = await User.findById(user.id);
@@ -107,16 +147,18 @@ module.exports = {
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
             exps = ctx.request.body.exps,
+            area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
        
-         var design = await Design.findById(id);
+        var design = await Design.findById(id);
         design.name=name;
         design.gender=gender;
         design.age=age;
         design.status=status;
         design.major=major;
         design.work_experience=exps;
+        design.area=area;
         design.content=content;
 
         await design.save();

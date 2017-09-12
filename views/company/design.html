@@ -37,38 +37,32 @@
 
     <div>
         <p>
-            {{__('company custom service')}}:{{bean.custom_service}}   {{bean.position}}
+            {{__('age')}}:{{bean.age}}   
         </p>
         <p>
-            {{__('company phone')}}:{{bean.phone}}
+            {{__('gender')}}:
+            {% if bean.gender==0%}女{% endif %}
+            {% if bean.gender==1%}男{% endif %}
+            
         </p>
         <p>
-            {{__('offical website')}}:{{bean.offical_website}}
+            {{__('status')}}:{{__(bean.status)}}
+        </p>
+        <p>{{__('location')}}:
+               {% for d in bean.areas %}
+            {{d.name}}
+            {% endfor %}
         </p>
         <p>
-            {{__('company email')}}:{{bean.email}}
+            {{__('major')}}:{{bean.major}}
         </p>
-        <p>
-            {{__('company address')}}:{{bean.address}}
+         <p>{{__('work experience')}}:
+               {% for d in bean.work_experience %}
+            {{d}}
+            {% endfor %}
         </p>
-        <p>
-            {{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}
-        </p>
-        <p>
-            {{__('count of shop')}}:{{bean.count_shop}}
-        </p>
-        <p>
-            {{__('cooperation brand')}}:{% for d in bean.brand %}{{d}} {% endfor %}
-        </p>
-        <p>
-            {{__('sale per year')}}:{{bean.sale_per_year}}{{__('unit money')}}
-        </p>
-        <p>
-            {{__('firsthand')}}:{{bean.firsthand}}
-        </p>
-        <p>
-            {{__('payment days')}}:{{bean.payment_days}}{{__('unit day')}}
-        </p>
+     
+        <p>{{__('design content')}}:{{e.content}}</p>   
     </div>
 
     <h3>ta的作品</h3>

@@ -1,18 +1,13 @@
-const Koa = require('koa');
-
-const session = require('koa-session');
-
-const bodyParser = require('koa-bodyparser');
-
-const koastatic = require('koa-static-cache');
-const moment = require('moment');
-const controller = require('./controller');
-const locale = require('koa-locale');
-const i18n = require('koa-i18n');
-
-const templating = require('./templating');
-
-let staticFiles = require('./static-files');
+const Koa = require('koa'),
+    session = require('koa-session'),
+    bodyParser = require('koa-bodyparser'),
+    koastatic = require('koa-static-cache'),
+    moment = require('moment'),
+    controller = require('./controller'),
+    locale = require('koa-locale'),
+    i18n = require('koa-i18n'),
+    templating = require('./templating'),
+    staticFiles = require('./static-files');
 
 const app = new Koa();
 locale(app)

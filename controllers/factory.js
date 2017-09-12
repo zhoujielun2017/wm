@@ -68,6 +68,22 @@ module.exports = {
             factory.major=factory.major.split(",");
         }
 
+        var list = await Cooperation.findAll({
+            where: {
+                user_id: factory.user_id
+            }
+        });
+        var customers=[];
+        var factorys=[];
+        for (var i = 0; i < list.length; i++) {
+            if(list[i].type=='factory'){
+                factorys.push(list[i]);
+            }
+            if(list[i].type!='factory'){
+                customers.push(list[i]);
+            }
+        }
+
 
         var pros = await Product.findAndCountAll({
             where: {
@@ -78,6 +94,8 @@ module.exports = {
         });
         ctx.render('./company/factory.html',{
             bean:factory,
+            factorys:factorys,
+            customers:customers,
             pros:pros,
             page:PageUtil.getPage(page, pros.count)
         });

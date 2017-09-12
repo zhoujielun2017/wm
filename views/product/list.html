@@ -2,6 +2,9 @@
 
 {% block head %}
 <style type="text/css">
+.img{
+  width: 110px;
+}
 .glyphicon-picture{
   font-size: 70px;
   color: #777;
@@ -13,28 +16,29 @@
 <h1>{{__('product info')}}</h1> <a href="/product/add">{{__('add')}}</a>
 
   {% for e in result.rows %}
-  <div class="media">
-    <div class="media-left">
-       <a href="/product/{{e.id}}">
-       
-      {% if not e.default_img %}
-        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
-      {% endif %}
-      {% if  e.default_img  %}
-        <img src="/{{e.default_img }}" alt="" class="img-rounded">
-      {% endif %}
-      </a>
-    </div>
-    <div class="media-body">
-      <h4 class="media-heading">
-        <a href="/product/{{e.id}}">{{e.title}}</a>
-      </h4>
-      <p>{{__('material')}}:{{e.material}}</p>
-      <p>{{__('price')}}:{{e.price}}</p>
-    </div>
-    <div class="media-right">
-    	<a href="/product/add?id={{e.id}}">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}" class="del">{{__('delete')}}</a>
-    </div>
+  <div class="row">
+      <div class="col-xs-3 col-md-3">
+          <a href="/product/{{e.id}}">
+             
+             {% if not e.default_img %}
+              <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+            {% endif %}
+            {% if  e.default_img  %}
+              <img src="/{{e.default_img }}" alt="" class="img-rounded">
+            {% endif %}
+
+          </a>
+      </div>
+      <div class="col-xs-7 col-md-7">
+        <h4 class="media-heading">
+          <a href="/product/{{e.id}}">{{e.title}}</a>
+        </h4>
+        <p>{{__('material')}}:{{e.material}}</p>
+        <p>{{__('price')}}:{{e.price}}</p>
+      </div>
+      <div class="col-xs-2 col-md-2">
+        <a href="/product/add?id={{e.id}}">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}" class="del">{{__('delete')}}</a>
+      </div>
   </div>
    {% endfor %}
 <nav aria-label="Page navigation">
