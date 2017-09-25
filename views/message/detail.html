@@ -1,25 +1,37 @@
 {% extends '../base.html' %}
 
 {% block head %}
-
+<style type="text/css">
+  .list img{
+    width: 50px;
+  }
+</style>
 {% endblock %}
 
 {% block main %}
 
+<!-- <h2 class="text-center">{{receiver.name}}</h2> -->
   {% for e in list %}
-  <div class="media">
-    <div class="media-left">
-        <img src="/{{e.sender_head}}" alt="" class="img-rounded">
+ 
+  <div class="row list">
+    <div class="col-xs-2 col-md-2">
+      {% if not e.sender_head %}
+      <img src="/images/user.png" class="img-circle">
+      {% endif%}
+      {% if e.sender_head %}
+        <img src="{{img_domain}}{{e.sender_head}}" alt="" class="img-circle">
+       {% endif%}
     </div>
-    <div class="media-body">
-      <h4 class="media-heading">
-        {{e.sender_name}}
+    <div class="col-xs-7 col-md-7">
+      <h4>{{e.sender_name}}
       </h4>
       <p>{{e.content}}</p>
     </div>
-    <div class="media-right">
-    	{{e.create_time}}
+   
+    <div class="col-xs-3 col-md-3">
+      {{e.create_time|formatdate("YYYY-MM-DD HH:mm:ss")}}
     </div>
+
   </div>
    {% endfor %}
 <form class="form-horizontal">
@@ -56,8 +68,9 @@ $("form").on('submit',function(e){
         success:function(json){
             if(json.code=='success'){
             	location.reload();
-            }else{
-            	// location.reload();
+            }
+            if(json.code=='receiver_null'){
+              alert("收信人不存在");
             }
         }
     });

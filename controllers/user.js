@@ -6,6 +6,8 @@ module.exports = {
     //个人中心
     'GET /user/center': async (ctx, next) => {
         var user=ctx.session.user;
+        user = await User.findById(user.id);
+        // console.log("user",user);
         ctx.render('./user/center.html',{user:user});
     },
     'GET /user/buy': async (ctx, next) => {
@@ -25,6 +27,18 @@ module.exports = {
         });
         ctx.render('./user/list.html',{list:list});
     },
+    //更新用户
+    'PUT /user/:id': async (ctx, next) => {
+        var id=ctx.params.id,
+            head_url = ctx.request.body.head_url;
+        var user = await User.findById(id);
+        
+        
+        user.head_url=head_url;
+        await user.save();
+        ctx.body={code:"success"};
+    },
+    //更新用户密码
     'PUT /user/:id/password': async (ctx, next) => {
         var id=ctx.params.id;
         var password = ctx.request.body.password,
@@ -64,7 +78,7 @@ module.exports = {
         });
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
-        console.log(result);
+        // console.log(result);
 
         ctx.render('./manage/user/list.html', {
             result:result,
@@ -73,14 +87,14 @@ module.exports = {
     },
     'GET /api/user/email': async (ctx, next) => {
         var email=ctx.request.query.email;
-        console.log("email",email);
+        // console.log("email",email);
         var result = await User.findOne({
             where:{
                 'email': email    
             }
             
         });
-        console.log(result);
+        // console.log(result);
         if(result){
             ctx.body=false;    
         }else{

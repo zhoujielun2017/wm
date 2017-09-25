@@ -17,8 +17,11 @@
     <div class="row list">
         <div class="col-xs-3 col-md-3">
             <a href="/factory/{{e.id}}">
-                <img alt="" class="img-rounded" src="/images/default.png">
-                </img>
+                {% if e.head %}
+                 <img class="img-thumbnail" src="{{img_domain}}{{e.head}}!300x300"/>
+                 {% else %}
+                  <img alt="" class="img-thumbnail" src="/images/default.png"/>
+                {% endif %}
             </a>
         </div>
         <div class="col-xs-7 col-md-7">

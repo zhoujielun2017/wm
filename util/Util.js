@@ -1,5 +1,6 @@
 var Util={};
 function getPageNums(cur_page, total_page,url) {
+    url=url||"";
     var result = "";
     cur_page=Number(cur_page);
     var max=cur_page + 6;

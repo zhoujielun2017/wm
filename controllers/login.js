@@ -1,7 +1,19 @@
-const crypto = require('crypto');
-var User=require("../model/User");
+const crypto = require('crypto'),
+    mail = require('../mail'),
+    config = require('../config'),
+    User=require("../model/User");
 
+var regContent="<h3>亲爱的用户，欢迎加入全球饰品网！</h3>";
+    regContent+="<p>为了保证您正常体验全球饰品网的服务，请在24小时内激活账号。</p>";
+    regContent+="<p>请点击下面的地址进行邮箱确认:</p>";
+    regContent+="<p><a href='__url' target='_blank'>__url</a></p>";
+    regContent+="<p>如果你不能点击上面地址，请把上述地址复制到浏览器地址栏进行确认。</p>";
 
+var forgetContent="<h3>重置密码</h3>";
+    forgetContent+="<p>重置密码请点击下面的地址:</p>";
+    forgetContent+="<p>请点击下面的地址进行邮箱确认:</p>";
+    forgetContent+="<p><a href='__url' target='_blank'>__url</a></p>";
+    forgetContent+="<p>如果你不能点击上面地址，请把上述地址复制到浏览器地址栏进行确认。</p>";
 
 module.exports = {
     'GET /login/login': async (ctx, next) => {
@@ -46,8 +58,19 @@ module.exports = {
         var email = ctx.request.body.email,
             type = ctx.request.body.type,
             password = ctx.request.body.password;
+
+        
         if(!email||!password){
             ctx.body ={code:"param_null"};
+            return;
+        }
+        var user = await User.findOne({
+          where: {
+            email: email
+          }
+        });
+        if(user){
+            ctx.body ={code:"exists"};
             return;
         }
         password=crypto.createHash('md5').update(password).digest('hex');
@@ -61,7 +84,17 @@ module.exports = {
             head_url: "",
             last_login_time:Date.now()
         });
+        var url="http://"+config.web.domain+"/login/fromemail?email="+email+"&pass="+password+"&time="+user.update_time;
 
+        console.log("发送注册邮件");
+        let mailOptions = {
+            from: '"service@acclist" <service@acclist.com>', // sender address
+            to: email, // list of receivers
+            subject: '帐号激活', // Subject line
+            text: regContent.replace(/__url/g,url), // plain text body
+            html: regContent.replace(/__url/g,url) // html body
+        };
+        mail.send(mailOptions);
         ctx.body ={code:"success",id:user.id};
     },
     //注册邀请码从邮箱过来
@@ -113,7 +146,19 @@ module.exports = {
             ctx.body ={code:"not_exist"};
             return;
         }
+
+        // http://localhost:8080/login/reset?email=xx@163.com&pass=719130ba7c4c085f24bc5f67754c0730&time=1506353244219
+        var url="http://"+config.web.domain+"/login/reset?email="+email+"&pass="+user.password+"&time="+user.update_time;
         //TODO 发送邮件
+        console.log("发送忘记密码邮件");
+        let mailOptions = {
+            from: '"service@acclist" <service@acclist.com>', // sender address
+            to: email, // list of receivers
+            subject: '重置密码', // Subject line
+            text: forgetContent.replace(/__url/g,url), // plain text body
+            html: forgetContent.replace(/__url/g,url) // html body
+        };
+        mail.send(mailOptions);
         ctx.body ={code:"success",id:user.id};
     },
     //重置密码页 

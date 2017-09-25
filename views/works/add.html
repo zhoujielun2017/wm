@@ -2,17 +2,9 @@
 
 {% block head %}
 <style type="text/css">
-  .glyphicon{
-    font-size: 3em;
-    padding: 15px;
-    border:1px solid #777;
-    color: #777;
-  }
-  .imgs img{
-    width: 100px;
-    height: 100px;
-  }
+
 </style>
+
 {% endblock %}
 
 {% block main %}
@@ -52,11 +44,13 @@
             <div class=" col-sm-10">
                 <div class="imgs">
                     {% for e in bean.imgs %}
-                    <img class="img-rounded" src="{{img_domain}}{{e}}">
-                        <input name="img" type="hidden" value="{{e}}">
-                            {% endfor %}
-                        </input>
-                    </img>
+                    <div>
+                    <img class="img-thumbnail" src="{{img_domain}}{{e}}"/>
+                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                    <input name="img" type="hidden" value="{{e}}"/>
+                    </div>
+                    {% endfor %}
+                     
                 </div>
                 <div class="fileselect">
                     <label class="glyphicon glyphicon-plus" for="file">
@@ -69,15 +63,20 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default" type="submit">
-                    {{__('add')}}
+                    {{__('save')}}
                 </button>
             </div>
         </div>
     </input>
 </form>
+
 {% endblock %}
 
 {% block foot %}
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+ <script src="/js/upyun.js"></script>
+ <script src="/js/upload.js"></script>
+
 <script>
     var valid_en={  
     title: {
@@ -121,26 +120,22 @@ if(imgCount>=10){
 }
 $("#file").on("change",function(){
     console.log("change")
-    var fd=new FormData();
-    fd.append("upload",this.files[0]);
-    $.ajax({
-        type: "POST",
-        url: "/file",
-        data:fd,
-        processData: false,  // 不处理数据
-        contentType: false,
-        success:function(json){
-          $(".imgs").append('<img src="'+json.url+'" class="img-rounded">'+
-            '<input type="hidden" name="img" value="'+json.path+'">')
-            console.log(json);
+     $.fileupload(this,function(json){
+
+         $(".imgs").append('<div><img src="'+json.url+'!300x300" class="img-thumbnail"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
+            '<input type="hidden" name="img" value="'+json.path+'"></div>')
+            
             imgCount++;
             if(imgCount>=10){
               $(".fileselect").hide();
-            }
-        }
+          }
+       
     });
-  })
 
+  })
+$(".imgs").on("click",".glyphicon-trash",function(){
+  $(this).parent("div").remove();
+});
 $("form").on('submit',function(e){
 
     var fd=new FormData(this);

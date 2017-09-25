@@ -1,8 +1,18 @@
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const db = require('../db');
-const koaBody  = require('koa-body');
+const fs = require('fs'),
+    path = require('path'),
+    os = require('os'),
+    db = require('../db'),
+    koaBody  = require('koa-body');
+    
+    const upyun = require('../index');
+    
+    const Service=require('../upyun/Service');
+// var sign = require("../lib/sign");
+// var Upyun = require("../lib/upyun");
+const bucket = new Service('acclist-pic', 'lwj', 'lwj201314');
+// var upyun = new Upyun('acclist-pic', 'lwj', 'lwj201314');
+
+
 
 //递归创建目录 同步方法  
 function mkdirsSync(dirname) {  
@@ -68,5 +78,52 @@ module.exports = {
             });
         }
         
+    },
+    'POST /file/upyun': async (ctx, next) => {
+       
+        const file = ctx.request.body.files.upload;
+        console.log(file);
+        var reader=new Buffer(file)
+        var now=new Date();
+        var dfdir="/data/img";
+        
+        var webdir=path.posix.join("/img/",now.getFullYear().toString(),(now.getMonth()+1)+""+now.getDate());
+        var url=path.posix.join(webdir,db.generateId()+".jpg");
+        console.log(url);
+        var domain="acclist-pic.b0.upaiyun.com";
+        upyun.upload(reader, url, { md5: true }, function(err, result) {
+            if(err) {
+                return console.log(err.message);
+            }
+
+            console.log("==== test upload ====");
+            console.log(result);
+            console.log("=====================");
+            console.log();
+
+            ctx.response.body = JSON.stringify({
+                "uploaded": 1,
+                "domain":domain,
+                "path":url
+            });
+        });
+        
+    },
+    'GET /sign': async (ctx, next) => {
+
+
+        var query=ctx.query;
+        // console.log(upyun);
+        // var now=new Date();
+        // var webdir=path.posix.join("/img/",now.getFullYear().toString(),(now.getMonth()+1)+""+now.getDate());
+        // var url=path.posix.join(webdir,db.generateId()+".jpg");
+        // console.log("url",url);
+        const headSign = upyun.sign.getHeaderSign(bucket, query.method, query.path);
+        // const headSign = sign.getHeaderSign("acclist-pic", query.method, query.path)
+        console.log(headSign);
+       ctx.body=headSign;
+
+
     }
+    
 };

@@ -45,10 +45,8 @@
         <li {% if  nav=="contact"  %}class="active"{% endif %}><a href="/contact">{{__('contact')}}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
- 
        
-       <!--  <li><a href="#" class="lang" lang="zh-CN">简体中文</a></li>
-        <li><a href="#" class="lang" lang="en">English</a></li> -->
+        <li><a href="/search" lang="zh-CN">搜索</a></li>
        
         {% if  sessionuser  %}
          <li><a href="/user/center">{{sessionuser.email}}</a></li>
@@ -58,7 +56,8 @@
         <li><a href="/login/login">{{__('sign in')}}</a></li>
         <li><a href="/login/login">{{__('register')}}</a></li>
         {% endif %}
-        
+        <li><a href="#" class="lang" lang="zh-CN">中文</a></li>
+        <li><a href="#" class="lang" lang="en">EN</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

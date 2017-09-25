@@ -40,6 +40,8 @@ module.exports = {
                 
             });
             bean.areas=areas;
+            var user = await User.findById(bean.user_id);
+            bean.head=user&&user.head_url;
         }
         ctx.render('./company/designs.html',{
             result:result,
@@ -73,6 +75,9 @@ module.exports = {
             }
             
         });
+        var user = await User.findById(design.user_id);
+        design.head=user&&user.head_url;
+
         design.areas=areas;
          var workses = await Works.findAndCountAll({
             where: {

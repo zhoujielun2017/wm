@@ -6,7 +6,10 @@ module.exports = db.defineModel('message_group', {
     status: db.INTEGER,
     content: db.STRING(1000),
     name:db.STRING(255),
-    img:db.STRING(512),
+    img:{
+        type: db.STRING(512),
+        allowNull: true
+    },
     count: db.INTEGER
 });
 

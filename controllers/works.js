@@ -15,7 +15,8 @@ module.exports = {
                 user_id: user.id
             },
             'limit': Util.pageSize,
-            'offset': Util.pageSize*(page-1)
+            'offset': Util.pageSize*(page-1),
+            order: [['create_time', 'DESC']]
         });
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
@@ -79,15 +80,22 @@ module.exports = {
             material = ctx.request.body.material||'',
             price = ctx.request.body.price||0,
             imgs = ctx.request.body.imgs,
+            default_img,
             content = ctx.request.body.content||'';
 
-       console.log(imgs,imgs.slice(0,imgs.indexOf(",")+1));
+       
+       if(~imgs.indexOf(",")){
+            default_img=imgs.slice(0,imgs.indexOf(","));
+        }else{
+            default_img=imgs;
+        }
+
         var works = await Works.findById(id);
         works.title=title;
         works.material=material;
         works.price=price;
         works.imgs=imgs;
-        works.default_img=imgs.split(",")[0];
+        works.default_img=default_img;
         works.content=content;
         await works.save();
         

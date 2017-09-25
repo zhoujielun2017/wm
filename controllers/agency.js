@@ -35,6 +35,8 @@ module.exports = {
                 
             });
             bean.areas=areas;
+            var user = await User.findById(bean.user_id);
+            bean.head=user&&user.head_url;
         }
         ctx.render('./company/agencys.html',{
             result:result,
@@ -45,11 +47,13 @@ module.exports = {
     //前台详情
     'GET /agency/:id': async (ctx, next) => {
         var id=ctx.params.id||1;
-        var agency = await Agency.findById(id);
-        if(agency&&agency.brand){
-            agency.brand=agency.brand.split(",");
+        var bean = await Agency.findById(id);
+        if(bean&&bean.brand){
+            bean.brand=bean.brand.split(",");
         }
-        ctx.render('./company/agency.html',{bean:agency});
+        var user = await User.findById(bean.user_id);
+        bean.head=user&&user.head_url;
+        ctx.render('./company/agency.html',{bean:bean});
     },
     'GET /agency': async (ctx, next) => {
         var user=ctx.session.user;

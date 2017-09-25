@@ -15,16 +15,16 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-3 img">
-      <img src="/images/default.png">
+      {% if bean.head %}
+       <img class="img-thumbnail" src="{{img_domain}}{{bean.head}}!300x300"/>
+      {% else %}
+        <img class="img-thumbnail" src="/images/default.png"/>
+      {% endif %}
     </div>
     <div class="col-xs-9">
       <h3>{{bean.name}}</h3>
-      <a>发站内信</a>
-      <form class="msgform">
-      <input type="hidden" name="receiver_id" value="{{bean.user_id}}">
-      <textarea name="content"></textarea>
-      <button>发送</button>
-      </form>
+      <a href="/message/{{bean.user_id}}">发站内信</a>
+      
     </div>
   </div>
    <div class="row">

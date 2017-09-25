@@ -1,25 +1,33 @@
 {% extends '../base.html' %}
 
 {% block head %}
-
+<style type="text/css">
+  .list img{
+    width: 50px;
+  }
+</style>
 {% endblock %}
 
 {% block main %}
-<a href="/message/add" class="btn btn-primary">add</a>
 
   {% for e in result.rows %}
-  <div class="media">
-    <div class="media-left">
-        <img src="{{e.img}}" alt="" class="img-rounded">
+  <div class="row list">
+
+    <div class="col-xs-3 col-sm-3">
+      {% if e.another_head %}
+      <img src="{{img_domain}}{{e.another_head}}!300x300" alt="" class="img-circle">
+      {% endif %}
+        
+      
     </div>
-    <div class="media-body">
-      <h4 class="media-heading">
+    <div class="col-xs-6 col-sm-6">
+      <h4 >
         {{e.name}}
       </h4>
       <p>{{e.content}}</p>
     </div>
-    <div class="media-right">
-    	<a href="/message/{{e.id}}">查看</a><a href="#">删除</a>
+    <div class="col-xs-3 col-sm-3">
+    	<a href="/messageGroup/{{e.id}}">查看</a><a href="/api/messageGroup/{{e.id}}" class="delete">删除</a>
     </div>
   </div>
   {% else %}
@@ -36,5 +44,23 @@
 {% block foot %}
 <script>
 
+$(".delete").on("click",function(){
+    var that=this;
+   $.ajax({
+        type: "delete",
+        url: that.href,
+        data:{
+      },
+        dataType:"json",
+        success:function(json){
+            if(json.code=='success'){
+              $(that).closest(".row").remove();
+            }else{
+              // location.reload();
+            }
+        }
+    });
+   return false;
+})
 </script>  
 {% endblock %}

@@ -31,12 +31,14 @@ module.exports = {
             var areas = await City.findAll({
                 where:{
                     id:{
-                    "$in":bean.area
-                }
+                        "$in":bean.area
+                    }
                 }
                 
             });
             bean.areas=areas;
+            var user = await User.findById(bean.user_id);
+            bean.head=user.head_url;
         }
         ctx.render('./company/sellers.html',{
             result:result,
@@ -60,7 +62,9 @@ module.exports = {
             }
         });
         seller.areas=areas;
-
+        var user = await User.findById(seller.user_id);
+        seller.head=user&&user.head_url;
+        
         ctx.render('./company/seller.html',{bean:seller});
     },
     //个人中心

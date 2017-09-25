@@ -28,7 +28,7 @@ function getPage(cur_page, total_count,url) {
     var obj = {};
     obj.page=cur_page;
     obj.pageCount=Math.ceil(total_count/PageUtil.pageSize);
-    obj.html=getPageNums(cur_page,obj.pageCount,url);
+    obj.html=getPageNums(cur_page,obj.pageCount,url||"");
     return obj;
 }
 

@@ -1,20 +1,27 @@
-/*.bd-sidebar {
-	float: left;
-	width: 25%;
+/* start upload */
+.glyphicon-plus{
+font-size: 3em;
+padding: 15px;
+border:1px solid #777;
+color: #777;
 }
-.bd-content{
-	width: 75%;
-	float: left;
+
+.imgs img{
+width: 100px;
+height: 100px;
 }
-@media (max-width: 767px){
-	.bd-sidebar {
-	    display: none;
-	}	
-	.bd-content{
-		width: 100%;
-	}
+.imgs div{
+position: relative;
+display: inline-block;
 }
-*/
+.imgs .glyphicon{
+position: absolute;
+background: #eee;
+top: initial;
+bottom: 5px;
+right: 5px;
+}
+/* end upload */
 .unread,.error{
 	color: red;
 }

@@ -6,10 +6,10 @@
     margin-bottom: 30px;
   }
   .img{
-      width: 100px;
+      width: 150px;
   }
-  img{
-    width: 90px;
+  .proimg{
+    width: 120px;
   }
 </style>
 {% endblock %}
@@ -18,16 +18,16 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-3 img">
-      <img src="/images/default.png">
+      {% if bean.head %}
+       <img class="img-thumbnail" src="{{img_domain}}{{bean.head}}!300x300"/>
+      {% else %}
+        <img class="img-thumbnail" src="/images/default.png"/>
+      {% endif %}
     </div>
     <div class="col-xs-9">
       <h3>{{bean.name}}</h3>
-      <a>发站内信</a>
-      <form class="msgform">
-      <input type="hidden" name="receiver_id" value="{{bean.user_id}}">
-      <textarea name="content"></textarea>
-      <button>发送</button>
-      </form>
+      <a href="/message/{{bean.user_id}}">发站内信</a>
+     
     </div>
   </div>
    <div class="row">
@@ -61,11 +61,6 @@
     公司简介:{{bean.content}}
   </div>
   <h3>公司产品</h3>
-  <div class="row">
-    <div class="col-xs-6">.col-xs-12 .col-md-8</div>
-    <div class="col-xs-6">.col-xs-6 .col-md-4</div>
-  </div>
-
   {% for e in pros.rows %}
   
   {% if loop.index0%2==0 %}
@@ -73,20 +68,23 @@
   {% endif %}
   <div class="col-xs-6">
     <div class="row list">
-        <div class="col-xs-4 col-md-4 img">
-            <a href="/seller/{{e.id}}">
-                <img alt="" class="img-rounded" src="/images/default.png">
-                </img>
+        <div class="col-xs-4 col-md-4 proimg">
+            <a href="/product/{{e.id}}">
+                {% if e.default_img %}
+                 <img class="img-thumbnail" src="{{img_domain}}{{e.default_img}}!300x300"/>
+                {% else %}
+                  <img class="img-thumbnail" src="/images/default.png"/>
+                {% endif %}
             </a>
         </div>
         <div class="col-xs-8 col-md-8">
              <h4>
-                <a href="/seller/{{e.id}}">
+                <a href="/product/{{e.id}}">
                     {{e.title}}
                 </a>
             </h4>
-            <p>材质: 混合材质</p>
-            <p>价格: ￥9.99元</p>
+            <p>材质: {{e.material}}</p>
+            <p>价格: &yen;{{e.price}}元</p>
         </div>
     </div>
   </div>
@@ -94,7 +92,7 @@
   </div>
   {% endif %}
   {% endfor %}
-
+<div class="clearfix"></div>
     <nav aria-label="Page navigation ">
         <ul class="pagination" >
             {{page.html}}

@@ -1,10 +1,10 @@
-var Message=require("../model/Message");
-var MessageGroup=require("../model/MessageGroup");
-var User=require("../model/User");
-var Util=require("../util/Util");
+var Message=require("../model/Message"),
+    MessageGroup=require("../model/MessageGroup"),
+    User=require("../model/User"),
+    Util=require("../util/Util");
 module.exports = {
     //列表页
-    'GET /message': async (ctx, next) => {
+    'GET /messageGroups': async (ctx, next) => {
         var user=ctx.session.user;
         var page=ctx.request.query.page||1;
         
@@ -20,31 +20,52 @@ module.exports = {
             'limit': Util.pageSize,
             'offset': Util.pageSize*(page-1)
         });
+ 
+        var update = await MessageGroup.update({count:0},{
+            'where':{
+                'user_id':user.id
+            }  
+        });
+        console.log(update);
+
+        var i=0,len=result.rows.length,bean;
+        for (i; i < len; i++) {
+            bean=result.rows[i];
+            var user=await User.findById(bean.another_id);
+            bean.another_head=user.head_url;
+            bean.name=user.name;
+            console.log("bean.another_head",bean.another_head)
+        }
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
-        console.log(result);
+       
 
         ctx.render('./message/list.html', {
             result:result,
-            page:Util.getPageNums(page,result.pageCount,"/message")}
+            page:Util.getPageNums(page,result.pageCount)}
         );
 
     },
     //添加页
-    'GET /message/add': async (ctx, next) => {
+    'GET /message/:id': async (ctx, next) => {
         var user=ctx.session.user;
-        console.log(user);
+        
         if(!user){
             ctx.response.redirect('/login/login');
             return ;
         }
-        var id=ctx.request.query.id;      
-        ctx.render('./message/add.html',{receiver:{id:"fd5d5a86de824ab2aba8039f5d927c32"}});
+        var id=ctx.params.id;      
+        var receiver=await User.findById(id);
+        console.log(receiver);
+        ctx.render('./message/add.html',{bean:receiver});
     },
-    'GET /message/:id': async (ctx, next) => {
+    //和某人的对话 id group的id
+    'GET /messageGroup/:id': async (ctx, next) => {
         var id=ctx.params.id;
         var group = await MessageGroup.findById(id);
+        //查找对话内容
         var group_id;
+        //谁大谁在前面
         if(group.user_id>group.another_id){
             group_id=group.user_id+"_"+group.another_id;
         }else{
@@ -58,19 +79,27 @@ module.exports = {
                 },
                  order: [['create_time', 'ASC']]
             });
-        for (var i = 0; i < list.length; i++) {
-            if(list[i].sender_id==one.id){
-                list[i].sender_name=one.name;
-                list[i].sender_head=one.head_url;
+        var i = 0,len=list.length,bean;
+        for (i; i < len; i++) {
+            bean=list[i];
+            
+            if(one&&bean.sender_id==one.id){
+                bean.sender_name=one.name;
+                bean.sender_head=one.head_url;
             }
-            if(list[i].sender_id==two.id){
-                list[i].sender_name=two.name;
-                list[i].sender_head=two.head_url;
+            if(two&&bean.sender_id==two.id){
+                bean.sender_name=two.name;
+                bean.sender_head=two.head_url;
             }
         }
         
-        ctx.render('./message/detail.html',{list:list,receiver:two});
+        ctx.render('./message/detail.html',{list:list,
+            receiver:two});
     },
+    /**
+    提交信息
+    会产生两个group,一个是自己的,一个是别人的
+    */
     'POST /api/message': async (ctx, next) => {
 
         var user=ctx.session.user;
@@ -80,13 +109,24 @@ module.exports = {
             ctx.body = {"code":"not_login"};
             return;
         }
+        if(user.id==receiver_id){
+            ctx.body = {"code":"myself"};
+            return;
+        }
+        //接收者
         var receiver=await User.findById(receiver_id);
-        var group_id;
+        if(!receiver){
+            ctx.body = {"code":"receiver_null"};
+            return;
+        }
+        //计算gourp_id
+        var group_id; //userId_receiverId
         if(user.id>receiver_id){
             group_id=user.id+"_"+receiver_id;
         }else{
             group_id=receiver_id+"_"+user.id;
         }
+        //创建message
         var message = await Message.create({
             group_id:group_id,
             sender_id:user.id,
@@ -94,7 +134,7 @@ module.exports = {
             status:0,
             content: content
         });
-        //自己的
+        //自己的MessageGroup
         var group=await MessageGroup.findOne({
             where: {
                 user_id:user.id,
@@ -108,18 +148,19 @@ module.exports = {
             group.name=receiver.name;
             group.save();
         }else{
+            //自己的未读为0
             await MessageGroup.create({
                 user_id:user.id,
                 another_id: receiver_id,
                 status:0,
                 img:receiver.head_url,
                 name:receiver.name,
-                count:1,
+                count:0,
                 content: content
             });
         }
 
-        //another的
+        //another的MessageGroup
         var group2=await MessageGroup.findOne({
             where: {
                 user_id:receiver_id,
@@ -133,7 +174,9 @@ module.exports = {
             group2.count++;
             group2.save();
         }else{
+            //别人的未读为1
             await MessageGroup.create({
+                
                 user_id:receiver_id,
                 another_id: user.id,
                 status:0,
@@ -145,6 +188,7 @@ module.exports = {
         }
         ctx.body = {"code":"success"};
     },
+    //获取未读条数
     'GET /api/messageGroup': async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
@@ -156,8 +200,19 @@ module.exports = {
                 user_id:user.id
             }
         });
-        count=group&&group.count||0
+        var count=group&&group.count||0;
         ctx.body={code:"success",count:count};
+    },
+    'DELETE /api/messageGroup/:id': async (ctx, next) => {
+        var id=ctx.params.id;
+        //只删除自己的group
+        await MessageGroup.destroy({
+          where: {
+            id:id
+          }
+        });
+
+        ctx.body={code:"success"};
     }
 
 };

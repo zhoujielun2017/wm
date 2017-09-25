@@ -1,6 +1,14 @@
 var Product=require("../model/Product");
 var Util=require("../util/Util");
 module.exports = {
+    //产品详情
+    // 'GET /product/:id': async (ctx, next) => {
+    //     var id = ctx.params.id;
+    //     var bean = await Product.findById(id);
+       
+    //     ctx.render('./product/detail.html', {bean:bean});
+
+    // },
     //产品列表页
     'GET /product': async (ctx, next) => {
         var user=ctx.session.user;
@@ -50,21 +58,27 @@ module.exports = {
         var title = ctx.request.body.title||'',
             material = ctx.request.body.material||'',
             price = ctx.request.body.price||0,
-            imgs = ctx.request.body.imgs||[],
-            content = ctx.request.body.content||'';
+            imgs = ctx.request.body.imgs,
+            content = ctx.request.body.content||'',
+            default_img=null;
         if(!user){
             ctx.body = {"code":"not_login"};
             return;
         }
         console.log("test user:",user.id);
+        
+        if(~imgs.indexOf(",")){
+            default_img=imgs.split(",")[0];
+        }
+       
         var product = await Product.create({
-            id:user.id,
+            
             user_id:user.id,
             title: title,
             price:price,
             material:material,
-            default_img:imgs[0],
-            imgs:imgs.join(","),
+            default_img:default_img,
+            imgs:imgs,
             status:1,
             content: content
         });
@@ -77,16 +91,21 @@ module.exports = {
             title = ctx.request.body.title||'',
             material = ctx.request.body.material||'',
             price = ctx.request.body.price||0,
-            imgs = ctx.request.body.imgs||[],
+            imgs = ctx.request.body.imgs,
             content = ctx.request.body.content||'';
-
+        var default_img;
+        if(~imgs.indexOf(",")){
+            default_img=imgs.slice(0,imgs.indexOf(","));
+        }else{
+            default_img=imgs;
+        }
        
          var product = await Product.findById(id);
         product.title=title;
         product.material=material;
         product.price=price;
-        product.imgs=imgs.join(",");
-        product.default_img=imgs[0];
+        product.imgs=imgs;
+        product.default_img=default_img;
         product.content=content;
         await product.save();
         

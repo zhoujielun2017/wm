@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "comment": "0.0.2",
+        "ez-upyun": "0.0.8",
         "htmlparser2": "^3.9.2",
         "koa": "2.0.0",
         "koa-body": "^2.3.0",
@@ -36,6 +37,7 @@
         "nodemailer": "^1.3.4",
         "nunjucks": "2.4.2",
         "pg": "^6.4.2",
-        "sequelize": "3.24.1"
+        "sequelize": "3.24.1",
+        "upyun": "^3.2.6"
     }
 }

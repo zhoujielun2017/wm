@@ -39,12 +39,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         
-      <li><a href="#">{{__('hot line')}}</a></li>
-      {% if  sessionuser.role==9  %}
+        <li><a href="#">{{__('hot line')}}</a></li>
+        {% if  sessionuser.role==9  %}
         <li><a href="/manage/users" class="lang" lang="zh-CN">后台管理</a></li>
         {% endif %}
-        <li><a href="#" class="lang" lang="zh-CN">简体中文</a></li>
-        <li><a href="#" class="lang" lang="en">English</a></li>
+        <li><a href="#" class="lang" lang="zh-CN">中文</a></li>
+        <li><a href="#" class="lang" lang="en">EN</a></li>
         <li><a href="#">{{sessionuser.email}}</a></li>
         {% if  sessionuser  %}
         <li><a href="#" class="loginout">{{__('sign out')}}</a></li>
@@ -84,7 +84,7 @@
           {% endif %}
 
           <a href="#" class="list-group-item"><h3>{{__('message manage')}}</h3></a>
-           <a href="/message" class="list-group-item"> <span class="badge unread"></span>{{__('all message')}}</a>
+           <a href="/messageGroups" class="list-group-item"> <span class="badge unread"></span>{{__('all message')}}</a>
           <a href="#" class="list-group-item"><h3>{{__('user message')}}</h3></a>
           <a href="/user/buy" class="list-group-item">{{__('to be vip')}}</a>
           <a href="/ord" class="list-group-item">{{__('buy record')}}</a>

@@ -2,9 +2,10 @@
 
 {% block head %}
 <style type="text/css">
-.img{
+.list img{
   width: 110px;
 }
+
 .glyphicon-picture{
   font-size: 70px;
   color: #777;
@@ -18,10 +19,10 @@
 {% endblock %}
 
 {% block main %}
-<h1>{{__('product info')}}</h1> <a href="/works/add" class="btn btn-primary">{{__('add')}}</a>
+<h1>{{__('works info')}}</h1> <a href="/works/add" class="btn btn-primary">{{__('add')}}</a>
 
   {% for e in result.rows %}
-   <div class="row">
+   <div class="row list">
       <div class="col-xs-3 col-md-3 img">
           <a href="/works/{{e.id}}">
              
@@ -29,7 +30,7 @@
               <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
             {% endif %}
             {% if  e.default_img  %}
-              <img src="{{img_domain}}{{e.default_img }}" alt="" class="img-rounded">
+              <img src="{{img_domain}}{{e.default_img }}!300x300" alt="" class="img-rounded">
             {% endif %}
 
           </a>

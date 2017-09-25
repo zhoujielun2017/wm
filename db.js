@@ -59,28 +59,28 @@ function defineModel(name, attributes) {
         type: Sequelize.BIGINT,
         allowNull: false
     };
-    console.log('model defined for table: ' + name + '\n' + JSON.stringify(attrs, function (k, v) {
-        if (k === 'type') {
-            for (let key in Sequelize) {
-                if (key === 'ABSTRACT' || key === 'NUMBER') {
-                    continue;
-                }
-                let dbType = Sequelize[key];
-                if (typeof dbType === 'function') {
-                    if (v instanceof dbType) {
-                        if (v._length) {
-                            return `${dbType.key}(${v._length})`;
-                        }
-                        return dbType.key;
-                    }
-                    if (v === dbType) {
-                        return dbType.key;
-                    }
-                }
-            }
-        }
-        return v;
-    }, '  '));
+    // console.log('model defined for table: ' + name + '\n' + JSON.stringify(attrs, function (k, v) {
+    //     if (k === 'type') {
+    //         for (let key in Sequelize) {
+    //             if (key === 'ABSTRACT' || key === 'NUMBER') {
+    //                 continue;
+    //             }
+    //             let dbType = Sequelize[key];
+    //             if (typeof dbType === 'function') {
+    //                 if (v instanceof dbType) {
+    //                     if (v._length) {
+    //                         return `${dbType.key}(${v._length})`;
+    //                     }
+    //                     return dbType.key;
+    //                 }
+    //                 if (v === dbType) {
+    //                     return dbType.key;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return v;
+    // }, '  '));
     return sequelize.define(name, attrs, {
         tableName: name,
         timestamps: false,
@@ -95,12 +95,12 @@ function defineModel(name, attributes) {
                     obj.create_time = now;
                     obj.update_time = now;
                     obj.version = 0;
-                    console.log('will create entity...' , obj.dataValues);
+                    console.log('will create entity...');
                 } else {
                     
                     obj.update_time = now;
                     obj.version++;
-                    console.log('will update entity...',obj);
+                    console.log('will update entity...');
                 }
             }
         }
