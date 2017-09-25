@@ -132,7 +132,7 @@
 	"unit money": "万元",
 	"unit day": "天",
 	"web pages": "页面",
-	"website": "全球国际xx",
+	"website": "全球国际饰品网",
 	"welcome": "欢迎",
 	"wiki": "维基",
 	"wikis": "维基",

@@ -6,7 +6,7 @@ const fs = require('fs'),
     
     const upyun = require('../index');
     
-    const Service=require('../upyun/Service');
+    const Service=require('../upyun/service');
 // var sign = require("../lib/sign");
 // var Upyun = require("../lib/upyun");
 const bucket = new Service('acclist-pic', 'lwj', 'lwj201314');
