@@ -7,7 +7,8 @@ var config = {
     port: 5432,
     img_domain:"http://acclist-pic.b0.upaiyun.com",
     web:{
-    	domain:"www.acclist.com"
+    	domain:"www.acclist.com",
+        paydomain:"pay.acclist.com"
     }
 };
 
