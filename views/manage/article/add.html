@@ -49,6 +49,7 @@
                 if(json.code="success"){
                     $("input[name=id]").val(json.id);
                 }
+                YY.dialog.toast({content:json.code})
             }
         });
 

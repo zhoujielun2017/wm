@@ -84,5 +84,8 @@
 	"parttime": "parttime",
 	"work experience": "work experience",
 	"data empty": "data empty",
-	"login": "login"
+	"login": "login",
+	"index": "index",
+	"contact": "contact",
+	"index articles": "index articles"
 }

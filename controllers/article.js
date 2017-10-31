@@ -9,7 +9,7 @@ module.exports = {
     'GET /article/:id': async (ctx, next) => {
         var id=ctx.params.id;
         var article = await Article.findById(id);
-        ctx.render('article.html',{bean:article});
+        ctx.render('./article/detail.html',{bean:article});
     },
     'GET /manage/article': async (ctx, next) => {
         var id=ctx.request.query.id;
