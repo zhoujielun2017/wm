@@ -5,7 +5,7 @@ padding: 15px;
 border:1px solid #777;
 color: #777;
 }
-mb100{
+.mb100{
   margin-bottom: 100px;
 }
 
@@ -30,7 +30,7 @@ right: 5px;
 }
 .footer {
   position: fixed;
-  
+  z-index: 10;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
