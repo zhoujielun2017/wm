@@ -9,7 +9,8 @@ module.exports = {
         Article.findAndCountAll
         var articles = await Article.findAll({
             'limit': pageSize,
-            'offset': pageSize*(page-1)
+            'offset': pageSize*(page-1),
+             order: 'create_time DESC'
         });
 
         console.log(articles);

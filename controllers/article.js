@@ -23,7 +23,8 @@ module.exports = {
         var page=ctx.request.query.page||1;
         var result = await Article.findAndCountAll({
             'limit': Util.pageSize,
-            'offset': Util.pageSize*(page-1)
+            'offset': Util.pageSize*(page-1),
+            order: 'create_time DESC'
         });
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
