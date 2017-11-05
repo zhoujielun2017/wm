@@ -49,7 +49,9 @@
                 if(json.code="success"){
                     $("input[name=id]").val(json.id);
                 }
-                YY.dialog({content:json.code}).alert();
+                YY.dialog({content:json.code,callback:function(){
+                    location.href="/manage/articles";
+                }}).alert();
             }
         });
 
