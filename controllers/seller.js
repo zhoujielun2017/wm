@@ -67,6 +67,46 @@ module.exports = {
         
         ctx.render('./company/seller.html',{bean:seller});
     },
+    //后台列表
+    'GET /manage/sellers': async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Seller.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        // console.log("for out",result.count);
+        for (var i = 0,len=result.count; i < len; i++) {
+            // console.log("for");
+            var bean=result.rows[i];
+            if(bean.brand){
+                bean.brand=bean.brand.split(",");
+            }
+            if(bean.area){
+                bean.area=bean.area.split("_");
+            }else{
+                bean.area=[];
+            }
+            // console.log("bean.area",bean.area);
+            var areas = await City.findAll({
+                where:{
+                    id:{
+                        "$in":bean.area
+                    }
+                }
+                
+            });
+            bean.areas=areas;
+            var user = await User.findById(bean.user_id);
+            bean.head=user.head_url;
+        }
+        ctx.render('./manage/seller/list.html',{
+            result:result,
+            page:PageUtil.getPage(page, result.count)
+        });
+    },
     //个人中心
     'GET /seller': async (ctx, next) => {
         var user=ctx.session.user;

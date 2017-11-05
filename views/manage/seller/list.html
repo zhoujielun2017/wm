@@ -1,0 +1,50 @@
+{% extends '../toolbar_index.html' %}
+
+{% block head %}
+<style type="text/css">
+  .list{
+    margin-bottom: 10px;
+  }
+  .list .col-md-3:first-child{
+      width: 150px;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+
+    <a href="/manage/seller" class="btn btn-primary" role="button">add</a>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for e in result.rows %}
+        <tr>
+            <td>{{e.name}}</td>
+            <td>
+            <a href="/manage/seller?id={{e.id}}" class="btn btn-primary" role="button">update</a>
+            <a href="/api/seller/{{e.id}}" class="btn btn-danger" role="button">del</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <nav aria-label="Page navigation">
+    <ul class="pagination">
+    {{page}}
+    </ul>
+    </nav>
+
+    
+</div>
+{% endblock %}
+
+{% block foot %}
+
+{% endblock %}
