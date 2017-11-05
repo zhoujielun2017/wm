@@ -32,7 +32,7 @@
 
     };
 
-    var editor = CKEDITOR.replace( 'content' );
+    var editor = CKEDITOR.replace( 'content' ,YY.editorConfig);
     $("form").on('submit',function(e){
 
         var fd=new FormData(this);
@@ -49,7 +49,7 @@
                 if(json.code="success"){
                     $("input[name=id]").val(json.id);
                 }
-                YY.dialog.toast({content:json.code})
+                YY.dialog({content:json.code}).alert();
             }
         });
 

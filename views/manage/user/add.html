@@ -7,6 +7,8 @@
         <label class="col-sm-2 control-label">email</label>
         <div class="col-sm-10">
              <p class="form-control-static">{{bean.email}}</p>
+             <button type="submit" class="btn btn-primary email">修改邮箱</button>    
+             <!--<button type="submit" class="btn btn-primary password">重置密码</button>    -->
         </div>
     </div>
     <div class="form-group">
@@ -16,7 +18,7 @@
         </div>
     </div>
      <div class="form-group">
-        <label  class="col-sm-2 control-label">状态</label>
+        <label  class="col-sm-2 control-label">角色</label>
         <div class="col-sm-10">
             <p class="form-control-static">
             {% if bean.role==0 %}
@@ -26,23 +28,113 @@
               高级会员
             {% endif %}
             {% if bean.role==9 %}
+              超级管理员
+            {% endif %}
+            {% if bean.role==8 %}
               管理员
             {% endif %}
             </p>
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">审核</button>
+    {% if bean.role==0 %}
+    <div class="form-group"> 
+        <div class="col-sm-offset-2 col-sm-10">      
+              <button type="submit" class="btn btn-primary verify1">审核为高级会员</button>       
         </div>
     </div>
+     {% endif %}
+     {% if bean.role==0 %}
+     <div>
+        <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary verify9">审核为管理员</button>
+        </div> 
+    </div>
+    {% endif %}
 </div>
+
 {% endblock %}
 {% block foot %}
 
 <script>
     
+    var id = $("input[name=id]").val();
+    $(".verify1").on("click",function(){
+        YY.dialog({content:"你确定通过该会员为高级会员吗?",callback:function(){
+            $.ajax({
+                type: "PUT",
+                url: "/user/"+id+"/role",
+                data:{
+                    role:1
+                },
+                dataType:"json",
+                success:function(json){
+                    if(json.code="success"){
+                       location.reload();
+                    }
+                }
+            });
+        }}).alert();
+    })
     
+    $(".verify9").on("click",function(){
+        YY.dialog({content:"你确定通过该会员为管理员吗?",callback:function(){
+            $.ajax({
+                type: "PUT",
+                url: "/user/"+id+"/role",
+                data:{
+                    role:8
+                },
+                dataType:"json",
+                success:function(json){
+                    if(json.code="success"){
+                       location.reload();
+                    }
+                }
+            });
+        }}).alert();
+    })
 
+    $(".email").on("click",function(){
+        YY.dialog({content:'邮箱:<input type="email" name="email">',callback:function(element){
+            var email=element.find("input[name=email]").val();
+            $.ajax({
+                type: "PUT",
+                url: "/user/"+id+"/email",
+                data:{
+                    email:email
+                },
+                dataType:"json",
+                success:function(json){
+                    if(json.code="success"){
+                       location.reload();
+                    }else{
+                        alert(json.code);
+                    }
+                }
+            });
+        }}).confirm();
+    })
+
+    // $(".password").on("click",function(){
+    //     YY.dialog({content:'密码:<input type="password" name="password">',callback:function(element){
+    //         var password=element.find("input[name=password]").val();
+    //         $.ajax({
+    //             type: "PUT",
+    //             url: "/user/"+id+"/password",
+    //             data:{
+    //                 password:password
+    //             },
+    //             dataType:"json",
+    //             success:function(json){
+    //                 if(json.code="success"){
+    //                     alert(json.code);
+    //                    location.reload();
+    //                 }else{
+    //                     alert(json.code);
+    //                 }
+    //             }
+    //         });
+    //     }}).confirm();
+    // })
 </script>
 {% endblock %}

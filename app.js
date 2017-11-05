@@ -57,17 +57,18 @@ app.use(async (ctx, next) => {
     ctx.response.set('X-Response-Time', `${execTime}ms`);
 });
 
-var loginUrl=['/user/center'];
+var loginUrl=["manage","/user/center"];
+var roleUrl=["/sellers","/agencys","/factorys","/designs","/search",""];
+var loginUrls=loginUrl.concat(roleUrl);
+var roleurls=roleUrl.join(",");
+var loginStr=loginUrls.join(",")
+
 //后台登陆
 app.use(async (ctx, next) => {
     var url=ctx.request.url;
-    var needLogin=false;
-    for (var i = 0; i < loginUrl.length; i++) {
-      if(loginUrl[i]==url){
-        needLogin=true;
-      }
-    }
-    if(~url.indexOf("manage")||needLogin){
+   
+   
+    if(~loginStr.indexOf(url+",")){
       var user=ctx.session.user;
       if(!user){
           console.log("未登录",url);
@@ -80,6 +81,33 @@ app.use(async (ctx, next) => {
      await next();
 });
 
+
+//购买会员
+app.use(async (ctx, next) => {
+    var url=ctx.request.url;
+    var user=ctx.session.user;
+    if(~url.indexOf(".js")||~url.indexOf(".png")||~url.indexOf(".jpg")||~url.indexOf(".css")){
+      await next();
+      return ;
+    }
+    if(user){
+      console.log("角色判断",url);
+      
+      if(~roleurls.indexOf(url+",")){
+
+      //非管理员,普通会员
+        var vipOrAdmin=user.role==8||user.role==9||user.verified;
+        console.log("角色",vipOrAdmin);
+        if(!vipOrAdmin){
+          console.log("跳转购买也",vipOrAdmin);
+          ctx.response.redirect('/user/buy');
+          return ;
+        }
+          
+      }
+    }
+    await next();
+});
 
 // static file support:
 // app.use(staticFiles('/static/', __dirname + '/static'));

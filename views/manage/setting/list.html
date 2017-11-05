@@ -1,0 +1,58 @@
+{% extends '../base.html' %}
+
+{% block main %}
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>key</th>
+        <th>value</th>
+       
+        <th>operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for e in list %}
+    <tr>
+        <td>{{e.id}}</td>
+        <td>{{e.name}}
+        </td>
+         <td>{{e.value}}
+        </td>
+       
+        <td>
+            <a href="/manage/setting/{{e.id}}" class="btn btn-primary" role="button">详情</a>
+            <a href="/api/setting/{{e.id}}" class="btn btn-danger" role="button">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
+{% block foot %}
+
+<script>
+   
+    $(".btn-danger").on("click",function () {
+        var thiz=$(this);
+        var href=this.href;
+        YY.dialog({content:"你确定删除吗?",callback:function(){
+              $.ajax({
+                type: "DELETE",
+                url: href,
+                dataType:"json",
+                success:function(json){
+                    if(json.code="success"){
+                        thiz.parents("tr").remove();
+                    }
+                }
+            });
+        }}).confirm();
+      
+        return false;
+    });
+</script>
+{% endblock %}

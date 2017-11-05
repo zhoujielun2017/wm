@@ -7,12 +7,15 @@
     <tr>
         <th>Email</th>
         <th>角色</th>
+        <th>类型</th>
+         <th>审核状态</th>
         <th>operation</th>
     </tr>
     </thead>
     <tbody>
     {% for e in result.rows %}
-    <tr>
+    <tr  {% if e.role==1 %}class="success"{% endif %}{% if e.role==8 %}class="info"{% endif %}{% if e.role==9 %}class="warning"{% endif %}
+    {% if e.verified==1 %}class="danger"{% endif %}>
         <td>{{e.email}}</td>
         <td>
             {% if e.role==0 %}
@@ -21,16 +24,25 @@
             {% if e.role==1 %}
               高级会员
             {% endif %}
-            {% if e.role==9 %}
+            {% if e.role==9  %}
+              超级管理员
+            {% endif %}
+             {% if e.role==8  %}
               管理员
             {% endif %}
         </td>
+         <td>
+             {{__(e.type)}}
+      
+        </td>
         <td>
         {% if e.verified==1 %}
-            <a href="/manage/user?id={{e.id}}" class="btn btn-warning" role="button">审核</a>  
+            待审核
         {% endif %}
-        <a href="/manage/user?id={{e.id}}" class="btn btn-primary" role="button">detail</a>
-        <a href="/api/user/{{e.id}}" class="btn btn-danger" role="button">del</a>
+        </td>
+        <td>
+        <a href="/manage/user?id={{e.id}}" class="btn btn-primary" role="button">详情</a>
+        <a href="/api/user/{{e.id}}" class="btn btn-danger" role="button">删除</a>
         </td>
     </tr>
     {% endfor %}

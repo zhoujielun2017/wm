@@ -2,9 +2,22 @@ var Article=require("../model/Article");
 var Util=require("../util/Util");
 
 module.exports = {
-    'GET /article': async (ctx, next) => {
-        var list = await Article.findAll();
-        ctx.render('articles.html',{siteTitle:"技术文章",list:list});
+    'GET /articles': async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Article.findAndCountAll({
+            'limit': Util.pageSize,
+            'offset': Util.pageSize*(page-1),
+            order: 'create_time DESC'
+        });
+        result.page=page;
+        result.pageCount=Math.ceil(result.count/Util.pageSize);
+        console.log(result);
+
+        ctx.render('./article/list.html', {
+            result:result,
+            page:Util.getPageNums(page,result.pageCount)}
+        );
+        
     },
     'GET /article/:id': async (ctx, next) => {
         var id=ctx.params.id;

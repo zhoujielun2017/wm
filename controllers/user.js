@@ -1,6 +1,8 @@
-const crypto = require('crypto');
-var User=require("../model/User");
-var Util=require("../util/Util");
+const crypto = require('crypto'),
+     User=require("../model/User"),
+     Setting=require("../model/Setting"),
+     Util=require("../util/Util");
+
 
 module.exports = {
     //个人中心
@@ -11,8 +13,18 @@ module.exports = {
         ctx.render('./user/center.html',{user:user});
     },
     'GET /user/buy': async (ctx, next) => {
-        var user=ctx.session.user;
-        ctx.render('./user/buy.html',{user:user});
+        var user=ctx.session.user;       
+       
+        var list = await Setting.findAll({});
+        var setting={};
+        for (var i = 0; i < list.length; i++) {
+            var obj = list[i];
+            setting[obj.id]=obj.value;
+        }
+        var price=setting['price_'+user.type];
+           
+
+        ctx.render('./user/buy.html',{user:user,price:price});
     },
     //会员管理
     'GET /users': async (ctx, next) => {
@@ -35,6 +47,36 @@ module.exports = {
         
         
         user.head_url=head_url;
+        await user.save();
+        ctx.body={code:"success"};
+    },
+     //更新用户密码
+    'PUT /user/:id/role': async (ctx, next) => {
+        var id=ctx.params.id;
+        var role = ctx.request.body.role;
+        var user = await User.findById(id);
+        user.verified=0;
+        user.role=role;
+        await user.save();
+        ctx.body={code:"success"};
+    },
+     //更新用户邮箱
+    'PUT /user/:id/email': async (ctx, next) => {
+        var id=ctx.params.id;
+        var email = ctx.request.body.email;
+         var result = await User.findOne({
+            where:{
+                'email': email    
+            }
+            
+        });
+        // console.log(result);
+        if(result){
+             ctx.body={code:"exist"};
+             return ;
+        }
+        var user = await User.findById(id);
+        user.email=email;
         await user.save();
         ctx.body={code:"success"};
     },
@@ -85,6 +127,7 @@ module.exports = {
             page:Util.getPageNums(page,result.pageCount,"/manage/user")}
         );
     },
+    //判断邮箱是否存在
     'GET /api/user/email': async (ctx, next) => {
         var email=ctx.request.query.email;
         // console.log("email",email);
