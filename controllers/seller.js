@@ -4,9 +4,7 @@ var Seller=require("../model/Seller"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
 
-module.exports = {
-    //前台列表
-    'GET /sellers': async (ctx, next) => {
+var sellers=async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await Seller.findAndCountAll({
             where: {
@@ -46,8 +44,7 @@ module.exports = {
             page:PageUtil.getPage(page, result.count)
         });
     },
-    //前台详情
-    'GET /seller/:id': async (ctx, next) => {
+    seller_id=async (ctx, next) => {
         var id=ctx.params.id||1;
         var seller = await Seller.findById(id);
         if(seller&&seller.brand){
@@ -67,8 +64,7 @@ module.exports = {
         
         ctx.render('./company/seller.html',{bean:seller});
     },
-    //后台列表
-    'GET /manage/sellers': async (ctx, next) => {
+    manage_sellers=async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await Seller.findAndCountAll({
             where: {
@@ -107,8 +103,10 @@ module.exports = {
             page:PageUtil.getPage(page, result.count)
         });
     },
-    //个人中心
-    'GET /seller': async (ctx, next) => {
+    manage_seller=async (ctx, next) => {
+        ctx.render('./manage/seller/add.html');
+    },
+    seller=async (ctx, next) => {
         var user=ctx.session.user;
         console.log(user);
         if(!user){
@@ -121,8 +119,7 @@ module.exports = {
         }
         ctx.render('./company/add_seller.html',{bean:seller});
     },
-    
-    'POST /api/seller': async (ctx, next) => {
+    api_seller=async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
@@ -151,7 +148,7 @@ module.exports = {
         }
         console.log("test user:",user.id);
         var seller = await Seller.create({
-            id:user.id,
+
             user_id:user.id,
             name: name,
             ename:ename,
@@ -175,7 +172,7 @@ module.exports = {
         dbUser.save();
         ctx.body = {"code":"success","id":seller.id};
     },
-    'PUT /api/seller': async (ctx, next) => {
+    api_seller_update=async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
             ctx.body = {"code":"not_login"};
@@ -229,7 +226,7 @@ module.exports = {
         dbUser.save();
         ctx.body = {"code":"success","id":seller.id};
     },
-    'PUT /api/sellerdetail': async (ctx, next) => {
+    api_sellerdetail=async (ctx, next) => {
          var user=ctx.session.user;
          var id = ctx.request.body.id||'',
             types = ctx.request.body.types,
@@ -272,5 +269,31 @@ module.exports = {
         await seller.save();
        
         ctx.body = {"code":"success","id":seller.id};
-    }
+    },
+    api_seller_delete=async (ctx, next) => {
+        var id=ctx.params.id;
+        await Seller.destroy({
+          where: {
+            id:id
+          }
+        });
+        ctx.body = {"code":"success"};
+    };
+
+module.exports = {
+    //前台列表
+    'GET /sellers': sellers,
+    //前台详情
+    'GET /seller/:id': seller_id,
+    //后台列表
+    'GET /manage/sellers': manage_sellers,
+    //后台添加零售商
+    'GET /manage/seller':manage_seller,
+    //个人中心
+    'GET /seller': seller,
+    
+    'POST /api/seller':api_seller,
+    'PUT /api/seller':api_seller_update ,
+    'DELETE /api/seller/:id':api_seller_delete ,
+    'PUT /api/sellerdetail': api_sellerdetail
 };

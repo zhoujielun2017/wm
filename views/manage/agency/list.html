@@ -10,7 +10,7 @@
 
 <div class="container">
 
-    <a href="/manage/seller" class="btn btn-primary" role="button">add</a>
+    <a href="/manage/agency" class="btn btn-primary" role="button">add</a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -23,8 +23,8 @@
         <tr>
             <td>{{e.name}}</td>
             <td>
-            <a href="/manage/seller?id={{e.id}}" class="btn btn-primary" role="button">update</a>
-            <a href="/api/seller/{{e.id}}" class="btn btn-danger" role="button">del</a>
+            <a href="/manage/agency?id={{e.id}}" class="btn btn-primary" role="button">update</a>
+            <a href="/api/agency/{{e.id}}" class="btn btn-danger" role="button">del</a>
             </td>
         </tr>
         {% endfor %}

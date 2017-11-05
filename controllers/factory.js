@@ -5,60 +5,58 @@ var Factory=require("../model/Factory"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
 
-module.exports = {
-    //前台列表
-    'GET /factorys': async (ctx, next) => {
-        var page=ctx.request.query.page||1;
-        var result = await Factory.findAndCountAll({
-            where: {
-                
-            },
-            'limit': PageUtil.pageSize,
-            'offset': PageUtil.pageSize*(page-1)
-        });
-        for (var i = 0; i < result.count; i++) {
-            var bean=result.rows[i];
+var factorys = async (ctx, next) => {
+    var page=ctx.request.query.page||1;
+    var result = await Factory.findAndCountAll({
+        where: {
+            
+        },
+        'limit': PageUtil.pageSize,
+        'offset': PageUtil.pageSize*(page-1)
+    });
+    for (var i = 0; i < result.count; i++) {
+        var bean=result.rows[i];
 
-            if(bean.major){
-                bean.major=bean.major.split(",");
-                console.log("bean.major",bean.major);
-            }
-            var cops = await Cooperation.findAll({
-                where:{
-                    user_id:bean.user_id
-                },
-                order: [['create_time', 'DESC']]
-            });
-            bean.cops=cops;
-
-            if(bean.area){
-                bean.area=bean.area.split("_");
-            }else{
-                bean.area=[];
-            }
-            // console.log("bean.area",bean.area);
-            var areas = await City.findAll({
-                where:{
-                    id:{
-                    "$in":bean.area
-                    }
-                }
-                
-            });
-            bean.areas=areas;
-            var user = await User.findById(bean.user_id);
-            bean.head=user&&user.head_url;
+        if(bean.major){
+            bean.major=bean.major.split(",");
+            console.log("bean.major",bean.major);
         }
-       
-        ctx.render('./company/factorys.html',{
-            result:result,
-            nav:"factorys",
-            cops:cops,
-            page:PageUtil.getPage(page, result.count)
+        var cops = await Cooperation.findAll({
+            where:{
+                user_id:bean.user_id
+            },
+            order: [['create_time', 'DESC']]
         });
-    },
-    //前台详情
-    'GET /factory/:id': async (ctx, next) => {
+        bean.cops=cops;
+
+        if(bean.area){
+            bean.area=bean.area.split("_");
+        }else{
+            bean.area=[];
+        }
+        // console.log("bean.area",bean.area);
+        var areas = await City.findAll({
+            where:{
+                id:{
+                "$in":bean.area
+                }
+            }
+            
+        });
+        bean.areas=areas;
+        var user = await User.findById(bean.user_id);
+        bean.head=user&&user.head_url;
+    }
+    
+    ctx.render('./company/factorys.html',{
+        result:result,
+        nav:"factorys",
+        cops:cops,
+        page:PageUtil.getPage(page, result.count)
+    });
+};
+
+var factory_id=async (ctx, next) => {
         var id=ctx.params.id;
         var page=ctx.request.query.page||1;
         var factory = await Factory.findById(id);
@@ -102,8 +100,62 @@ module.exports = {
             pros:pros,
             page:PageUtil.getPage(page, pros.count)
         });
-    },
-    'GET /factory': async (ctx, next) => {
+    };
+
+    var manage_factorys=async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Factory.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        for (var i = 0; i < result.count; i++) {
+            var bean=result.rows[i];
+
+            if(bean.major){
+                bean.major=bean.major.split(",");
+                console.log("bean.major",bean.major);
+            }
+            var cops = await Cooperation.findAll({
+                where:{
+                    user_id:bean.user_id
+                },
+                order: [['create_time', 'DESC']]
+            });
+            bean.cops=cops;
+
+            if(bean.area){
+                bean.area=bean.area.split("_");
+            }else{
+                bean.area=[];
+            }
+            // console.log("bean.area",bean.area);
+            var areas = await City.findAll({
+                where:{
+                    id:{
+                    "$in":bean.area
+                    }
+                }
+                
+            });
+            bean.areas=areas;
+            var user = await User.findById(bean.user_id);
+            bean.head=user&&user.head_url;
+        }
+       
+        ctx.render('./manage/factory/list.html',{
+            result:result,
+            page:PageUtil.getPage(page, result.count)
+        });
+    };
+    var manage_factory=async (ctx, next) => {
+        var id=ctx.request.query.id;
+        var factory = await Factory.findById(id);
+        ctx.render('./manage/factory/add.html',{bean:factory});
+    };
+    var factory=async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
             ctx.response.redirect('/login/login');
@@ -112,9 +164,8 @@ module.exports = {
         var factory = await Factory.findById(user.id);
         
         ctx.render('./company/add_factory.html',{bean:factory});
-    },
-    
-    'POST /api/factory': async (ctx, next) => {
+    };
+    var api_factory=async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
@@ -132,7 +183,7 @@ module.exports = {
         }
         console.log("test user:",user.id);
         var factory = await Factory.create({
-            id:user.id,
+            
             user_id:user.id,
             name: name,
             ename:ename,
@@ -148,8 +199,8 @@ module.exports = {
         dbUser.name=name;
         dbUser.save();
         ctx.body = {"code":"success","id":factory.id};
-    },
-    'PUT /api/factory': async (ctx, next) => {
+    };
+    var api_factory_update=async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
             ctx.body = {"code":"not_login"};
@@ -182,8 +233,9 @@ module.exports = {
         dbUser.name=name;
         dbUser.save();
         ctx.body = {"code":"success","id":factory.id};
-    },
-    'PUT /api/factorydetail': async (ctx, next) => {
+    };
+
+    var api_factorydetail=async (ctx, next) => {
          var user=ctx.session.user;
          var id = ctx.request.body.id||'',
             types = ctx.request.body.types,
@@ -226,5 +278,32 @@ module.exports = {
         await factory.save();
        
         ctx.body = {"code":"success","id":factory.id};
-    }
+    };
+    var api_factory_delete=async (ctx, next) => {
+         var id=ctx.params.id;
+
+        await Factory.destroy({
+          where: {
+            id:id
+          }
+        });
+       
+        ctx.body = {"code":"success"};
+    };
+module.exports = {
+    //前台列表
+    'GET /factorys': factorys,
+    //前台详情
+    'GET /factory/:id': factory_id,
+    //前台列表
+    'GET /manage/factorys':manage_factorys ,
+     //后台添加factory
+    'GET /manage/factory':manage_factory,
+    //前台编辑页
+    'GET /factory':factory ,
+    
+    'POST /api/factory': api_factory,
+    'PUT /api/factory': api_factory_update,
+    'DELETE /api/factory/:id': api_factory_delete,
+    'PUT /api/factorydetail': api_factorydetail
 };

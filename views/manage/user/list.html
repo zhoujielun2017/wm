@@ -56,21 +56,25 @@
 
 {% endblock %}
 {% block foot %}
-
 <script>
    
-    $(".btn-danger").on("click",function () {
+     $(".btn-danger").on("click",function () {
         var thiz=$(this);
-        $.ajax({
-            type: "DELETE",
-            url: this.href,
-            dataType:"json",
-            success:function(json){
-                if(json.code="success"){
-                    thiz.parent("li").remove();
+        var href=this.href;
+        YY.dialog({content:"你确定删除吗?",callback:function(){
+              $.ajax({
+                type: "DELETE",
+                url: href,
+                dataType:"json",
+                success:function(json){
+                    if(json.code="success"){
+                        thiz.parents("tr").remove();
+                    }
                 }
-            }
-        });
+            });
+        }}).confirm();
+      
+        return false;
     });
 </script>
 {% endblock %}

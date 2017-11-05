@@ -4,9 +4,7 @@ var Agency=require("../model/Agency"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
 
-module.exports = {
-    //前台列表
-    'GET /agencys': async (ctx, next) => {
+var agencys=async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await Agency.findAndCountAll({
             where: {
@@ -43,9 +41,8 @@ module.exports = {
             nav:"agencys",
             page:PageUtil.getPage(page, result.count)
         });
-    },
-    //前台详情
-    'GET /agency/:id': async (ctx, next) => {
+    }
+    var agency_id=async (ctx, next) => {
         var id=ctx.params.id||1;
         var bean = await Agency.findById(id);
         if(bean&&bean.brand){
@@ -54,8 +51,55 @@ module.exports = {
         var user = await User.findById(bean.user_id);
         bean.head=user&&user.head_url;
         ctx.render('./company/agency.html',{bean:bean});
-    },
-    'GET /agency': async (ctx, next) => {
+    };
+    var manage_agencys=async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Agency.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        for (var i = 0,len=result.count; i < len; i++) {
+            var bean=result.rows[i];
+            if(bean.brand){
+                bean.brand=bean.brand.split(",");
+            }
+            if(bean.area){
+                bean.area=bean.area.split("_");
+            }else{
+                bean.area=[];
+            }
+            // console.log("bean.area",bean.area);
+            var areas = await City.findAll({
+                where:{
+                    id:{
+                    "$in":bean.area
+                    }
+                }
+                
+            });
+            bean.areas=areas;
+            var user = await User.findById(bean.user_id);
+            bean.head=user&&user.head_url;
+        }
+        ctx.render('./manage/agency/list.html',{
+            result:result,
+            page:PageUtil.getPage(page, result.count)
+        });
+    };
+
+    var manage_agency=async (ctx, next) => {
+        var id=ctx.request.query.id;
+        var bean = await Agency.findById(id);
+        if(bean&&bean.brand){
+            bean.brand=bean.brand.split(",");    
+        }
+        ctx.render('./manage/agency/add.html',{bean:bean});
+
+    }
+    var agency=async (ctx, next) => {
         var user=ctx.session.user;
         console.log(user);
         if(!user){
@@ -68,9 +112,9 @@ module.exports = {
         }
         
         ctx.render('./company/add_agency.html',{bean:agency});
-    },
-    
-    'POST /api/agency': async (ctx, next) => {
+    };
+
+    var api_agency=async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
@@ -97,7 +141,7 @@ module.exports = {
         }
         console.log("test user:",user.id);
         var agency = await Agency.create({
-            id:user.id,
+            
             user_id:user.id,
             name: name,
             ename:ename,
@@ -119,8 +163,9 @@ module.exports = {
         dbUser.name=name;
         dbUser.save();
         ctx.body = {"code":"success","id":agency.id};
-    },
-    'PUT /api/agency': async (ctx, next) => {
+    };
+
+    var api_agency_update=async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
             ctx.body = {"code":"not_login"};
@@ -170,6 +215,35 @@ module.exports = {
         dbUser.name=name;
         dbUser.save();
         ctx.body = {"code":"success","id":agency.id};
-    }
+    };
+
+    var api_agency_delete=async (ctx, next) => {
+         var id=ctx.params.id;
+
+        await Agency.destroy({
+          where: {
+            id:id
+          }
+        });
+       
+        ctx.body = {"code":"success"};
+    };
+module.exports = {
+    //前台列表
+    'GET /agencys': agencys,
+    //前台详情
+    'GET /agency/:id': agency_id,
+    //前台编辑页面
+    'GET /agency': agency,
+    //后台列表
+    'GET /manage/agencys': manage_agencys,
+    //后台添加编辑agency
+    'GET /manage/agency': manage_agency,
+    //添加接口
+    'POST /api/agency': api_agency,
+    //更新接口
+    'PUT /api/agency': api_agency_update,
+    //删除接口
+    'DELETE /api/agency/:id': api_agency_delete
     
 };
