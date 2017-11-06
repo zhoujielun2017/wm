@@ -7,10 +7,10 @@
 {% endblock %}
 
 {% block main %}
-<h3>供应商列表</h3>
+<h3>设计师列表</h3>
 <div class="container">
 
-    <a href="/manage/factory" class="btn btn-primary" role="button">add</a>
+    <a href="/manage/design" class="btn btn-primary" role="button">add</a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -23,8 +23,8 @@
         <tr>
             <td>{{e.name}}</td>
             <td>
-            <a href="/manage/factory?id={{e.id}}" class="btn btn-primary" role="button">update</a>
-            <a href="/api/factory/{{e.id}}" class="btn btn-danger" role="button">del</a>
+            <a href="/manage/design?id={{e.id}}" class="btn btn-primary" role="button">update</a>
+            <a href="/api/design/{{e.id}}" class="btn btn-danger" role="button">del</a>
             </td>
         </tr>
         {% endfor %}
@@ -42,8 +42,7 @@
 
 {% block foot %}
 <script>
-     
-
+   
      $(".btn-danger").on("click",function () {
         var thiz=$(this);
         var href=this.href;
@@ -62,7 +61,5 @@
       
         return false;
     });
-
 </script>
-
 {% endblock %}
