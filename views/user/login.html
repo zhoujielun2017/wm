@@ -8,20 +8,20 @@
 {% endblock %}
 
 {% block main %}
+
 <div class="container">
-    
+    <p class="text-right">
+        <a class="lang" href="#" lang="zh-CH">
+            中文
+        </a>
+        &nbsp;/&nbsp;
+        <a class="lang" href="#" lang="en">
+            EN
+        </a>
+    </p>
+    <div class="login-logo"><a href="/"></a></div>
     <form class="form-horizontal" >
-        <p class="text-right">
-            <a class="lang" href="#" lang="zh-CH">
-                简体中文
-            </a> 
-            <a class="lang" href="#" lang="en">
-                English
-            </a>
-        </p>
-        <h3 class="text-center">
-            {{__('sign in')}}
-        </h3>
+
         <div class="form-group">
             <!-- <label class="col-sm-3 control-label" for="inputEmail3">
                 {{__('email')}}

@@ -9,7 +9,8 @@ var config = {
     web:{
     	domain:"www.acclist.com",
         paydomain:"pay.acclist.com"
-    }
+    },
+noCache:true
 };
 
 module.exports = config;
