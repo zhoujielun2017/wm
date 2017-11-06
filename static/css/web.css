@@ -28,12 +28,37 @@ right: 5px;
 .unread,.error{
 	color: red;
 }
-.footer {
-  position: fixed;
-  z-index: 10;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #333;
+
+html, body {
+    height: 100%;
 }
+.page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -70px;
+}
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+.footer, .page-wrap:after {
+    height: 70px;
+}
+.logo{margin: 20px 90px 0 0;}
+.navcon{font-size: 16px;}
+.indexbg{background: url("../images/wmap.png") no-repeat center center;width:1101px;height: 506px; position: absolute;top:40px;z-index: -1;}
+.book{background: url("../images/book.png") no-repeat center center;width: 274px;height: 153px;margin: 0 auto 80px;}
+.loginnow{width: 140px;height: 52px;margin: 20px auto;box-shadow:0 6px 20px 0 rgba(255,201,0,.16)}
+.loginnow a{display: block;font-size: 14px;text-align: center;line-height: 52px;background: #ffc900;color: #222;}
+.jumbotron p{font-size: 14px;text-align: center}
+.newsbg{background: #f9f9f9;margin-bottom: 20px;}
+.list-news li{float: left;background: url("../images/dian.png") no-repeat 0 15px;padding-left: 22px;display: inline-block;line-height: 35px;width: 100%;font-size: 16px;}
+.title{margin: 20px 0px 15px 35px;line-height: 24px;}
+.title span{background: url("../images/title.png") no-repeat;width: 3px;height: 24px;display: block;float: left;margin-right: 12px;}
+.title i{background: url("../images/newsicon.png") no-repeat;width: 40px;height: 12px;display: inline-block;margin-left: 12px;}
+.footer {width: 100%;height: 70px;background-color: #262523;}
+.Blogo{margin: 18px 25px 0 0;float: left;}
+.Bnav li{float: left;margin-top: 24px;list-style: none;}
+.Bnav li a{padding: 0 15px;color: #676767;line-height: 24px;}
+.jumbotron{padding-top: 0px;padding-bottom: 0px;}
+.Btext{float: right;color: #676767;line-height: 50px;}

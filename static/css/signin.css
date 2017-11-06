@@ -1,12 +1,12 @@
 body {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #eee;
+  background-color: #fff;
 }
 form{
-   max-width: 330px;
+   max-width: 380px;
    margin: 0 auto;
-     background: #FFF;
+   background: #FFF;
   padding: 20px;
 }
 h3{
@@ -15,3 +15,6 @@ h3{
 .foot-line{
   margin-top: 30px;
 }
+.login-logo{margin: 60px auto 50px;text-align: center;}
+.login-logo a{background: url("../images/loginLogo.png") no-repeat;width: 234px;height: 60px;display: block;margin: 0 auto;}
+.btn{padding: 0px;border: none;border-radius: 0px;font-size: 16px;}

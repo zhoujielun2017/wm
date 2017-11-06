@@ -3,7 +3,7 @@ const config = require('./config');
 function createEnv(path, opts) {
     var
         autoescape = opts.autoescape === undefined ? true : opts.autoescape,
-        noCache = opts.noCache || false,
+        noCache = opts.noCache || true,
         watch = opts.watch || false,
         throwOnUndefined = opts.throwOnUndefined || false,
         env = new nunjucks.Environment(
