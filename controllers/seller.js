@@ -108,7 +108,7 @@ var sellers=async (ctx, next) => {
     },
     seller=async (ctx, next) => {
         var user=ctx.session.user;
-        console.log(user);
+        
         if(!user){
             ctx.response.redirect('/login/login');
             return ;
@@ -146,7 +146,7 @@ var sellers=async (ctx, next) => {
             ctx.body = {"code":"not_login"};
             return;
         }
-        console.log("test user:",user.id);
+        
         var seller = await Seller.create({
 
             user_id:user.id,

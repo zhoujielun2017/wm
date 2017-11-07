@@ -7,6 +7,7 @@ const Koa = require('koa'),
     locale = require('koa-locale'),
     i18n = require('koa-i18n'),
     templating = require('./templating'),
+     roleController = require('./role'),
     favicon = require('koa-favicon'),
     staticFiles = require('./static-files');
 
@@ -48,15 +49,15 @@ app.use(i18n(app, {
 }))
 
 // log request URL:
-app.use(async (ctx, next) => {
-    console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
-    var
-        start = new Date().getTime(),
-        execTime;
-    await next();
-    execTime = new Date().getTime() - start;
-    ctx.response.set('X-Response-Time', `${execTime}ms`);
-});
+// app.use(async (ctx, next) => {
+//     console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
+//     var
+//         start = new Date().getTime(),
+//         execTime;
+//     await next();
+//     execTime = new Date().getTime() - start;
+//     ctx.response.set('X-Response-Time', `${execTime}ms`);
+// });
 
 var loginUrl=["manage","/user/center"];
 var roleUrl=["/sellers","/agencys","/factorys","/designs","/search",""];
@@ -67,8 +68,7 @@ var loginStr=loginUrls.join(",")
 //后台登陆
 app.use(async (ctx, next) => {
     var url=ctx.request.url;
-   
-   
+
     if(~loginStr.indexOf(url+",")){
       var user=ctx.session.user;
       if(!user){
@@ -84,31 +84,31 @@ app.use(async (ctx, next) => {
 
 
 //购买会员
-app.use(async (ctx, next) => {
-    var url=ctx.request.url;
-    var user=ctx.session.user;
-    if(~url.indexOf(".js")||~url.indexOf(".png")||~url.indexOf(".jpg")||~url.indexOf(".css")){
-      await next();
-      return ;
-    }
-    if(user){
-      console.log("角色判断",url,user);
+// app.use(async (ctx, next) => {
+//     var url=ctx.request.url;
+//     var user=ctx.session.user;
+//     if(~url.indexOf(".js")||~url.indexOf(".png")||~url.indexOf(".jpg")||~url.indexOf(".css")){
+//       await next();
+//       return ;
+//     }
+//     if(user){
+//       console.log("角色判断",url,user);
       
-      if(~roleurls.indexOf(url+",")){
+//       if(~roleurls.indexOf(url+",")){
 
-      //非管理员,普通会员
-        var vipOrAdmin=user.verified||user.role==8||user.role==9;
-        console.log("角色",vipOrAdmin);
-        if(!vipOrAdmin){
-          console.log("跳转购买也",vipOrAdmin);
-          ctx.response.redirect('/user/buy');
-          return ;
-        }
+//       //非管理员,普通会员
+//         var vipOrAdmin=user.verified||user.role==8||user.role==9;
+//         console.log("角色",vipOrAdmin);
+//         if(!vipOrAdmin){
+//           console.log("跳转购买也",vipOrAdmin);
+//           ctx.response.redirect('/user/buy');
+//           return ;
+//         }
           
-      }
-    }
-    await next();
-});
+//       }
+//     }
+//     await next();
+// });
 
 // static file support:
 // app.use(staticFiles('/static/', __dirname + '/static'));
@@ -139,7 +139,7 @@ app.use(templating('views', {
        }
     }
 }));
-
+app.use(roleController());
 // add controller:
 app.use(controller());
 

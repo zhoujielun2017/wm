@@ -26,7 +26,7 @@ module.exports = {
                 'user_id':user.id
             }  
         });
-        console.log(update);
+        //console.log(update);
 
         var i=0,len=result.rows.length,bean;
         for (i; i < len; i++) {
@@ -34,7 +34,7 @@ module.exports = {
             var user=await User.findById(bean.another_id);
             bean.another_head=user.head_url;
             bean.name=user.name;
-            console.log("bean.another_head",bean.another_head)
+            //console.log("bean.another_head",bean.another_head)
         }
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
@@ -56,7 +56,7 @@ module.exports = {
         }
         var id=ctx.params.id;      
         var receiver=await User.findById(id);
-        console.log(receiver);
+        //console.log(receiver);
         ctx.render('./message/add.html',{bean:receiver});
     },
     //和某人的对话 id group的id

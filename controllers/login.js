@@ -102,7 +102,7 @@ module.exports = {
         var email = ctx.request.query.email,
             password = ctx.request.query.pass,
             time = ctx.request.query.time;
-        console.log("param",ctx.request.query);
+        //console.log("param",ctx.request.query);
         if(!email||!password||!time){
             ctx.render('./user/reg_email_fail.html',{msg:"邀请链接错误"});
             return;
@@ -166,7 +166,7 @@ module.exports = {
         var email = ctx.request.query.email,
             password = ctx.request.query.pass,
             time = ctx.request.query.time;
-        console.log("param",ctx.request.query);
+        //console.log("param",ctx.request.query);
         if(!email||!password||!time){
             ctx.render('./user/reset_email_fail.html',{msg:"邀请链接错误"});
             return;

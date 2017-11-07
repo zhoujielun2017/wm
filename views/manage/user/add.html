@@ -63,9 +63,9 @@
         YY.dialog({content:"你确定通过该会员为高级会员吗?",callback:function(){
             $.ajax({
                 type: "PUT",
-                url: "/user/"+id+"/verified",
+                url: "/user/"+id+"/role",
                 data:{
-                    verified:1
+                    role:1
                 },
                 dataType:"json",
                 success:function(json){

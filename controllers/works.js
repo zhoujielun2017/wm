@@ -20,7 +20,7 @@ module.exports = {
         });
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
-        console.log(result);
+       
 
         ctx.render('./works/list.html', {
             result:result,
@@ -31,7 +31,7 @@ module.exports = {
     //产品添加页
     'GET /works/add': async (ctx, next) => {
         var user=ctx.session.user;
-        console.log(user);
+        
         if(!user){
             ctx.response.redirect('/login/login');
             return ;

@@ -118,7 +118,7 @@ module.exports = {
 
             if(bean.major){
                 bean.major=bean.major.split(",");
-                console.log("bean.major",bean.major);
+               
             }
             var cops = await Cooperation.findAll({
                 where:{

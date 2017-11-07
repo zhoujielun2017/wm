@@ -19,7 +19,7 @@ var factorys = async (ctx, next) => {
 
         if(bean.major){
             bean.major=bean.major.split(",");
-            console.log("bean.major",bean.major);
+            //console.log("bean.major",bean.major);
         }
         var cops = await Cooperation.findAll({
             where:{
@@ -116,7 +116,7 @@ var factory_id=async (ctx, next) => {
 
             if(bean.major){
                 bean.major=bean.major.split(",");
-                console.log("bean.major",bean.major);
+                //console.log("bean.major",bean.major);
             }
             var cops = await Cooperation.findAll({
                 where:{
@@ -181,7 +181,7 @@ var factory_id=async (ctx, next) => {
             ctx.body = {"code":"not_login"};
             return;
         }
-        console.log("test user:",user.id);
+        //console.log("test user:",user.id);
         var factory = await Factory.create({
             
             user_id:user.id,

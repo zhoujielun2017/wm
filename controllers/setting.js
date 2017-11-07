@@ -10,7 +10,7 @@ module.exports = {
      'GET /manage/setting/:id': async (ctx, next) => {
         var id=ctx.params.id;
         var setting = await Setting.findById(id);
-        console.log('find: ' + JSON.stringify(setting));
+      
         // setting.content=helper.html2text(setting.content,false);
         ctx.render('./manage/setting/edit.html', {bean:setting});
     },
@@ -22,7 +22,7 @@ module.exports = {
             sort:1,
             url: url
         });
-        console.log('created: ' + JSON.stringify(setting));
+        
         ctx.response.type = 'application/json';
         ctx.response.body = JSON.stringify({code:"success"});
     },
@@ -43,7 +43,7 @@ module.exports = {
          var id=ctx.params.id;
         var setting = await Setting.findById(id);
         await setting.destroy();
-        console.log('destory: ' + JSON.stringify(setting));
+       
         ctx.response.type = 'application/json';
         ctx.response.body = JSON.stringify({code:"success"});
     }

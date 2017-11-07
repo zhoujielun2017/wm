@@ -13,7 +13,7 @@ module.exports = {
              order: 'create_time DESC'
         });
 
-        console.log(articles);
+        //console.log(articles);
 
         ctx.render('index.html', {
             

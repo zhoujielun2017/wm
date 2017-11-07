@@ -117,7 +117,7 @@ var designs=async (ctx, next) => {
             ctx.body = {"code":"not_login"};
             return;
         }
-        console.log("test user:",user.id);
+        //console.log("test user:",user.id);
         var design = await Design.create({
             id:user.id,
             user_id:user.id,

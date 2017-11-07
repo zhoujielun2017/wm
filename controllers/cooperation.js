@@ -13,7 +13,7 @@ var major=[
 module.exports = {
     'GET /cooperation': async (ctx, next) => {
         var user=ctx.session.user;
-        console.log(user);
+        //console.log(user);
         if(!user){
             ctx.response.redirect('/login/login');
             return ;

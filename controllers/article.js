@@ -1,8 +1,7 @@
 var Article=require("../model/Article");
 var Util=require("../util/Util");
 
-module.exports = {
-    'GET /articles': async (ctx, next) => {
+var articles=async (ctx, next) =>{
         var page=ctx.request.query.page||1;
         var result = await Article.findAndCountAll({
             'limit': Util.pageSize,
@@ -11,7 +10,7 @@ module.exports = {
         });
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
-        console.log(result);
+        //console.log(result);
 
         ctx.render('./article/list.html', {
             result:result,
@@ -19,12 +18,12 @@ module.exports = {
         );
         
     },
-    'GET /article/:id': async (ctx, next) => {
+    article_id=async (ctx, next) => {
         var id=ctx.params.id;
         var article = await Article.findById(id);
         ctx.render('./article/detail.html',{bean:article});
     },
-    'GET /manage/article': async (ctx, next) => {
+    manage_article=async (ctx, next) => {
         var id=ctx.request.query.id;
         var result;
         if(id){
@@ -32,7 +31,7 @@ module.exports = {
         }
         ctx.render('./manage/article/add.html', {bean:result});
     },
-    'GET /manage/articles': async (ctx, next) => {
+    manage_articles=async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await Article.findAndCountAll({
             'limit': Util.pageSize,
@@ -41,21 +40,21 @@ module.exports = {
         });
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
-        console.log(result);
+        //console.log(result);
 
         ctx.render('./manage/article/list.html', {
             result:result,
             page:Util.getPageNums(page,result.pageCount,"/manage/article")}
         );
     },
-     'GET /manage/article/:id': async (ctx, next) => {
+    manage_article_id=async (ctx, next) => {
         var id=ctx.params.id;
         var article = await Article.findById(id);
         
         // article.content=helper.html2text(article.content,false);
         ctx.render('./manage/article.html', {bean:article});
     },
-    'POST /api/article': async (ctx, next) => {
+    api_article=async (ctx, next) => {
          var title = ctx.request.body.title || '',
             content = ctx.request.body.content || '';
 
@@ -69,7 +68,7 @@ module.exports = {
 
         ctx.body = {code:"success",id:article.id};
     },
-    'PUT /api/article': async (ctx, next) => {
+    api_article_update=async (ctx, next) => {
          
          var id = ctx.request.body.id || '',
             title = ctx.request.body.title || '',
@@ -85,5 +84,35 @@ module.exports = {
 
         ctx.response.type = 'application/json';
         ctx.response.body = JSON.stringify(data);
+    },
+    api_article_delete=async (ctx, next) => {
+         
+         var id = ctx.params.id ;
+ 
+         await Article.destroy({
+          where: {
+            id:id
+          }
+        });
+
+        ctx.response.body = {code:"success"};
     }
+
+module.exports = {
+    //前台列表
+    'GET /articles': articles ,
+    //前台详情
+    'GET /article/:id': article_id,
+    //后台添加
+    'GET /manage/article': manage_article,
+    //后台列表
+    'GET /manage/articles': manage_articles,
+    //后台详情
+     'GET /manage/article/:id': manage_article_id,
+     //添加接口
+    'POST /api/article': api_article,
+    //更新接口
+    'PUT /api/article': api_article_update,
+    'DELETE /api/article/:id': api_article_delete
 };
+

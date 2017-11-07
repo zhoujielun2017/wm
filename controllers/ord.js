@@ -21,7 +21,7 @@ module.exports = {
         });
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
-        console.log(result);
+      
 
         ctx.render('./ord/list.html', {
             result:result,
@@ -37,7 +37,7 @@ module.exports = {
         });
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
-        console.log(result);
+       
 
         ctx.render('./manage/ord/list.html', {
             result:result,

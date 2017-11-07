@@ -89,5 +89,10 @@
 	"contact": "contact",
 	"index articles": "index articles",
 	"contact phone": "contact phone",
-	"location": "location"
+	"location": "location",
+	"major_xiaolv": "major_xiaolv",
+	"major_zhiliang": "major_zhiliang",
+	"major_kuanshi": "major_kuanshi",
+	"major_zhizi": "major_zhizi",
+	"major_caoliu": "major_caoliu"
 }

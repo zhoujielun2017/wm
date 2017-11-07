@@ -5,7 +5,7 @@ var Cooperation=require("../model/Cooperation");
 module.exports = {
     'GET /agency': async (ctx, next) => {
         var user=ctx.session.user;
-        console.log(user);
+        //console.log(user);
         if(!user){
             ctx.response.redirect('/login/login');
             return ;
@@ -30,7 +30,7 @@ module.exports = {
             ctx.body = {"code":"not_login"};
             return;
         }
-        console.log("test user:",user.id);
+        //console.log("test user:",user.id);
         var agency = await Agency.create({
             id:user.id,
             user_id:user.id,

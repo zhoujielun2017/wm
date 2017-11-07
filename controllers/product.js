@@ -27,7 +27,7 @@ module.exports = {
         });
         result.page=page;
         result.pageCount=Math.ceil(result.count/Util.pageSize);
-        console.log(result);
+       
 
         ctx.render('./product/list.html', {
             result:result,
@@ -38,7 +38,7 @@ module.exports = {
     //产品添加页
     'GET /product/add': async (ctx, next) => {
         var user=ctx.session.user;
-        console.log(user);
+        
         if(!user){
             ctx.response.redirect('/login/login');
             return ;
@@ -65,7 +65,7 @@ module.exports = {
             ctx.body = {"code":"not_login"};
             return;
         }
-        console.log("test user:",user.id);
+        
         
         if(~imgs.indexOf(",")){
             default_img=imgs.split(",")[0];
