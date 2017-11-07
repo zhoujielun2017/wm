@@ -39,6 +39,7 @@
         "nunjucks": "2.4.2",
         "pg": "^6.4.2",
         "sequelize": "3.24.1",
-        "upyun": "^3.3.1"
+        "upyun": "^3.3.1",
+        "koa-favicon":"2.0.0"
     }
 }
