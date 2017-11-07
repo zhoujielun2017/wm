@@ -7,6 +7,7 @@ const Koa = require('koa'),
     locale = require('koa-locale'),
     i18n = require('koa-i18n'),
     templating = require('./templating'),
+    favicon = require('koa-favicon'),
     staticFiles = require('./static-files');
 
 const app = new Koa();
@@ -30,7 +31,7 @@ const CONFIG = {
 };
 
 app.use(session(CONFIG, app));
-
+app.use(favicon(__dirname + '/favicon.ico'));
 //i18n
 app.use(i18n(app, {
   directory: './i18n',
