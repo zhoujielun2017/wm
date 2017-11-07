@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>{{__('website')}}</title>
+    <title>会员中心-{{__('website')}}</title>
 
     <!-- Bootstrap -->
     
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/web.css" rel="stylesheet">
     {% block head %} {% endblock %}
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -21,6 +21,7 @@
   </head>
 <body>
  <!-- Static navbar -->
+<div class="page-wrap">
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container">
     <div class="navbar-header">
@@ -30,21 +31,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">{{__('website')}}</a>
+        <div class="logo"><a href="/user/center"><img src="/images/logoM.png" /></a></div>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/user/center">user center</a></li>
-       
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-        <li><a href="#">{{__('hot line')}}</a></li>
-        {% if  sessionuser.role==9 or sessionuser.role==8  %}
-        <li><a href="/manage/users" class="lang" lang="zh-CN">后台管理</a></li>
-        {% endif %}
-        <li><a href="#" class="lang" lang="zh-CN">中文</a></li>
-        <li><a href="#" class="lang" lang="en">EN</a></li>
+    <div id="navbar" class="navbar-collapse collapse change">
+        <ul class="nav navbar-nav">
+            <li><a href="#" class="lang" lang="zh-CN">中文</a><a href="#" class="lang change" lang="en">/ EN</a></li>
+        </ul>
+      <ul class="nav navbar-nav navbar-right ">
+         <li><a href="/" class="lang">网站首页</a></li>
+        <li><a href="" class="lang">{{__('hot line')}}</a></li>
         <li><a href="#">{{sessionuser.email}}</a></li>
         {% if  sessionuser  %}
         <li><a href="#" class="loginout">{{__('sign out')}}</a></li>
@@ -52,11 +47,15 @@
         {% if  not sessionuser  %}
         <li><a href="/login/login">{{__('sign in')}}</a></li>
         {% endif %}
-        
+
+        {% if  sessionuser.role==9 or sessionuser.role==8  %}
+        <li><a href="/manage/users" class="lang" lang="zh-CN">后台管理</a></li>
+        {% endif %}
       </ul>
     </div><!--/.nav-collapse -->
   </div>
 </nav>
+<div class="bk30"></div>
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-3">
@@ -96,12 +95,23 @@
     </div>
   </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-    <p class="text-muted ">Place sticky footer content here.</p>
-    </div>
-</footer>
+</div>
+    <footer class="footer">
+        <div class="container">
+            <div class="Blogo"><a href="/"><img src="/images/logoB.png"></a></div>
+            <ul class="Bnav">
+                <li {% if  nav=="index"  %}class="active"{% endif %}><a href="/">{{__('index')}}</a></li>
+                <li {% if  nav=="sellers"  %}class="active"{% endif %}><a href="/sellers">{{__('seller')}}</a></li>
+                <li {% if  nav=="agencys"  %}class="active"{% endif %}><a href="/agencys">{{__('agency')}}</a></li>
+                {% if  sessionuser or sessionuser.type!='factory' %}
+                <li {% if  nav=="factorys"  %}class="active"{% endif %}><a href="/factorys">{{__('factory')}}</a></li>
+                {% endif %}
+                <li {% if  nav=="designs"  %}class="active"{% endif %}><a href="/designs">{{__('design')}}</a></li>
+                <li {% if  nav=="contact"  %}class="active"{% endif %}><a href="/contact">{{__('contact')}}</a></li>
+            </ul>
+            <p class="Btext">Copyright © 2017 Acclist鲁ICP备17038222号-1</p>
+        </div>
+    </footer>
 <script src="/js/jquery.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-validate/1.17.0/jquery.validate.min.js"></script>

@@ -1,17 +1,11 @@
 {% extends '../empty.html' %}
 
 {% block head %}
-<style type="text/css">
-    .list{
-    margin-bottom: 10px;
-  }
-  .list .col-md-3:first-child{
-      width: 150px;
-  }
-</style>
+
 {% endblock %}
 
 {% block main %}
+<div class="page-wrap">
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -40,10 +34,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input class="form-control" name="q" placeholder="关键字" type="text" value="{{q}}">
+                    <input class="form-width form-control" name="q" placeholder="关键字" type="text" value="{{q}}">
                     </input>
                 </div>
-                <button class="btn btn-default" type="submit">
+                <button class="search-bt" type="submit">
                     搜索
                 </button>
             </form>
@@ -89,6 +83,7 @@
             {{page.html}}
         </ul>
     </nav>
+</div>
 </div>
 {% endblock %}
 

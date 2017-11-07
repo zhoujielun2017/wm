@@ -91,12 +91,12 @@ app.use(async (ctx, next) => {
       return ;
     }
     if(user){
-      console.log("角色判断",url);
+      console.log("角色判断",url,user);
       
       if(~roleurls.indexOf(url+",")){
 
       //非管理员,普通会员
-        var vipOrAdmin=user.role==8||user.role==9||user.verified;
+        var vipOrAdmin=user.verified||user.role==8||user.role==9;
         console.log("角色",vipOrAdmin);
         if(!vipOrAdmin){
           console.log("跳转购买也",vipOrAdmin);

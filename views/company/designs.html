@@ -1,18 +1,11 @@
 {% extends '../toolbar_index.html' %}
 
 {% block head %}
-<style type="text/css">
-  .list{
-    margin-bottom: 10px;
-  }
-  .list .col-md-3:first-child{
-      width: 150px;
-  }
-</style>
 {% endblock %}
 
 {% block main %}
-<div class="container mb100">
+<div class="bk30"></div>
+<div class="container">
     {% for e in result.rows %}
     <div class="row list">
         <div class="col-xs-3 col-md-3">
@@ -30,6 +23,8 @@
                     {{e.name}}
                 </a>
             </h4>
+            <div class="rightinfo"><a href="" class="talk"></a> <a href="/design/{{e.id}}" class="more"></a></div>
+            <div class="clear"></div>
             <p>{{__('location')}}:
                {% for d in e.areas %}
             {{d.name}}
@@ -50,6 +45,7 @@
             {{page.html}}
         </ul>
     </nav>
+</div>
 </div>
 {% endblock %}
 

@@ -58,7 +58,7 @@
 	"have not account": "还没有账号",
 	"have acount": "已有账号",
 	"index": "首页",
-	"index articles":"饰品动态",
+	"index articles":"行业信息动态",
 	"image": "图片",
 	"last login time": "上次登录时间",
 	"location":"所在位置",
@@ -141,6 +141,6 @@
 	"works info": "作品信息",
 	"work experience": "工作经历",
 	"end": "end",
-	"contact": "contact"
+	"contact": "联系我们"
 	
 }

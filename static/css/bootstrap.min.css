@@ -2535,7 +2535,6 @@ select[multiple].input-lg,textarea.input-lg {
     }
     .form-inline .form-control {
         display:inline-block;
-        width:auto;
         vertical-align:middle
     }
     .form-inline .form-control-static {
@@ -3353,11 +3352,17 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
     display:block;
     font-family: "Microsoft YaHei","\5fae\8f6f\96c5\9ed1";
 }
+.change .nav>li{margin-left: 20px;}
 .nav>li>a {
     position:relative;
     display:block;
     padding:10px 15px
 }
+.change .nav>li>a{
+    display: inline-block;
+    padding: 10px 2px;
+}
+
 .nav>li>a:focus,.nav>li>a:hover {
     text-decoration:none;
     background-color:#eee
