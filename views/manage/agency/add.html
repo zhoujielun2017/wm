@@ -204,9 +204,13 @@ $("form").on('submit',function(e){
     $(".city select").each(function(){
       area.push(this.value);
     });
+    var url="/manage/agency";
+    if(method.toLowerCase()=="get"){
+      url="/api/agency"
+    }
     $.ajax({
         type: method,
-        url: "/api/agency",
+        url: url,
         data:{id:fd.get('id'),
 	        name:fd.get('name'),
 	        ename:fd.get('ename'),

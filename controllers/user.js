@@ -3,6 +3,15 @@ const crypto = require('crypto'),
      Setting=require("../model/Setting"),
      Util=require("../util/Util");
 
+var manage_user_id=async (ctx, next) => {
+        var id=ctx.request.params.id;
+        var result;
+        if(id){
+            result = await User.findById(id);
+        }
+        console.log("user",result);
+        ctx.render('./manage/user/add.html', {bean:result});
+    }
 
 module.exports = {
     //个人中心
@@ -104,14 +113,7 @@ module.exports = {
         }
         ctx.render('./manage/user/add.html', {bean:result});
     },
-    'GET /manage/user/:id': async (ctx, next) => {
-        var id=ctx.request.params.id;
-        var result;
-        if(id){
-            result = await User.findById(id);
-        }
-        ctx.render('./manage/user/add.html', {bean:result});
-    },
+    'GET /manage/user/:id':manage_user_id ,
     'GET /manage/users': async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await User.findAndCountAll({

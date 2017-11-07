@@ -5,9 +5,7 @@ var Design=require("../model/Design"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
 
-module.exports = {
-    //前台列表
-    'GET /designs': async (ctx, next) => {
+var designs=async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await Design.findAndCountAll({
             where: {
@@ -49,8 +47,7 @@ module.exports = {
             page:PageUtil.getPage(page, result.count)
         });
     },
-    //前台详情
-    'GET /design/:id': async (ctx, next) => {
+    design_id=async (ctx, next) => {
         var id=ctx.params.id;
         var page=ctx.request.query.page||1;
         var design = await Design.findById(id);
@@ -92,20 +89,19 @@ module.exports = {
             page:PageUtil.getPage(page, workses.count)
         });
     },
-    'GET /design': async (ctx, next) => {
+    design=async (ctx, next) => {
         var user=ctx.session.user;
-        console.log(user);
+      
         if(!user){
             ctx.response.redirect('/login/login');
             return ;
         }
         var design = await Design.findById(user.id);
         if(design&&design.work_experience)
-        design.work_experience=design.work_experience.split(",");
+            design.work_experience=design.work_experience.split(",");
         ctx.render('./company/add_design.html',{bean:design});
     },
-    
-    'POST /api/design': async (ctx, next) => {
+    api_design=async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
@@ -139,7 +135,7 @@ module.exports = {
         dbUser.save();
         ctx.body = {"code":"success","id":design.id};
     },
-    'PUT /api/design': async (ctx, next) => {
+    api_design_update=async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
             ctx.body = {"code":"not_login"};
@@ -172,7 +168,7 @@ module.exports = {
         dbUser.save();
         ctx.body = {"code":"success","id":design.id};
     },
-    'PUT /api/designdetail': async (ctx, next) => {
+    api_designdetail=async (ctx, next) => {
          var user=ctx.session.user;
          var id = ctx.request.body.id||'',
             types = ctx.request.body.types,
@@ -215,5 +211,75 @@ module.exports = {
         await design.save();
        
         ctx.body = {"code":"success","id":design.id};
+    },
+    api_design_delete=async (ctx, next) => {
+         var id=ctx.params.id;
+        await Design.destroy({
+          where: {
+            id:id
+          }
+        });
+        ctx.body = {"code":"success"};
+    },
+    manage_designs=async (ctx, next) => {
+        var page=ctx.request.query.page||1;
+        var result = await Design.findAndCountAll({
+            where: {
+                
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        for (var i = 0,len=result.count; i < len; i++) {
+            var bean=result.rows[i];
+            if(bean.brand){
+                bean.brand=bean.brand.split(",");
+            }
+            if(bean.area){
+                bean.area=bean.area.split("_");
+            }else{
+                bean.area=[];
+            }
+            // console.log("bean.area",bean.area);
+            var areas = await City.findAll({
+                where:{
+                    id:{
+                    "$in":bean.area
+                    }
+                }
+                
+            });
+            bean.areas=areas;
+            var user = await User.findById(bean.user_id);
+            bean.head=user&&user.head_url;
+        }
+        ctx.render('./manage/design/list.html',{
+            result:result,
+            page:PageUtil.getPage(page, result.count)
+        });
+    },
+    manage_design=async (ctx, next) => {
+        var id=ctx.request.query.id;
+        var bean = await Design.findById(id);
+      
+        if(bean&&bean.work_experience)
+            bean.work_experience=bean.work_experience.split(",");
+        ctx.render('./manage/design/add.html',{bean:bean});
+
     }
+module.exports = {
+    //前台列表
+    'GET /designs': designs,
+    //前台详情
+    'GET /design/:id': design_id,
+    //前台编辑页面
+    'GET /design': design,
+    //后台列表
+    'GET /manage/designs': manage_designs,
+    //后台添加编辑design
+    'GET /manage/design': manage_design,
+    'POST /api/design': api_design,
+    'PUT /api/design': api_design_update,
+    'DELETE /api/design/:id': api_design_delete,
+    'PUT /api/designdetail': api_designdetail
 };

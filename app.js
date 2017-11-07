@@ -112,7 +112,7 @@ app.use(async (ctx, next) => {
 // static file support:
 // app.use(staticFiles('/static/', __dirname + '/static'));
 // app.use(koastatic('./static', {maxAge: 60 * 60* 24 * 7}));
-//app.use(koastatic('./static', {maxAge: 0}));
+
 app.use(koastatic('./static', {maxAge: 0,buffer:false,dynamic:true}));
 // parse request body:
 app.use(bodyParser());
@@ -126,7 +126,7 @@ app.use(templating('views', {
     autoescape:false,
     filters: {
         formatdate: function(str, format, meridiem) {
-            console.log(str,format);
+            
            if (str !== undefined&&str) {
              if (!meridiem) {
                return moment(+str).format(format);

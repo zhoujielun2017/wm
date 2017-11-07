@@ -87,5 +87,7 @@
 	"login": "login",
 	"index": "index",
 	"contact": "contact",
-	"index articles": "index articles"
+	"index articles": "index articles",
+	"contact phone": "contact phone",
+	"location": "location"
 }

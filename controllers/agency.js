@@ -1,5 +1,7 @@
 var Agency=require("../model/Agency"),
     User=require("../model/User"),
+    crypto = require('crypto'),
+    Setting=require("../model/Setting"),
     City=require("../model/City"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
@@ -88,9 +90,8 @@ var agencys=async (ctx, next) => {
             result:result,
             page:PageUtil.getPage(page, result.count)
         });
-    };
-
-    var manage_agency=async (ctx, next) => {
+    },
+    manage_agency=async (ctx, next) => {
         var id=ctx.request.query.id;
         var bean = await Agency.findById(id);
         if(bean&&bean.brand){
@@ -98,8 +99,8 @@ var agencys=async (ctx, next) => {
         }
         ctx.render('./manage/agency/add.html',{bean:bean});
 
-    }
-    var agency=async (ctx, next) => {
+    },
+    agency=async (ctx, next) => {
         var user=ctx.session.user;
         console.log(user);
         if(!user){
@@ -112,9 +113,67 @@ var agencys=async (ctx, next) => {
         }
         
         ctx.render('./company/add_agency.html',{bean:agency});
-    };
+    },
+    //后台添加接口
+    manage_agency_add=async (ctx, next) => {
 
-    var api_agency=async (ctx, next) => {
+        
+        var name = ctx.request.body.name||'',
+            ename = ctx.request.body.ename||'',
+            address = ctx.request.body.address||'',
+            legal_person = ctx.request.body.legal_person||'',
+            phone = ctx.request.body.phone||'',
+            custom_service = ctx.request.body.custom_service||'',
+            email = ctx.request.body.email||'',
+            offical_website = ctx.request.body.offical_website||'',
+            position = ctx.request.body.position||'',
+            count_shop = ctx.request.body.count_shop||'',
+            purchase_per_year = ctx.request.body.purchase_per_year||'',
+            firsthand = ctx.request.body.firsthand||'',
+            payment_days = ctx.request.body.payment_days||'',
+            create_time = ctx.request.body.create_time||'',
+            brands = ctx.request.body.brands||'',
+            area = ctx.request.body.area||'',
+            content = ctx.request.body.content||'';
+
+        var setting=await Setting.findById("auto_create_user");
+        setting.value++
+        await setting.save();
+        var password=crypto.createHash('md5').update("123456").digest('hex');
+        var user = await User.create({
+            role:0,
+            email: "auto"+setting.value+"@acclist.com",
+            name:name,
+            type:"agency",
+            password:password,
+            verified:0,
+            head_url: "",
+            last_login_time:0
+        });
+        
+        var agency = await Agency.create({
+            
+            user_id:user.id,
+            name: name,
+            ename:ename,
+            address:address,
+            phone:phone,
+            custom_service:custom_service,
+            email:email,
+            position:position,
+            count_shop:count_shop,
+            payment_days:payment_days,
+            purchase_per_year:purchase_per_year,
+            firsthand:firsthand,
+            offical_website:offical_website,
+            brand:brands,
+            area:area,
+            create_time:create_time
+        });
+      
+        ctx.body = {"code":"success","id":agency.id};
+    },
+     api_agency=async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
@@ -139,7 +198,7 @@ var agencys=async (ctx, next) => {
             ctx.body = {"code":"not_login"};
             return;
         }
-        console.log("test user:",user.id);
+        
         var agency = await Agency.create({
             
             user_id:user.id,
@@ -163,9 +222,8 @@ var agencys=async (ctx, next) => {
         dbUser.name=name;
         dbUser.save();
         ctx.body = {"code":"success","id":agency.id};
-    };
-
-    var api_agency_update=async (ctx, next) => {
+    },
+     api_agency_update=async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
             ctx.body = {"code":"not_login"};
@@ -215,9 +273,7 @@ var agencys=async (ctx, next) => {
         dbUser.name=name;
         dbUser.save();
         ctx.body = {"code":"success","id":agency.id};
-    };
-
-    var api_agency_delete=async (ctx, next) => {
+    }, api_agency_delete=async (ctx, next) => {
          var id=ctx.params.id;
 
         await Agency.destroy({
@@ -239,6 +295,8 @@ module.exports = {
     'GET /manage/agencys': manage_agencys,
     //后台添加编辑agency
     'GET /manage/agency': manage_agency,
+    //后台添加接口
+    'POST /manage/agency': manage_agency_add,
     //添加接口
     'POST /api/agency': api_agency,
     //更新接口
