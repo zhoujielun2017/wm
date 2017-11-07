@@ -59,7 +59,7 @@ module.exports = {
         await user.save();
         ctx.body={code:"success"};
     },
-     //更新用户密码
+     //更新用户角色
     'PUT /user/:id/role': async (ctx, next) => {
         var id=ctx.params.id;
         var role = ctx.request.body.role;
@@ -69,6 +69,14 @@ module.exports = {
         await user.save();
         ctx.body={code:"success"};
     },
+     'PUT /user/:id/verified': async (ctx, next) => {
+         var id=ctx.params.id;
+         var verified = ctx.request.body.verified;
+         var user = await User.findById(id);
+         user.verified=1;
+         await user.save();
+         ctx.body={code:"success"};
+     },
      //更新用户邮箱
     'PUT /user/:id/email': async (ctx, next) => {
         var id=ctx.params.id;
