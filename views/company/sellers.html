@@ -34,15 +34,15 @@
                     {{d.name}}
                     {% endfor %}
                     </p>
-                    <p> 合作品牌:
+                    <p> {{__('cooperation brand')}}:
                     {% for d in e.brand %}
                     {{d}}
                     {% endfor %}
                     </p>
                 </div>
                 <div class="col-xs-6">
-                    <p>店面数量:{{e.count_shop}}</p>
-                    <p>年销售额:{{e.sale_per_year}}万元</p>
+                    <p>{{__('count of shop')}}:{{e.count_shop}}</p>
+                    <p>{{__('sale per year')}}:{{e.sale_per_year}}{{__('unit money')}}</p>
                 </div>
             </div>
         </div>

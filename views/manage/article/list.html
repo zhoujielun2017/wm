@@ -13,7 +13,10 @@
     <tbody>
     {% for e in result.rows %}
     <tr>
-        <td>{{e.title}}</td>
+        <td>
+            <a href="/article/{{e.id}}" target="_blank">{{e.title}}</a>
+            
+        </td>
         <td>
         <a href="/manage/article?id={{e.id}}" class="btn btn-primary" role="button">update</a>
         <a href="/api/article/{{e.id}}" class="btn btn-danger" role="button">del</a>

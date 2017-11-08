@@ -38,8 +38,8 @@
             <li><a href="#" class="lang" lang="zh-CN">中文</a><a href="#" class="lang change" lang="en">/ EN</a></li>
         </ul>
       <ul class="nav navbar-nav navbar-right ">
-         <li><a href="/" class="lang">网站首页</a></li>
-        <li><a href="" class="lang">{{__('hot line')}}</a></li>
+         <li><a href="/" >{{__('index')}}</a></li>
+        <li><a href="#" >{{__('hot line')}}</a></li>
         <li><a href="#">{{sessionuser.email}}</a></li>
         {% if  sessionuser  %}
         <li><a href="#" class="loginout">{{__('sign out')}}</a></li>
@@ -49,7 +49,7 @@
         {% endif %}
 
         {% if  sessionuser.role==9 or sessionuser.role==8  %}
-        <li><a href="/manage/users" class="lang" lang="zh-CN">后台管理</a></li>
+        <li><a href="/manage/users" >后台管理</a></li>
         {% endif %}
       </ul>
     </div><!--/.nav-collapse -->

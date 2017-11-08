@@ -1,5 +1,5 @@
 {
-	"website": "website",
+	"website": "acclist.com",
 	"email": "email",
 	"password": "password",
 	"sign in": "sign in",
@@ -58,7 +58,7 @@
 	"all": "all",
 	"edit": "edit",
 	"delete": "delete",
-	"hot line": "hot line",
+	"hot line": "hot line 400-2343-54545",
 	"works info": "works info",
 	"name": "name",
 	"age": "age",
@@ -90,9 +90,13 @@
 	"index articles": "index articles",
 	"contact phone": "contact phone",
 	"location": "location",
-	"major_xiaolv": "major_xiaolv",
-	"major_zhiliang": "major_zhiliang",
-	"major_kuanshi": "major_kuanshi",
-	"major_zhizi": "major_zhizi",
-	"major_caoliu": "major_caoliu"
+	"major_xiaolv": "efficiently",
+	"major_zhiliang": "good quality",
+	"major_kuanshi": "attractive design",
+	"major_zhizi": "Profound qualification",
+	"major_caoliu": "the current of times",
+	"keyword": "keyword",
+	"search": "search",
+	"more": "more",
+	"unit money": "ten thousand"
 }

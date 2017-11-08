@@ -3,6 +3,7 @@ var Design=require("../model/Design"),
     User=require("../model/User"),
     City=require("../model/City"),
     Cooperation=require("../model/Cooperation"),
+    UserService=require("../service/UserService"),
     PageUtil=require("../util/PageUtil");
 
 var designs=async (ctx, next) => {
@@ -100,6 +101,39 @@ var designs=async (ctx, next) => {
         if(design&&design.work_experience)
             design.work_experience=design.work_experience.split(",");
         ctx.render('./company/add_design.html',{bean:design});
+    },
+    //后台添加接口
+    manage_design_add=async (ctx, next) => {
+
+        var name = ctx.request.body.name||'',
+            gender = ctx.request.body.gender||'',
+            age = ctx.request.body.age||'',
+            status = ctx.request.body.status||'',
+            major = ctx.request.body.major||'',
+            exps = ctx.request.body.exps,
+            area = ctx.request.body.area||'',
+            content = ctx.request.body.content||'';
+
+            var user = await UserService.createUser(name,"design");
+            
+
+        //console.log("test user:",user.id);
+        var design = await Design.create({
+            
+            user_id:user.id,
+            name: name,
+            gender:gender,
+            age:age,
+            status:status,
+            major:major,
+            work_experience:exps,
+            area:area,
+            content:content
+        });
+        var dbUser = await User.findById(user.id);
+        dbUser.name=name;
+        dbUser.save();
+        ctx.body = {"code":"success","id":design.id};
     },
     api_design=async (ctx, next) => {
 
@@ -278,6 +312,8 @@ module.exports = {
     'GET /manage/designs': manage_designs,
     //后台添加编辑design
     'GET /manage/design': manage_design,
+    'POST /manage/design': manage_design_add,
+    
     'POST /api/design': api_design,
     'PUT /api/design': api_design_update,
     'DELETE /api/design/:id': api_design_delete,

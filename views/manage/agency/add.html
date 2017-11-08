@@ -205,7 +205,7 @@ $("form").on('submit',function(e){
       area.push(this.value);
     });
     var url="/manage/agency";
-    if(method.toLowerCase()=="get"){
+    if(method.toLowerCase()=="put"){
       url="/api/agency"
     }
     $.ajax({

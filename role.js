@@ -1,7 +1,8 @@
 
 //不开放的栏目
 var desing_notallow_urls=["/sellers","/agencys","/factorys","/search/seller","/search/agency","/search/factory"];
-var factory_notallow_urls=["/sellers","/agencys","/search/seller","/search/agency"];
+//供应商不能看供应商
+var factory_notallow_urls=["/factorys","/search/factory"];
 
 function contains(arr, obj) {  
     var i = arr.length;  

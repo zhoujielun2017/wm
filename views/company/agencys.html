@@ -33,7 +33,7 @@
                     {{d.name}}
                     {% endfor %}
                     </p>
-                    <p> 合作品牌:
+                    <p> {{__('cooperation brand')}}:
           {% for d in e.brand %}
           {{d}}
           {% endfor %}</p>
@@ -41,7 +41,7 @@
                 <div class="col-xs-6">
                     
                 <p>
-                年采购额:{{e.purchase_per_year}}万元
+                {{__('purchase per year')}}:{{e.purchase_per_year}} {{__('unit money')}}
                 </p>
                 </div>
             </div>

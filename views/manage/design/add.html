@@ -203,9 +203,13 @@ $("form").on('submit',function(e){
     $(".city select").each(function(){
       area.push(this.value);
     });
+    var url="/manage/design";
+    if(method.toLowerCase()=="put"){
+      url="/api/design"
+    }
     $.ajax({
         type: method,
-        url: "/api/design",
+        url: url,
         data:{id:fd.get('id'),
           name:fd.get('name'),
           gender:fd.get('gender'),

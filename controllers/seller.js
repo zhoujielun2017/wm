@@ -1,6 +1,7 @@
 var Seller=require("../model/Seller"),
     User=require("../model/User"),
     City=require("../model/City"),
+    UserService=require("../service/UserService"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
 
@@ -118,6 +119,54 @@ var sellers=async (ctx, next) => {
             seller.brand=seller.brand.split(",");
         }
         ctx.render('./company/add_seller.html',{bean:seller});
+    },
+    manage_seller_add=async (ctx, next) => {
+
+        
+        var name = ctx.request.body.name||'',
+            ename = ctx.request.body.ename||'',
+            address = ctx.request.body.address||'',
+            legal_person = ctx.request.body.legal_person||'',
+            phone = ctx.request.body.phone||'',
+            contact_phone = ctx.request.body.contact_phone||'',
+            
+            custom_service = ctx.request.body.custom_service||'',
+            email = ctx.request.body.email||'',
+            offical_website = ctx.request.body.offical_website||'',
+            position = ctx.request.body.position||'',
+            count_shop = ctx.request.body.count_shop||'',
+            sale_per_year = ctx.request.body.sale_per_year||'',
+            firsthand = ctx.request.body.firsthand||'',
+            payment_days = ctx.request.body.payment_days||'',
+            create_time = ctx.request.body.create_time||Date.now(),
+            brands = ctx.request.body.brands||'',
+            area = ctx.request.body.area||'',
+            content = ctx.request.body.content||'';
+
+        var user= await UserService.createUser(name,"seller");
+        
+        var seller = await Seller.create({
+
+            user_id:user.id,
+            name: name,
+            ename:ename,
+            address:address,
+            phone:phone,
+            contact_phone:contact_phone,
+            custom_service:custom_service,
+            email:email,
+            position:position,
+            count_shop:count_shop,
+            payment_days:payment_days,
+            sale_per_year:sale_per_year,
+            firsthand:firsthand,
+            brand:brands,
+            offical_website:offical_website,
+            area:area,
+            create_time:create_time
+        });
+       
+        ctx.body = {"code":"success","id":seller.id};
     },
     api_seller=async (ctx, next) => {
 
@@ -289,7 +338,8 @@ module.exports = {
     'GET /manage/sellers': manage_sellers,
     //后台添加零售商
     'GET /manage/seller':manage_seller,
-    //个人中心
+    'POST /manage/seller':manage_seller_add,
+    //个人中心 seller修改页
     'GET /seller': seller,
     
     'POST /api/seller':api_seller,

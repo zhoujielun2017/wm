@@ -3,6 +3,7 @@ var Agency=require("../model/Agency"),
     crypto = require('crypto'),
     Setting=require("../model/Setting"),
     City=require("../model/City"),
+    UserService=require("../service/UserService"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
 
@@ -136,20 +137,7 @@ var agencys=async (ctx, next) => {
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
-        var setting=await Setting.findById("auto_create_user");
-        setting.value++
-        await setting.save();
-        var password=crypto.createHash('md5').update("123456").digest('hex');
-        var user = await User.create({
-            role:0,
-            email: "auto"+setting.value+"@acclist.com",
-            name:name,
-            type:"agency",
-            password:password,
-            verified:0,
-            head_url: "",
-            last_login_time:0
-        });
+        var user = await UserService.createUser(name,"agency");
         
         var agency = await Agency.create({
             

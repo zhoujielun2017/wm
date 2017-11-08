@@ -2,6 +2,7 @@ var Factory=require("../model/Factory"),
     User=require("../model/User"),
     Product=require("../model/Product"),
     City=require("../model/City"),
+    UserService=require("../service/UserService"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
 
@@ -100,9 +101,8 @@ var factory_id=async (ctx, next) => {
             pros:pros,
             page:PageUtil.getPage(page, pros.count)
         });
-    };
-
-    var manage_factorys=async (ctx, next) => {
+    },
+     manage_factorys=async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await Factory.findAndCountAll({
             where: {
@@ -149,13 +149,13 @@ var factory_id=async (ctx, next) => {
             result:result,
             page:PageUtil.getPage(page, result.count)
         });
-    };
-    var manage_factory=async (ctx, next) => {
+    },
+     manage_factory=async (ctx, next) => {
         var id=ctx.request.query.id;
         var factory = await Factory.findById(id);
         ctx.render('./manage/factory/add.html',{bean:factory});
-    };
-    var factory=async (ctx, next) => {
+    },
+     factory=async (ctx, next) => {
         var user=ctx.session.user;
         if(!user){
             ctx.response.redirect('/login/login');
@@ -164,8 +164,39 @@ var factory_id=async (ctx, next) => {
         var factory = await Factory.findById(user.id);
         
         ctx.render('./company/add_factory.html',{bean:factory});
+    },
+    manage_factory_add=async (ctx, next) => {
+
+        
+        var name = ctx.request.body.name||'',
+            ename = ctx.request.body.ename||'',
+            address = ctx.request.body.address||'',
+            legal_person = ctx.request.body.legal_person||'',
+            phone = ctx.request.body.phone||'',
+            custom_service = ctx.request.body.custom_service||'',
+            email = ctx.request.body.email||'',
+            area = ctx.request.body.area||'',
+            content = ctx.request.body.content||'';
+        
+        var user = await UserService.createUser(name,"factory");
+        
+        var factory = await Factory.create({
+            
+            user_id:user.id,
+            name: name,
+            ename:ename,
+            address:address,
+            legal_person:legal_person,
+            phone:phone,
+            custom_service:custom_service,
+            email:email,
+            area:area,
+            content: content
+        });
+      
+        ctx.body = {"code":"success","id":factory.id};
     };
-    var api_factory=async (ctx, next) => {
+    api_factory=async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
@@ -297,8 +328,10 @@ module.exports = {
     'GET /factory/:id': factory_id,
     //前台列表
     'GET /manage/factorys':manage_factorys ,
-     //后台添加factory
+     //后台添加factory页面
     'GET /manage/factory':manage_factory,
+     //后台添加factory接口
+    'POST /manage/factory':manage_factory_add,
     //前台编辑页
     'GET /factory':factory ,
     

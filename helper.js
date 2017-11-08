@@ -187,26 +187,7 @@ module.exports = {
         }
     },
 
-    // getPageNumber: function (request) {
-    //     var index = string2Integer(request.query.page || '1');
-    //     if (index === null || index < 1) {
-    //         index = 1;
-    //     }
-    //     return index;
-    // },
-
-    // getPage: function (request, pageSize) {
-    //     var
-    //         index = string2Integer(request.query.page || '1'),
-    //         size = pageSize || string2Integer(request.query.size || '10');
-    //     if (index === null || index < 1) {
-    //         index = 1;
-    //     }
-    //     if (size === null || size < 10 || size > 100) {
-    //         size = 10;
-    //     }
-    //     return new Page(index, size);
-    // },
+    
 
     isString: function (val) {
         return typeof(val) === 'string';
