@@ -11,7 +11,17 @@ var manage_user_id=async (ctx, next) => {
         }
         console.log("user",result);
         ctx.render('./manage/user/add.html', {bean:result});
-    }
+    },
+    api_user_id_delete=async (ctx, next) => {
+        var id=ctx.request.params.id;
+        var result;
+         await User.destroy({
+          where: {
+            id:id
+          }
+        });
+        ctx.response.body = {code:"success"};
+    };
 
 module.exports = {
     //个人中心
@@ -147,5 +157,6 @@ module.exports = {
             ctx.body=true;    
         }
         
-    }
+    },
+    'DELETE /api/user/:id': api_user_id_delete
 };
