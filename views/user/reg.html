@@ -130,16 +130,18 @@ $("form").on("submit",function(){
   if(!$(this).valid()){
     return false;
   }
-  var fd=new FormData(this);
+  // var fd=new FormData(this);
+  var data=$(this).serialize()
    $.ajax({
         type: "POST",
         url: "/login/reg",
-         data:{
-          email:fd.get("email"),
-          password:fd.get("password"),
-          password2:fd.get("password2"),
-          type:fd.get("type")
-        },
+        data:data,
+        //  data:{
+        //   email:fd.get("email"),
+        //   password:fd.get("password"),
+        //   password2:fd.get("password2"),
+        //   type:fd.get("type")
+        // },
         dataType:"json",
         success:function(json){
             if(json.code=='success'){
