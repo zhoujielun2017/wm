@@ -123,17 +123,20 @@ var validator=$("form").validate({
 
 $("form").on("submit",function(){
 
-   var fd=new FormData(this);
+   // var fd=new FormData(this);
+   
    if(!$(this).valid()){
     return false;
    }
+   var data=$(this).serialize();
    $.ajax({
         type: "POST",
         url: "/login/login",
-         data:{
-          email:fd.get("email"),
-          password:fd.get("password")
-        },
+        data:data,
+        //  data:{
+        //   email:fd.get("email"),
+        //   password:fd.get("password")
+        // },
         dataType:"json",
         success:function(json){
             console.log(json);
