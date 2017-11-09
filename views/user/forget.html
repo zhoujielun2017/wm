@@ -30,14 +30,12 @@
 
 $("form").on("submit",function(){
 
-	var fd=new FormData(this);
-	
+	// var fd=new FormData(this);
+	 var data=$("form").serialize();
 	 $.ajax({
         type: "POST",
         url: "/login/forget",
-         data:{
-        	email:fd.get("email")
-        },
+         data:data,
         dataType:"json",
         success:function(json){
             if(json.code="success"){
