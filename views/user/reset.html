@@ -40,17 +40,12 @@
 
 $("form").on("submit",function(){
 
-	var fd=new FormData(this);
 	
+  var data=$(this).serialize();
 	 $.ajax({
         type: "POST",
         url: "/login/reset",
-         data:{
-          id:fd.get("id"),
-        	token:fd.get("token"),
-        	password:fd.get("password"),
-          password2:fd.get("password2"),
-        },
+         data:data,
         dataType:"json",
         success:function(json){
             if(json.code=="success"){

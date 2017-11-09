@@ -46,7 +46,7 @@
         </div>
     </div>
   </div>
-   
+   <input type="hidden" name="imgs">
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">{{__('save')}}</button>
@@ -121,23 +121,22 @@ $(".imgs").on("click",".glyphicon-trash",function(){
 
 $("form").on('submit',function(e){
 
-    var fd=new FormData(this);
-    var method=fd.get('id')?"PUT":"POST";
-    console.log(fd.get('id'));
+    var $this=$(this);
+    var id=$this.find("input[name=id]").val();
+    var method=id?"PUT":"POST";
+  
     var imgs=[];
     $("input[name=img]").each(function(){
       imgs.push(this.value);
     })
+
+     $this.find("input[name=imgs]").val(imgs.join(","));
+    var data=$this.serialize();
+
     $.ajax({
         type: method,
         url: "/api/product",
-        data:{id:fd.get('id'),
-	        title:fd.get('title'),
-	        price:fd.get('price'),
-	        material:fd.get('material'),
-	        content:fd.get('content'),
-          imgs:imgs.join(",")
-    	},
+        data:data,
         dataType:"json",
         success:function(json){
             if(json.code=='success'){

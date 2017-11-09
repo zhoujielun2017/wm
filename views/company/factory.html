@@ -105,26 +105,6 @@
 
 {% block foot %}
 <script type="text/javascript">
-  $(".msgform").on("submit",function(){
-     var fd = new FormData(this);
-     $.ajax({
-        type: "POST",
-        url: "/api/message",
-        data:{
-          receiver_id:fd.get("receiver_id"),
-          content:fd.get("content")
-        },
-        dataType:"json",
-        success:function(json){
-            if(json.code=='success'){
-              alert(json.code);
-            }
-            if(json.code=='not_login'){
-              alert("请先登录");
-            }
-        }
-    });
-     return false;
-  });
+ 
 </script>
 {% endblock %}

@@ -46,11 +46,11 @@
 <script>
 $("form").on('submit',function(e){
 
-    var fd=new FormData(this);
+   
     $.ajax({
         type: "POST",
         url: "/api/ord",
-        data:{id:fd.get('paytype')},
+        data:{id:1},
         dataType:"json",
         success:function(json){
             if(json.code=='success'){

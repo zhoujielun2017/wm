@@ -49,5 +49,9 @@ module.exports = db.defineModel('seller', {
     area:{
          type: db.STRING(100),
         allowNull: true
+    },
+    build_time:{
+        type: db.BIGINT,
+        allowNull: true
     }
 });

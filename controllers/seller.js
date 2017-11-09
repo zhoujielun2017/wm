@@ -71,6 +71,7 @@ var sellers=async (ctx, next) => {
             where: {
                 
             },
+            order: [['create_time', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -114,7 +115,15 @@ var sellers=async (ctx, next) => {
             ctx.response.redirect('/login/login');
             return ;
         }
-        var seller = await Seller.findById(user.id);
+        var sellers = await Seller.findAll({
+            where:{
+                user_id:user.id
+            }
+        });
+        var seller;
+        if(sellers){
+            seller=sellers[0];
+        }
         if(seller&&seller.brand){
             seller.brand=seller.brand.split(",");
         }
@@ -129,7 +138,6 @@ var sellers=async (ctx, next) => {
             legal_person = ctx.request.body.legal_person||'',
             phone = ctx.request.body.phone||'',
             contact_phone = ctx.request.body.contact_phone||'',
-            
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
             offical_website = ctx.request.body.offical_website||'',
@@ -138,14 +146,14 @@ var sellers=async (ctx, next) => {
             sale_per_year = ctx.request.body.sale_per_year||'',
             firsthand = ctx.request.body.firsthand||'',
             payment_days = ctx.request.body.payment_days||'',
-            create_time = ctx.request.body.create_time||Date.now(),
+            build_time = ctx.request.body.build_time||Date.now(),
             brands = ctx.request.body.brands||'',
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
         var user= await UserService.createUser(name,"seller");
         
-        var seller = await Seller.create({
+        var obj={
 
             user_id:user.id,
             name: name,
@@ -163,12 +171,14 @@ var sellers=async (ctx, next) => {
             brand:brands,
             offical_website:offical_website,
             area:area,
-            create_time:create_time
-        });
+            build_time:build_time
+        };
+        // console.log("obj",obj);
+        var seller = await Seller.create(obj);
        
         ctx.body = {"code":"success","id":seller.id};
     },
-    api_seller=async (ctx, next) => {
+    api_seller_add=async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
@@ -186,7 +196,7 @@ var sellers=async (ctx, next) => {
             sale_per_year = ctx.request.body.sale_per_year||'',
             firsthand = ctx.request.body.firsthand||'',
             payment_days = ctx.request.body.payment_days||'',
-            create_time = ctx.request.body.create_time||Date.now(),
+            build_time = ctx.request.body.build_time||Date.now(),
             brands = ctx.request.body.brands||'',
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
@@ -214,7 +224,7 @@ var sellers=async (ctx, next) => {
             brand:brands,
             offical_website:offical_website,
             area:area,
-            create_time:create_time
+            build_time:build_time
         });
         var dbUser = await User.findById(user.id);
         dbUser.name=name;
@@ -342,7 +352,7 @@ module.exports = {
     //个人中心 seller修改页
     'GET /seller': seller,
     
-    'POST /api/seller':api_seller,
+    'POST /api/seller':api_seller_add,
     'PUT /api/seller':api_seller_update ,
     'DELETE /api/seller/:id':api_seller_delete ,
     'PUT /api/sellerdetail': api_sellerdetail

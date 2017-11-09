@@ -127,7 +127,9 @@
       </div>
     </div>
   </div>
-   
+   <input type="hidden" name="types">
+   <input type="hidden" name="names">
+   <input type="hidden" name="majors">
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
       <button type="submit" class="btn btn-default">{{__('confirm')}}</button>
@@ -160,8 +162,9 @@ $(".addF").click(function(){
 
 $("form").on('submit',function(e){
 
-    var fd=new FormData(this);
-    var method=fd.get('id')?"PUT":"POST";
+    var $this=$(this)
+    var id=$this.find("input[name=id]").val();
+    var method=id?"PUT":"POST";
     //类型
     var types=[];
     $("select[name=type]").each(function(){
@@ -182,25 +185,30 @@ $("form").on('submit',function(e){
         var code=$(this).data("code");
         majors.push(code);
     })
+    $this.find("input[name=types]").val(types.join(","));
+    $this.find("input[name=names]").val(names.join(","));
+    $this.find("input[name=majors]").val(majors.join(","));
+    var data=$this.serialize();
     $.ajax({
         type: method,
         url: "/api/factorydetail",
-        data:{
-          id:fd.get('id'),
-          types:types.join(","),
-          names:names.join(","),
-	        acreage:fd.get('acreage'),
-	        type_per_month:fd.get('type_per_month'),
-	        count_person:fd.get('count_person'),
-	        count_qc:fd.get('count_qc'),
-	        able_per_month:fd.get('able_per_month'),
-	        majors:majors.join(",")
-    	},
+         data:data,
+      //   data:{
+      //     id:fd.get('id'),
+      //     types:types.join(","),
+      //     names:names.join(","),
+	    //     acreage:fd.get('acreage'),
+	    //     type_per_month:fd.get('type_per_month'),
+	    //     count_person:fd.get('count_person'),
+	    //     count_qc:fd.get('count_qc'),
+	    //     able_per_month:fd.get('able_per_month'),
+	    //     majors:majors.join(",")
+    	// },
         dataType:"json",
         success:function(json){
             if(json.code=='success'){
             	$("input[name=id]").val(json.id);
-            	alert("保存成功");
+            	YY.dialog({content:json.code}).alert();
             }else{
             	// location.reload();
             }

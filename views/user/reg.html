@@ -130,7 +130,7 @@ $("form").on("submit",function(){
   if(!$(this).valid()){
     return false;
   }
-  // var fd=new FormData(this);
+
   var data=$(this).serialize();
    $.ajax({
         type: "POST",

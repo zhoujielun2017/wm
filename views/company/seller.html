@@ -38,7 +38,7 @@
       <p>{{__('company address')}}:{{bean.address}}</p>
     </div>
     <div class="col-xs-6">
-      <p>{{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
+      <p>{{__('build time')}}:{{bean.build_time|formatdate("YYYY-MM-DD")}}</p>
       <p>{{__('count of shop')}}:{{bean.count_shop}}</p>
       <p>{{__('cooperation brand')}}:{% for d in bean.brand %}{{d}} {% endfor %}
        </p>
@@ -55,26 +55,6 @@
 
 {% block foot %}
 <script type="text/javascript">
-  $(".msgform").on("submit",function(){
-     var fd = new FormData(this);
-     $.ajax({
-        type: "POST",
-        url: "/api/message",
-        data:{
-          receiver_id:fd.get("receiver_id"),
-          content:fd.get("content")
-        },
-        dataType:"json",
-        success:function(json){
-            if(json.code=='success'){
-              alert(json.code);
-            }
-            if(json.code=='not_login'){
-              alert("请先登录");
-            }
-        }
-    });
-     return false;
-  });
+  
 </script>
 {% endblock %}

@@ -81,6 +81,7 @@ var designs=async (ctx, next) => {
             where: {
                 
             },
+            order: [['create_time', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -97,7 +98,17 @@ var designs=async (ctx, next) => {
             ctx.response.redirect('/login/login');
             return ;
         }
-        var design = await Design.findById(user.id);
+        
+        var designs = await Design.findAll({
+            where:{
+                user_id:user.id
+            }
+        });
+        var design;
+        if(designs){
+            design=designs[0];
+        }
+
         if(design&&design.work_experience)
             design.work_experience=design.work_experience.split(",");
         ctx.render('./company/add_design.html',{bean:design});
@@ -261,6 +272,7 @@ var designs=async (ctx, next) => {
             where: {
                 
             },
+            order: [['create_time', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });

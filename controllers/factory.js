@@ -108,6 +108,7 @@ var factory_id=async (ctx, next) => {
             where: {
                 
             },
+            order: [['create_time', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -161,8 +162,15 @@ var factory_id=async (ctx, next) => {
             ctx.response.redirect('/login/login');
             return ;
         }
-        var factory = await Factory.findById(user.id);
-        
+        var factorys = await Factory.findAll({
+             where:{
+                user_id:user.id
+            }
+        });
+        var factory;
+        if(factorys){
+            factory=factorys[0];
+        }
         ctx.render('./company/add_factory.html',{bean:factory});
     },
     manage_factory_add=async (ctx, next) => {

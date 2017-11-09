@@ -29,14 +29,13 @@
 <script>
     
     $("form").on("submit",function(){
-        var fd = new FormData(this);
+         var $this=$(this);
+        var id=$this.find("input[name=id]").val();
+        var data=$this.serialize();
          $.ajax({
             type: "PUT",
-            url: "/api/setting/"+fd.get("id"),
-            data:{
-                name:fd.get("name"),
-                value:fd.get("value")
-            },
+            url: "/api/setting/"+id,
+            data:data,
             dataType:"json",
             success:function(json){
                 if(json.code="success"){

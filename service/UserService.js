@@ -18,6 +18,7 @@ async function createUser(name,type){
             type:type,
             password:password,
             verified:0,
+            status:1,
             head_url: "",
             last_login_time:0
         });

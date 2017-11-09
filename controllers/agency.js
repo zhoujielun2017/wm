@@ -61,6 +61,7 @@ var agencys=async (ctx, next) => {
             where: {
                 
             },
+            order: [['create_time', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -108,7 +109,15 @@ var agencys=async (ctx, next) => {
             ctx.response.redirect('/login/login');
             return ;
         }
-        var agency = await Agency.findById(user.id);
+        var agencys = await Agency.findAll({
+            where:{
+                user_id:user.id
+            }
+        });
+        var agency;
+        if(agencys){
+            agency=agencys[0];
+        }
         if(agency&&agency.brand){
             agency.brand=agency.brand.split(",");    
         }

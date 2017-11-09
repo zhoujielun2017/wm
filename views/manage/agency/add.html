@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block main %}
+<h3>添加中间商</h3>
 <form class="form-horizontal">
   <input type="hidden" name="id" value="{{bean.id}}"/>
   <div class="form-group">
@@ -55,7 +56,7 @@
    <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('build time')}}</label>
     <div class="col-sm-10">
-      <input type="date" name="create_time" value="{{bean.create_time|formatdate("YYYY-MM-DD")}}" class="form-control" placeholder="{{__('build time')}}">
+      <input type="date" name="build_time2" value="{{bean.build_time|formatdate("YYYY-MM-DD")}}" class="form-control" placeholder="{{__('build time')}}">
     </div>
   </div>
   {% for e in bean.brand %}
@@ -126,6 +127,9 @@
           </div>
         </div>
     </div>
+    <input type="hidden" name="build_time">
+    <input type="hidden" name="brands">
+    <input type="hidden" name="area">
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">{{__('confirm')}}</button>
@@ -192,10 +196,12 @@ $(".addC").click(function(){
 
 $("form").on('submit',function(e){
 
-    var fd=new FormData(this);
-    var method=fd.get('id')?"PUT":"POST";
+    var $this=$(this);
+    var id=$this.find("input[name=id]").val();
+    var method=id?"PUT":"POST";
    
-    var create_time=Date.parse(fd.get('create_time'));
+   var build_time2=$this.find("input[name=build_time2]").val();
+    var build_time=Date.parse(build_time2);
     var brands=[];
     $("input[name=brand]").each(function(){
       brands.push($(this).val());
@@ -204,6 +210,11 @@ $("form").on('submit',function(e){
     $(".city select").each(function(){
       area.push(this.value);
     });
+    $this.find("input[name=area]").val("_"+area.join("_")+"_");
+    $this.find("input[name=brands]").val(brands.join(","));
+    $this.find("input[name=build_time]").val(build_time);
+    var data=$this.serialize();
+
     var url="/manage/agency";
     if(method.toLowerCase()=="put"){
       url="/api/agency"
@@ -211,27 +222,16 @@ $("form").on('submit',function(e){
     $.ajax({
         type: method,
         url: url,
-        data:{id:fd.get('id'),
-	        name:fd.get('name'),
-	        ename:fd.get('ename'),
-	        address:fd.get('address'),
-	        email:fd.get('email'),
-	        custom_service:fd.get('custom_service'),
-	        legal_person:fd.get('legal_person'),
-          offical_website:fd.get('offical_website'),
-          position:fd.get('position'),
-          count_shop:fd.get('count_shop'),
-          purchase_per_year:fd.get('purchase_per_year'),
-          payment_days:fd.get('payment_days'),
-	        create_time:create_time,
-          brands:brands.join(","),
-          area:"_"+area.join("_")+"_"
-    	},
+        data:data,
         dataType:"json",
         success:function(json){
             if(json.code=='success'){
             	$("input[name=id]").val(json.id);
-            	alert("保存成功");
+               YY.dialog({content:json.code,callback:function(){
+                location.href="/manage/agencys";
+              }}).alert();  
+            	// YY.dialog({content:json.code}).alert();
+              // location.href="/manage/agencys";
             }else{
             	// location.reload();
             }

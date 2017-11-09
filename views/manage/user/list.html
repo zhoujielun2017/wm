@@ -9,6 +9,7 @@
         <th>角色</th>
         <th>类型</th>
          <th>审核状态</th>
+          <th>激活状态</th>
         <th>operation</th>
     </tr>
     </thead>
@@ -38,6 +39,13 @@
         <td>
         {% if e.verified==1 %}
             待审核
+        {% endif %}
+        </td>
+        <td>
+        {% if e.status==1 %}
+            激活
+        {% else %}
+            未激活
         {% endif %}
         </td>
         <td>

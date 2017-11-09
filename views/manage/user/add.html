@@ -17,6 +17,27 @@
             <p class="form-control-static">{{bean.create_time|formatdate("YYYY-MM-DD HH:mm:ss")}}</p>
         </div>
     </div>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label">type</label>
+        <div class="col-sm-10">
+            <p class="form-control-static">
+                {{bean.type}}
+               
+                </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label">status</label>
+        <div class="col-sm-10">
+            <p class="form-control-static">
+                 {% if bean.status==1 %}
+              已激活
+              {% else %}
+              未激活
+            {% endif %}
+                </p>
+        </div>
+    </div>
      <div class="form-group">
         <label  class="col-sm-2 control-label">角色</label>
         <div class="col-sm-10">
@@ -45,9 +66,16 @@
      {% endif %}
      
      {% if bean.role==0  %}
-     <div>
+       <div class="form-group"> 
         <div class="col-sm-offset-2 col-sm-10">
               <button type="submit" class="btn btn-primary verify9">审核为管理员</button>
+        </div> 
+    </div>
+    {% endif %}
+     {% if bean.status==0  %}
+       <div class="form-group"> 
+        <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-primary status1">激活</button>
         </div> 
     </div>
     {% endif %}
@@ -88,6 +116,26 @@
                 dataType:"json",
                 success:function(json){
                     if(json.code="success"){
+                       location.reload();
+                    }
+                }
+            });
+        }}).alert();
+    })
+
+    $(".status1").on("click",function(){
+        
+        YY.dialog({content:"你确定激活该会员吗?",callback:function(){
+            $.ajax({
+                type: "PUT",
+                url: "/user/"+id+"/status",
+                data:{
+                    status:1
+                },
+                dataType:"json",
+                success:function(json){
+                    if(json.code="success"){
+                       
                        location.reload();
                     }
                 }
