@@ -40,6 +40,10 @@ module.exports = {
             var obj = list[i];
             setting[obj.id]=obj.value;
         }
+        if(!user.type){
+            user.type="seller";    
+        }
+        
         var price=setting['price_'+user.type];
            
 
