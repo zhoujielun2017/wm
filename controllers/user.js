@@ -4,7 +4,7 @@ const crypto = require('crypto'),
      Util=require("../util/Util");
 
 var manage_user_id=async (ctx, next) => {
-        var id=ctx.request.params.id;
+        var id=ctx.params.id;
         var result;
         if(id){
             result = await User.findById(id);
@@ -13,7 +13,7 @@ var manage_user_id=async (ctx, next) => {
         ctx.render('./manage/user/add.html', {bean:result});
     },
     api_user_id_delete=async (ctx, next) => {
-        var id=ctx.request.params.id;
+        var id=ctx.params.id;
         var result;
          await User.destroy({
           where: {
@@ -156,6 +156,7 @@ module.exports = {
         }else{
             ctx.body=true;    
         }
+
         
     },
     'DELETE /api/user/:id': api_user_id_delete
