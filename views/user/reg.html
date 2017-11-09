@@ -131,7 +131,7 @@ $("form").on("submit",function(){
     return false;
   }
   // var fd=new FormData(this);
-  var data=$(this).serialize()
+  var data=$(this).serialize();
    $.ajax({
         type: "POST",
         url: "/login/reg",

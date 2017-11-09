@@ -147,6 +147,13 @@ $("form").on("submit",function(){
                 "password": "邮箱或者密码错误"
               });
             }
+            if(json.code=="not_active"){
+
+              validator.showErrors({
+                "password": "账号为未激活"
+              });
+            }
+            
         }
     });
   return false;

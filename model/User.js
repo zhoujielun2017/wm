@@ -7,6 +7,7 @@ module.exports = db.defineModel('user', {
     type: db.STRING(20),
     email: db.STRING(100),
     password:db.STRING(100),
+    status: db.BIGINT,
     verified: db.BIGINT,
     last_login_time:{
         type: db.BIGINT,

@@ -39,6 +39,10 @@ module.exports = {
             ctx.body ={code:"not_found"};
             return;
         }
+        if(!user.status){
+            ctx.body ={code:"not_active"};
+            return;
+        }
         user.last_login_time=Date.now();
         user.save();
         ctx.session.user = user;
@@ -78,6 +82,7 @@ module.exports = {
             role:0,
             email: email,
             name:email,
+            status:0,
             type:type,
             password:password,
             verified:0,
