@@ -122,6 +122,7 @@ module.exports = {
             ctx.render('./user/reg_email_fail.html',{msg:"邀请链接已经过期"});
             return;
         }
+        user.status=1;
         user.update_time = Date.now();
         await user.save();    
         ctx.session.user = user;
