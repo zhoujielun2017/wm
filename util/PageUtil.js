@@ -3,6 +3,9 @@ var PageUtil={
 };
 
 function getPageNums(cur_page, total_page,url) {
+    if(total_page<=1){
+        return "";
+    }
     var result = "";
     cur_page=Number(cur_page);
     var max=cur_page + 6;
