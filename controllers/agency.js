@@ -242,7 +242,7 @@ var agencys=async (ctx, next) => {
             purchase_per_year = ctx.request.body.purchase_per_year||'',
             firsthand = ctx.request.body.firsthand||'',
             payment_days = ctx.request.body.payment_days||'',
-            build_time = ctx.request.body.build_time||'',
+            build_time = ctx.request.body.build_time||Date.now(),
             brands = ctx.request.body.brands||'',
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';

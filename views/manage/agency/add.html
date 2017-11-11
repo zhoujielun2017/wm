@@ -197,6 +197,9 @@ $(".addC").click(function(){
 $("form").on('submit',function(e){
 
     var $this=$(this);
+     if(!$this.valid()){
+       return false;
+     }
     var id=$this.find("input[name=id]").val();
     var method=id?"PUT":"POST";
    

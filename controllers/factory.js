@@ -215,7 +215,7 @@ var factory_id=async (ctx, next) => {
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
-             build_time = ctx.request.body.build_time,
+             build_time = ctx.request.body.build_time||Date.now(),
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
         if(!user){
@@ -248,7 +248,7 @@ var factory_id=async (ctx, next) => {
             ctx.body = {"code":"not_login"};
             return;
         }
-         var id = ctx.request.body.id||'',
+        var id = ctx.request.body.id||'',
             name = ctx.request.body.name||'',
             ename = ctx.request.body.ename||'',
             address = ctx.request.body.address||'',
@@ -257,12 +257,10 @@ var factory_id=async (ctx, next) => {
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
             area = ctx.request.body.area||'',
-            build_time = ctx.request.body.build_time||'',
-            
+            build_time = ctx.request.body.build_time||Date.now(),
             content = ctx.request.body.content||'';
-
        
-         var factory = await Factory.findById(id);
+        var factory = await Factory.findById(id);
         factory.name=name;
         factory.ename=ename;
         factory.address=address;

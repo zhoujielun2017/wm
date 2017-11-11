@@ -1,5 +1,7 @@
 
 //不开放的栏目
+var visitor_notallow_urls=["/designs","/search"];
+//设计是不能看的栏目
 var desing_notallow_urls=["/sellers","/agencys","/factorys","/search/seller","/search/agency","/search/factory"];
 //供应商不能看供应商
 var factory_notallow_urls=["/factorys","/search/factory"];
@@ -26,6 +28,9 @@ function roleController() {
         var notAllow=false;
         //游客
         if(!user){
+            if(contains(visitor_notallow_urls,url)){
+                notAllow=true;
+            }
             if(contains(desing_notallow_urls,url)){
                 notAllow=true;
             }

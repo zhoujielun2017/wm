@@ -133,22 +133,27 @@ if($.cookie("locale")=="zh-CH"){
 
 $("form").validate({
   rules: {
-    title: {
+    name: {
       required: true,
       maxlength: 100
     },
-    price: {
+    ename: {
+      required: true
+    },
+    build_time2: {
       required: true
     }
   },
   messages: messages,
   errorElement: "em"
-
 });
 
 $("form").on('submit',function(e){
 
      var $this=$(this);
+     if(!$this.valid()){
+       return false;
+     }
     var id=$this.find("input[name=id]").val();
     var method=id?"PUT":"POST";
     
