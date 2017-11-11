@@ -14,6 +14,7 @@
     <table class="table table-hover">
         <thead>
         <tr>
+            <td>关联账号</td>
             <th>Name</th>
             <th>operation</th>
         </tr>
@@ -21,6 +22,7 @@
         <tbody>
         {% for e in result.rows %}
         <tr>
+             <td>{{e.email}}</td>
             <td>{{e.name}}</td>
             <td>
             <a href="/manage/agency?id={{e.id}}" class="btn btn-primary" role="button">update</a>

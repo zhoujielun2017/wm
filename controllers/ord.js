@@ -1,7 +1,7 @@
 var Ord=require("../model/Ord");
 var db=require("../db");
 var OrdPay=require("../model/OrdPay");
-var Util=require("../util/Util");
+var PageUtil=require("../util/PageUtil");
 
 module.exports = {
     'GET /ord': async (ctx, next) => {
@@ -16,32 +16,28 @@ module.exports = {
             where: {
                 user_id: user.id
             },
-            'limit': Util.pageSize,
-            'offset': Util.pageSize*(page-1)
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
         });
-        result.page=page;
-        result.pageCount=Math.ceil(result.count/Util.pageSize);
-      
+
 
         ctx.render('./ord/list.html', {
             result:result,
-            page:Util.getPageNums(page,result.pageCount,"/ord")}
+            page:PageUtil.getPage(page,result.count)}
         );
     },
     'GET /manage/ords': async (ctx, next) => {
         var user=ctx.session.user;
         var page=ctx.request.query.page||1;
         var result = await Ord.findAndCountAll({
-            'limit': Util.pageSize,
-            'offset': Util.pageSize*(page-1)
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
         });
-        result.page=page;
-        result.pageCount=Math.ceil(result.count/Util.pageSize);
        
 
         ctx.render('./manage/ord/list.html', {
             result:result,
-            page:Util.getPageNums(page,result.pageCount,"/ord")}
+            page:PageUtil.getPage(page,result.count)}
         );
     },
     'GET /manage/ord/:id': async (ctx, next) => {

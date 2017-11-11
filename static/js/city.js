@@ -9,7 +9,7 @@
 			//_234_235_237_
 			areas=el.dataset.area.split("_");
 		}
-		//area1国家
+		//默认中国 北京 东城区
 		var defaults = {
 	        nation: 0,
 	        province:1,

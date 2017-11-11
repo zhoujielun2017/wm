@@ -16,7 +16,7 @@
   height: inherit;
   width: inherit;
   }
-  input[name=file]{
+  input[type=file]{
     display: none;
   }
 .change a{display: inline-block;padding: 15px 3px;}
@@ -37,7 +37,7 @@
       <img src="{{img_domain}}{{user.head_url }}" alt="" class="img-rounded">
       {% endif %}
     </label>
-    <input type="file" name="file" id="uploadfile">
+    <input type="file" name="upload" id="uploadfile">
 </div>
 
 
@@ -74,19 +74,26 @@
 {% endblock %}
 
 {% block foot %}
- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
- <script src="/js/upyun.js"></script>
- <script src="/js/upload.js"></script>
+ <script src="/js/ajaxfileupload.js"></script>
 <script>
 	// client side only need bucket name
+    var id=$("input[name=id]").val();
     $("#uploadfile").on("change",function(){
-        $.fileupload(this,function(data){
-            var path=data.path;
-            console.log("返回结果",path);
-            var domain=$("input[name=imgdomain]").val();
-            var id=$("input[name=id]").val();
-            
-             $.ajax({
+
+      $.ajaxFileUpload({
+        url: '/file',
+        secureuri: false,
+        fileElementId:"uploadfile",
+        data: {                    
+            'name': 'carlcarl',
+        },
+        dataType:"json",
+        success:function(json, status ){
+          console.log("success",json, status )
+         
+          var path=json.path;
+          var url=json.url;
+           $.ajax({
                 type: "PUT",
                 url: "/user/"+id,
                  data:{
@@ -95,11 +102,14 @@
                 dataType:"json",
                 success:function(json){
                     if(json.code="success"){
-                       $(".head img")[0].src=domain+path;
+                        $(".head img")[0].src=url+'!300x300';
                     }
                 }
             });
-        });
+        }
+      });
+
+        
     })
 </script>  
 {% endblock %}

@@ -1,7 +1,7 @@
 const crypto = require('crypto'),
      User=require("../model/User"),
      Setting=require("../model/Setting"),
-     Util=require("../util/Util");
+     PageUtil=require("../util/PageUtil");
 
 var manage_user_id=async (ctx, next) => {
         var id=ctx.params.id;
@@ -104,16 +104,14 @@ var manage_user_id=async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await User.findAndCountAll({
              order: [['create_time', 'DESC']],
-            'limit': Util.pageSize,
-            'offset': Util.pageSize*(page-1)
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
         });
-        result.page=page;
-        result.pageCount=Math.ceil(result.count/Util.pageSize);
-        // console.log(result);
+       
 
         ctx.render('./manage/user/list.html', {
             result:result,
-            page:Util.getPageNums(page,result.pageCount,"/manage/user")}
+            page:PageUtil.getPage(page,result.count)}
         );
     },
     api_user_email=async (ctx, next) => {

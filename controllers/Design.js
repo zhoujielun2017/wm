@@ -278,6 +278,8 @@ var designs=async (ctx, next) => {
         });
         for (var i = 0,len=result.count; i < len; i++) {
             var bean=result.rows[i];
+             var user = await User.findById(bean.user_id);
+            bean.email=user.email;
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }

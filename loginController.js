@@ -1,5 +1,5 @@
 
-var loginUrl=["/user/center","/manage/user"];
+var loginUrl=["/user/center","/manage/user","/manage/users"];
 function contains(arr, obj) {  
     var i = arr.length;  
     while (i--) {  

@@ -1,5 +1,5 @@
 var Works=require("../model/Works");
-var Util=require("../util/Util");
+var PageUtil=require("../util/PageUtil");
 module.exports = {
     //产品列表页
     'GET /works': async (ctx, next) => {
@@ -14,17 +14,14 @@ module.exports = {
             where: {
                 user_id: user.id
             },
-            'limit': Util.pageSize,
-            'offset': Util.pageSize*(page-1),
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1),
             order: [['create_time', 'DESC']]
         });
-        result.page=page;
-        result.pageCount=Math.ceil(result.count/Util.pageSize);
-       
-
+      
         ctx.render('./works/list.html', {
             result:result,
-            page:Util.getPageNums(page,result.pageCount,"/works")}
+            page:PageUtil.getPage(page,result.count)}
         );
 
     },

@@ -53,11 +53,6 @@ function roleController() {
         }
         
 
-        // var start = new Date().getTime(),
-        //     execTime;
-        // await next();
-        // execTime = new Date().getTime() - start;
-        // ctx.response.set('X-Response-Time', `${execTime}ms`);
     };
 }
 

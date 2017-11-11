@@ -67,6 +67,8 @@ var agencys=async (ctx, next) => {
         });
         for (var i = 0,len=result.count; i < len; i++) {
             var bean=result.rows[i];
+             var user = await User.findById(bean.user_id);
+            bean.email=user.email;
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }
@@ -240,13 +242,12 @@ var agencys=async (ctx, next) => {
             purchase_per_year = ctx.request.body.purchase_per_year||'',
             firsthand = ctx.request.body.firsthand||'',
             payment_days = ctx.request.body.payment_days||'',
-            create_time = ctx.request.body.create_time||'',
+            build_time = ctx.request.body.build_time||'',
             brands = ctx.request.body.brands||'',
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
-       
-         var agency = await Agency.findById(id);
+        var agency = await Agency.findById(id);
         agency.name=name;
         agency.ename=ename;
         agency.address=address;
@@ -263,7 +264,7 @@ var agencys=async (ctx, next) => {
         agency.content=content;
         agency.brand=brands;
         agency.area=area;
-        agency.create_time=create_time;
+        agency.build_time=build_time;
 
         await agency.save();
          var dbUser = await User.findById(user.id);

@@ -74,9 +74,7 @@
 {% endblock %}
 
 {% block foot %}
- <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
- <script src="/js/upyun.js"></script>
- <script src="/js/upload.js"></script>
+<script src="/js/ajaxfileupload.js"></script>
 
 <script>
     var valid_en={  
@@ -120,19 +118,25 @@ if(imgCount>=10){
   $(".fileselect").hide();
 }
 $("#file").on("change",function(){
-    console.log("change")
-     $.fileupload(this,function(json){
-
-         $(".imgs").append('<div><img src="'+json.url+'!300x300" class="img-thumbnail"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
+   
+    $.ajaxFileUpload({
+      url: '/file',
+      secureuri: false,
+      fileElementId:"file",
+      data: {                    
+          'name': 'carlcarl',
+      },
+      dataType:"json",
+      success:function(json, status ){
+         $(".imgs").append('<div><img src="'+json.url+'" class="img-thumbnail"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
             '<input type="hidden" name="img" value="'+json.path+'"></div>')
-            
+            // console.log(json);
             imgCount++;
             if(imgCount>=10){
               $(".fileselect").hide();
           }
-       
+      }
     });
-
   })
 $(".imgs").on("click",".glyphicon-trash",function(){
   $(this).parent("div").remove();
@@ -158,7 +162,8 @@ $("form").on('submit',function(e){
         success:function(json){
             if(json.code=='success'){
               $("input[name=id]").val(json.id);
-              alert(json.code);
+              
+              YY.dialog({content:json.code}).alert();
               // location.href="/works";
             }else{
               // location.reload();

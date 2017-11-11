@@ -114,7 +114,8 @@ var factory_id=async (ctx, next) => {
         });
         for (var i = 0; i < result.count; i++) {
             var bean=result.rows[i];
-
+            var user = await User.findById(bean.user_id);
+            bean.email=user.email;
             if(bean.major){
                 bean.major=bean.major.split(",");
                 //console.log("bean.major",bean.major);
@@ -126,7 +127,7 @@ var factory_id=async (ctx, next) => {
                 order: [['create_time', 'DESC']]
             });
             bean.cops=cops;
-
+            
             if(bean.area){
                 bean.area=bean.area.split("_");
             }else{
@@ -214,13 +215,14 @@ var factory_id=async (ctx, next) => {
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+             build_time = ctx.request.body.build_time,
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
         if(!user){
             ctx.body = {"code":"not_login"};
             return;
         }
-        //console.log("test user:",user.id);
+        
         var factory = await Factory.create({
             
             user_id:user.id,
@@ -231,6 +233,7 @@ var factory_id=async (ctx, next) => {
             phone:phone,
             custom_service:custom_service,
             email:email,
+            build_time:build_time,
             area:area,
             content: content
         });
@@ -254,6 +257,8 @@ var factory_id=async (ctx, next) => {
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
             area = ctx.request.body.area||'',
+            build_time = ctx.request.body.build_time||'',
+            
             content = ctx.request.body.content||'';
 
        
@@ -267,6 +272,7 @@ var factory_id=async (ctx, next) => {
         factory.email=email;
         factory.area=area;
         factory.content=content;
+        factory.build_time=build_time;
         await factory.save();
          var dbUser = await User.findById(user.id);
         dbUser.name=name;

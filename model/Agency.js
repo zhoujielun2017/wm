@@ -35,5 +35,9 @@ module.exports = db.defineModel('agency', {
     area:{
          type: db.STRING(100),
         allowNull: true
+    },
+     build_time:{
+        type: db.BIGINT,
+        allowNull: true
     }
 });

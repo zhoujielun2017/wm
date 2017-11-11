@@ -14,9 +14,9 @@ var sellers=async (ctx, next) => {
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
-        // console.log("for out",result.count);
+
         for (var i = 0,len=result.count; i < len; i++) {
-            // console.log("for");
+
             var bean=result.rows[i];
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
@@ -79,6 +79,8 @@ var sellers=async (ctx, next) => {
         for (var i = 0,len=result.count; i < len; i++) {
             // console.log("for");
             var bean=result.rows[i];
+             var user = await User.findById(bean.user_id);
+            bean.email=user.email;
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }
@@ -106,7 +108,17 @@ var sellers=async (ctx, next) => {
         });
     },
     manage_seller=async (ctx, next) => {
-        ctx.render('./manage/seller/add.html');
+        var id=ctx.request.query.id;
+
+        if(id){
+            var seller = await Seller.findById(id);
+            if(seller&&seller.brand){
+                seller.brand=seller.brand.split(",");
+            }
+        }
+       
+
+        ctx.render('./manage/seller/add.html',{bean:seller});
     },
     seller=async (ctx, next) => {
         var user=ctx.session.user;
@@ -253,7 +265,7 @@ var sellers=async (ctx, next) => {
             sale_per_year = ctx.request.body.sale_per_year||'',
             firsthand = ctx.request.body.firsthand||'',
             payment_days = ctx.request.body.payment_days||'',
-            create_time = ctx.request.body.create_time||Date.now(),
+            build_time = ctx.request.body.build_time||Date.now(),
             brands = ctx.request.body.brands||'',
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
@@ -277,7 +289,7 @@ var sellers=async (ctx, next) => {
         seller.content=content;
         seller.brand=brands;
         seller.area=area;
-        seller.create_time=create_time;
+        seller.build_time=build_time;
 
         await seller.save();
          var dbUser = await User.findById(user.id);
@@ -346,7 +358,7 @@ module.exports = {
     'GET /seller/:id': seller_id,
     //后台列表
     'GET /manage/sellers': manage_sellers,
-    //后台添加零售商
+    //后台添加和编辑零售商
     'GET /manage/seller':manage_seller,
     'POST /manage/seller':manage_seller_add,
     //个人中心 seller修改页

@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block main %}
-<h1>{{__('product info')}}</h1> <a href="/product/add">{{__('add')}}</a>
+<h1>{{__('product info')}}</h1> <a href="/product/add" class="btn btn-primary">{{__('add')}}</a>
 
   {% for e in result.rows %}
   <div class="row list">
@@ -44,7 +44,7 @@
    {% endfor %}
 <nav aria-label="Page navigation">
   <ul class="pagination">
-  {{page}}
+  {{page.html}}
   </ul>
 </nav>
 {% endblock %}

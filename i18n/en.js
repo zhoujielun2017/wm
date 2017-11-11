@@ -98,5 +98,6 @@
 	"keyword": "keyword",
 	"search": "search",
 	"more": "more",
-	"unit money": "ten thousand"
+	"unit money": "ten thousand",
+	"save": "save"
 }

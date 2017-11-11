@@ -1,20 +1,18 @@
 var Article=require("../model/Article");
-var Util=require("../util/Util");
+var PageUtil=require("../util/PageUtil");
 
 var articles=async (ctx, next) =>{
         var page=ctx.request.query.page||1;
         var result = await Article.findAndCountAll({
-            'limit': Util.pageSize,
-            'offset': Util.pageSize*(page-1),
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1),
             order: 'create_time DESC'
         });
-        result.page=page;
-        result.pageCount=Math.ceil(result.count/Util.pageSize);
-        //console.log(result);
+       
 
         ctx.render('./article/list.html', {
             result:result,
-            page:Util.getPageNums(page,result.pageCount)}
+            page:PageUtil.getPage(page,result.count)}
         );
         
     },
@@ -34,17 +32,15 @@ var articles=async (ctx, next) =>{
     manage_articles=async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var result = await Article.findAndCountAll({
-            'limit': Util.pageSize,
-            'offset': Util.pageSize*(page-1),
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1),
             order: 'create_time DESC'
         });
-        result.page=page;
-        result.pageCount=Math.ceil(result.count/Util.pageSize);
-        //console.log(result);
+      
 
         ctx.render('./manage/article/list.html', {
             result:result,
-            page:Util.getPageNums(page,result.pageCount,"/manage/article")}
+            page:PageUtil.getPage(page,result.count)}
         );
     },
     manage_article_id=async (ctx, next) => {

@@ -1,7 +1,7 @@
 var Message=require("../model/Message"),
     MessageGroup=require("../model/MessageGroup"),
     User=require("../model/User"),
-    Util=require("../util/Util");
+    PageUtil=require("../util/PageUtil");
 module.exports = {
     //列表页
     'GET /messageGroups': async (ctx, next) => {
@@ -17,8 +17,8 @@ module.exports = {
                 user_id: user.id
             },
              order: [['create_time', 'DESC']],
-            'limit': Util.pageSize,
-            'offset': Util.pageSize*(page-1)
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
         });
  
         var update = await MessageGroup.update({count:0},{
@@ -36,13 +36,10 @@ module.exports = {
             bean.name=user.name;
             //console.log("bean.another_head",bean.another_head)
         }
-        result.page=page;
-        result.pageCount=Math.ceil(result.count/Util.pageSize);
-       
 
         ctx.render('./message/list.html', {
             result:result,
-            page:Util.getPageNums(page,result.pageCount)}
+            page:PageUtil.getPage(page,result.count)}
         );
 
     },
