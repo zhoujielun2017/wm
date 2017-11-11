@@ -37,7 +37,10 @@ var sellers=async (ctx, next) => {
             });
             bean.areas=areas;
             var user = await User.findById(bean.user_id);
-            bean.head=user.head_url;
+            if(user){
+                bean.head=user.head_url;
+            }
+            
         }
         ctx.render('./company/sellers.html',{
             result:result,
