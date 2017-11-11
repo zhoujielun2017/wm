@@ -49,42 +49,6 @@ app.use(i18n(app, {
   ]
 }))
 
-// log request URL:
-// app.use(async (ctx, next) => {
-//     console.log(`Process ${ctx.request.method} ${ctx.request.url}...`);
-//     var
-//         start = new Date().getTime(),
-//         execTime;
-//     await next();
-//     execTime = new Date().getTime() - start;
-//     ctx.response.set('X-Response-Time', `${execTime}ms`);
-// });
-
-// var loginUrl=["manage","/user/center"];
-
-// var loginUrls=loginUrl.concat(roleUrl);
-
-// var loginStr=loginUrls.join(",")
-
-// //后台登陆
-// app.use(async (ctx, next) => {
-//     var url=ctx.request.url;
-
-//     if(~loginStr.indexOf(url+",")){
-//       var user=ctx.session.user;
-//       if(!user){
-//           console.log("未登录",url);
-//           ctx.response.redirect('/login/login');
-//           return ;
-        
-//       }
-     
-//     }
-//      await next();
-// });
-
-
-
 // static file support:
 // app.use(staticFiles('/static/', __dirname + '/static'));
 // app.use(koastatic('./static', {maxAge: 60 * 60* 24 * 7}));
@@ -92,8 +56,6 @@ app.use(i18n(app, {
 app.use(koastatic('./static', {maxAge: 0,buffer:false,dynamic:true}));
 // parse request body:
 app.use(bodyParser());
-
-// app.use(koaBody({ multipart: true }));
 
 // add nunjucks as view:
 app.use(templating('views', {
@@ -114,12 +76,12 @@ app.use(templating('views', {
        }
     }
 }));
+//登录控制
 app.use(loginController());
+//角色控制
 app.use(roleController());
 // add controller:
 app.use(controller());
-
-
 
 app.listen(8080);
 

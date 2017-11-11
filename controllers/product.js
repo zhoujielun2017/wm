@@ -13,11 +13,10 @@ var product=async (ctx, next) => {
             where: {
                 user_id: user.id
             },
+             order: [['create_time', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
-        
-       
 
         ctx.render('./product/list.html', {
             result:result,
@@ -120,7 +119,7 @@ module.exports = {
     //     ctx.render('./product/detail.html', {bean:bean});
 
     // },
-    //产品列表页
+    //前台产品列表页
     'GET /product': product,
     //产品添加页
     'GET /product/add': product_add,

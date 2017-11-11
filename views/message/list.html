@@ -27,11 +27,11 @@
       <p>{{e.content}}</p>
     </div>
     <div class="col-xs-3 col-sm-3">
-    	<a href="/messageGroup/{{e.id}}">查看</a><a href="/api/messageGroup/{{e.id}}" class="delete">删除</a>
+    	<a href="/messageGroup/{{e.id}}" class="btn btn-info">{{__('detail')}}</a><a href="/api/messageGroup/{{e.id}}"  class="btn btn-danger delete">{{__('delete')}}</a>
     </div>
   </div>
   {% else %}
-    <h4 class="text-center">暂时没有数据</h4>
+    <h4 class="text-center">{{__('data empty')}}</h4>
    {% endfor %}
   
 <nav aria-label="Page navigation">
@@ -61,6 +61,7 @@ $(".delete").on("click",function(){
         }
     });
    return false;
-})
+});
+
 </script>  
 {% endblock %}

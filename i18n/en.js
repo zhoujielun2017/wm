@@ -99,5 +99,8 @@
 	"search": "search",
 	"more": "more",
 	"unit money": "ten thousand",
-	"save": "save"
+	"save": "save",
+	"detail": "detail",
+	"admin manager": "admin manager",
+	"manager": "manager"
 }

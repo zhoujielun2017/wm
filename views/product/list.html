@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block main %}
-<h1>{{__('product info')}}</h1> <a href="/product/add" class="btn btn-primary">{{__('add')}}</a>
+<h1>{{__('product info')}}</h1> <a href="/product/add" class="btn btn-info">{{__('add')}}</a>
 
   {% for e in result.rows %}
   <div class="row list">
@@ -38,7 +38,7 @@
         <p>{{__('price')}}:{{e.price}}</p>
       </div>
       <div class="col-xs-2 col-md-2">
-        <a href="/product/add?id={{e.id}}">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}" class="del">{{__('delete')}}</a>
+        <a href="/product/add?id={{e.id}}" class="btn btn-info">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}"  class="btn btn-danger del">{{__('delete')}}</a>
       </div>
   </div>
    {% endfor %}

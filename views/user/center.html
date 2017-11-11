@@ -63,19 +63,24 @@
   <a href="/user/buy">{{__('to be vip')}}</a>
 {% endif %}
 {% if user.role==1 %}
-  高级会员
+  {{__('User vip')}}
 {% endif %}
 {% if user.role==9 %}
-  管理员
+  {{__('manager')}}
 {% endif %}
 </p>
- <p>{{__('all message')}}:(18)</p>
+
+ <p>{{__('all message')}}:(<span class="messageCount">0</span>)</p>
  <p>{{__('last login time')}}:{{user.last_login_time|formatdate("YYYY-MM-DD HH:mm:ss")}}</p>
 {% endblock %}
 
 {% block foot %}
  <script src="/js/ajaxfileupload.js"></script>
 <script>
+  //消息总数回掉
+  function messageCount(count){
+    $(".messageCount").text(count);
+  }
 	// client side only need bucket name
     var id=$("input[name=id]").val();
     $("#uploadfile").on("change",function(){
