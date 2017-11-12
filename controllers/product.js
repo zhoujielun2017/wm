@@ -1,7 +1,14 @@
 var Product=require("../model/Product");
 var PageUtil=require("../util/PageUtil");
 
-var product=async (ctx, next) => {
+var product_id=async (ctx, next) => {
+        var id = ctx.params.id;
+        var bean = await Product.findById(id);
+       
+        ctx.render('./product/detail.html', {bean:bean});
+
+    },
+    product=async (ctx, next) => {
         var user=ctx.session.user;
         var page=ctx.request.query.page||1;
         
@@ -112,13 +119,8 @@ var product=async (ctx, next) => {
     }
 module.exports = {
     //产品详情
-    // 'GET /product/:id': async (ctx, next) => {
-    //     var id = ctx.params.id;
-    //     var bean = await Product.findById(id);
-       
-    //     ctx.render('./product/detail.html', {bean:bean});
-
-    // },
+    'GET /product/:id': product_id,
+    
     //前台产品列表页
     'GET /product': product,
     //产品添加页
