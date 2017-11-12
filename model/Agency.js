@@ -36,6 +36,14 @@ module.exports = db.defineModel('agency', {
          type: db.STRING(100),
         allowNull: true
     },
+    twitter:{
+          type: db.STRING(100),
+        allowNull: true
+    },
+    facebook:{
+          type: db.STRING(100),
+        allowNull: true
+    },
      build_time:{
         type: db.BIGINT,
         allowNull: true

@@ -137,6 +137,8 @@ var agencys=async (ctx, next) => {
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+             twitter = ctx.request.body.twitter||'',
+              facebook = ctx.request.body.facebook||'',
             offical_website = ctx.request.body.offical_website||'',
             position = ctx.request.body.position||'',
             count_shop = ctx.request.body.count_shop||'',
@@ -159,6 +161,8 @@ var agencys=async (ctx, next) => {
             phone:phone,
             custom_service:custom_service,
             email:email,
+            twitter:twitter,
+            facebook:facebook,
             position:position,
             count_shop:count_shop,
             payment_days:payment_days,
@@ -182,6 +186,8 @@ var agencys=async (ctx, next) => {
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+             twitter = ctx.request.body.twitter||'',
+              facebook = ctx.request.body.facebook||'',
             offical_website = ctx.request.body.offical_website||'',
             position = ctx.request.body.position||'',
             count_shop = ctx.request.body.count_shop||'',
@@ -207,6 +213,8 @@ var agencys=async (ctx, next) => {
             phone:phone,
             custom_service:custom_service,
             email:email,
+            twitter:twitter,
+            facebook:facebook,
             position:position,
             count_shop:count_shop,
             payment_days:payment_days,
@@ -236,6 +244,8 @@ var agencys=async (ctx, next) => {
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+             twitter = ctx.request.body.twitter||'',
+              facebook = ctx.request.body.facebook||'',
             offical_website = ctx.request.body.offical_website||'',
             position = ctx.request.body.position||'',
             count_shop = ctx.request.body.count_shop||'',
@@ -255,6 +265,8 @@ var agencys=async (ctx, next) => {
         agency.phone=phone;
         agency.custom_service=custom_service;
         agency.email=email;
+         agency.twitter=twitter;
+          agency.facebook=facebook;
         agency.offical_website=offical_website;
         agency.position=position;
         agency.count_shop=count_shop;

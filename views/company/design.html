@@ -52,10 +52,11 @@
         <p>
             {{__('major')}}:{{bean.major}}
         </p>
-         <p>{{__('work experience')}}:
-               {% for d in bean.work_experience %}
-            {{d}}
-            {% endfor %}
+        
+        <p>
+            {% for d in bean.work_experience %}
+        {{__('work experience')}}: {{d}}
+        {% endfor %}
         </p>
      
         <p>{{__('design content')}}:{{e.content}}</p>   

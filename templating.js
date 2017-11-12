@@ -28,7 +28,7 @@ function templating(path, opts) {
         ctx.render = function (view, model) {
             var user=ctx.session.user;
             ctx.response.body = env.render(view, 
-                Object.assign({}, ctx.state , model ,{sessionuser:user},config));
+                Object.assign({}, ctx.state , model ,{sessionuser:user},config.web));
             ctx.response.type = 'text/html';
         };
         await next();

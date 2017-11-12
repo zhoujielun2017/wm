@@ -84,7 +84,7 @@
 
           <a href="#" class="list-group-item"><h3>{{__('message manage')}}</h3></a>
            <a href="/messageGroups" class="list-group-item"> <span class="badge unread"></span>{{__('all message')}}</a>
-          <a href="#" class="list-group-item"><h3>{{__('user message')}}</h3></a>
+          <a href="#" class="list-group-item"><h3>{{__('user management')}}</h3></a>
           <a href="/user/buy" class="list-group-item">{{__('to be vip')}}</a>
           <a href="/ord" class="list-group-item">{{__('buy record')}}</a>
       </div>
@@ -116,7 +116,7 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.validate.min.js"></script>
 <script src="/js/jquery.cookie.min.js"></script>
-<script src="/js/common.js"></script>
+<script src="/js/common.js?v={{js_version}}"></script>
 <script type="text/javascript">
   $(".lang").click(function(){
     var lang=$(this).attr("lang")||en;

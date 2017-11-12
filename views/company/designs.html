@@ -31,9 +31,9 @@
             {% endfor %}
             </p>
             
-            <p>{{__('work experience')}}:
- {% for d in e.work_experience %}
-            {{d}}
+            <p>
+            {% for d in e.work_experience %}
+                {{__('work experience')}}:{{d}}
             {% endfor %}
             </p>
             <p>{{__('design content')}}:{{e.content}}</p>      

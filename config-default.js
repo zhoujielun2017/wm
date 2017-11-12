@@ -5,10 +5,12 @@ var config = {
     password: 'xxx',
     host: 'localhost',
     port: 3306,
-    img_domain:"http://acclist-pic.b0.upaiyun.com",
+    
     web:{
     	domain:"www.acclist.com",
-        paydomain:"pay.acclist.com"
+        paydomain:"pay.acclist.com",
+         img_domain:"http://acclist-pic.b0.upaiyun.com",
+        js_version:1
     }
 };
 
