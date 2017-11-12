@@ -1,0 +1,48 @@
+{% extends '../toolbar_index.html' %}
+
+{% block head %}
+<style type="text/css">
+
+</style>
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+      
+  <ol class="breadcrumb">
+    <li><a href="/">Home</a></li>
+   
+    <li class="active">detail</li>
+  </ol>
+      <div class="blog-header">
+        <h1 class="blog-title">{{bean.title}}</h1>
+        
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+          {{__('price')}}:{{bean.price}}
+        {{__('material')}}:{{bean.material}}
+        {% for e in bean.imgs %}
+          <img src="{{img_domain}}{{e}}!300x300" class="img-thumbnail"/>
+          {% endfor %}
+          
+
+        </div><!-- /.blog-main -->
+
+       
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+
+
+{% endblock %}
+
+{% block foot %}
+<script>
+
+</script>  
+{% endblock %}
