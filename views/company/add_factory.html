@@ -177,7 +177,7 @@ $("form").on('submit',function(e){
       area.push(this.value);
     });
     var build_time2=$this.find("input[name=build_time2]").val();
-    var build_time=Date.parse(build_time2);
+    var build_time=Date.parse(build_time2)||'';
     $this.find("input[name=build_time]").val(build_time);
     $this.find("input[name=area]").val("_"+area.join("_")+"_");
     var data=$this.serialize();

@@ -276,6 +276,12 @@ var sellers=async (ctx, next) => {
 
        
         var seller = await Seller.findById(id);
+        if(!seller.user_id){
+            var user= await UserService.createUser(name,"seller");
+            seller.user_id=user.id;
+        }
+        
+
         seller.name=name;
         seller.ename=ename;
         seller.address=address;

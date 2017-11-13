@@ -198,6 +198,11 @@ var designs=async (ctx, next) => {
 
        
         var design = await Design.findById(id);
+         if(!design.user_id){
+            var user= await UserService.createUser(name,"design");
+            design.user_id=user.id;
+        }
+
         design.name=name;
         design.gender=gender;
         design.age=age;

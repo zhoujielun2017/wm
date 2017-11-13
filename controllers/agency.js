@@ -259,6 +259,11 @@ var agencys=async (ctx, next) => {
             content = ctx.request.body.content||'';
 
         var agency = await Agency.findById(id);
+        if(!agency.user_id){
+            var user= await UserService.createUser(name,"agency");
+            agency.user_id=user.id;
+        }
+
         agency.name=name;
         agency.ename=ename;
         agency.address=address;

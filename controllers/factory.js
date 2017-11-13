@@ -262,6 +262,10 @@ var factory_id=async (ctx, next) => {
             content = ctx.request.body.content||'';
        
         var factory = await Factory.findById(id);
+         if(!factory.user_id){
+            var user= await UserService.createUser(name,"factory");
+            factory.user_id=user.id;
+        }
         factory.name=name;
         factory.ename=ename;
         factory.address=address;

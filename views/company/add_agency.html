@@ -233,7 +233,7 @@ $("form").on('submit',function(e){
     var method=id?"PUT":"POST";
    
    var build_time2=$this.find("input[name=build_time2]").val();
-    var build_time=Date.parse(build_time2);
+    var build_time=Date.parse(build_time2)||'';
     var brands=[];
     $("input[name=brand]").each(function(){
       brands.push($(this).val());
