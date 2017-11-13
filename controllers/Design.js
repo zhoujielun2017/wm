@@ -280,6 +280,7 @@ var designs=async (ctx, next) => {
             var bean=result.rows[i];
              var user = await User.findById(bean.user_id);
             bean.email=user&&user.email;
+             bean.head=user&&user.head_url;
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }
@@ -298,8 +299,8 @@ var designs=async (ctx, next) => {
                 
             });
             bean.areas=areas;
-            var user = await User.findById(bean.user_id);
-            bean.head=user&&user.head_url;
+            
+           
         }
         ctx.render('./manage/design/list.html',{
             result:result,

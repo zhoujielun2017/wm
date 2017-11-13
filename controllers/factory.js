@@ -116,6 +116,7 @@ var factory_id=async (ctx, next) => {
             var bean=result.rows[i];
             var user = await User.findById(bean.user_id);
             bean.email=user&&user.email;
+             bean.head=user&&user.head_url;
             if(bean.major){
                 bean.major=bean.major.split(",");
                 //console.log("bean.major",bean.major);
@@ -143,8 +144,8 @@ var factory_id=async (ctx, next) => {
                 
             });
             bean.areas=areas;
-            var user = await User.findById(bean.user_id);
-            bean.head=user&&user.head_url;
+           
+           
         }
        
         ctx.render('./manage/factory/list.html',{
