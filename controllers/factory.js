@@ -205,7 +205,7 @@ var factory_id=async (ctx, next) => {
         });
       
         ctx.body = {"code":"success","id":factory.id};
-    };
+    },
     api_factory=async (ctx, next) => {
 
         var user=ctx.session.user;
@@ -281,9 +281,9 @@ var factory_id=async (ctx, next) => {
         dbUser.name=name;
         dbUser.save();
         ctx.body = {"code":"success","id":factory.id};
-    };
-
-    var api_factorydetail=async (ctx, next) => {
+    },
+    //供应商详情
+    api_factorydetail=async (ctx, next) => {
          var user=ctx.session.user;
          var id = ctx.request.body.id||'',
             types = ctx.request.body.types,
@@ -298,6 +298,7 @@ var factory_id=async (ctx, next) => {
         var typearr=types.split(",");
         var namearr=names.split(",");
 
+        //先删除合作信息
         await Cooperation.destroy({
           where: {
             user_id:user.id
@@ -317,7 +318,6 @@ var factory_id=async (ctx, next) => {
         
         var factory = await Factory.findById(id);
         factory.acreage=acreage;
-        
         factory.type_per_month=type_per_month;
         factory.count_person=count_person;
         factory.count_qc=count_qc;

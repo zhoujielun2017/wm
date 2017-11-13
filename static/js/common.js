@@ -21,7 +21,7 @@ var YY={};
             if(that.setting.callback){
                 that.setting.callback(that.alertdialog);
             }
-            that.alertdialog.modal('hide');
+           
         });
         
     }

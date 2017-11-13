@@ -118,13 +118,18 @@ $("#file").on("change",function(){
       dataType:"json",
       success:function(json, status ){
         // console.log("success",json, status )
-         $(".imgs").append('<div><img src="'+json.url+'!300x300" class="img-thumbnail"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
+        setTimeout(function(){
+
+           $(".imgs").append('<div><img src="'+json.url+'!300x300" class="img-thumbnail"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
             '<input type="hidden" name="img" value="'+json.path+'"></div>')
             // console.log(json);
             imgCount++;
             if(imgCount>=10){
               $(".fileselect").hide();
           }
+
+        },1000)
+        
       }
     });
 

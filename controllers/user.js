@@ -1,5 +1,9 @@
 const crypto = require('crypto'),
      User=require("../model/User"),
+     Factory=require("../model/Factory"),
+     Seller=require("../model/Seller"),
+     Agency=require("../model/Agency"),
+     Design=require("../model/Design"),
      Setting=require("../model/Setting"),
      PageUtil=require("../util/PageUtil");
 
@@ -151,7 +155,40 @@ var manage_user_id=async (ctx, next) => {
     },
     api_user_id_delete=async (ctx, next) => {
         var id=ctx.params.id;
-        var result;
+        var user = await User.findById(id);
+        var rel;
+        if(user.type=='factory'){
+            rel=await Factory.findAndCount({
+                where:{
+                    user_id:id
+                }
+            })
+        }
+        if(user.type=='design'){
+            rel=await Design.findAndCount({
+                where:{
+                    user_id:id
+                }
+            })
+        }
+        if(user.type=='seller'){
+            rel=await Seller.findAndCount({
+                where:{
+                    user_id:id
+                }
+            })
+        }
+        if(user.type=='agency'){
+            rel=await Agency.findAndCount({
+                where:{
+                    user_id:id
+                }
+            })
+        }
+        if(rel){
+            ctx.response.body = {code:"rel_exit"};
+            return ;
+        }
          await User.destroy({
           where: {
             id:id

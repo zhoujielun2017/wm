@@ -118,13 +118,14 @@ var product_id=async (ctx, next) => {
         ctx.body = {"code":"success"};
     }
 module.exports = {
+     //产品添加页,要在:id的前面
+    'GET /product/add': product_add,
     //产品详情
     'GET /product/:id': product_id,
     
     //前台产品列表页
     'GET /product': product,
-    //产品添加页
-    'GET /product/add': product_add,
+   
     
     'POST /api/product': api_product,
     'PUT /api/product': api_product_update,

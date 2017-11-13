@@ -18,7 +18,27 @@ module.exports = {
             ctx.response.redirect('/login/login');
             return ;
         }
-        var company = await Factory.findById(user.id);
+        var company = await Factory.findOne({
+            where:{
+                user_id:user.id
+            }
+        });
+        //如果不存在,创建一个空的
+        if(!company){
+             await Factory.create({
+                user_id:user.id,
+                name: "",
+                ename:"",
+                address:"",
+                legal_person:"",
+                phone:"",
+                custom_service:"",
+                email:"",
+                build_time:null,
+                area:"",
+                content: ""
+            });
+        }
         if(company&&company.major){
             company.major=company.major.split(",");
         }

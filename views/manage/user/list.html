@@ -76,8 +76,11 @@
                 url: href,
                 dataType:"json",
                 success:function(json){
-                    if(json.code="success"){
+                    if(json.code=="success"){
                         thiz.parents("tr").remove();
+                    }
+                    if(json.code=='rel_exit'){
+                        alert("有数据关联,请先把关联数据删除,比如设计师、供应商、中间商等");
                     }
                 }
             });
