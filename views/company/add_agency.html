@@ -74,7 +74,7 @@
    <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('build time')}}</label>
     <div class="col-sm-10">
-      <input type="date" name="build_time2" value="{{bean.build_time|formatdate("YYYY-MM-DD")}}" class="form-control" placeholder="{{__('build time')}}">
+      <input type="text" name="build_time2" value="{{bean.build_time|formatdate("YYYY-MM-DD")}}" class="form-control" placeholder="{{__('build time')}}">
     </div>
   </div>
   {% for e in bean.brand %}
@@ -160,6 +160,20 @@
 <script type="text/javascript" src="/js/city.js"></script>
 <script>
 var city=$(".city").city();  
+
+var locale=$.cookie('locale')||'en'; 
+   $('[name=build_time2]').datetimepicker({
+        language:  locale,
+        format: 'yyyy-mm-dd',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+
 var valid_en={  
     name: {
       required: "Please provide name",
