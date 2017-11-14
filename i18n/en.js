@@ -111,5 +111,6 @@
 	"save": "save",
 	"detail": "detail",
 	"admin manager": "admin manager",
-	"manager": "manager"
+	"manager": "manager",
+	"User vip":"vip user"
 }

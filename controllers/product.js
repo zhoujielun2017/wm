@@ -24,7 +24,10 @@ var product_id=async (ctx, next) => {
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
-
+       for (var i = 0,len=result.count; i < len; i++) {
+            var bean=result.rows[i];
+            bean.price=(bean.price/100).toFixed(2);
+       }
         ctx.render('./product/list.html', {
             result:result,
             page:PageUtil.getPage(page,result.count)}
@@ -42,6 +45,7 @@ var product_id=async (ctx, next) => {
         var product = {};
         if(id){
             product = await Product.findById(id);
+            product.price=(product.price/100).toFixed(2);
             product.imgs=product.imgs.split(",");
         }
         ctx.render('./product/add.html',{bean:product});
