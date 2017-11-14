@@ -84,7 +84,7 @@
                 {{__('company email')}}
             </label>
             <div class="col-sm-10">
-                <input class="form-control" name="email" placeholder="{{__('company email')}}" type="text" value="{{bean.email}}">
+                <input class="form-control" name="email" placeholder="{{__('company email')}}" type="text" value="{{bean.email}}" maxlength="50">
                 </input>
             </div>
         </div>
@@ -141,7 +141,7 @@
                 </input>
             </div>
             <div class="col-sm-5">
-                <p class="form-control-static">万元</p>
+                <p class="form-control-static">{{__('unit money')}}</p>
             </div>
         </div>
         <div class="form-group">
@@ -170,30 +170,10 @@
                
             </div>
         </div>
-         <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('location')}}
-            </label>
-            <div class="col-sm-10">
-              <div class="row city" data-area="{{bean.area}}">
-                <div class="col-xs-4 col-sm-4">
-                  <select name="area1" class="form-control" data-id="">
-                  </select>
-                </div>
-                <div class="col-xs-4 col-sm-4">
-                 <select name="area2" class="form-control">
-                </select>
-                 </div>
-                <div class="col-xs-4 col-sm-4">
-                 <select name="area3" class="form-control">
-                </select>
-                 </div>
-              </div>
-            </div>
-        </div>
+         
         <input type="hidden" name="build_time">
         <input type="hidden" name="brands">
-        <input type="hidden" name="area">
+       
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default" type="submit">
@@ -224,7 +204,7 @@
 		forceParse: 0
     });
 
-    var city=$(".city").city();  
+   
   
     var valid_en={  
     name: {
@@ -290,11 +270,8 @@ $("form").on('submit',function(e){
     $("input[name=brand]").each(function(){
       brands.push($(this).val());
     })
-    var area=[];
-    $(".city select").each(function(){
-      area.push(this.value);
-    })
-    $this.find("input[name=area]").val("_"+area.join("_")+"_");
+   
+
     $this.find("input[name=build_time]").val(build_time);
     $this.find("input[name=brands]").val(brands.join(","));
     var data=$this.serialize();

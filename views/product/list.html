@@ -35,7 +35,7 @@
           <a href="/product/{{e.id}}">{{e.title}}</a>
         </h4>
         <p>{{__('material')}}:{{e.material}}</p>
-        <p>{{__('price')}}:{{e.price}}</p>
+        <p>{{__('price')}}:{{e.price}} {{__('unit dollor')}}</p>
       </div>
       <div class="col-xs-2 col-md-2">
         <a href="/product/add?id={{e.id}}" class="btn btn-info">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}"  class="btn btn-danger del">{{__('delete')}}</a>

@@ -145,6 +145,7 @@
 	"user management": "会员管理",
 	"user endtime": "会员到期时间",
 	"unit money": "万美元",
+	"unit dollor": "美元",
 	"unit day": "天",
 	"web pages": "页面",
 	"website": "全球国际饰品网",
