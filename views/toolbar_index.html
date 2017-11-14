@@ -21,7 +21,7 @@
     <![endif]-->
   </head>
 <body>
-<div class="page-wrap">
+<div class="page-wrap yahei">
  <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container">
@@ -50,18 +50,18 @@
       </ul>
       <ul class="nav navbar-nav navbar-right navinfo">
        
-        <li><a href="/search" >{{__('search')}}</a></li>
+        <li class="search"><a href="/search" ><span></span><p>{{__('search')}}</p></a></li>
        
         {% if  sessionuser  %}
-         <li><a href="/user/center">{{sessionuser.email}}</a></li>
+        <li><a href="/user/center">{{sessionuser.email}}</a></li>
         <li><a href="#" class="loginout">{{__('sign out')}}</a></li>
         {% endif %}
         {% if  not sessionuser  %}
-        <li><a href="/login/login">{{__('sign in')}}</a></li>
-        <li><a href="/login/reg">{{__('register')}}</a></li>
+        <li class="login"><a href="/login/login"><span></span><p>{{__('sign in')}}</p></a></li>
+        <li class="registration"><a href="/login/reg"><span></span><p>{{__('register')}}</p></a></li>
         {% endif %}
         <li><a href="#" class="lang" lang="zh-CN">中文</a></li>
-          /
+         <li style="line-height: 82px;">/</li>
         <li><a href="#" class="lang" lang="en">EN</a></li>
       </ul>
     </div><!--/.nav-collapse -->

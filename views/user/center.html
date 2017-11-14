@@ -60,7 +60,7 @@
  </p>
  <p>{{__('role of user')}}:
 {% if user.role==0 %}
-  <a href="/user/buy">{{__('to be vip')}}</a>
+  <a href="/user/buy" class="red">{{__('to be vip')}}</a>
 {% endif %}
 {% if user.role==1 %}
   {{__('User vip')}}
