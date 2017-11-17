@@ -38,6 +38,7 @@ app.use(favicon(__dirname + '/favicon.ico'));
 app.use(i18n(app, {
   directory: './i18n',
   locales: [ 'en','zh-CN'], //  `zh-CN` defualtLocale, must match the locales to the filenames
+  defaultLocale: 'en',
   modes: [
     'query',                //  optional detect querystring - `/?locale=en-US`
     'subdomain',            //  optional detect subdomain   - `zh-CN.koajs.com`
