@@ -1,13 +1,20 @@
 {% extends '../empty.html' %}
 
 {% block head %}
-
+<link href="/css/signin.css" rel="stylesheet" type="text/css"/>
 {% endblock %}
 
 
 {% block main %}
 
-<h1 class="text-center">email send success</h1>
+<div class="container">
+    <div class="login-logo"><a href="/"></a></div>
+    <div class="log-row">
+        <div class="fg-mail"></div>
+        <p class="mailtext yahei">欢迎加入全球饰品网，请登录邮箱激活账号完成注册</p>
+        <span class="loginEmail"><a href="/login/fromemail?email={{bean.email}}&pass={{bean.password}}&time={{bean.update_time}}">立即激活</a></span>
+    </div>
+</div>
 <!-- <p class="text-center">
 	<a href="/login/fromemail?email={{bean.email}}&pass={{bean.password}}&time={{bean.update_time}}">注册是邮件接收的链接</a>
 </p>

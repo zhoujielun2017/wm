@@ -6,6 +6,7 @@ border:1px solid #ccc;
 color: #ccc;
 }
 .bk10{height: 10px;width: 100%;overflow: hidden;font-size: 0px;display: block;}
+.bk20{height: 20px;width: 100%;overflow: hidden;font-size: 0px;display: block;}
 .bk30{height: 30px;width: 100%;overflow: hidden;font-size: 0px;display: block;}
 /*浮动相关*/
 .clearfix:after{ clear:both; content:"."; display:block; font-size:0; height:0; visibility:hidden;}
@@ -90,3 +91,16 @@ html, body {
 .registration a span{display: block;background: url("../images/registration.png") no-repeat;width: 21px;height: 22px;margin: 5px auto 3px;}
 .search a p,.login a p,.registration a p{margin: 0px;line-height: 20px;}
 a.red{color: #ff0000;}
+.logotext{font-size: 18px;color: #000;margin-left: 10px;}
+.fg-mail{float: left;background: url("../images/fg-mail.png") no-repeat;width: 95px;height: 95px;margin-right: 25px;}
+.reg-ok{float: left;background: url("../images/reg-ok.png") no-repeat;width: 95px;height: 95px;margin-right: 25px;}
+.loginEmail a{display: inline-block;text-align: center;height: 50px;line-height: 50px;background: #ffc900;color: #222;font-size: 16px;width: 160px;}
+.mailtext{font-size: 20px;white-space: nowrap;margin: 5px 0 12px;color: #222222;}
+.log-row{margin: 100px auto;display: table;}
+.fa-dh{background: url("../images/phone_icon.png") no-repeat;width: 110px;height: 110px;display: block;margin: 50px auto 0px;}
+.about-text{margin: 0px 0px 0px 120px;}
+.about-text p{text-align: left;font-size: 16px;color: #222;}
+.btn-height{height: 40px;line-height: 40px;}
+.contentText p{line-height: 26px;font-size: 16px;margin: 10px 0px;}
+
+
