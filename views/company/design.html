@@ -39,7 +39,6 @@
             {{__('gender')}}:
             {% if bean.gender==0%}女{% endif %}
             {% if bean.gender==1%}男{% endif %}
-            
         </p>
         <p>
             {{__('status')}}:{{__(bean.status)}}
@@ -52,13 +51,11 @@
         <p>
             {{__('major')}}:{{bean.major}}
         </p>
-        
-        <p>
-            {% for d in bean.work_experience %}
-        {{__('work experience')}}: {{d}}
+
+        {% for d in bean.exps %}
+         <p>{{__('work experience')}}: {{d.experience}} </p>
         {% endfor %}
-        </p>
-     
+
         <p>{{__('design content')}}:{{e.content}}</p>   
     </div>
 
@@ -81,9 +78,6 @@
                     {{e.title}}
                 </a>
             </h4>
-            <p>
-                材质: 混合材质
-            </p>
         </div>
     </div>
         

@@ -160,10 +160,11 @@ $("form").on('submit',function(e){
         success:function(json){
             if(json.code=='success'){
             	$("input[name=id]").val(json.id);
-              YY.dialog({content:json.code}).alert();
-            	// location.href="/product";
+              YY.dialog({content:json.code,callback:function(){
+                location.href="/product";
+              }}).alert();
             }else{
-            	// location.reload();
+              YY.dialog({content:json.code}).alert();
             }
         }
     });

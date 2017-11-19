@@ -1,4 +1,5 @@
 var Design=require("../model/Design"),
+    DesignExp=require("../model/DesignExp"),
     Works=require("../model/Works"),
     User=require("../model/User"),
     City=require("../model/City"),
@@ -12,6 +13,7 @@ var designs=async (ctx, next) => {
             where: {
                 
             },
+            order: [['create_time', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -20,9 +22,7 @@ var designs=async (ctx, next) => {
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }
-            if(bean.work_experience){
-                bean.work_experience=bean.work_experience.split(",");
-            }
+           
 
             if(bean.area){
                 bean.area=bean.area.split("_");
@@ -39,6 +39,13 @@ var designs=async (ctx, next) => {
                 
             });
             bean.areas=areas;
+            var exps = await DesignExp.findAll({
+                where:{
+                    design_id:bean.id
+                }
+                
+            });
+            bean.exps=exps;
             var user = await User.findById(bean.user_id);
             bean.head=user&&user.head_url;
         }
@@ -55,9 +62,7 @@ var designs=async (ctx, next) => {
         if(design&&design.brand){
             design.brand=design.brand.split(",");
         }
-        if(design&&design.work_experience){
-            design.work_experience=design.work_experience.split(",");
-        }
+        
         if(design.area){
             design.area=design.area.split("_");
         }else{
@@ -73,6 +78,14 @@ var designs=async (ctx, next) => {
             }
             
         });
+        var exps = await DesignExp.findAll({
+            where:{
+                design_id:id
+            }
+            
+        });
+        design.exps=exps;
+
         var user = await User.findById(design.user_id);
         design.head=user&&user.head_url;
 
@@ -91,27 +104,23 @@ var designs=async (ctx, next) => {
             page:PageUtil.getPage(page, workses.count)
         });
     },
+    //前台编辑页
     design=async (ctx, next) => {
         var user=ctx.session.user;
-      
-        if(!user){
-            ctx.response.redirect('/login/login');
-            return ;
-        }
-        
-        var designs = await Design.findAll({
+        var design = await Design.findOne({
             where:{
                 user_id:user.id
             }
         });
-        var design;
-        if(designs){
-            design=designs[0];
-        }
+        //工作经验
+        var exps= await DesignExp.findAll({
+           where:{
+               design_id:design.id
+           },
+           order: [['create_time', 'ASC']],
+        });
 
-        if(design&&design.work_experience)
-            design.work_experience=design.work_experience.split(",");
-        ctx.render('./company/add_design.html',{bean:design});
+        ctx.render('./company/add_design.html',{bean:design,exps:exps});
     },
     //后台添加接口
     manage_design_add=async (ctx, next) => {
@@ -121,23 +130,18 @@ var designs=async (ctx, next) => {
             age = ctx.request.body.age||'',
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
-            exps = ctx.request.body.exps,
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
-            var user = await UserService.createUser(name,"design");
+        var user = await UserService.createUser(name,"design");
             
-
-        //console.log("test user:",user.id);
         var design = await Design.create({
-            
             user_id:user.id,
             name: name,
             gender:gender,
             age:age,
             status:status,
             major:major,
-            work_experience:exps,
             area:area,
             content:content
         });
@@ -154,27 +158,20 @@ var designs=async (ctx, next) => {
             age = ctx.request.body.age||'',
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
-            exps = ctx.request.body.exps,
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
-        if(!user){
-            ctx.body = {"code":"not_login"};
-            return;
-        }
-        //console.log("test user:",user.id);
         var design = await Design.create({
-            id:user.id,
             user_id:user.id,
             name: name,
             gender:gender,
             age:age,
             status:status,
             major:major,
-            work_experience:exps,
             area:area,
             content:content
         });
+        
         var dbUser = await User.findById(user.id);
         dbUser.name=name;
         dbUser.save();
@@ -182,17 +179,12 @@ var designs=async (ctx, next) => {
     },
     api_design_update=async (ctx, next) => {
         var user=ctx.session.user;
-        if(!user){
-            ctx.body = {"code":"not_login"};
-            return;
-        }
          var id = ctx.request.body.id||'',
             name = ctx.request.body.name||'',
             gender = ctx.request.body.gender||'',
             age = ctx.request.body.age||'',
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
-            exps = ctx.request.body.exps,
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
@@ -208,7 +200,7 @@ var designs=async (ctx, next) => {
         design.age=age;
         design.status=status;
         design.major=major;
-        design.work_experience=exps;
+
         design.area=area;
         design.content=content;
 
@@ -218,50 +210,7 @@ var designs=async (ctx, next) => {
         dbUser.save();
         ctx.body = {"code":"success","id":design.id};
     },
-    api_designdetail=async (ctx, next) => {
-         var user=ctx.session.user;
-         var id = ctx.request.body.id||'',
-            types = ctx.request.body.types,
-            names = ctx.request.body.names,
-            acreage = ctx.request.body.acreage||'',
-            type_per_month = ctx.request.body.type_per_month||'',
-            count_person = ctx.request.body.count_person||'',
-            count_qc = ctx.request.body.count_qc||'',
-            able_per_month = ctx.request.body.able_per_month||'',
-            major = ctx.request.body.major||'';
-
-        var typearr=types.split(",");
-        var namearr=names.split(",");
-
-        await Cooperation.destroy({
-          where: {
-            user_id:user.id
-          }
-        });
-
-        for (var i = 0; i < typearr.length; i++) {
-            var type=typearr[i];
-            var name=namearr[i];
-           
-            var cooperation = await Cooperation.create({
-                user_id:user.id,
-                name: name,
-                type:type
-            });
-        }
-        
-        var design = await Design.findById(id);
-        design.acreage=acreage;
-        
-        design.type_per_month=type_per_month;
-        design.count_person=count_person;
-        design.count_qc=count_qc;
-        design.able_per_month=able_per_month;
-        design.major=major;
-        await design.save();
-       
-        ctx.body = {"code":"success","id":design.id};
-    },
+    
     api_design_delete=async (ctx, next) => {
          var id=ctx.params.id;
         await Design.destroy({
@@ -316,10 +265,47 @@ var designs=async (ctx, next) => {
         var id=ctx.request.query.id;
         var bean = await Design.findById(id);
       
-        if(bean&&bean.work_experience)
-            bean.work_experience=bean.work_experience.split(",");
-        ctx.render('./manage/design/add.html',{bean:bean});
+        var exps = await DesignExp.findAll({
+            where:{
+                design_id:id
+            }
+            
+        });
 
+        ctx.render('./manage/design/add.html',{bean:bean,exps:exps});
+
+    },
+    //添加工作经验
+    api_designexp=async (ctx, next) => {
+        var user=ctx.session.user;
+        var design_id = ctx.request.body.design_id,
+            experience = ctx.request.body.experience;
+        var bean = await DesignExp.create({
+            design_id:design_id,
+            experience:experience
+        });
+        
+       ctx.body = {"code":"success",expid:bean.id};
+    },
+    //更新工作经验
+    api_designexp_update=async (ctx, next) => {
+        var user=ctx.session.user;
+        var expid = ctx.request.body.expid,
+            experience = ctx.request.body.experience;
+        var bean = await DesignExp.findById(expid);
+        bean.experience=experience;
+        await bean.save();
+        ctx.body = {"code":"success",expid:expid};
+    },
+    //更新工作经验
+    api_designexp_delete=async (ctx, next) => {
+        
+        var expid = ctx.request.body.expid;
+        
+        var bean = await DesignExp.findById(expid);
+       
+        await bean.destroy();
+        ctx.body = {"code":"success"};
     }
 module.exports = {
     //前台列表
@@ -333,9 +319,16 @@ module.exports = {
     //后台添加编辑design
     'GET /manage/design': manage_design,
     'POST /manage/design': manage_design_add,
-    
+    //添加设计师
     'POST /api/design': api_design,
+    //更新设计师
     'PUT /api/design': api_design_update,
+    //删除设计师
     'DELETE /api/design/:id': api_design_delete,
-    'PUT /api/designdetail': api_designdetail
+    //增加工作经验
+    'POST /api/designexp': api_designexp,
+     //增加工作经验
+    'PUT /api/designexp': api_designexp_update,
+     //增加工作经验
+    'DELETE /api/designexp': api_designexp_delete
 };

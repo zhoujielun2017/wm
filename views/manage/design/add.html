@@ -1,11 +1,14 @@
 {% extends '../base.html' %}
 
 {% block head %}
-
+<style>
+    .expbtn{
+        margin-top:10px;
+    }
+</style>
 {% endblock %}
 
 {% block main %}
-<h3>添加设计师</h3>
 <form class="form-horizontal">
     <input name="id" type="hidden" value="{{bean.id}}">
         <div class="form-group">
@@ -63,27 +66,42 @@
                 </input>
             </div>
         </div>
-        {% for e in bean.work_experience %}
-        <div class="form-group  {% if loop.last %}experience{% endif %}">
-            <label class="col-sm-2 control-label">
+      
+        {% for e in exps %}
+        <div class="form-group  {% if loop.first %}experience{% endif %}">
+            <div class="col-sm-2 control-label">
                 {{__('work experience')}}
-            </label>
+                <div class="expbtn">
+                <a href="javascript:void(0);" class="btn btn-default saveexp">{{__('save')}}</a>
+                </div>
+                
+                <div  class="expbtn  {% if loop.first %} hidden {% endif %}">
+                <a href="javascript:void(0);" class="btn btn-danger delexp">{{__('delete')}}</a>
+                </div>
+               
+            </div>
             <div class="col-sm-10">
-                <input class="form-control" name="work_experience" placeholder="{{__('work experience')}}" type="text" value="{{e}}" maxlength="200">
-                </input>
+                <input type="hidden" name="expid" value="{{e.id}}">
+                <textarea rows="7" class="form-control" name="work_experience" placeholder="{{__('work experience')}}"  maxlength="1000">{{e.experience}}</textarea>
             </div>
         </div>
          {% else %}
+         <!-- 没有工作经验 -->
         <div class="form-group experience">
             <label class="col-sm-2 control-label">
                 {{__('work experience')}}
+                <div class="expbtn">
+                    <a href="javascript:void(0);" class="btn btn-default saveexp">{{__('save')}}</a>
+                </div>
+                <div class="expbtn hidden">
+                    <a href="javascript:void(0);" class="btn btn-danger delexp">{{__('delete')}}</a>
+                </div>
             </label>
             <div class="col-sm-10">
-                <input class="form-control" name="work_experience" placeholder="{{__('work experience')}}" type="text" value=""  maxlength="200">
-                </input>
+                <input type="hidden" name="expid" value="">
+               <textarea rows="7" class="form-control" name="work_experience" placeholder="{{__('work experience')}}"  maxlength="1000"></textarea>
             </div>
         </div>
-
         {% endfor %}
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
@@ -122,7 +140,7 @@
               </div>
             </div>
         </div>
-        <input type="hidden" name="exps">
+       
         <input type="hidden" name="area">
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -183,38 +201,86 @@ $("form").validate({
   errorElement: "em"
 
 });
-
+//copy experience
 $(".addC").click(function(){
+  var group =$(this).parents(".form-group");
   var temp=$(".experience");
   var clone=temp.clone();
-  temp.after(clone);
+  group.before(clone);
   temp.removeClass("experience")
   clone.find("input").val("");
+  clone.find(".expbtn").removeClass("hidden");
+  clone.find("textarea").val("");
 });
-
-$("form").on('submit',function(e){
-
-     var $this=$(this);
-     if(!$this.valid()){
-       return false;
+//删除工作经验
+$("form").on('click',".delexp",function(){
+    var group=$(this).parents(".form-group");
+     var $input=group.find("input[name=expid]");
+     var expid = $input.val();
+     if(!expid){
+         return ;
      }
+     $.ajax({
+        type: "delete",
+        url: "/api/designexp",
+        data:{
+            expid:expid
+        },
+        dataType:"json",
+        success:function(json){
+            if(json.code=='success'){
+                group.remove();
+            }else{
+                // location.reload();
+            }
+        }
+    });
+})
+
+//保存工作经验
+$("form").on('click','.saveexp',function(){
+    var $input=$(this).parents(".form-group").find("input[name=expid]");
+    var experience=$(this).parents(".form-group").find("[name=work_experience]").val();
+    var design_id=$("input[name=id]").val();
+    var expid = $input.val();
+    var method=expid?"PUT":"POST";
+    
+    designSave($("form")[0],function(data){
+        $.ajax({
+            type: method,
+            url: "/api/designexp",
+            data:{
+                expid:expid,
+                design_id:data.id,
+                experience:experience
+            },
+            dataType:"json",
+            success:function(json){
+                if(json.code=='success'){
+                    $input.val(json.expid);
+                }else{
+                    // location.reload();
+                }
+            }
+        });
+    });
+
+    
+})
+//保存
+var designSave=function(form,callback){
+    var $this=$(form);
     var id=$this.find("input[name=id]").val();
     var method=id?"PUT":"POST";
-    
-    
-    var exps=[];
-    $("input[name=work_experience]").each(function(){
-      exps.push($(this).val());
-    });
+
     var area=[];
     $(".city select").each(function(){
       area.push(this.value);
     });
-     $this.find("input[name=exps]").val(exps.join(","));
+   
      $this.find("input[name=area]").val("_"+area.join("_")+"_");
      var data=$this.serialize();
-
-    var url="/manage/design";
+     var url="/manage/design";
     if(method.toLowerCase()=="put"){
       url="/api/design"
     }
@@ -222,20 +288,25 @@ $("form").on('submit',function(e){
         type: method,
         url: url,
         data:data,
-      dataType:"json",
-      success:function(json){
+        dataType:"json",
+        success:function(json){
           if(json.code=='success'){
             $("input[name=id]").val(json.id);
-            YY.dialog({content:json.code,callback:function(){
-              location.href="/manage/designs";
-            }}).alert();  
+            callback&&callback(json);
+            
           }else{
             // location.reload();
           }
       }
     });
-
+}
+$("form").on('submit',function(e){
+    designSave(this,function(json){
+        YY.dialog({content:json.code}).alert();
+    })
     return false;
 });
+
+
 </script>
 {% endblock %}

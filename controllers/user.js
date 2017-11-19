@@ -185,7 +185,7 @@ var manage_user_id=async (ctx, next) => {
                 }
             })
         }
-        if(rel){
+        if(rel&&rel.count){
             ctx.response.body = {code:"rel_exit"};
             return ;
         }
