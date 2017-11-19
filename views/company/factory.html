@@ -26,7 +26,7 @@
     </div>
     <div class="col-xs-9">
       <h3>{{bean.name}}</h3>
-      <span class="talk"></span><a href="/message/{{bean.user_id}}">发站内信</a>
+      <span class="talk"></span><a href="/message/{{bean.user_id}}"> {{__('send message')}}</a>
      
     </div>
   </div>
@@ -50,17 +50,17 @@
       </p>
       <p>{{__('cooperation factory name')}}:{% for d in factorys %}{{d.name}} {% endfor %}
        </p>
-       <p>{{__('company acreage')}}:{{bean.acreage}}平米</p>
-      <p>{{__('type per month')}}:{{bean.type_per_month}}</p>
-      <p>{{__('produce person')}}:{{bean.count_person}}</p>
-      <p>{{__('QC person')}}:{{bean.count_qc}}</p>
-      <p>{{__('produce per month')}}:{{bean.able_per_month}}</p>
+       <p>{{__('company acreage')}}:{{bean.acreage}} {{__('square meters')}}</p>
+      <p>{{__('type per month')}}:{{bean.type_per_month}} {{__('pcs')}}</p>
+      <p>{{__('produce person')}}:{{bean.count_person}} {{__('persons')}}</p>
+      <p>{{__('QC person')}}:{{bean.count_qc}} {{__('persons')}}</p>
+      <p>{{__('produce per month')}}:{{bean.able_per_month}} {{__('pcs')}}</p>
     </div>
   </div>
   <div>
-    公司简介:{{bean.content}}
+    {{__('company summary')}}:{{bean.content}}
   </div>
-  <h3>公司产品</h3>
+  <h3>{{__('product')}}</h3>
   {% for e in pros.rows %}
   
   {% if loop.index0%2==0 %}
@@ -84,7 +84,7 @@
                 </a>
             </h4>
             <p>{{__('material')}}: {{e.material}}</p>
-            <p>{{__('price')}}: ${{e.price}}{{__('unit dollor')}}</p>
+            <p>{{__('price')}}: ${{e.price}} </p>
         </div>
     </div>
   </div>

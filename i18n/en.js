@@ -110,9 +110,10 @@
 	"unit money": "million US dollars",
 	"save": "save",
 	"detail": "detail",
-	"admin manager": "admin manager",
+	"admin manager": "admin management",
 	"manager": "manager",
 	"User vip": "vip user",
+	
 	"square meters": "square meters",
 	"pcs": "pcs",
 	"persons": "persons"

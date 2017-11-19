@@ -9,6 +9,7 @@
 	"admin manager": "后台管理",
 	"all message": "全部消息",
 	"back": "返回",
+	"days": "天",
 	"base info": "基本信息",
 	"buy record": "购买记录",
 	"buy h1":"开通套餐：全球饰品信息网高级会员",
@@ -128,6 +129,7 @@
 	"save": "保存",
 	"say something": "说点什么吧",
 	"search": "搜索",
+	"send message": "发站内信",
 	"search result": "搜索结果",
 	"setting": "设置",
 	"settings": "设置",
@@ -149,7 +151,7 @@
 	"user endtime": "会员到期时间",
 	"unit money": "万美元",
 	"unit dollor": "美元",
-	"unit day": "天",
+	
 	
 	"web pages": "页面",
 	"website": "全球国际饰品网",
@@ -160,6 +162,7 @@
 	"works info": "作品信息",
 	"work experience": "工作经历",
 	"end": "end",
-	"contact": "联系我们"
-	
+	"contact": "联系我们",
+	"yes":"是",
+	"no":"否"
 }

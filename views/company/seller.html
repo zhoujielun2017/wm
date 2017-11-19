@@ -23,7 +23,7 @@
     </div>
     <div class="col-xs-9">
       <h3>{{bean.name}}</h3>
-      <span class="talk"></span><a href="/message/{{bean.user_id}}">发站内信</a>
+      <span class="talk"></span><a href="/message/{{bean.user_id}}">{{__('send message')}}</a>
       
     </div>
   </div>
@@ -44,10 +44,10 @@
        </p>
       <p>{{__('sale per year')}}:{{bean.sale_per_year}}{{__('unit money')}}</p>
       <p>{{__('firsthand')}}:
-      {% if bean.firsthand==1 %}是{% endif%}
-      {% if bean.firsthand==0 %}否{% endif%}
+      {% if bean.firsthand==1 %}{{__('yes')}}{% endif%}
+      {% if bean.firsthand==0 %}{{__('no')}}{% endif%}
       </p>
-      <p>{{__('payment days')}}:{{bean.payment_days}}{{__('unit day')}}</p>
+      <p>{{__('payment days')}}:{{bean.payment_days}}{{__('days')}}</p>
     </div>
   </div>
 </div>
