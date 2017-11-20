@@ -16,7 +16,7 @@
   height: inherit;
   width: inherit;
   }
-  input[type=file]{
+  input[type=file],iframe{
     display: none;
   }
 .change a{display: inline-block;padding: 15px 3px;}
@@ -34,12 +34,16 @@
       <img src="/images/unUpload.png" alt="">
       {% endif %}
       {% if  user.head_url  %}
-      <img src="{{img_domain}}{{user.head_url }}" alt="" class="img-rounded">
+      <img src="{{img_domain}}{{user.head_url }}!300x300" alt="" class="img-rounded">
       {% endif %}
     </label>
-    <input type="file" name="upload" id="uploadfile">
+    
 </div>
-
+<iframe  name="formiframe" id="formiframe" ></iframe>
+<form action="/file" method="post" target="formiframe" enctype="multipart/form-data">
+<input type="file" name="upload" id="uploadfile">
+<!--<button>submit</button>-->
+</form>
 
 
 
@@ -81,38 +85,51 @@
   function messageCount(count){
     $(".messageCount").text(count);
   }
+
+  var iframe = document.getElementById("formiframe");
+  var id=$("input[name=id]").val();
+  iframe.onload = function(){
+    
+    //获取iframe的内容，即服务返回的数据
+    var responseData = this.contentDocument.body.textContent || this.contentWindow.document.body.textContent;
+    var json = JSON.parse(responseData);
+    console.log(json);
+    var path=json.path;
+    var url=json.url;
+      $.ajax({
+          type: "PUT",
+          url: "/user/"+id,
+            data:{
+            head_url:path
+          },
+          dataType:"json",
+          success:function(json){
+              if(json.code="success"){
+                setTimeout(function(){
+                  $(".head img")[0].src=url+'!300x300';
+                },1000);
+                  
+              }
+          }
+      });
+ }
+
 	// client side only need bucket name
     var id=$("input[name=id]").val();
     $("#uploadfile").on("change",function(){
-
-      $.ajaxFileUpload({
-        url: '/file',
-        secureuri: false,
-        fileElementId:"uploadfile",
-        data: {                    
-            'name': 'carlcarl',
-        },
-        dataType:"json",
-        success:function(json, status ){
-          console.log("success",json, status )
+      $("form").submit();
+      // $.ajaxFileUpload({
+      //   url: '/file',
+      //   secureuri: false,
+      //   fileElementId:"uploadfile",
+      //   data: {},
+      //   dataType:"json",
+      //   success:function(json, status ){
+      //     console.log("success",json, status )
          
-          var path=json.path;
-          var url=json.url;
-           $.ajax({
-                type: "PUT",
-                url: "/user/"+id,
-                 data:{
-                  head_url:path
-                },
-                dataType:"json",
-                success:function(json){
-                    if(json.code="success"){
-                        $(".head img")[0].src=url+'!300x300';
-                    }
-                }
-            });
-        }
-      });
+          
+      //   }
+      // });
 
         
     })
