@@ -8,16 +8,9 @@ var major=[
     "major_zhizi",
     "major_caoliu",
 ];
- 
 
-module.exports = {
-    'GET /cooperation': async (ctx, next) => {
+var cooperation=async (ctx, next) => {
         var user=ctx.session.user;
-        //console.log(user);
-        if(!user){
-            ctx.response.redirect('/login/login');
-            return ;
-        }
         var company = await Factory.findOne({
             where:{
                 user_id:user.id
@@ -49,6 +42,7 @@ module.exports = {
         });
         var customer=[];
         var factory=[];
+        //处理合作信息
         for (var i = 0; i < list.length; i++) {
             if(list[i].type=='factory'){
                 factory.push(list[i]);
@@ -57,51 +51,64 @@ module.exports = {
                 customer.push(list[i]);
             }
         }
-        ctx.render('./company/cooperation.html',{bean:company,
-            list:list,customer:customer,factory:factory,major:major});
+        ctx.render('./company/cooperation.html',{
+            bean:company,
+            list:list,
+            customer:customer,
+            factory:factory,
+            major:major});
     },
-    'POST /api/cooperation': async (ctx, next) => {
+    //添加合作商
+    api_cooperation=async (ctx, next) => {
 
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
+            factory_id = ctx.request.body.factory_id,
             type = ctx.request.body.type||'';
-        if(!user){
-            ctx.body = {"code":"not_login"};
-            return;
-        }
-        
+        var factory = await Factory.findOne({
+            where:{
+                user_id:user.id
+            }
+        });
         var cooperation = await Cooperation.create({
-            user_id:user.id,
+            factory_id:factory_id,
             name: name,
             type:type
         });
-        var dbUser = await User.findById(user.id);
-        dbUser.name=name;
-        dbUser.save();
+       
         ctx.body = {"code":"success","id":cooperation.id};
-    },
-    'PUT /api/cooperation': async (ctx, next) => {
+    }, 
+    api_cooperation_update=async (ctx, next) => {
          var user=ctx.session.user;
-         var id = ctx.request.body.id||'',
+         var coopid = ctx.request.body.coopid||'',
             name = ctx.request.body.name||'',
             type = ctx.request.body.type||'';
-
-       
-         var cooperation = await Cooperation.findById(id);
+        
+        var cooperation = await Cooperation.findById(coopid);
         cooperation.name=name;
         cooperation.type=type;
-        
         await cooperation.save();
-        var dbUser = await User.findById(user.id);
-        dbUser.name=name;
-        dbUser.save();
-        ctx.body = {"code":"success","id":cooperation.id};
+       
+        ctx.body = {"code":"success","id":coopid};
     },
-    'DELETE /api/cooperation': async (ctx, next) => {
+    api_cooperation_delete=async (ctx, next) => {
          
-        var id = ctx.params.id;
+        var id = ctx.request.body.id;
         var data = await Cooperation.findById(id);
-        
+        if(data){
+            await data.destroy();
+        }
+       
         ctx.body = {code:"success"};
     }
+module.exports = {
+    'GET /cooperation': cooperation,
+    
+    //添加合作商
+    'POST /api/cooperation': api_cooperation,
+    //更新合作商
+    'PUT /api/cooperation': api_cooperation_update,
+    //删除合作商
+    'DELETE /api/cooperation': api_cooperation_delete
+    
 };

@@ -123,6 +123,7 @@
 	"Recent articles": "最新发表",
 	"Refresh": "刷新",
 	"Reply": "回复",
+	"profile management":"档案管理",
 	"role of user": "会员类型",
 	"register": "注册",
 	"sale per year": "年销售额",

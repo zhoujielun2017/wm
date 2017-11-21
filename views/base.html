@@ -62,7 +62,15 @@
     <div class="col-xs-12 col-md-3">
         
       <div class="list-group">
-          <a href="#" class="list-group-item"><h3>{{__('company manage')}}</h3></a>
+        
+          <a href="#" class="list-group-item">
+            <h3>{% if  sessionuser.type=="design"  %}
+              {{__('profile management')}}
+            {% else %}
+              {{__('company manage')}}
+            {% endif%}
+            </h3>
+          </a>
           {% if  sessionuser.type=="factory"  %}
           <a href="/factory" class="list-group-item">{{__('base info')}}</a>
           <a href="/cooperation" class="list-group-item">{{__('cooperation info')}}</a>

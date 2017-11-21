@@ -113,8 +113,8 @@
 	"admin manager": "admin management",
 	"manager": "manager",
 	"User vip": "vip user",
-	
 	"square meters": "square meters",
 	"pcs": "pcs",
-	"persons": "persons"
+	"persons": "persons",
+	"profile management": "profile management"
 }

@@ -2,7 +2,9 @@
 
 {% block head %}
 <style type="text/css">
-
+#uploadForm{
+  display: none;
+}
 </style>
 {% endblock %}
 
@@ -45,8 +47,10 @@
 
         </div>
         <div class="fileselect">
-           <label for="file" class="glyphicon glyphicon-plus"></label>
-         <input type="file" name="upload" id="file" class="hidden">
+           <label for="uploadfile" class="glyphicon glyphicon-plus"></label>
+         
+
+       
         </div>
     </div>
   </div>
@@ -58,12 +62,19 @@
   </div>
 </form>
 
+
+<form id="uploadForm" action="/file" method="post" target="formiframe" enctype="multipart/form-data">
+  <input type="file" name="upload" id="uploadfile">
+</form>
+
 {% endblock %}
 
 {% block foot %}
+ <script src="/js/upload.js"></script>
 
- <script src="/js/ajaxfileupload.js"></script>
+
 <script>
+
 var valid_en={  
     title: {
       required: "Please provide title",
@@ -85,7 +96,7 @@ if($.cookie("locale")=="zh-CH"){
   messages=valid_zh;
 }
 
-$("form").validate({
+$("form.form-horizontal").validate({
   rules: {
     title: {
       required: true,
@@ -104,21 +115,11 @@ var imgCount=$(".imgs input").length;
 if(imgCount>=10){
   $(".fileselect").hide();
 }
-$("#file").on("change",function(){
-    console.log("change")
 
-
-    $.ajaxFileUpload({
-      url: '/file',
-      secureuri: false,
-      fileElementId:"file",
-      data: {                    
-          'name': 'carlcarl',
-      },
-      dataType:"json",
-      success:function(json, status ){
-        // console.log("success",json, status )
-        setTimeout(function(){
+  $.upload({
+    fileElementId:"uploadfile",
+    callback:function(json){
+       setTimeout(function(){
 
            $(".imgs").append('<div><img src="'+json.url+'!300x300" class="img-thumbnail"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
             '<input type="hidden" name="img" value="'+json.path+'"></div>')
@@ -129,16 +130,44 @@ $("#file").on("change",function(){
           }
 
         },1000)
-        
-      }
-    });
-
+    }
   })
+
+// $("#filewwwww").on("change",function(){
+//     console.log("change")
+
+
+//     $.ajaxFileUpload({
+//       url: '/file',
+//       secureuri: false,
+//       fileElementId:"file",
+//       data: {                    
+//           'name': 'carlcarl',
+//       },
+//       dataType:"json",
+//       success:function(json, status ){
+//         // console.log("success",json, status )
+        // setTimeout(function(){
+
+        //    $(".imgs").append('<div><img src="'+json.url+'!300x300" class="img-thumbnail"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
+        //     '<input type="hidden" name="img" value="'+json.path+'"></div>')
+        //     // console.log(json);
+        //     imgCount++;
+        //     if(imgCount>=10){
+        //       $(".fileselect").hide();
+        //   }
+
+        // },1000)
+        
+//       }
+//     });
+
+//   })
 $(".imgs").on("click",".glyphicon-trash",function(){
   $(this).parent("div").remove();
 });
 
-$("form").on('submit',function(e){
+$("form.form-horizontal").on('submit',function(e){
 
     var $this=$(this);
     var id=$this.find("input[name=id]").val();

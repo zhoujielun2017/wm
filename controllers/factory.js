@@ -351,9 +351,12 @@ module.exports = {
     'POST /manage/factory':manage_factory_add,
     //前台编辑页
     'GET /factory':factory ,
-    
+    //添加供应商
     'POST /api/factory': api_factory,
+    //更新供应商
     'PUT /api/factory': api_factory_update,
     'DELETE /api/factory/:id': api_factory_delete,
-    'PUT /api/factorydetail': api_factorydetail
+    //更新供应商详情
+    'PUT /api/factorydetail': api_factorydetail,
+    
 };
