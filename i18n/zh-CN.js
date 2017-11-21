@@ -152,7 +152,7 @@
 	"user endtime": "会员到期时间",
 	"unit money": "万美元",
 	"unit dollor": "美元",
-	
+	"user center":"会员中心",
 	
 	"web pages": "页面",
 	"website": "全球国际饰品网",

@@ -301,7 +301,7 @@ var factory_id=async (ctx, next) => {
         //先删除合作信息
         await Cooperation.destroy({
           where: {
-            user_id:user.id
+            factory_id:id
           }
         });
 
@@ -310,7 +310,8 @@ var factory_id=async (ctx, next) => {
             var name=namearr[i];
            
             var cooperation = await Cooperation.create({
-                user_id:user.id,
+               
+                factory_id:id,
                 name: name,
                 type:type
             });

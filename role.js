@@ -3,7 +3,7 @@ var role_urls=["/sellers","/agencys","/factorys","/designs","/search/seller","/s
 //普通会员可以看见
 var visitor=[];
 //设计师可以看见
-var design=["/designs"];
+var design=[];
 //高级设计师可以看见
 var design_vip=["/designs"];
 //零售商可见
@@ -17,7 +17,7 @@ var agency_vip=role_urls;
 //供应商可见
 var factory=[];
 //高级供应商可见
-var factory_vip=["/factorys","/search/factory","/designs"];
+var factory_vip=["/sellers","/agencys","/designs","/search/seller","/search/agency",];
 
 
 function contains(arr, obj) {  

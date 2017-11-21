@@ -37,7 +37,7 @@ var cooperation=async (ctx, next) => {
         }
         var list = await Cooperation.findAll({
             where: {
-                user_id: user.id
+                factory_id: company.id
             }
         });
         var customer=[];

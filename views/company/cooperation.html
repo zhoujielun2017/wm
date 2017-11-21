@@ -14,7 +14,7 @@
       <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation customer name')}}</label>
       <div class="col-sm-9" >
         <div class="row">
-          <div class="col-xs-8 col-sm-6">
+          <div class="col-xs-6 col-sm-4">
             <select class="form-control" name="type">
               <option value="seller">{{__('seller')}}</option>
               <option value="agency">{{__('agency')}}</option>
@@ -22,6 +22,11 @@
           </div>
           <div class="col-xs-4 col-sm-6">
              <input type="text" name="customer" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="">
+          </div>
+          <div class="col-xs-2 col-sm-2">
+              {% if not loop.first %}
+              <button class="btn btn-danger">{{__('delete')}}</button>
+              {% endif %}
           </div>
         </div>
       </div>
@@ -31,7 +36,7 @@
       <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation customer name')}}</label>
       <div class="col-sm-9" >
         <div class="row">
-          <div class="col-xs-8 col-sm-6">
+          <div class="col-xs-6 col-sm-4">
             <select class="form-control" name="type">
               <option value="seller">{{__('seller')}}</option>
               <option value="agency">{{__('agency')}}</option>
@@ -39,6 +44,11 @@
           </div>
           <div class="col-xs-4 col-sm-6">
              <input type="text" name="customer" value="" class="form-control" id="inputEmail3" placeholder="">
+          </div>
+          <div class="col-xs-2 col-sm-2">
+              {% if not loop.first %}
+              <button class="btn btn-danger">{{__('delete')}}</button>
+              {% endif %}
           </div>
         </div>
       </div>
@@ -57,18 +67,26 @@
   
     <div class="form-group {% if loop.last %}factory{% endif %}">
       <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation factory name')}}</label>
-      <div class="col-sm-9">
+      <div class="col-sm-7">
           
          <input type="text" name="factory" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="{{__('cooperation factory name')}}">
+      </div>
+      <div class="col-sm-2">
+          {% if not loop.first %}
+          <button class="btn btn-danger">{{__('delete')}}</button>
+          {% endif %}
       </div>
     </div>
   {% else %}
   <div class="form-group factory">
     <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation factory name')}}</label>
-    <div class="col-sm-9">
+    <div class="col-sm-7">
         
        <input type="text" name="factory" value="" class="form-control" id="inputEmail3" placeholder="{{__('cooperation factory name')}}">
     </div>
+     <div class="col-sm-2">
+          <button class="btn btn-danger">{{__('delete')}}</button>
+      </div>
   </div>
 {% endfor %}
  
@@ -176,7 +194,11 @@ $(".addF").click(function(){
   temp.removeClass("factory")
   clone.find("input").val("");
 });
-
+//删除
+$(".btn-danger").click(function(){
+  $(this).parents(".form-group").remove();
+  return false;
+});
 $("form").on('submit',function(e){
 
     var $this=$(this)

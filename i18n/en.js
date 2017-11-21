@@ -116,5 +116,6 @@
 	"square meters": "square meters",
 	"pcs": "pcs",
 	"persons": "persons",
-	"profile management": "profile management"
+	"profile management": "profile management",
+	"user center": "user center"
 }
