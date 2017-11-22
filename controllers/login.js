@@ -136,7 +136,8 @@ module.exports = {
         var user = await User.findById(id);
         // login/fromemail?email=11@22&pass=2222&time=1502549978197
         var token=crypto.createHash('md5').update(id+user.password).digest('hex');
-
+        var email=user.email;
+        user.email=email.substring(email.indexOf("@")+1,email.length);
         ctx.render('./user/email_send_sucess.html',{bean:user,token:token});
     },
     //忘记密码页面

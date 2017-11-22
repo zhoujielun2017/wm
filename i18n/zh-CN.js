@@ -7,6 +7,7 @@
 	"agency": "中间商",
 	"age": "年龄",
 	"admin manager": "后台管理",
+	"active": "立即激活",
 	"all message": "全部消息",
 	"back": "返回",
 	"days": "天",
@@ -156,6 +157,7 @@
 	"square meters":"平方米",
 	"tags": "标签",
 	"try": "立即体验",
+	
 	"this reply was deleted": "该回复已被删除",
 	"title": "标题",
 	"type user": "商家类型",
