@@ -65,14 +65,14 @@
         
       <div class="list-group">
         
-          <a href="#" class="list-group-item">
+          <div class="list-group-item">
             <h3>{% if  sessionuser.type=="design"  %}
               {{__('profile management')}}
             {% else %}
               {{__('company manage')}}
             {% endif%}
             </h3>
-          </a>
+          </div>
           {% if  sessionuser.type=="factory"  %}
           <a href="/factory" class="list-group-item">{{__('base info')}}</a>
           <a href="/cooperation" class="list-group-item">{{__('cooperation info')}}</a>
@@ -93,9 +93,9 @@
           <a href="/works" class="list-group-item">{{__('works info')}}</a>
           {% endif %}
 
-          <a href="#" class="list-group-item"><h3>{{__('message manage')}}</h3></a>
+          <div class="list-group-item"><h3>{{__('message manage')}}</h3></div>
            <a href="/messageGroups" class="list-group-item"> <span class="badge unread"></span>{{__('all message')}}</a>
-          <a href="#" class="list-group-item"><h3>{{__('user management')}}</h3></a>
+          <div class="list-group-item"><h3>{{__('user management')}}</h3></div>
           <a href="/user/buy" class="list-group-item">{{__('to be vip')}}</a>
           <a href="/ord" class="list-group-item">{{__('buy record')}}</a>
       </div>
