@@ -118,14 +118,17 @@ module.exports = {
             password:password
           }
         });
-        if(user.update_time!=time){
-            ctx.render('./user/reg_email_fail.html',{msg:"邀请链接已经过期"});
-            return;
+        // if(user.update_time!=time){
+        //     ctx.render('./user/reg_email_fail.html',{msg:"邀请链接已经过期"});
+        //     return;
+        // }
+        if(user){
+             user.status=1;
+            user.update_time = Date.now();
+            await user.save();    
+            ctx.session.user = user;
         }
-        user.status=1;
-        user.update_time = Date.now();
-        await user.save();    
-        ctx.session.user = user;
+       
         ctx.render('./user/reg_email_sucess.html',{});
     },
     'GET /login/sendemail': async (ctx, next) => {

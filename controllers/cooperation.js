@@ -2,11 +2,17 @@ var Cooperation=require("../model/Cooperation");
 var Factory=require("../model/Factory");
 
 var major=[
-   "major_xiaolv",
-    "major_zhiliang",
-    "major_kuanshi",
-    "major_zhizi",
-    "major_caoliu",
+    "major_brass",
+	"major_zink",
+	"major_chain",
+	"major_ribbon",
+	"major_semi",
+	"major_glass",
+	"major_resin",
+	"major_acrylic",
+	"major_pearl",
+	"major_shall",
+	"major_wood"
 ];
 
 var cooperation=async (ctx, next) => {

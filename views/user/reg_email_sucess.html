@@ -9,8 +9,10 @@
     <div class="login-logo"><a href="/"></a></div>
     <div class="log-row">
         <div class="reg-ok"></div>
-        <p class="mailtext yahei">恭喜你{{user.email}}注册成功！</p>
-        <span><a href="/user/center">会员中心</a>或者去 <a href="/">首页</a></span>
+        <p class="mailtext yahei">
+            {{__('reg from email')}}</p>
+        <p><a href="/user/center">{{__('user center')}}</a> </p>
+         <p><a href="/">{{__('index')}}</a></p>
     </div>
 </div>
 {% endblock %}
