@@ -39,7 +39,7 @@
       <p>{{__('company legal person')}}:{{bean.legal_person}}</p>
       <p>{{__('company address')}}:{{bean.address}}</p>
       <p>{{__('company major')}}:
- {% for d in bean.major %}{{__(d)}} {% endfor %}
+ {% for d in bean.major %}{{__('major_'+d)}} {% endfor %}
       </p>
 
     </div>

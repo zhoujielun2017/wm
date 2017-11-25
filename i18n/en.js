@@ -55,8 +55,8 @@
 	"seller": "Retailer",
 	"agency": "Importer",
 	"add": "add",
-	"cooperation customer name": "cooperation customer name",
-	"cooperation factory name": "cooperation factory name",
+	"cooperation customer name": "cooperation customer",
+	"cooperation factory name": "cooperation factory",
 	"company acreage": "company acreage",
 	"type per month": "type per month",
 	"produce person": "produce person",
@@ -138,5 +138,16 @@
 	"major_zhiliang": "major_zhiliang",
 	"major_kuanshi": "major_kuanshi",
 	"major_zhizi": "major_zhizi",
-	"major_caoliu": "major_caoliu"
+	"major_caoliu": "major_caoliu",
+	"brass": "brass",
+	"zink": "zink",
+	"chain": "chain",
+	"ribbon": "ribbon",
+	"semi": "semi",
+	"glass": "glass",
+	"resin": "resin",
+	"acrylic": "acrylic",
+	"pearl": "pearl",
+	"shall": "shall",
+	"wood": "wood"
 }

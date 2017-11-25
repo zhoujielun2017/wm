@@ -66,7 +66,7 @@
                 {% endfor %}
             </p>
             <p>
-                现合作客户名称:
+                {{__('cooperation customer name')}}:
                 {% for d in e.cops %}
                     {% if d.type=="seller" %}
                     {{d.name}}
@@ -74,7 +74,7 @@
                 {% endfor %}
             </p>
             <p>
-                已通过验厂:
+                {{__('cooperation factory name')}}:
                 {% for d in e.cops %}
                     {% if d.type=="factory" %}
                     {{d.name}}
@@ -83,7 +83,7 @@
             </p>
             <p>
                 
-                公司特长:{% for d in e.major %}{{__(d)}} {% endfor %}
+                {{__('company major')}}:{% for d in e.major %}{{__('major_'+d)}} {% endfor %}
                 
             </p>
         </div>

@@ -44,6 +44,11 @@ module.exports = db.defineModel('factory', {
         type: db.STRING(100),
         allowNull: true
     },
+    //所在地
+    search:{
+        type: db.STRING(1000),
+        allowNull: true
+    },
      build_time:{
         type: db.BIGINT,
         allowNull: true

@@ -4,10 +4,12 @@ var PageUtil=require("../util/PageUtil");
 var product_id=async (ctx, next) => {
         var id = ctx.params.id;
         var bean = await Product.findById(id);
-       
+        bean.imgs=bean.imgs.split(",");
         ctx.render('./product/detail.html', {bean:bean});
 
-    },
+    }
+var product_id=product_id,
+
     product=async (ctx, next) => {
         var user=ctx.session.user;
         var page=ctx.request.query.page||1;

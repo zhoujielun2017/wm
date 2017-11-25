@@ -2,17 +2,17 @@ var Cooperation=require("../model/Cooperation");
 var Factory=require("../model/Factory");
 
 var major=[
-    "major_brass",
-	"major_zink",
-	"major_chain",
-	"major_ribbon",
-	"major_semi",
-	"major_glass",
-	"major_resin",
-	"major_acrylic",
-	"major_pearl",
-	"major_shall",
-	"major_wood"
+    "brass",
+	"zink",
+	"chain",
+	"ribbon",
+	"semi",
+	"glass",
+	"resin",
+	"acrylic",
+	"pearl",
+	"shall",
+	"wood"
 ];
 
 var cooperation=async (ctx, next) => {
@@ -24,7 +24,7 @@ var cooperation=async (ctx, next) => {
         });
         //如果不存在,创建一个空的
         if(!company){
-             await Factory.create({
+             company=await Factory.create({
                 user_id:user.id,
                 name: "",
                 ename:"",

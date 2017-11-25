@@ -236,6 +236,7 @@ var factory_id=async (ctx, next) => {
             email:email,
             build_time:build_time,
             area:area,
+            search:name,
             content: content
         });
         var dbUser = await User.findById(user.id);
@@ -266,6 +267,20 @@ var factory_id=async (ctx, next) => {
             var user= await UserService.createUser(name,"factory");
             factory.user_id=user.id;
         }
+        var cops = await Cooperation.findAll({
+            where:{
+                factory_id:id
+            }
+        });
+        var search=[];
+        search.push(factory.name.replace(","," "));
+        search.push(factory.major.replace(","," "));
+        var len=cops?cops.length:0;
+         for (var i = 0; i < len; i++) {
+            search.push(cops[i].name.replace(","," "));
+         }
+        
+        factory.search=search.join(",");
         factory.name=name;
         factory.ename=ename;
         factory.address=address;
@@ -318,6 +333,7 @@ var factory_id=async (ctx, next) => {
         }
         
         var factory = await Factory.findById(id);
+        factory.search=factory.name.replace(","," ")+","+majors+","+namearr;
         factory.acreage=acreage;
         factory.type_per_month=type_per_month;
         factory.count_person=count_person;

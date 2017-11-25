@@ -7,6 +7,59 @@ var Agency=require("../model/Agency"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
 
+var search_facotry=async (ctx, next) => {
+        var page=ctx.request.query.page||1,
+            q=ctx.request.query.q;
+        var result = await Factory.findAndCountAll({
+            where: {
+                search:{
+                    "$like":"%"+q+"%"
+                }
+            },
+            'limit': PageUtil.pageSize,
+            'offset': PageUtil.pageSize*(page-1)
+        });
+        for (var i = 0; i < result.count; i++) {
+            var bean=result.rows[i];
+
+            if(bean.major){
+                bean.major=bean.major.split(",");
+               
+            }
+            var cops = await Cooperation.findAll({
+                where:{
+                    user_id:bean.user_id
+                },
+                order: [['create_time', 'DESC']]
+            });
+            bean.cops=cops;
+
+            if(bean.area){
+                bean.area=bean.area.split("_");
+            }else{
+                bean.area=[];
+            }
+            // console.log("bean.area",bean.area);
+            var areas = await City.findAll({
+                where:{
+                    id:{
+                    "$in":bean.area
+                    }
+                }
+                
+            });
+            bean.areas=areas;
+            var user = await User.findById(bean.user_id);
+            bean.head=user&&user.head_url;
+        }
+       
+       
+        ctx.render('./search/factory.html',{
+            result:result,
+            q:q,
+            page:PageUtil.getPage(page, result.count)
+        });
+    }
 module.exports = {
     //搜索页
     'GET /search': async (ctx, next) => {
@@ -101,59 +154,8 @@ module.exports = {
             page:PageUtil.getPage(page, result.count)
         });
     },
-    'GET /search/factory': async (ctx, next) => {
-        var page=ctx.request.query.page||1,
-            q=ctx.request.query.q;
-        var result = await Factory.findAndCountAll({
-            where: {
-                name:{
-                    "$like":"%"+q+"%"
-                }
-            },
-            'limit': PageUtil.pageSize,
-            'offset': PageUtil.pageSize*(page-1)
-        });
-        for (var i = 0; i < result.count; i++) {
-            var bean=result.rows[i];
-
-            if(bean.major){
-                bean.major=bean.major.split(",");
-               
-            }
-            var cops = await Cooperation.findAll({
-                where:{
-                    user_id:bean.user_id
-                },
-                order: [['create_time', 'DESC']]
-            });
-            bean.cops=cops;
-
-            if(bean.area){
-                bean.area=bean.area.split("_");
-            }else{
-                bean.area=[];
-            }
-            // console.log("bean.area",bean.area);
-            var areas = await City.findAll({
-                where:{
-                    id:{
-                    "$in":bean.area
-                    }
-                }
-                
-            });
-            bean.areas=areas;
-            var user = await User.findById(bean.user_id);
-            bean.head=user&&user.head_url;
-        }
-       
-       
-        ctx.render('./search/factory.html',{
-            result:result,
-            q:q,
-            page:PageUtil.getPage(page, result.count)
-        });
-    },
+    'GET /search/factory': search_facotry,
+    
     'GET /search/design': async (ctx, next) => {
         var page=ctx.request.query.page||1,
             q=ctx.request.query.q;
