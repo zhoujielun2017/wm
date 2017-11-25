@@ -108,6 +108,7 @@
 	"new wiki": "新维基",
 	"name": "名称",
 	"order info": "订单信息",
+	"only show vip":"该栏目只对高级会员显示",
 	"order id": "订单号",
 	"operation": "操作",
 	"offical website": "官方网站",
