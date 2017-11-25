@@ -51,6 +51,9 @@ var sellers=async (ctx, next) => {
     seller_id=async (ctx, next) => {
         var id=ctx.params.id||1;
         var seller = await Seller.findById(id);
+        if(!seller){
+             ctx.render('./404.html',{bean:seller});
+        }
         if(seller&&seller.brand){
             seller.brand=seller.brand.split(",");
         }

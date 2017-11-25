@@ -92,7 +92,7 @@ var designs=async (ctx, next) => {
         design.areas=areas;
          var workses = await Works.findAndCountAll({
             where: {
-                
+                user_id:design.user_id
             },
             order: [['create_time', 'DESC']],
             'limit': PageUtil.pageSize,

@@ -273,8 +273,8 @@ var factory_id=async (ctx, next) => {
             }
         });
         var search=[];
-        search.push(factory.name.replace(","," "));
-        search.push(factory.major.replace(","," "));
+        search.push(name.replace(","," "));
+        search.push(factory.major?factory.major.replace(","," "):"");
         var len=cops?cops.length:0;
          for (var i = 0; i < len; i++) {
             search.push(cops[i].name.replace(","," "));

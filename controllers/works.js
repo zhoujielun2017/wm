@@ -1,8 +1,24 @@
 var Works=require("../model/Works");
 var PageUtil=require("../util/PageUtil");
-module.exports = {
-    //产品列表页
-    'GET /works': async (ctx, next) => {
+
+var works_id=async (ctx, next) => {
+        var id = ctx.params.id;
+        var bean = await Works.findById(id);
+        bean.imgs=bean.imgs.split(",");
+        ctx.render('./works/detail.html', {bean:bean});
+
+    },
+    api_works_delete=async (ctx, next) => {
+         
+        var id = ctx.params.id;
+        await Works.destroy({
+          where: {
+            id:id
+          }
+        });
+        ctx.body = {"code":"success"};
+    },
+    works=async (ctx, next) => {
         var user=ctx.session.user;
         var page=ctx.request.query.page||1;
         
@@ -25,8 +41,7 @@ module.exports = {
         );
 
     },
-    //产品添加页
-    'GET /works/add': async (ctx, next) => {
+    works_add=async (ctx, next) => {
         var user=ctx.session.user;
         
         if(!user){
@@ -43,8 +58,7 @@ module.exports = {
         }
         ctx.render('./works/add.html',{bean:works});
     },
-    
-    'POST /api/works': async (ctx, next) => {
+    api_works_add=async (ctx, next) => {
 
         var user=ctx.session.user;
         var title = ctx.request.body.title||'',
@@ -70,7 +84,7 @@ module.exports = {
         
         ctx.body = {"code":"success","id":works.id};
     },
-    'PUT /api/works': async (ctx, next) => {
+    api_works_update=async (ctx, next) => {
          
         var id = ctx.request.body.id||'',
             title = ctx.request.body.title||'',
@@ -97,15 +111,18 @@ module.exports = {
         await works.save();
         
         ctx.body = {"code":"success","id":works.id};
-    },
-    'DELETE /api/works/:id': async (ctx, next) => {
-         
-        var id = ctx.params.id;
-        await Works.destroy({
-          where: {
-            id:id
-          }
-        });
-        ctx.body = {"code":"success"};
     }
+module.exports = {
+    //作品详情页
+    'GET /works/:id': works_id,
+    //产品列表页
+    'GET /works': works,
+    //产品添加页
+    'GET /works/add': works_add,
+    //添加作品
+    'POST /api/works': api_works_add,
+    //更新作品
+    'PUT /api/works': api_works_update,
+    //删除作品
+    'DELETE /api/works/:id': api_works_delete
 };

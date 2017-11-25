@@ -1,5 +1,6 @@
 
-var loginUrl=["/user/center","/manage/user","/manage/users","/cooperation","/api/cooperation"];
+var loginUrl=["/user/center","/manage/user","/manage/users",
+"/cooperation","/api/cooperation"];
 function contains(arr, obj) {  
     var i = arr.length;  
     while (i--) {  
@@ -17,7 +18,7 @@ function loginController() {
         if(~url.indexOf("?")){
             url=url.substring(0,url.indexOf("?"))
         }
-        console.log("登陆判断",url);
+        
         if(contains(loginUrl,url)){
            var user=ctx.session.user;
             if(!user){
@@ -26,8 +27,8 @@ function loginController() {
                 return ;
                 
             }
-        
         }
+        console.log("登陆判断通过",url);
         await next();
     };
 }
