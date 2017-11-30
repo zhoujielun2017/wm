@@ -6,6 +6,19 @@ var Factory=require("../model/Factory"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
 
+var i18n_majors={
+    "brass": "铜",
+	"zink": "锌",
+	"chain": "链条",
+	"ribbon": "丝带和绳子",
+	"semi": "天然石",
+	"glass": "玻璃",
+	"resin": "树脂",
+	"acrylic": "亚克力",
+	"pearl": "珍珠",
+	"shall": "贝壳",
+    "wood": "木头"
+}
 var factorys = async (ctx, next) => {
     var page=ctx.request.query.page||1;
     var result = await Factory.findAndCountAll({
@@ -275,6 +288,13 @@ var factory_id=async (ctx, next) => {
         var search=[];
         search.push(name.replace(","," "));
         search.push(factory.major?factory.major.replace(","," "):"");
+        var majors = factory.major.split(",");
+        for (var i = 0,len1=majors.length; i < len1; i++) {
+            var m=majors[i];
+            search.push(i18n_majors[m]);
+        }
+        
+
         var len=cops?cops.length:0;
          for (var i = 0; i < len; i++) {
             search.push(cops[i].name.replace(","," "));
@@ -332,8 +352,20 @@ var factory_id=async (ctx, next) => {
             });
         }
         
+        
         var factory = await Factory.findById(id);
-        factory.search=factory.name.replace(","," ")+","+majors+","+namearr;
+        //处理搜索字段
+        var search=[];
+        search.push(factory.name.replace(","," "));
+        search.push(majors);
+        var majorArr = majors.split(",");
+        for (var i = 0,len1=majorArr.length; i < len1; i++) {
+            var m=majorArr[i];
+            search.push(i18n_majors[m]);
+        }
+        search.push(namearr);
+
+        factory.search=search.join(",");
         factory.acreage=acreage;
         factory.type_per_month=type_per_month;
         factory.count_person=count_person;

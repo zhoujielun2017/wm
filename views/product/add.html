@@ -48,10 +48,8 @@
         </div>
         <div class="fileselect">
            <label for="uploadfile" class="glyphicon glyphicon-plus"></label>
-         
-
-       
         </div>
+        <div class="imgtip" style="display:none;">the image can not be empty</div>
     </div>
   </div>
    <input type="hidden" name="imgs">
@@ -133,36 +131,6 @@ if(imgCount>=10){
     }
   })
 
-// $("#filewwwww").on("change",function(){
-//     console.log("change")
-
-
-//     $.ajaxFileUpload({
-//       url: '/file',
-//       secureuri: false,
-//       fileElementId:"file",
-//       data: {                    
-//           'name': 'carlcarl',
-//       },
-//       dataType:"json",
-//       success:function(json, status ){
-//         // console.log("success",json, status )
-        // setTimeout(function(){
-
-        //    $(".imgs").append('<div><img src="'+json.url+'!300x300" class="img-thumbnail"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
-        //     '<input type="hidden" name="img" value="'+json.path+'"></div>')
-        //     // console.log(json);
-        //     imgCount++;
-        //     if(imgCount>=10){
-        //       $(".fileselect").hide();
-        //   }
-
-        // },1000)
-        
-//       }
-//     });
-
-//   })
 $(".imgs").on("click",".glyphicon-trash",function(){
   $(this).parent("div").remove();
 });
@@ -177,7 +145,11 @@ $("form.form-horizontal").on('submit',function(e){
     $("input[name=img]").each(function(){
       imgs.push(this.value);
     })
-
+    if(!imgs.length){
+        alert("image can not be empty");
+        return false;
+    }
+    alert("sss")
      $this.find("input[name=imgs]").val(imgs.join(","));
     var data=$this.serialize();
 
@@ -200,8 +172,5 @@ $("form.form-horizontal").on('submit',function(e){
 
     return false;
 });
-
-
-
 </script>  
 {% endblock %}
