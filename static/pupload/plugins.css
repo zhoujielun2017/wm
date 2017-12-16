@@ -1,0 +1,54 @@
+/*上传插件*/
+.filelabel{
+    display: inline-block;
+    position: relative;
+    width: 80px !important;
+    height: 80px !important;
+    border: 1px dashed #ddd;
+    line-height: 69px !important;
+    text-align: center;
+    font-size: 69px !important;
+    color: #aaa;
+    cursor: pointer;
+    font-weight: normal;
+}
+.filelabel:hover{
+    background: #e6f4ff;
+    border: 1px solid #e6f4ff;
+}
+.filelabel input{
+    opacity: 0;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    z-index: 1;
+    top:0;
+    left: 0;
+
+}
+
+.uploadImgUL li{ width: 80px;height: 80px;    display: inline-block;
+    list-style-type: none; float: left;position: relative;margin-right: 5px;}
+.uploadImgDiv li div{
+        text-align: center;
+        background: #ccc;
+            height: 100%;
+    line-height: 80px;
+    }
+.uploadImgUL li img{width: 100%;height: 100%;}
+.uploadImgUL {padding: 0;float: left;}
+.uploadImgUL li .kv-file-remove{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+	background:url(../upload/m-close.png) no-repeat;
+    background-position: -2px -3px;
+    width:20px;height:20px;background-size:24px auto;
+	border:none;
+    background-color: #FFF;
+}
+.uploadImgUL li .kv-file-remove::before,.uploadImgUL li .kv-file-remove::after {}
+.uploadImgUL li:hover .kv-file-remove{
+    display: block;
+}
+.uploadImgUL li:hover{}

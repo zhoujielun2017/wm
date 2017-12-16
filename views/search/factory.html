@@ -15,15 +15,16 @@
             <form action="/search/result" class="form-inline" method="get">
                 <div class="form-group">
                     <select class="form-control" name="type">
+                        <option value="factory"  selected>
+                            {{__('factory')}}
+                        </option>
                         <option value="seller">
                             {{__('seller')}}
                         </option>
                         <option value="agency">
                             {{__('agency')}}
                         </option>
-                        <option value="factory"  selected>
-                            {{__('factory')}}
-                        </option>
+                       
                         <option value="design">
                             {{__('design')}}
                         </option>
@@ -59,6 +60,7 @@
                     {{e.name}}
                 </a>
             </h4>
+            <p>{{e.ename}}</p>
             <p>
                 {{__('location')}}:
                 {% for d in e.areas %}

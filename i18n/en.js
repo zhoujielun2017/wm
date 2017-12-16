@@ -149,5 +149,7 @@
 	"acrylic": "acrylic",
 	"pearl": "pearl",
 	"shall": "shall",
-	"wood": "wood"
+	"wood": "wood",
+	"only show vip": "only show vip",
+	"send message": "send message"
 }

@@ -19,6 +19,9 @@
             <form action="/search/result" class="form-inline" method="get">
                 <div class="form-group">
                     <select class="form-control" name="type">
+                        <option value="design" selected>
+                            {{__('design')}}
+                        </option>
                         <option value="seller">
                             {{__('seller')}}
                         </option>
@@ -28,9 +31,7 @@
                         <option value="factory">
                             {{__('factory')}}
                         </option>
-                        <option value="design" selected>
-                            {{__('design')}}
-                        </option>
+                       
                     </select>
                 </div>
                 <div class="form-group">
