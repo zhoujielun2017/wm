@@ -102,5 +102,6 @@ a.red{color: #ff0000;}
 .about-text p{text-align: left;font-size: 16px;color: #222;}
 .btn-height{height: 40px;line-height: 40px;}
 .contentText p{line-height: 26px;font-size: 16px;margin: 10px 0px;}
-
+.searchWord{color: #999;margin: 20px 0px 0px 15px;}
+.searchWord span{margin-right: 6px;}
 
