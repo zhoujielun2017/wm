@@ -60,15 +60,15 @@
   <div>
     {{__('company summary')}}:{{bean.content}}
   </div>
-  <h3>{{__('product')}}</h3>
+  <h3 style="margin-bottom: 30px;">{{__('product')}}</h3>
   {% for e in pros.rows %}
   
-  {% if loop.index0%2==0 %}
+  {% if loop.index0%3==0 %}
   <div class="row">
   {% endif %}
-  <div class="col-xs-6">
+  <div class="col-xs-4">
     <div class="row list">
-        <div class="col-xs-4 col-md-4 proimg">
+        <div class="col-xs-8 col-md-8">
             <a href="/product/{{e.id}}">
                 {% if e.default_img %}
                  <img class="img-thumbnail" src="{{img_domain}}{{e.default_img}}!300x300"/>
@@ -78,17 +78,18 @@
             </a>
         </div>
         <div class="col-xs-8 col-md-8">
-             <h4>
+             <h3>
                 <a href="/product/{{e.id}}">
                     {{e.title}}
                 </a>
-            </h4>
+            </h3>
+            <p style="font-size: 16px;font-weight: bold;color: #dc9600;">{{__('price')}}: ${{e.price}} </p>
             <p>{{__('material')}}: {{e.material}}</p>
-            <p>{{__('price')}}: ${{e.price}} </p>
+
         </div>
     </div>
   </div>
-  {% if loop.index%2==0 %}
+  {% if loop.index%3==0 %}
   </div>
   {% endif %}
   {% endfor %}

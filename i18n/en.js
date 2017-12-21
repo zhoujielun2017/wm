@@ -66,6 +66,7 @@
 	"price": "price",
 	"material": "material",
 	"title": "title",
+	"style": "style",
 	"image": "image",
 	"order info": "order info",
 	"order id": "order id",

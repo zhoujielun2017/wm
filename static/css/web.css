@@ -57,7 +57,7 @@ html, body {
 .footer, .page-wrap:after {
     height: 70px;
 }
-.logo{margin: 20px 60px 0 0;}
+.logo{margin: 25px 60px 0 0;}
 .navcon{font-size: 16px;}
 .indexbg{background: url("../images/wmap.png") no-repeat center center;width:1101px;height: 506px; z-index: -1;padding-top: 20px;margin:40px auto 0px;}
 .book{background: url("../images/book.png") no-repeat center center;width: 203px;height: 164px;margin: 50px auto 0px;}
