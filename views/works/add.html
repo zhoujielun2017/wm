@@ -45,11 +45,13 @@
             <div class=" col-sm-10">
                 <div class="imgs">
                     {% for e in bean.imgs %}
-                    <div>
-                    <img class="img-thumbnail" src="{{img_domain}}{{e}}"/>
-                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                    <input name="img" type="hidden" value="{{e}}"/>
-                    </div>
+                        {% if e %}
+                        <div>
+                        <img class="img-thumbnail" src="{{img_domain}}{{e}}"/>
+                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                        <input name="img" type="hidden" value="{{e}}"/>
+                        </div>
+                        {% endif %}
                     {% endfor %}
                      
                 </div>
@@ -154,7 +156,9 @@ $("form.form-horizontal").on('submit',function(e){
     })
     $this.find("input[name=imgs]").val(imgs.join(","));
     var data=$this.serialize();
-
+    if(!$this.valid()){
+        return false;
+    }
     $.ajax({
         type: method,
         url: "/api/works",

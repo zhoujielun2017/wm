@@ -112,6 +112,18 @@ var designs=async (ctx, next) => {
                 user_id:user.id
             }
         });
+        if(!design){
+            design = await Design.create({
+                user_id:user.id,
+                name: "",
+                gender:1,
+                age:0,
+                status:1,
+                major:"",
+                area:"",
+                content:""
+            });
+        }
         //工作经验
         var exps= await DesignExp.findAll({
            where:{

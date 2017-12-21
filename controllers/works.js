@@ -4,7 +4,9 @@ var PageUtil=require("../util/PageUtil");
 var works_id=async (ctx, next) => {
         var id = ctx.params.id;
         var bean = await Works.findById(id);
-        bean.imgs=bean.imgs.split(",");
+        if(bean&&bean.imgs){
+            bean.imgs=bean.imgs.split(",");
+        }
         ctx.render('./works/detail.html', {bean:bean});
 
     },
@@ -113,12 +115,13 @@ var works_id=async (ctx, next) => {
         ctx.body = {"code":"success","id":works.id};
     }
 module.exports = {
-    //作品详情页
-    'GET /works/:id': works_id,
+   
     //产品列表页
     'GET /works': works,
     //产品添加页
     'GET /works/add': works_add,
+     //作品详情页
+     'GET /works/:id': works_id,
     //添加作品
     'POST /api/works': api_works_add,
     //更新作品

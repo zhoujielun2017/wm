@@ -22,7 +22,7 @@
    <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('create time')}}</label>
     <div class="col-sm-10">
-      <input type="text" name="build_time2" value="{{bean.build_time|formatdate('YYYY-MM-DD')}}" class="form-control" placeholder="{{__('create time')}}">
+      <input type="text" name="build_time2" value="{{bean.build_time|formatdate('YYYY-MM-DD')}}" class="form-control" placeholder="YYYY-MM-DD">
     </div>
   </div>
  
@@ -80,18 +80,18 @@
 <script>
 var city=$(".city").city();  
 
-var locale=$.cookie('locale')||'en'; 
-   $('[name=build_time2]').datetimepicker({
-        language:  locale,
-        format: 'yyyy-mm-dd',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		minView: 2,
-		forceParse: 0
-    });
+// var locale=$.cookie('locale')||'en'; 
+//    $('[name=build_time2]').datetimepicker({
+//         language:  locale,
+//         format: 'yyyy-mm-dd',
+//         weekStart: 1,
+//         todayBtn:  1,
+// 		autoclose: 1,
+// 		todayHighlight: 1,
+// 		startView: 2,
+// 		minView: 2,
+// 		forceParse: 0
+//     });
 
 var valid_en={  
     name: {
@@ -163,18 +163,7 @@ $("form").on('submit',function(e){
         type: method,
         url: "/api/factory",
         data:data,
-      //   data:{id:fd.get('id'),
-	    //     name:fd.get('name'),
-	    //     ename:fd.get('ename'),
-	    //     phone:fd.get('phone'),
-	    //     address:fd.get('address'),
-	    //     email:fd.get('email'),
-	    //     custom_service:fd.get('custom_service'),
-	    //     content:fd.get('content'),
-	    //     legal_person:fd.get('legal_person'),
-	    //     create_time:fd.get('create_time'),
-      //     area:"_"+area.join("_")+"_"
-    	// },
+
         dataType:"json",
         success:function(json){
             if(json.code=='success'){

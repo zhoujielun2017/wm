@@ -102,11 +102,17 @@ var factory_id=async (ctx, next) => {
         
         var pros = await Product.findAndCountAll({
             where: {
-                
+                user_id:factory.user_id
             },
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
+        for(var i,len=pros.rows.length;i<len;i++){
+            var bean=pros.rows[i];
+            bean.price=(bean.price/100).toFixed(2)
+        }
+        
+
         ctx.render('./company/factory.html',{
             bean:factory,
             factorys:factorys,
