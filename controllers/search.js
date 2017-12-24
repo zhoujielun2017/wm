@@ -9,7 +9,10 @@ var Agency=require("../model/Agency"),
 
 var search_facotry=async (ctx, next) => {
         var page=ctx.request.query.page||1,
-            q=ctx.request.query.q&&q.trim();
+            q=ctx.request.query.q;
+            if(q){
+                q=q.trim();
+            }
         var result = await Factory.findAndCountAll({
             where: {
                 $or: [
