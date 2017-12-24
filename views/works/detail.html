@@ -2,7 +2,11 @@
 
 {% block head %}
 <style type="text/css">
-
+.blog-header h1{margin-bottom: 15px;}
+.blog-header p{margin-bottom: 30px;}
+.blog-header p span{margin-right: 10px;}
+.row{text-align: center;}
+.row img{text-align: center;margin: 0 auto 15px;}
 </style>
 {% endblock %}
 
@@ -12,25 +16,21 @@
       
   <ol class="breadcrumb">
     <li><a href="/">Home</a></li>
-   
+    <li><a href="/designs">Designer</a></li>
     <li class="active">detail</li>
   </ol>
       <div class="blog-header">
         <h1 class="blog-title">{{bean.title}}</h1>
-        
+        <p><span> {{__('price')}}:{{bean.price}}</span><span>{{__('material')}}:{{bean.material}}</span></p>
       </div>
 
       <div class="row">
-
-        <div class="col-sm-8 blog-main">
-          {{__('price')}}:{{bean.price}}
-        {{__('material')}}:{{bean.material}}
         {% for e in bean.imgs %}
-          <img src="{{img_domain}}{{e}}!300x300" class="img-thumbnail"/>
+            <p><img src="{{img_domain}}{{e}}"/></p>
           {% endfor %}
           
 
-        </div><!-- /.blog-main -->
+        <!-- /.blog-main -->
 
        
       </div><!-- /.row -->
@@ -38,7 +38,7 @@
     </div><!-- /.container -->
 
 
-
+</div>
 {% endblock %}
 
 {% block foot %}
