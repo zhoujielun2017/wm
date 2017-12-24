@@ -46,9 +46,14 @@
     <div class="col-xs-6">
       <p>{{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
       <p>{{__('cooperation customer name')}}:
-      {% for d in customers %}{{d.name}} {% endfor %}
+      {% for d in customers %}
+      <p>{{d.name}} </p>
+      {% endfor %}
       </p>
-      <p>{{__('cooperation factory name')}}:{% for d in factorys %}{{d.name}} {% endfor %}
+      <p>{{__('cooperation factory name')}}:
+        {% for d in factorys %}
+        <p>{{d.name}} </p>
+        {% endfor %}
        </p>
        <p>{{__('company acreage')}}:{{bean.acreage}} {{__('square meters')}}</p>
       <p>{{__('type per month')}}:{{bean.type_per_month}} {{__('pcs')}}</p>

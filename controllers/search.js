@@ -12,9 +12,11 @@ var search_facotry=async (ctx, next) => {
             q=ctx.request.query.q;
         var result = await Factory.findAndCountAll({
             where: {
-                search:{
-                    "$like":"%"+q+"%"
-                }
+                $or: [
+                    {search:{"$like":"%"+q+"%"}},
+                    {name: {"$like":"%"+q+"%"}},
+                    {ename: {"$like":"%"+q+"%"}}
+                ]
             },
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
