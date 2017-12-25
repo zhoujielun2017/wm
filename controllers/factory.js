@@ -37,7 +37,7 @@ var factorys = async (ctx, next) => {
         }
         var cops = await Cooperation.findAll({
             where:{
-                user_id:bean.user_id
+                factory_id:bean.id
             },
             order: [['create_time', 'DESC']]
         });
@@ -292,14 +292,14 @@ var factory_id=async (ctx, next) => {
             }
         });
         var search=[];
-        search.push(name.replace(","," "));
-        search.push(factory.major?factory.major.replace(","," "):"");
-        var majors = factory.major.split(",");
-        for (var i = 0,len1=majors.length; i < len1; i++) {
-            var m=majors[i];
-            search.push(i18n_majors[m]);
+        if(factory.major){
+            search.push(factory.major?factory.major.replace(","," "):"");
+            var majors = factory.major.split(",");
+            for (var i = 0,len1=majors.length; i < len1; i++) {
+                var m=majors[i];
+                search.push(i18n_majors[m]);
+            }
         }
-        
 
         var len=cops?cops.length:0;
          for (var i = 0; i < len; i++) {
