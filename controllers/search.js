@@ -33,7 +33,7 @@ var search_facotry=async (ctx, next) => {
             }
             var cops = await Cooperation.findAll({
                 where:{
-                    user_id:bean.user_id
+                    factory_id:bean.id
                 },
                 order: [['create_time', 'DESC']]
             });
