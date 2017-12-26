@@ -24,21 +24,20 @@ var designs=async (ctx, next) => {
             }
            
 
-            if(bean.area){
-                bean.area=bean.area.split("_");
-            }else{
-                bean.area=[];
-            }
+            // if(bean.area){
+            //     bean.area=bean.area.split("_");
+            // }else{
+            //     bean.area=[];
+            // }
             // console.log("bean.area",bean.area);
-            var areas = await City.findAll({
-                where:{
-                    id:{
-                    "$in":bean.area
-                    }
-                }
-                
-            });
-            bean.areas=areas;
+            // var areas = await City.findAll({
+            //     where:{
+            //         id:{
+            //         "$in":bean.area
+            //         }
+            //     }
+            // });
+            // bean.areas=areas;
             var exps = await DesignExp.findAll({
                 where:{
                     design_id:bean.id
@@ -63,21 +62,21 @@ var designs=async (ctx, next) => {
             design.brand=design.brand.split(",");
         }
         
-        if(design.area){
-            design.area=design.area.split("_");
-        }else{
-            design.area=[];
-        }
+        // if(design.area){
+        //     design.area=design.area.split("_");
+        // }else{
+        //     design.area=[];
+        // }
         
         // console.log("design.area",design.area);
-        var areas = await City.findAll({
-            where:{
-                id:{
-                "$in":design.area
-                }
-            }
+        // var areas = await City.findAll({
+        //     where:{
+        //         id:{
+        //         "$in":design.area
+        //         }
+        //     }
             
-        });
+        // });
         var exps = await DesignExp.findAll({
             where:{
                 design_id:id
@@ -89,7 +88,7 @@ var designs=async (ctx, next) => {
         var user = await User.findById(design.user_id);
         design.head=user&&user.head_url;
 
-        design.areas=areas;
+        // design.areas=areas;
          var workses = await Works.findAndCountAll({
             where: {
                 user_id:design.user_id

@@ -36,9 +36,9 @@
       <p>{{__('company address')}}:{{bean.address}}</p>
     </div>
     <div class="col-xs-6">
-      <p>{{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
+      <p>{{__('build time')}}:{{bean.create_time|formatdate("YYYY")}}</p>
      <!--  <p>{{__('count of shop')}}:{{bean.count_shop}}</p> -->
-      <p>{{__('cooperation brand')}}:{% for d in bean.brand %}{{d}} {% endfor %}
+      <p>{{__('cooperation brand')}}:{{bean.brand}}
        </p>
       <p>{{__('purchase per year')}}:{{bean.purchase_per_year}} {{__('unit money')}}</p>
       <!-- <p>{{__('firsthand')}}:{{bean.firsthand}}</p> -->

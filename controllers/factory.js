@@ -107,9 +107,11 @@ var factory_id=async (ctx, next) => {
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
-        for(var i,len=pros.rows.length;i<len;i++){
+        for(var i=0,len=pros.rows.length;i<len;i++){
             var bean=pros.rows[i];
-            bean.price=(bean.price/100).toFixed(2)
+          
+            bean.price=(bean.price/100).toFixed(2);
+           
         }
         
 

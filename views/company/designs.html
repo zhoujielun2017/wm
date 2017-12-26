@@ -25,10 +25,7 @@
             </h4>
             <div class="rightinfo"><a href="/message/{{e.user_id}}" class="talk"></a> <a href="/design/{{e.id}}" class="more"></a></div>
             <div class="clear"></div>
-            <p>{{__('location')}}:
-               {% for d in e.areas %}
-            {{d.name}}
-            {% endfor %}
+            <p>{{__('location')}}:{{e.area}}
             </p>
 
             {% for d in e.exps %}

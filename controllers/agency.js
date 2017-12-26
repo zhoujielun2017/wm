@@ -18,9 +18,9 @@ var agencys=async (ctx, next) => {
         });
         for (var i = 0,len=result.count; i < len; i++) {
             var bean=result.rows[i];
-            if(bean.brand){
-                bean.brand=bean.brand.split(",");
-            }
+            // if(bean.brand){
+            //     bean.brand=bean.brand.split(",");
+            // }
             if(bean.area){
                 bean.area=bean.area.split("_");
             }else{
@@ -48,9 +48,9 @@ var agencys=async (ctx, next) => {
     var agency_id=async (ctx, next) => {
         var id=ctx.params.id||1;
         var bean = await Agency.findById(id);
-        if(bean&&bean.brand){
-            bean.brand=bean.brand.split(",");
-        }
+        // if(bean&&bean.brand){
+        //     bean.brand=bean.brand.split(",");
+        // }
         var user = await User.findById(bean.user_id);
         bean.head=user&&user.head_url;
         ctx.render('./company/agency.html',{bean:bean});
