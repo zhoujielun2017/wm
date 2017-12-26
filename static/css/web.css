@@ -59,7 +59,7 @@ html, body {
 }
 .logo{margin: 25px 60px 0 0;}
 .navcon{font-size: 16px;}
-.indexbg{background: url("../images/wmap.png") no-repeat center center;width:1101px;height: 506px; z-index: -1;padding-top: 20px;margin:40px auto 0px;}
+.indexbg{background: url("../images/wmap.png") no-repeat center center;width:1101px;height: 506px;padding-top: 20px;margin:40px auto 0px;}
 .book{background: url("../images/book.png") no-repeat center center;width: 203px;height: 164px;margin: 50px auto 0px;}
 .loginnow{width: 140px;height: 52px;margin: 20px auto;box-shadow:0 6px 20px 0 rgba(255,201,0,.16)}
 .loginnow a{display: block;font-size: 14px;text-align: center;line-height: 52px;background: #ffc900;color: #222;}
@@ -104,4 +104,7 @@ a.red{color: #ff0000;}
 .contentText p{line-height: 26px;font-size: 16px;margin: 10px 0px;}
 .searchWord{color: #999;margin: 20px 0px 0px 15px;}
 .searchWord span{margin-right: 6px;}
+.fc999{color: #999;}
+.mr5{margin-right: 5px;}
+.indexC{width: 800px;margin: 0 auto;}
 

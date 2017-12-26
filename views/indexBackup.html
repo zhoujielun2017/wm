@@ -1,0 +1,48 @@
+{% extends './toolbar_index.html' %}
+
+{% block head %}
+<style type="text/css">
+footer{
+    height: 50px;
+    background: #333;
+}
+</style>
+{% endblock %}
+
+{% block main %}
+
+<div class="jumbotron masthead">
+    <div class="container indexbg">
+    <!-- <div class="bg"> -->
+        <h2 class="text-center">{{__('index title')}}</h2>
+        <p></p>
+        <div class="book"></div>
+    <!-- </div> -->
+    </div>
+</div>
+<div class="newsbg">
+    <div class="container">
+        <div class="row">
+        <div class="col-md-4">
+            <img src="/images/newpic.jpg" alt="">
+        </div>
+        <div class="col-md-7">
+            <h4 class="title"><span></span>{{__('index articles')}}<i></i></h4>
+            <ul class="list-news">
+               {% for e in articles  %}
+               <li>
+                   <a href="/article/{{e.id}}">{{e.title}}</a>
+                   </li>
+                {% endfor %}
+            </ul>
+            <p class="text-right"><a href="/articles">{{__('more')}}</a></p>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block foot %}
+<script></script>  
+{% endblock %}

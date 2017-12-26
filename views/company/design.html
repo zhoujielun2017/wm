@@ -33,30 +33,28 @@
 
     <div>
         <p>
-            {{__('age')}}:{{bean.age}}   
+            <span class="fc999 mr5">{{__('age')}}:</span>{{bean.age}}
         </p>
         <p>
-            {{__('gender')}}:
+            <span class="fc999 mr5">{{__('gender')}}:</span>
             {% if bean.gender==0%}女{% endif %}
             {% if bean.gender==1%}男{% endif %}
         </p>
         <p>
-            {{__('status')}}:{{__(bean.status)}}
+            <span class="fc999 mr5">{{__('status')}}:</span>{{__(bean.status)}}
         </p>
-        <p>{{__('location')}}:
-             
+        <p><span class="fc999 mr5"></span>{{__('location')}}:</span>
             {{bean.area}}
-          
         </p>
         <p>
-            {{__('major')}}:{{bean.major}}
+            <span class="fc999 mr5">{{__('major')}}:</span>{{bean.major}}
         </p>
 
         {% for d in bean.exps %}
-         <p>{{__('work experience')}}: {{d.experience}} </p>
+         <p><span class="fc999 mr5">{{__('work experience')}}:</span> {{d.experience}} </p>
         {% endfor %}
 
-        <p>{{__('design content')}}:{{e.content}}</p>   
+        <p><span class="fc999 mr5">{{__('design content')}}:</span>{{e.content}}</p>
     </div>
 
     <h3>ta的作品</h3>
@@ -95,6 +93,7 @@
             {{page.html}}
         </ul>
     </nav>
+</div>
 </div>
 </div>
 {% endblock %}
