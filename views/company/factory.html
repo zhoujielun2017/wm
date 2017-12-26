@@ -32,38 +32,38 @@
   </div>
    <div class="row">
     <div class="col-xs-6">
-      <p>{{__('company custom service')}}:{{bean.custom_service}}   {{bean.position}}</p>
-      <p>{{__('company phone')}}:{{bean.phone}}</p>
+      <p><span class="fc999 mr5">{{__('company custom service')}}:</span>{{bean.custom_service}}   {{bean.position}}</p>
+      <p><span class="fc999 mr5">{{__('company phone')}}:</span>{{bean.phone}}</p>
      <!--  <p>{{__('offical website')}}:{{bean.offical_website}}</p> -->
-      <p>{{__('company email')}}:{{bean.email}}</p>
-      <p>{{__('company legal person')}}:{{bean.legal_person}}</p>
-      <p>{{__('company address')}}:{{bean.address}}</p>
-      <p>{{__('company major')}}:
+      <p><span class="fc999 mr5">{{__('company email')}}:</span>{{bean.email}}</p>
+      <p><span class="fc999 mr5">{{__('company legal person')}}:</span>{{bean.legal_person}}</p>
+      <p><span class="fc999 mr5">{{__('company address')}}:</span>{{bean.address}}</p>
+      <p><span class="fc999 mr5">{{__('company major')}}:</span>
  {% for d in bean.major %}{{__('major_'+d)}} {% endfor %}
       </p>
-
+      <p><span class="fc999 mr5">{{__('produce per month')}}:</span>{{bean.able_per_month}} {{__('pcs')}}</p>
     </div>
     <div class="col-xs-6">
-      <p>{{__('build time')}}:{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
-      <p>{{__('cooperation customer name')}}:
+      <p><span class="fc999 mr5">{{__('build time')}}:</span>{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
+      <p><span class="fc999 mr5">{{__('cooperation customer name')}}:</span>
       {% for d in customers %}
-      <p>{{d.name}} </p>
+      <span class="mr5">{{d.name}} </span>
       {% endfor %}
       </p>
-      <p>{{__('cooperation factory name')}}:
+      <p><span class="fc999 mr5">{{__('cooperation factory name')}}:</span>
         {% for d in factorys %}
-        <p>{{d.name}} </p>
+        <span class="mr5">{{d.name}} </span>
         {% endfor %}
        </p>
-       <p>{{__('company acreage')}}:{{bean.acreage}} {{__('square meters')}}</p>
-      <p>{{__('type per month')}}:{{bean.type_per_month}} {{__('pcs')}}</p>
-      <p>{{__('produce person')}}:{{bean.count_person}} {{__('persons')}}</p>
-      <p>{{__('QC person')}}:{{bean.count_qc}} {{__('persons')}}</p>
-      <p>{{__('produce per month')}}:{{bean.able_per_month}} {{__('pcs')}}</p>
+       <p><span class="fc999 mr5">{{__('company acreage')}}:</span>{{bean.acreage}} {{__('square meters')}}</p>
+      <p><span class="fc999 mr5">{{__('type per month')}}:</span>{{bean.type_per_month}} {{__('pcs')}}</p>
+      <p><span class="fc999 mr5">{{__('produce person')}}:</span>{{bean.count_person}} {{__('persons')}}</p>
+      <p><span class="fc999 mr5">{{__('QC person')}}:</span>{{bean.count_qc}} {{__('persons')}}</p>
+
     </div>
   </div>
   <div>
-    {{__('company summary')}}:{{bean.content}}
+    <span class="fc999 mr5">{{__('company summary')}}:</span>{{bean.content}}
   </div>
   <h3 style="margin-bottom: 30px;">{{__('product')}}</h3>
   {% for e in pros.rows %}

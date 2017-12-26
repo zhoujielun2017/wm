@@ -25,17 +25,16 @@
             </h4>
             <div class="rightinfo"><a href="/message/{{e.user_id}}" class="talk"></a> <a href="/design/{{e.id}}" class="more"></a></div>
             <div class="clear"></div>
-            <p>{{__('location')}}:
+            <p><span class="fc999 mr5">{{__('location')}}:</span>
                {% for d in e.areas %}
             {{d.name}}
             {% endfor %}
             </p>
-
             {% for d in e.exps %}
-                <p>{{__('work experience')}}:{{d.experience}}</p>
+                <p><span class="fc999 mr5">{{__('work experience')}}:</span><span class="mr5">{{d.experience}}</span></p>
             {% endfor %}
             
-            <p>{{__('design content')}}:{{e.content}}</p>      
+            <p><span class="fc999 mr5">{{__('design content')}}:</span>{{e.content}}</p>
         </div>
     </div>
     {% endfor %}

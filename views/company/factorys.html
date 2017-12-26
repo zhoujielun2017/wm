@@ -29,7 +29,7 @@
             <p>{{e.ename}}</p>
             <p>
                 
-                 {{__('cooperation customer name')}}:
+                 <span class="fc999 mr5">{{__('cooperation customer name')}}:</span>
                 {% for d in e.cops %}
                     {% if d.type=="seller" %}
                     {{d.name}}
@@ -38,7 +38,7 @@
             </p>
             <p>
                
-                {{__('cooperation factory name')}}:
+                <span class="fc999 mr5">{{__('cooperation factory name')}}:</span>
                 {% for d in e.cops %}
                     {% if d.type=="factory" %}
                     {{d.name}}
@@ -47,7 +47,7 @@
             </p>
             <p>
 
-                 {{__('company major')}}:{% for d in e.major %}{{__('major_'+d)}}{% endfor %}
+                 <span class="fc999 mr5">{{__('company major')}}:</span>{% for d in e.major %}&nbsp;&nbsp;{{__('major_'+d)}}{% endfor %}
                 
             </p>
         </div>

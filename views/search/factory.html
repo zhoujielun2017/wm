@@ -43,6 +43,7 @@
     </div>
 </nav>
 <div class="container">
+    <div class="bk20"></div>
    {% for e in result.rows %}
     <div class="row list">
         <div class="col-xs-3 col-md-3">
@@ -54,21 +55,22 @@
                 {% endif %}
             </a>
         </div>
+
         <div class="col-xs-7 col-md-7">
-            <h4 class="media-heading">
+            <h4>
                 <a href="/factory/{{e.id}}">
                     {{e.name}}
                 </a>
             </h4>
             <p>{{e.ename}}</p>
-            <p>
-                {{__('location')}}:
+            <!--<p>
+                <span class="fc999 mr5">{{__('location')}}:</span>
                 {% for d in e.areas %}
                 {{d.name}}
                 {% endfor %}
-            </p>
+            </p>-->
             <p>
-                {{__('cooperation customer name')}}:
+               <span class="fc999 mr5"> {{__('cooperation customer name')}}:</span>
                 {% for d in e.cops %}
                     {% if d.type=="seller" %}
                     {{d.name}}
@@ -76,7 +78,7 @@
                 {% endfor %}
             </p>
             <p>
-                {{__('cooperation factory name')}}:
+               <span class="fc999 mr5"> {{__('cooperation factory name')}}:</span>
                 {% for d in e.cops %}
                     {% if d.type=="factory" %}
                     {{d.name}}
@@ -85,7 +87,7 @@
             </p>
             <p>
                 
-                {{__('company major')}}:{% for d in e.major %}{{__('major_'+d)}} {% endfor %}
+               <span class="fc999 mr5"> {{__('company major')}}</span>{% for d in e.major %}{{__('major_'+d)}} {% endfor %}
                 
             </p>
         </div>
