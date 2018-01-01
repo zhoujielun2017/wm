@@ -3522,7 +3522,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 .navbar {
     position:relative;
     min-height:84px;
-    margin-bottom:20px;
+    margin-bottom:0px;
     border-bottom:1px solid #ffc900;
 }
 @media (min-width:768px) {
