@@ -16,7 +16,7 @@
                 {{__('name')}}
             </label>
             <div class="col-sm-10">
-                <input class="form-control" name="name" placeholder="{{__('name')}}" type="text" value="{{bean.name}}" maxlength="20">
+                <input class="form-control" name="name" required  placeholder="{{__('name')}}" type="text" value="{{bean.name}}" maxlength="20">
                 </input>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 {{__('age')}}
             </label>
             <div class="col-sm-10">
-                <input class="form-control" name="age" placeholder="{{__('age')}}" type="number" value="{{bean.age}}">
+                <input class="form-control" name="age" required  placeholder="{{__('age')}}" type="number" value="{{bean.age}}">
                 </input>
             </div>
         </div>
@@ -35,12 +35,12 @@
             </label>
             <div class="col-sm-10">
                 <label class="radio-inline">
-                    <input type="radio" value="1" name="gender" {% if bean.gender==1 %}checked="true"{% endif %}>
+                    <input type="radio" value="1" name="gender"  {% if bean.gender==1 %}checked="true"{% endif %}>
                        {{__('male')}}
                     </input>
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" value="0"  name="gender" {% if bean.gender==0 %}checked="true"{% endif %}>
+                    <input type="radio" value="0"  name="gender"  {% if bean.gender==0 %}checked="true"{% endif %}>
                        {{__('female')}}
                     </input>
                 </label>
@@ -51,7 +51,7 @@
                 {{__('status')}}
             </label>
             <div class="col-sm-10">
-              <select class="form-control" name="status">
+              <select class="form-control" name="status"  required >
                 <option value="fulltime"  {% if bean.status=='fulltime' %}selected{% endif %}>{{__('fulltime')}}</option>
                 <option value="parttime" {% if bean.status=='parttime' %}selected{% endif %}>{{__('parttime')}}</option>
               </select>
@@ -62,7 +62,7 @@
                 {{__('major')}}
             </label>
             <div class="col-sm-10">
-                <input class="form-control" name="major" placeholder="{{__('major')}}" type="text" value="{{bean.major}}"  maxlength="100">
+                <input class="form-control" name="major" required  placeholder="{{__('major')}}" type="text" value="{{bean.major}}"  maxlength="100">
                 </input>
             </div>
         </div>
@@ -82,7 +82,7 @@
             </div>
             <div class="col-sm-10">
                 <input type="hidden" name="expid" value="{{e.id}}">
-                <textarea rows="7" class="form-control" name="work_experience" placeholder="{{__('work experience')}}"  maxlength="1000">{{e.experience}}</textarea>
+                <textarea rows="7" class="form-control" name="work_experience" required  placeholder="{{__('work experience')}}"  maxlength="1000">{{e.experience}}</textarea>
             </div>
         </div>
          {% else %}
@@ -99,7 +99,7 @@
             </label>
             <div class="col-sm-10">
                 <input type="hidden" name="expid" value="">
-               <textarea rows="7" class="form-control" name="work_experience" placeholder="{{__('work experience')}}"  maxlength="1000"></textarea>
+               <textarea rows="7" class="form-control" name="work_experience" required  placeholder="{{__('work experience')}}"  maxlength="1000"></textarea>
             </div>
         </div>
         {% endfor %}
@@ -113,7 +113,7 @@
                 {{__('design content')}}
             </label>
             <div class="col-sm-10">
-                <textarea class="form-control" name="content" placeholder="{{__('work experience')}}"  maxlength="1000">{{bean.content}}</textarea>
+                <textarea class="form-control" name="content" required  placeholder="{{__('work experience')}}"  maxlength="1000">{{bean.content}}</textarea>
             </div>
         </div>
         <div class="form-group">
@@ -121,7 +121,7 @@
                 {{__('location')}}
             </label>
             <div class="col-sm-10">
-                    <input type="text" class="form-control" name="area" placeholder="{{__('location')}}"  maxlength="100" value="{{bean.area}}"/>                
+                    <input type="text" class="form-control" name="area" required  placeholder="{{__('location')}}"  maxlength="100" value="{{bean.area}}"/>                
             </div>
             <!-- <div class="col-sm-10">
               <div class="row city" data-area="{{bean.area}}">

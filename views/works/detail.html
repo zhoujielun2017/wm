@@ -21,7 +21,7 @@
   </ol>
       <div class="blog-header">
         <h1 class="blog-title">{{bean.title}}</h1>
-        <p><span> {{__('price')}}:{{bean.price}}</span><span>{{__('material')}}:{{bean.material}}</span></p>
+        <p><span> {{__('price')}}:{{bean.price|fmoney}}</span><span>{{__('material')}}:{{bean.material}}</span></p>
       </div>
 
       <div class="row">

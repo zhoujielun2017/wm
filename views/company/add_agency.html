@@ -10,71 +10,71 @@
   <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('company name')}}</label>
     <div class="col-sm-10">
-      <input type="text" name="name" value="{{bean.name}}" class="form-control" placeholder="{{__('company name')}}">
+      <input type="text" name="name" value="{{bean.name}}" required class="form-control" placeholder="{{__('company name')}}">
     </div>
   </div>
   <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('company english name')}}</label>
     <div class="col-sm-10">
-      <input type="text" name="ename" value="{{bean.ename}}" class="form-control" placeholder="{{__('company english name')}}">
+      <input type="text" name="ename" value="{{bean.ename}}" required class="form-control" placeholder="{{__('company english name')}}">
     </div>
   </div>
   
    <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('offical website')}}</label>
     <div class="col-sm-10">
-      <input type="text" name="offical_website" value="{{bean.offical_website}}" class="form-control" placeholder="{{__('offical website')}}">
+      <input type="text" name="offical_website" value="{{bean.offical_website}}" required class="form-control" placeholder="{{__('offical website')}}">
     </div>
   </div>
      <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('company address')}}</label>
     <div class="col-sm-10">
-      <textarea name="address"  class="form-control" placeholder="{{__('company address')}}">{{bean.address}}</textarea>
+      <textarea name="address"  class="form-control" required placeholder="{{__('company address')}}">{{bean.address}}</textarea>
     </div>
   </div>
      <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('company custom service')}}</label>
     <div class="col-sm-10">
-      <input type="text" name="custom_service" value="{{bean.custom_service}}" class="form-control" placeholder="{{__('company custom service')}}">
+      <input type="text" name="custom_service" value="{{bean.custom_service}}" required class="form-control" placeholder="{{__('company custom service')}}">
     </div>
   </div>
   <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('contact phone')}}</label>
     <div class="col-sm-10">
-      <input type="text" name="phone" value="{{bean.phone}}" class="form-control" placeholder="{{__('contact phone')}}">
+      <input type="text" name="phone" value="{{bean.phone}}" class="form-control" required placeholder="{{__('contact phone')}}">
     </div>
   </div>
    <div class="form-group">
     <label  class="col-sm-2 control-label">twitter</label>
     <div class="col-sm-10">
-      <input type="text" name="twitter" value="{{bean.twitter}}" class="form-control" placeholder="twitter">
+      <input type="text" name="twitter" value="{{bean.twitter}}" class="form-control" required  placeholder="twitter">
     </div>
   </div>
    <div class="form-group">
     <label  class="col-sm-2 control-label">facebook</label>
     <div class="col-sm-10">
-      <input type="text" name="facebook" value="{{bean.facebook}}" class="form-control" placeholder="facebook">
+      <input type="text" name="facebook" value="{{bean.facebook}}" class="form-control" required  placeholder="facebook">
     </div>
   </div>
  
        <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('company position')}}</label>
     <div class="col-sm-10">
-      <input type="text" name="position" value="{{bean.position}}" class="form-control" placeholder="{{__('company position')}}">
+      <input type="text" name="position" value="{{bean.position}}" class="form-control" required  placeholder="{{__('company position')}}">
     </div>
   </div>
   
    <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('company email')}}</label>
     <div class="col-sm-10">
-      <input type="email" name="email"  value="{{bean.email}}" class="form-control" placeholder="{{__('company email')}}" maxlength="50">
+      <input type="email" name="email"  value="{{bean.email}}" class="form-control" required  placeholder="{{__('company email')}}" maxlength="50">
     </div>
   </div>
 
    <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('build time')}}</label>
     <div class="col-sm-10">
-      <input type="text" name="build_time2" value="{{bean.build_time|formatdate("YYYY")}}" class="form-control" placeholder="YYYY">
+      <input type="text" name="build_time2" value="{{bean.build_time|formatdate("YYYY")}}" required  class="form-control" placeholder="YYYY">
     </div>
   </div>
  
@@ -83,7 +83,7 @@
           {{__('cooperation brand')}}
       </label>
       <div class="col-sm-10">
-          <input class="form-control" name="brand" placeholder="{{__('cooperation brand')}}" type="text" value="{{bean.brand}}">
+          <input class="form-control" name="brand" required  placeholder="{{__('cooperation brand')}}" type="text" value="{{bean.brand}}">
           </input>
       </div>
   </div>
@@ -96,7 +96,7 @@
   <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('purchase per year')}}</label>
     <div class="col-sm-5">
-    <input type="text" name="purchase_per_year" value="{{bean.purchase_per_year}}"  class="form-control" placeholder="{{__('purchase per year')}}"/>
+    <input type="text" name="purchase_per_year"  required value="{{bean.purchase_per_year}}"  class="form-control" placeholder="{{__('purchase per year')}}"/>
      
     </div>
     <div class="col-sm-5">
@@ -107,7 +107,7 @@
   <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('payment days')}}</label>
     <div class="col-sm-10">
-     <input type="text" name="payment_days" value="{{bean.payment_days}}"  class="form-control" placeholder="{{__('payment days')}}"/>
+     <input type="text" name="payment_days" value="{{bean.payment_days}}" required   class="form-control" placeholder="{{__('payment days')}}"/>
     
     </div>
   </div>
@@ -116,7 +116,7 @@
           {{__('location')}}
       </label>
       <div class="col-sm-10">
-              <input type="text" class="form-control" name="area" placeholder="{{__('location')}}"  maxlength="100" value="{{bean.area}}"/>                
+              <input type="text" class="form-control" name="area" required  placeholder="{{__('location')}}"  maxlength="100" value="{{bean.area}}"/>                
       </div>
   </div>
     <input type="hidden" name="build_time">

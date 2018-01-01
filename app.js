@@ -74,7 +74,19 @@ app.use(templating('views', {
                return moment(+str).format(format).replace(/(a{1,2}|p)\.?m{1}?\.?/i, "$1.m.");
              }
            }
-       }
+       },
+       fmoney:function(s, n){   
+         console.log(s,n)
+          n = (n > 0 && n <=20)? n : 2;   
+          s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";   
+          var l = s.split(".")[0].split("").reverse(),   
+          r = s.split(".")[1];   
+          t = "";   
+          for(i = 0; i < l.length; i ++ ){   
+            t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");   
+          }   
+          return t.split("").reverse().join("") + "." + r;   
+      }
     }
 }));
 //登录控制

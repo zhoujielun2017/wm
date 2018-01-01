@@ -1,11 +1,12 @@
 var Factory=require("../model/Factory"),
+    Environment=require("../model/Environment"),
     User=require("../model/User"),
     Product=require("../model/Product"),
     City=require("../model/City"),
     UserService=require("../service/UserService"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
-
+   
 var i18n_majors={
     "brass": "铜",
 	"zink": "锌",
@@ -74,6 +75,10 @@ var factory_id=async (ctx, next) => {
         var id=ctx.params.id;
         var page=ctx.request.query.page||1;
         var factory = await Factory.findById(id);
+        var env = await Environment.findById(id);
+        if(env&&env.imgs){
+            env.imgs=env.imgs.split(",");
+        }
         if(factory&&factory.brand){
             factory.brand=factory.brand.split(",");
         }
@@ -120,6 +125,7 @@ var factory_id=async (ctx, next) => {
             factorys:factorys,
             customers:customers,
             pros:pros,
+            env:env,
             page:PageUtil.getPage(page, pros.count)
         });
     },

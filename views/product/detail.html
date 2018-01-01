@@ -6,7 +6,7 @@
 .blog-header p{margin-bottom: 30px;}
 .blog-header p span{margin-right: 10px;}
 .row{text-align: center;}
-.row img{text-align: center;margin: 0 auto 15px;}
+.row img{text-align: center;margin: 0 auto 15px;max-width: 100%;max-height: 400px;}
 </style>
 {% endblock %}
 
@@ -21,23 +21,19 @@
   </ol>
       <div class="blog-header">
         <h1 class="blog-title">{{bean.title}}</h1>
-        <p><span><a href="/product/{{e.id}}">{{e.title}}</a></span><span>{{__('price')}}:{{bean.price}}</span><span>{{__('material')}}:{{bean.material}}</span></p>
+        <p><span><a href="/product/{{e.id}}">{{e.title}}</a></span>
+          <span>{{__('price')}}:{{bean.price|fmoney}}</span>
+          <span>{{__('material')}}:{{bean.material}}</span></p>
       </div>
 
       <div class="row">
-        {% for e in bean.imgs %}
-          <p><img src="{{img_domain}}{{e}}"/></p>
+        {% for e in list %}
+          <p><img src="{{img_domain}}{{e.img}}"/></p>
+          <p>{{e.content}}</p>
           {% endfor %}
-          
-
         <!-- /.blog-main -->
-
-       
       </div><!-- /.row -->
-
     </div><!-- /.container -->
-
-
 </div>
 {% endblock %}
 

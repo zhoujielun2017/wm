@@ -60,6 +60,7 @@
 	"design content": "设计特长",
 	"data empty": "暂时没有数据",
 	"edit": "编辑",
+	"environment": "公司环境",
 	"email": "邮箱",
 	"firsthand": "是否直采",
 	"forget password": "忘记密码",
@@ -75,7 +76,7 @@
 	"index": "首页",
 	"index title": "搭起饰品供求信息的桥梁",
 	"index content": "",
-	"index articles":"行业信息动态",
+	"index articles": "行业信息动态",
 	"image": "图片",
 	"keyword": "关键字",
 	"last login time": "上次登录时间",
@@ -108,7 +109,7 @@
 	"new wiki": "新维基",
 	"name": "姓名",
 	"order info": "订单信息",
-	"only show vip":"该栏目只对高级会员显示",
+	"only show vip": "该栏目只对高级会员显示",
 	"order id": "订单号",
 	"operation": "操作",
 	"offical website": "官方网站",
@@ -184,5 +185,6 @@
 	"no": "否",
 	"brass": "brass",
 	"zink": "zink",
-	"chain": "chain"
+	"chain": "chain",
+	"environmen": "environmen"
 }

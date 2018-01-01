@@ -40,7 +40,7 @@
           <a href="/works/{{e.id}}">{{e.title}}</a>
         </h4>
         <p>{{__('material')}}:{{e.material}}</p>
-        <p>{{__('price')}}:{{e.price}}</p>
+        <p>{{__('price')}}:{{e.price|fmoney}}</p>
       </div>
       <div class="col-xs-2 col-md-2">
         <a href="/works/add?id={{e.id}}">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}" class="del">{{__('delete')}}</a>
