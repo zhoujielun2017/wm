@@ -19,7 +19,7 @@
       <img src="/images/user.png" class="img-circle">
       {% endif%}
       {% if e.sender_head %}
-        <img src="{{img_domain}}{{e.sender_head}}" alt="" class="img-circle">
+        <img src="{{img_domain}}{{e.sender_head}}!300x300" alt="" class="img-circle">
        {% endif%}
     </div>
     <div class="col-xs-7 col-md-7">
@@ -44,11 +44,11 @@
   </div>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">add</button>
+      <button type="submit" class="btn btn-primary">send</button>
     </div>
   </div>
 </form>
-
+</div>
 {% endblock %}
 
 {% block foot %}

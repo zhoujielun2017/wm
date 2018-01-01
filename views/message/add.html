@@ -1,12 +1,15 @@
 {% extends '../toolbar_index.html' %}
 
 {% block head %}
-
+<style type="text/css">
+.sendbox{width: 600px;margin: 0 auto;}
+.sendbox h2{font-size: 28px;margin-bottom: 30px;}
+.sendbox .form-control{height: 120px;}
+</style>
 {% endblock %}
 
 {% block main %}
-<div class="container">
-
+<div class="container sendbox">
   <h2>给{{bean.name}}发站内信</h2>
   <form class="form-horizontal">
   <input type="hidden" name="receiver_id" value="{{bean.id}}">
@@ -18,10 +21,11 @@
     </div>
     <div class="form-group">
       <div class="col-sm-12">
-        <button type="submit" class="btn btn-default">add</button>
+        <button type="submit" class="btn btn-primary">send</button>
       </div>
     </div>
   </form>
+</div>
 </div>
 {% endblock %}
 

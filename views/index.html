@@ -11,6 +11,42 @@ footer{
 
 {% block main %}
 
+<link rel="stylesheet" type="text/css" href="/css/hiSlider.css">
+<script src="/js/jquery.1.9.1.js"></script>
+<script src="/js/jquery.hiSlider.min.js"></script>
+<div id="wrap">
+    <ul class="hiSlider hiSlider3">
+        <li class="hiSlider-item"><a href="https://www.baidu.com/"><img src="images/1.jpg" alt=""></a></li>
+        <li class="hiSlider-item"><a href="#"><img src="images/2.jpg" alt=""></a></li>
+        <li class="hiSlider-item"><a href="#"><img src="images/3.jpg" alt=""></a></li>
+        <li class="hiSlider-item"><a href="#" ><img src="images/4.jpg" alt=""></a></li>
+        <li class="hiSlider-item"><a href="#"><img src="images/5.jpg" alt=""></a></li>
+    </ul>
+</div>
+<script>
+    $('.hiSlider1').hiSlider();
+    $('.hiSlider2').hiSlider({
+        isFlexible: true,
+        mode: 'fade',
+        isSupportTouch: false,
+        isShowTitle: false,
+        isShowPage: false,
+        titleAttr: function(curIdx){
+            return $('img', this).attr('alt');
+        }
+    });
+    $('.hiSlider3').hiSlider({
+        isFlexible: true,
+        isSupportTouch: true,
+        titleAttr: function(curIdx){
+            return $('img', this).attr('alt');
+        }
+    });
+    $('.hiSlider4').hiSlider({
+        startSlide: 2,
+        direction: 'top'
+    });
+</script>
 <div class="jumbotron masthead">
     <div class="container indexbg">
         <div class="indexC">
@@ -31,5 +67,5 @@ footer{
 {% endblock %}
 
 {% block foot %}
-<script></script>  
+
 {% endblock %}

@@ -9,13 +9,17 @@
   font-size: 70px;
   color: #777;
 }
-
+h1{float: left;display: block;margin: 0px 20px 0px 0px;}
+.btn-add{display: block;float: left;margin-top: 5px;}
 </style>
 {% endblock %}
 
 {% block main %}
-<h1>{{__('product info')}}</h1> <a href="/product/add" class="btn btn-info">{{__('add')}}</a>
 
+<h1>{{__('product info')}}</h1> <a href="/product/add" class="btn btn-info btn-add">{{__('add')}}</a>
+
+<div class="bk20"></div>
+<div class="bk20"></div>
   {% for e in result.rows %}
   <div class="row list">
       <div class="col-xs-3 col-md-3">
