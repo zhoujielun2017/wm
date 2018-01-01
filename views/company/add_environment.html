@@ -28,11 +28,15 @@
         <div class="imgs">
           <!-- <div>100%</div> -->
           {% for e in bean.imgs %}
+          {% if e %}
           <div>
             <img src="{{img_domain}}{{e}}!300x300" class="img-thumbnail"/>
             <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
             <input type="hidden" name="img" value="{{e}}"/>
            </div>
+          {% endif %}
+          
+         
          {% endfor %}
         </div>
         <div class="imgtip" style="display:none;">the image can not be empty</div>
