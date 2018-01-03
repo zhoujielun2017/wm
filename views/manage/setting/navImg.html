@@ -1,0 +1,90 @@
+{% extends '../base.html' %}
+
+{% block head %} 
+<style>
+    .imglist img{
+        height: 100px;
+        width:100%;
+        margin-bottom: 10px;
+        text-align: center;
+        line-height: 100px;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+<h3>首页轮播图管理</h3>
+<form class="form-horizontal">
+    <div class="form-group">
+    <label  class="col-sm-2 control-label">{{__('image')}}</label>
+    <div class="col-sm-10">
+        <div class="fileselect">
+            <label for="uploadfile" class="glyphicon glyphicon-plus" id="browse"></label>
+         </div>
+        <div class="imglist">
+          <!-- <div>100%</div> -->
+          {% for e in list %}
+            <div class="img">
+              <img src="{{img_domain}}{{e.img}}!300x300"/>
+              <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+            </div>          
+         {% endfor %}
+        </div>
+        <div class="imgtip" style="display:none;">the image can not be empty</div>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}
+{% block foot %}
+<script src="/js/upload.js"></script>
+<script src="/pupload/plupload.full.min.js"></script>
+<script>
+var html='<img src="__url" />'+
+'<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';
+var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
+		browse_button : 'browse',
+    url : '/file',
+    file_data_name:"upload",
+		flash_swf_url : 'pupload/upload/Moxie.swf',
+    silverlight_xap_url : 'pupload/upload/Moxie.xap',
+    init : {
+      FileUploaded:function(up,file,result){
+        var json = JSON.parse(result.response);
+        setTimeout(function(){
+          $('#'+file.id).html(html.replace("__url",json.url).replace("__path",json.path));
+        },2000)
+        
+      }
+    }
+	});
+	uploader.init(); //初始化
+
+	//绑定文件添加进队列事件
+	uploader.bind('FilesAdded',function(uploader,files){
+    for(var i = 0, len = files.length; i<len; i++){
+        var file=files[i];
+        if(file.origSize>2012340){
+          alert("image can not larger than 2M");
+          return ;
+        }
+        var imglen = $(".imgs img").length;
+        if(imglen+len>50){
+          alert("images can not more than 50 ");
+          return ;
+        }
+        // origSize:4507297
+        var imgHtml = '<div id="'+file.id+'" class="img">0%</div>';
+        $(".imgs").append(imgHtml);
+    }
+    uploader.start();
+  
+  });
+  //绑定文件上传进度事件
+	uploader.bind('UploadProgress',function(uploader,file){
+		$('#'+file.id).text(file.percent + '%');//控制进度条
+  });
+    
+</script>
+{% endblock %}

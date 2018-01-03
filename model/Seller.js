@@ -12,6 +12,10 @@ module.exports = db.defineModel('seller', {
         type: db.STRING(200),
         allowNull: true
     },
+    china_office:{
+        type: db.STRING(200),
+        allowNull: true
+    },
     //联系人职位
     position:{
         type: db.STRING(30),

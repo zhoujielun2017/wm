@@ -42,7 +42,7 @@
       <p><span class="fc999 mr5">{{__('company major')}}:</span>
  {% for d in bean.major %}{{__('major_'+d)}} {% endfor %}
       </p>
-      <p><span class="fc999 mr5">{{__('produce per month')}}:</span>{{bean.able_per_month}} {{__('pcs')}}</p>
+      <p><span class="fc999 mr5">{{__('produce per month')}}:</span>{{bean.able_per_month|fmoney(0)}} {{__('pcs')}}</p>
     </div>
     <div class="col-xs-6">
       <p><span class="fc999 mr5">{{__('build time')}}:</span>{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
@@ -56,10 +56,10 @@
         <span class="mr5">{{d.name}} </span>
         {% endfor %}
        </p>
-       <p><span class="fc999 mr5">{{__('company acreage')}}:</span>{{bean.acreage}} {{__('square meters')}}</p>
-      <p><span class="fc999 mr5">{{__('type per month')}}:</span>{{bean.type_per_month}} {{__('pcs')}}</p>
-      <p><span class="fc999 mr5">{{__('produce person')}}:</span>{{bean.count_person}} {{__('persons')}}</p>
-      <p><span class="fc999 mr5">{{__('QC person')}}:</span>{{bean.count_qc}} {{__('persons')}}</p>
+       <p><span class="fc999 mr5">{{__('company acreage')}}:</span>{{bean.acreage|fmoney(0)}} {{__('square meters')}}</p>
+      <p><span class="fc999 mr5">{{__('type per month')}}:</span>{{bean.type_per_month|fmoney(0)}} {{__('pcs')}}</p>
+      <p><span class="fc999 mr5">{{__('produce person')}}:</span>{{bean.count_person|fmoney(0)}} {{__('persons')}}</p>
+      <p><span class="fc999 mr5">{{__('QC person')}}:</span>{{bean.count_qc|fmoney(0)}} {{__('persons')}}</p>
 
     </div>
   </div>
@@ -73,7 +73,9 @@
   <div class="row env">
     
           {% for e in env.imgs %}
+          <a href="/environment/{{bean.id}}">
             <img class="img-thumbnail img" src="{{img_domain}}{{e}}!300x300" alt="">
+          </a>
           {% endfor %}
      
   </div>

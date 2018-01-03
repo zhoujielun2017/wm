@@ -19,6 +19,7 @@
 	"buy h5": "去付款",
 	"build time": "成立时间",
 	"cancel": "取消",
+	"china office":"中国办事处",
 	"correlation account": "关联账号",
 	"category": "分类",
 	"comment": "评论",

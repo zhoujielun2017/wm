@@ -26,6 +26,14 @@
       <input type="text" name="offical_website" value="{{bean.offical_website}}" required class="form-control" placeholder="{{__('offical website')}}">
     </div>
   </div>
+  <div class="form-group">
+      <label class="col-sm-2 control-label">
+          {{__('china office')}}
+      </label>
+      <div class="col-sm-10">
+          <input class="form-control" name="china_office" required  placeholder="{{__('china office')}}" type="text" value="{{bean.china_office}}"/>
+      </div>
+  </div>
      <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('company address')}}</label>
     <div class="col-sm-10">
@@ -177,19 +185,56 @@ if($.cookie("locale")=="zh-CH"){
   messages=valid_zh;
 }
 
-$("form").validate({
-  rules: {
-    title: {
-      required: true,
-      maxlength: 100
-    },
-    price: {
-      required: true
-    }
-  },
-  messages: messages,
-  errorElement: "em"
+jQuery.validator.addMethod("phone", function(value,element) {
+  var length = value.length;
+  var mobile = (length==11&&!isNaN(value));
+  var tel = /^d{3,4}-?d{7,9}$/;
+  console.log(mobile)
+  return this.optional(element) || (tel.test(value) || mobile);
 
+}, "please input a correct phone number");
+
+$("form").validate({
+rules: {
+  title: {
+    required: true,
+    maxlength: 100
+  },
+  email: {  
+      required: true,  
+      email: true  
+  },
+  offical_website:{
+      required: true,  
+      url: true  
+  },
+  contact_phone:{
+      required: true,  
+      phone: true  
+  },
+  phone:{
+      required: true,  
+      phone: true  
+  },
+  build_time2:{
+      required: true,  
+      range:[1800,3000]
+  },
+  count_shop:{
+      required: true,  
+      range:[0,9999999999]
+  },
+  purchase_per_year:{
+      required: true,  
+      range:[0,9999999999]
+  },
+  payment_days:{
+      required: true,  
+      range:[0,9999999999]
+  }
+},
+messages: messages,
+errorElement: "em"
 });
 
 $(".addC").click(function(){
@@ -203,6 +248,9 @@ $(".addC").click(function(){
 $("form").on('submit',function(e){
 
     var $this=$(this);
+    if(!$this.valid()){
+       return false;
+     }
     var id=$this.find("input[name=id]").val();
     var method=id?"PUT":"POST";
    

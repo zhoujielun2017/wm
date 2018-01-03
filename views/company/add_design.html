@@ -190,19 +190,56 @@ if($.cookie("locale")=="zh-CH"){
   messages=valid_zh;
 }
 
+jQuery.validator.addMethod("phone", function(value,element) {
+    var length = value.length;
+    var mobile = (length==11&&!isNaN(value));
+    var tel = /^d{3,4}-?d{7,9}$/;
+    console.log(mobile)
+    return this.optional(element) || (tel.test(value) || mobile);
+
+}, "please input a correct phone number");
+
 $("form").validate({
   rules: {
     title: {
       required: true,
       maxlength: 100
     },
-    price: {
-      required: true
+    email: {  
+        required: true,  
+        email: true  
+    },
+    offical_website:{
+        required: true,  
+        url: true  
+    },
+    contact_phone:{
+        required: true,  
+        phone: true  
+    },
+    phone:{
+        required: true,  
+        phone: true  
+    },
+    build_time2:{
+        required: true,  
+        range:[1800,3000]
+    },
+    count_shop:{
+        required: true,  
+        range:[0,9999999999]
+    },
+    sale_per_year:{
+        required: true,  
+        range:[0,9999999999]
+    },
+    age:{
+        required: true,  
+        range:[0,200]
     }
   },
   messages: messages,
   errorElement: "em"
-
 });
 //copy experience
 $(".addC").click(function(){
@@ -273,6 +310,9 @@ $("form").on('click','.saveexp',function(){
 //保存
 var designSave=function(form,callback){
     var $this=$(form);
+    if(!$this.valid()){
+       return false;
+     }
     var id=$this.find("input[name=id]").val();
     var method=id?"PUT":"POST";
 

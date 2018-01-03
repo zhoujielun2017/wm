@@ -210,6 +210,8 @@ var sellers=async (ctx, next) => {
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
             offical_website = ctx.request.body.offical_website||'',
+            china_office = ctx.request.body.china_office||'',
+            
             position = ctx.request.body.position||'',
             count_shop = ctx.request.body.count_shop||'',
             sale_per_year = ctx.request.body.sale_per_year||'',
@@ -242,6 +244,7 @@ var sellers=async (ctx, next) => {
             firsthand:firsthand,
             brand:brands,
             offical_website:offical_website,
+            china_office:china_office,
             area:area,
             build_time:build_time
         });
@@ -267,6 +270,7 @@ var sellers=async (ctx, next) => {
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
             offical_website = ctx.request.body.offical_website||'',
+            china_office=ctx.request.body.china_office||'',
             position = ctx.request.body.position||'',
             count_shop = ctx.request.body.count_shop||'',
             sale_per_year = ctx.request.body.sale_per_year||'',
@@ -294,6 +298,7 @@ var sellers=async (ctx, next) => {
         seller.custom_service=custom_service;
         seller.email=email;
         seller.offical_website=offical_website;
+        seller.china_office=china_office;
         seller.position=position;
         seller.count_shop=count_shop;
         seller.sale_per_year=sale_per_year;

@@ -147,13 +147,13 @@ $("form").on("submit",function(){
               // var error='<em class="error" style="display: inline;">邮箱或者密码错误</em>';
               // $("input[name=password]").after(error);
               validator.showErrors({
-                "password": "邮箱或者密码错误"
+                "password": "email or password incorrect"
               });
             }
             if(json.code=="not_active"){
 
               validator.showErrors({
-                "password": "账号为未激活"
+                "password": "your account is not active"
               });
             }
             

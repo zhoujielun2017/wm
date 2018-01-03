@@ -190,6 +190,7 @@ var agencys=async (ctx, next) => {
              twitter = ctx.request.body.twitter||'',
               facebook = ctx.request.body.facebook||'',
             offical_website = ctx.request.body.offical_website||'',
+            china_office = ctx.request.body.china_office||'',
             position = ctx.request.body.position||'',
             count_shop = ctx.request.body.count_shop||'',
             purchase_per_year = ctx.request.body.purchase_per_year||'',
@@ -222,6 +223,7 @@ var agencys=async (ctx, next) => {
             purchase_per_year:purchase_per_year,
             firsthand:firsthand,
             offical_website:offical_website,
+            china_office:china_office,
             brand:brands,
             area:area,
             create_time:create_time
@@ -248,6 +250,8 @@ var agencys=async (ctx, next) => {
              twitter = ctx.request.body.twitter||'',
               facebook = ctx.request.body.facebook||'',
             offical_website = ctx.request.body.offical_website||'',
+            china_office = ctx.request.body.china_office||'',
+            
             position = ctx.request.body.position||'',
             count_shop = ctx.request.body.count_shop||'',
             purchase_per_year = ctx.request.body.purchase_per_year||'',
@@ -274,6 +278,7 @@ var agencys=async (ctx, next) => {
          agency.twitter=twitter;
           agency.facebook=facebook;
         agency.offical_website=offical_website;
+        agency.china_office=china_office;
         agency.position=position;
         agency.count_shop=count_shop;
         agency.purchase_per_year=purchase_per_year;
