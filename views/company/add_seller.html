@@ -39,7 +39,7 @@
                 {{__('china office')}}
             </label>
             <div class="col-sm-10">
-                <input class="form-control" name="china_office" required  placeholder="{{__('china office')}}" type="text" value="{{bean.china_office}}"/>
+                <input class="form-control" name="china_office"   placeholder="{{__('china office')}}" type="text" value="{{bean.china_office}}"/>
             </div>
         </div>
         
@@ -248,7 +248,7 @@ $(".btn-danger").click(function(){
 jQuery.validator.addMethod("phone", function(value,element) {
     var length = value.length;
     var mobile = (length==11&&!isNaN(value));
-    var tel = /^d{3,4}-?d{7,9}$/;
+    var tel = /^\d{3,4}-?\d{7,9}$/;
     console.log(mobile)
     return this.optional(element) || (tel.test(value) || mobile);
 

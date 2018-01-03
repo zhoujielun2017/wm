@@ -111,8 +111,8 @@ if($.cookie("locale")=="zh-CH"){
 jQuery.validator.addMethod("phone", function(value,element) {
     var length = value.length;
     var mobile = (length==11&&!isNaN(value));
-    var tel = /^d{3,4}-?d{7,9}$/;
-    console.log(mobile)
+    var tel = /^\d{3,4}-?\d{7,9}$/;
+
     return this.optional(element) || (tel.test(value) || mobile);
 
 }, "please input a correct phone number");
