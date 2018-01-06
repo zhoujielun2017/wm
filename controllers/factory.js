@@ -239,6 +239,8 @@ var factory_id=async (ctx, next) => {
         var name = ctx.request.body.name||'',
             ename = ctx.request.body.ename||'',
             address = ctx.request.body.address||'',
+            city = ctx.request.body.city||'',
+            nation = ctx.request.body.nation||'',
             legal_person = ctx.request.body.legal_person||'',
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
@@ -257,6 +259,8 @@ var factory_id=async (ctx, next) => {
             name: name,
             ename:ename,
             address:address,
+            city:city,
+            nation:nation,
             legal_person:legal_person,
             phone:phone,
             custom_service:custom_service,
@@ -281,6 +285,8 @@ var factory_id=async (ctx, next) => {
             name = ctx.request.body.name||'',
             ename = ctx.request.body.ename||'',
             address = ctx.request.body.address||'',
+            city = ctx.request.body.city||'',
+            nation = ctx.request.body.nation||'',
             legal_person = ctx.request.body.legal_person||'',
             phone = ctx.request.body.phone||'',
             custom_service = ctx.request.body.custom_service||'',
@@ -318,6 +324,8 @@ var factory_id=async (ctx, next) => {
         factory.name=name;
         factory.ename=ename;
         factory.address=address;
+        factory.city=city;
+        factory.nation=nation;
         factory.legal_person=legal_person;
         factory.phone=phone;
         factory.custom_service=custom_service;

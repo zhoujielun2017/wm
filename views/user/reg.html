@@ -19,38 +19,33 @@
     <div class="login-logo"><a href="/"></a></div>
     <form class="form-horizontal">
         <div class="form-group">
-           <!--  <label class="col-sm-2 control-label">
-                {{__('email')}}
-            </label> -->
+
             <div class="col-sm-12">
                 <input class="form-control" name="email" placeholder="{{__('email')}}" required="" type="email">
                 </input>
             </div>
         </div>
         <div class="form-group">
-           <!--  <label class="col-sm-2 control-label" for="inputPassword3">
-                {{__('password')}}
-            </label> -->
+ 
             <div class="col-sm-12">
-                <input class="form-control" id="inputPassword3" name="password" placeholder="{{__('password')}}" type="password">
+                <input class="form-control"  name="password" placeholder="{{__('password')}}" type="password">
                 </input>
             </div>
         </div>
         <div class="form-group">
-           <!--  <label class="col-sm-2 control-label" for="inputPassword3">
-                {{__('confirm password')}}
-            </label> -->
+ 
             <div class="col-sm-12">
-                <input class="form-control" id="inputPassword3" name="password2" placeholder="{{__('confirm password')}}" type="password">
+                <input class="form-control" name="password2" placeholder="{{__('confirm password')}}" type="password">
                 </input>
             </div>
         </div>
         <div class="form-group">
-            <!-- <label class="col-sm-2 control-label" for="inputPassword3">
-                {{__('type user')}}
-            </label> -->
+
             <div class="col-sm-12">
                 <select class="form-control" name="type">
+                    <option value="">
+                        please select
+                    </option>
                     <option value="seller">
                         {{__('seller')}}
                     </option>
@@ -102,6 +97,9 @@
       required: true,
       email: true,
       remote:"/api/user/email"
+    },
+    type:{
+        required: true
     }
   },
   messages: {

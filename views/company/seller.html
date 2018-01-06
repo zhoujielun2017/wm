@@ -40,7 +40,7 @@
     </div>
     <div class="col-xs-6">
       <p><span class="fc999 mr5">{{__('build time')}}:</span>{{bean.build_time|formatdate("YYYY-MM-DD")}}</p>
-      <p><span class="fc999 mr5">{{__('count of shop')}}:</span>{{bean.count_shop}}</p>
+      <p><span class="fc999 mr5">{{__('count of shop')}}:</span>{{bean.count_shop}}{{__('unit shop')}}</p>
       <p><span class="fc999 mr5">{{__('cooperation brand')}}:</span>{% for d in bean.brand %}{{d}} {% endfor %}
        </p>
       <p><span class="fc999 mr5">{{__('sale per year')}}:</span>{{bean.sale_per_year}}{{__('unit money')}}</p>

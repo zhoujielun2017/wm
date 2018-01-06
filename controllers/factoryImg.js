@@ -1,4 +1,4 @@
-var Environment=require("../model/Environment"),
+var FactoryImg=require("../model/FactoryImg"),
     Factory=require("../model/Factory");
 
     var environment = async (ctx, next) => {
@@ -25,33 +25,51 @@ var Environment=require("../model/Environment"),
             });
         
         }
-        var bean = await Environment.findById(factory.id);
-        if(!bean){
-            bean = await Environment.create({id:factory.id,imgs:""});
-        }
-        bean.imgs=bean.imgs.split(",");
+        var list = await FactoryImg.findAll({
+            factory_id:factory.id
+        });
+        
+       
         ctx.render('./company/add_environment.html',{
             nav:"environment",
-            bean:bean
+            bean:factory,
+            list:list
         });
     },
     environment_id = async (ctx, next) => {
         var id=ctx.params.id;
        
-        var bean = await Environment.findById(id);
+        var list = await FactoryImg.findAll({
+            factory_id:factory.id
+        });
         
-        bean.imgs=bean.imgs.split(",");
         ctx.render('./company/environment.html',{
-            bean:bean
+            list:list
         });
     },
     add=async (ctx, next) => {
 
         var id = ctx.request.body.id,
-            imgs = ctx.request.body.imgs;
-        var bean = await Environment.findById(id);
-        bean.imgs=imgs;
-        await bean.save();
+            imgdescs = ctx.request.body.imgdescs||'',
+            imgs = ctx.request.body.imgs||'';
+        await FactoryImg.destroy({
+            where: {
+                factory_id:id
+            }
+        });
+        var imgarr = imgs.split(",");
+        var descarr = imgdescs.split("_@_");
+        for (var i=0,len=imgarr.length;i<len;i++) {
+            var img=imgarr[i];
+            var imgdesc=descarr[i];
+            var img=await FactoryImg.create({
+                factory_id:id,
+                img:img,
+                content:imgdesc,
+                sort:0
+            });
+        }
+        
         ctx.body = {"code":"success"};
     };
 
@@ -59,6 +77,6 @@ var Environment=require("../model/Environment"),
 module.exports = {
     'GET /environment/:id': environment_id,
     'GET /environment': environment,
-    'PUT /api/environment': add
+    'POST /api/environment': add
     
 };

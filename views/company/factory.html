@@ -38,7 +38,7 @@
      <!--  <p>{{__('offical website')}}:{{bean.offical_website}}</p> -->
       <p><span class="fc999 mr5">{{__('company email')}}:</span>{{bean.email}}</p>
       <p><span class="fc999 mr5">{{__('company legal person')}}:</span>{{bean.legal_person}}</p>
-      <p><span class="fc999 mr5">{{__('company address')}}:</span>{{bean.address}}</p>
+      <p><span class="fc999 mr5">{{__('company address')}}:</span>{{bean.nation}}{{bean.city}}{{bean.address}}</p>
       <p><span class="fc999 mr5">{{__('company major')}}:</span>
  {% for d in bean.major %}{{__('major_'+d)}} {% endfor %}
       </p>

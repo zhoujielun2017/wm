@@ -17,6 +17,8 @@
 	"password": "password",
 	"sign in": "Sign in",
 	"unit dollor": "dollor",
+	"unit shop": "shop",
+	"unit day": "day",
 	"have not account": "have not account",
 	"please register": "please register",
 	"forget password": "forget password",

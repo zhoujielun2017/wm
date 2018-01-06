@@ -4,6 +4,8 @@ module.exports = db.defineModel('factory', {
     name: db.STRING(500),
     ename: db.STRING(500),
     address: db.STRING(500),
+    city: db.STRING(100),
+    nation: db.STRING(100),
     legal_person: db.STRING(20),
     user_id: db.STRING(32),
     phone: db.STRING(20),

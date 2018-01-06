@@ -180,10 +180,10 @@
 $(".major").on("click","button",function(){
   var len=$(".major .btn-primary").length;
   var has=$(this).hasClass("btn-primary");
-  if(len>=3&&!has){
-    YY.dialog({content:"three choose most"}).alert();
-    return ;
-  }
+  // if(len>=3&&!has){
+  //   YY.dialog({content:"three choose most"}).alert();
+  //   return ;
+  // }
   $(this).toggleClass("btn-primary");
 });
 
