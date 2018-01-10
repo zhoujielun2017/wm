@@ -42,7 +42,7 @@
         </ul>
       <ul class="nav navbar-nav navbar-right ">
          <li><a href="/" >{{__('index')}}</a></li>
-        <li><a href="#" >{{__('hot line')}}</a></li>
+        <li style="line-height: 53px;padding: 10px 2px;">{{__('hot line')}}</li>
         <li><a href="#">{{sessionuser.email}}</a></li>
         {% if  sessionuser  %}
         <li><a href="#" class="loginout">{{__('sign out')}}</a></li>
@@ -62,11 +62,6 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-3">
-      <div class="list-group">
-          <div class="list-group-item" style="padding: 0px 15px ;">
-              <a href="/user/center"><h3 style="margin: 10px 0px;">{{__('user center')}}</h3></a>
-          </div>
-      </div>
         
       <div class="list-group">
         
