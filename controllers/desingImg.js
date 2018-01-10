@@ -1,16 +1,16 @@
-var FactoryImg=require("../model/FactoryImg"),
-    Factory=require("../model/Factory");
+var DesignImg=require("../model/DesignImg"),
+    Design=require("../model/Design");
 
     var environment = async (ctx, next) => {
         var user=ctx.session.user;
-        var factory = await Factory.findOne({
+        var design = await Design.findOne({
             where:{
                 user_id:user.id
             }
         });
         //如果不存在,创建一个空的
-        if(!factory){
-            factory= await Factory.create({
+        if(!design){
+            design= await Design.create({
                 user_id:user.id,
                 name: "",
                 ename:"",
@@ -25,22 +25,22 @@ var FactoryImg=require("../model/FactoryImg"),
             });
         
         }
-        var list = await FactoryImg.findAll({
-            factory_id:factory.id
+        var list = await DesignImg.findAll({
+            design_id:design.id
         });
         
        
         ctx.render('./company/add_environment.html',{
             nav:"environment",
-            bean:factory,
+            bean:design,
             list:list
         });
     },
     environment_id = async (ctx, next) => {
         var id=ctx.params.id;
        
-        var list = await FactoryImg.findAll({
-            factory_id:id
+        var list = await DesignImg.findAll({
+            design_id:id
         });
         
         ctx.render('./company/environment.html',{
@@ -52,9 +52,9 @@ var FactoryImg=require("../model/FactoryImg"),
         var id = ctx.request.body.id,
             imgdescs = ctx.request.body.imgdescs||'',
             imgs = ctx.request.body.imgs||'';
-        await FactoryImg.destroy({
+        await DesignImg.destroy({
             where: {
-                factory_id:id
+                design_id:id
             }
         });
         var imgarr = imgs.split(",");
@@ -62,8 +62,8 @@ var FactoryImg=require("../model/FactoryImg"),
         for (var i=0,len=imgarr.length;i<len;i++) {
             var img=imgarr[i];
             var imgdesc=descarr[i];
-            var img=await FactoryImg.create({
-                factory_id:id,
+            var img=await DesignImg.create({
+                design_id:id,
                 img:img,
                 content:imgdesc,
                 sort:0
@@ -75,8 +75,8 @@ var FactoryImg=require("../model/FactoryImg"),
 
 
 module.exports = {
-    'GET /environment/:id': environment_id,
-    'GET /environment': environment,
-    'POST /api/environment': add
+    'GET /designImg/:id': environment_id,
+    'GET /designImg': environment,
+    'POST /api/designImg': add
     
 };

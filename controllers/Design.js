@@ -142,6 +142,7 @@ var designs=async (ctx, next) => {
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
             area = ctx.request.body.area||'',
+            summary = ctx.request.body.summary||'';
             content = ctx.request.body.content||'';
 
         var user = await UserService.createUser(name,"design");
@@ -154,6 +155,7 @@ var designs=async (ctx, next) => {
             status:status,
             major:major,
             area:area,
+            summary:summary,
             content:content
         });
         var dbUser = await User.findById(user.id);
@@ -170,6 +172,7 @@ var designs=async (ctx, next) => {
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
             area = ctx.request.body.area||'',
+            summary = ctx.request.body.summary||'';
             content = ctx.request.body.content||'';
 
         var design = await Design.create({
@@ -180,6 +183,7 @@ var designs=async (ctx, next) => {
             status:status,
             major:major,
             area:area,
+            summary:summary,
             content:content
         });
         
@@ -197,6 +201,7 @@ var designs=async (ctx, next) => {
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
             area = ctx.request.body.area||'',
+            summary = ctx.request.body.summary||'';
             content = ctx.request.body.content||'';
 
        
@@ -213,6 +218,7 @@ var designs=async (ctx, next) => {
         design.major=major;
 
         design.area=area;
+        design.summary=summary;
         design.content=content;
 
         await design.save();

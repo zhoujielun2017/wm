@@ -66,13 +66,20 @@
                 </input>
             </div>
         </div>
-      
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('personal summary')}}
+            </label>
+            <div class="col-sm-10">
+                <textarea class="form-control" name="summary" required  placeholder="{{__('personal summary')}}"  maxlength="1000">{{bean.summary}}</textarea>
+            </div>
+        </div>
         {% for e in exps %}
         <div class="form-group  {% if loop.first %}experience{% endif %}">
             <div class="col-sm-2 control-label">
                 {{__('work experience')}}
                 <div class="expbtn">
-                <a href="javascript:void(0);" class="btn btn-default saveexp">{{__('save')}}</a>
+                <a href="javascript:void(0);" class="btn btn-primary saveexp">{{__('save')}}</a>
                 </div>
                 
                 <div  class="expbtn  {% if loop.first %} hidden {% endif%}">
@@ -123,25 +130,7 @@
             <div class="col-sm-10">
                     <input type="text" class="form-control" name="area" required  placeholder="{{__('location')}}"  maxlength="100" value="{{bean.area}}"/>                
             </div>
-            <!-- <div class="col-sm-10">
-              <div class="row city" data-area="{{bean.area}}">
-                <div class="col-xs-4 col-sm-4">
-                  <select name="area1" class="form-control">
-                    
-                  </select>
-                </div>
-                <div class="col-xs-4 col-sm-4">
-                 <select name="area2" class="form-control">
-                  
-                </select>
-                 </div>
-                <div class="col-xs-4 col-sm-4">
-                 <select name="area3" class="form-control">
-                  
-                </select>
-                 </div>
-              </div>
-            </div> -->
+            
         </div>
        
         <!-- <input type="hidden" name="area"> -->
@@ -214,8 +203,7 @@ $("form").validate({
         url: true  
     },
     contact_phone:{
-        required: true,  
-        phone: true  
+        required: true
     },
     phone:{
         required: true

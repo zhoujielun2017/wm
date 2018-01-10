@@ -151,7 +151,7 @@ var agencys=async (ctx, next) => {
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
-        var user = await UserService.createUser(name,"agency");
+        var user = await UserService.createUser(custom_service,"agency");
         
         var agency = await Agency.create({
             
@@ -229,7 +229,7 @@ var agencys=async (ctx, next) => {
             create_time:create_time
         });
         var dbUser = await User.findById(user.id);
-        dbUser.name=name;
+        dbUser.name=custom_service;
         dbUser.save();
         ctx.body = {"code":"success","id":agency.id};
     },
@@ -291,7 +291,7 @@ var agencys=async (ctx, next) => {
 
         await agency.save();
          var dbUser = await User.findById(user.id);
-        dbUser.name=name;
+        dbUser.name=custom_service;
         dbUser.save();
         ctx.body = {"code":"success","id":agency.id};
     }, api_agency_delete=async (ctx, next) => {

@@ -1,14 +1,14 @@
-var Works=require("../model/Works");
+var Works=require("../model/Works"),
+    DesignImg=require("../model/DesignImg");
 var PageUtil=require("../util/PageUtil");
 
 var works_id=async (ctx, next) => {
         var id = ctx.params.id;
         var bean = await Works.findById(id);
-        if(bean&&bean.imgs){
-            bean.imgs=bean.imgs.split(",");
-        }
-        ctx.render('./works/detail.html', {bean:bean});
-
+        var list = await DesignImg.findAll({where:{
+            design_id:id
+        }});
+        ctx.render('./works/detail.html', {bean:bean,list:list});
     },
     api_works_delete=async (ctx, next) => {
          
@@ -45,20 +45,21 @@ var works_id=async (ctx, next) => {
     },
     works_add=async (ctx, next) => {
         var user=ctx.session.user;
-        
+        var id=ctx.request.query.id;
         if(!user){
             ctx.response.redirect('/login/login');
             return ;
         }
-        var id=ctx.request.query.id;
         
         if(id){
             var works = await Works.findById(id);
         }
         if(works){
-            works.imgs=works.imgs.split(",");
+            var list=await DesignImg.findAll({where:{
+                design_id:id
+            }})
         }
-        ctx.render('./works/add.html',{bean:works});
+        ctx.render('./works/add.html',{bean:works,list:list});
     },
     api_works_add=async (ctx, next) => {
 
@@ -67,12 +68,13 @@ var works_id=async (ctx, next) => {
             material = ctx.request.body.material||'',
             price = ctx.request.body.price||0,
             imgs = ctx.request.body.imgs,
+            imgdescs = ctx.request.body.imgdescs,
             content = ctx.request.body.content||'';
         if(!user){
             ctx.body = {"code":"not_login"};
             return;
         }
-        console.log("test user:",user.id);
+        
         var works = await Works.create({
             user_id:user.id,
             title: title,
@@ -84,6 +86,19 @@ var works_id=async (ctx, next) => {
             content: content
         });
         
+        var imgarr=imgs.split(",");
+        var descarr=imgdescs.split("_@_");
+        for (var i=0,len=imgarr.length;i<len;i++) {
+            var img=imgarr[i];
+            var imgdesc=descarr[i];
+            var img=await DesignImg.create({
+                design_id:works.id,
+                img:img,
+                content:imgdesc,
+                sort:0
+            });
+        }
+
         ctx.body = {"code":"success","id":works.id};
     },
     api_works_update=async (ctx, next) => {
@@ -93,6 +108,7 @@ var works_id=async (ctx, next) => {
             material = ctx.request.body.material||'',
             price = ctx.request.body.price||0,
             imgs = ctx.request.body.imgs,
+            imgdescs = ctx.request.body.imgdescs,
             default_img,
             content = ctx.request.body.content||'';
 
@@ -112,6 +128,24 @@ var works_id=async (ctx, next) => {
         works.content=content;
         await works.save();
         
+        var imgarr=imgs.split(",");
+        var descarr=imgdescs.split("_@_");
+        await DesignImg.destroy({
+            where: {
+                design_id:id
+            }
+          });
+        for (var i=0,len=imgarr.length;i<len;i++) {
+            var img=imgarr[i];
+            var imgdesc=descarr[i];
+            var img=await DesignImg.create({
+                design_id:id,
+                img:img,
+                content:imgdesc,
+                sort:0
+            });
+        }
+
         ctx.body = {"code":"success","id":works.id};
     }
 module.exports = {

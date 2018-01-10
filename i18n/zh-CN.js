@@ -20,7 +20,7 @@
 	"build time": "成立时间",
 	"city": "城市",
 	"cancel": "取消",
-	"china office":"中国办事处",
+	"china office": "中国办事处",
 	"correlation account": "关联账号",
 	"category": "分类",
 	"comment": "评论",
@@ -131,6 +131,7 @@
 	"purchase per year": "年采购额",
 	"pay success": "支付成功",
 	"payment days": "账期",
+	"personal summary": "个人简介",
 	"parttime": "兼职",
 	"pcs": "件",
 	"persons": "人",
@@ -191,5 +192,6 @@
 	"brass": "brass",
 	"zink": "zink",
 	"chain": "chain",
-	"environmen": "environmen"
+	"environmen": "environmen",
+	"works": "works"
 }

@@ -3,12 +3,20 @@
 {% block head %}
 <style type="text/css">
 #uploadForm{
-  display: none;
-}
+    display: none;
+  }
+  .imgs div.img{
+    border: 1px solid #ccc;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+  }
 </style>
 {% endblock %}
 
 {% block main %}
+<h3>{{__('works')}}</h3>
 <form class="form-horizontal">
     <input name="id" type="hidden" value="{{bean.id}}">
         <div class="form-group">
@@ -34,26 +42,27 @@
                 {{__('image')}}
             </label>
             <div class=" col-sm-10">
-                <div class="imgs">
-                    {% for e in bean.imgs %}
-                        {% if e %}
-                        <div>
-                        <img class="img-thumbnail" src="{{img_domain}}{{e}}"/>
-                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                        <input name="img" type="hidden" value="{{e}}"/>
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                     
-                </div>
                 <div class="fileselect">
-                    <label class="glyphicon glyphicon-plus" for="uploadfile">
-                    </label>
-                   
+                    <label for="uploadfile" class="glyphicon glyphicon-plus" id="browse"></label>
                 </div>
+                <div class="imgs">
+                    <!-- <div>100%</div> -->
+                {% for e in list %}
+                <div>
+                    <div class="img">
+                    <img src="{{img_domain}}{{e.img}}!300x300" class="img-thumbnail"/>
+                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                    <input type="hidden" name="img" value="{{e.img}}"/>
+                    </div>
+                    <input type="text" class="form-control" name="imgdesc" value="{{e.content}}" placeholder="">
+                    </div>
+                {% endfor %}
+                </div>
+                <div class="imgtip" style="display:none;">the image can not be empty</div>
             </div>
         </div>
         <input type="hidden" name="imgs">
+        <input type="hidden" name="imgdescs">
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default" type="submit">
@@ -64,15 +73,59 @@
     </input>
 </form>
 
-<form id="uploadForm" action="/file" method="post" target="formiframe" enctype="multipart/form-data">
-  <input type="file" name="upload" id="uploadfile">
-</form>
+
 {% endblock %}
 
 {% block foot %}
  <script src="/js/upload.js"></script>
-
+ <script src="/pupload/plupload.full.min.js"></script>
 <script>
+    var html='<img src="__url" class="img-thumbnail"/>'+
+'<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
+'<input type="hidden" name="img" value="__path"/>';
+var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
+		browse_button : 'browse',
+    url : '/file',
+    file_data_name:"upload",
+		flash_swf_url : 'pupload/upload/Moxie.swf',
+    silverlight_xap_url : 'pupload/upload/Moxie.xap',
+    init : {
+      FileUploaded:function(up,file,result){
+        var json = JSON.parse(result.response);
+        setTimeout(function(){
+          $('#'+file.id+" .img").html(html.replace("__url",json.url).replace("__path",json.path));
+        },2000)
+        
+      }
+    }
+	});
+	uploader.init(); //初始化
+
+	//绑定文件添加进队列事件
+	uploader.bind('FilesAdded',function(uploader,files){
+    for(var i = 0, len = files.length; i<len; i++){
+        var file=files[i];
+        if(file.origSize>2012340){
+          alert("image can not larger than 2M");
+          return ;
+        }
+        var imglen = $(".imgs img").length;
+        if(imglen+len>30){
+          alert("images can not more than 30 ");
+          return ;
+        }
+        // origSize:4507297
+        var imgHtml = '<div id="'+file.id+'"><div class="img">0%</div><input type="text" class="form-control" name="imgdesc"></div>';
+        $(".imgs").append(imgHtml);
+    }
+    uploader.start();
+  
+  });
+  //绑定文件上传进度事件
+	uploader.bind('UploadProgress',function(uploader,file){
+		$('#'+file.id+" .img").text(file.percent + '%');//控制进度条
+  });
+
     var valid_en={  
     title: {
       required: "Please provide title",
@@ -114,23 +167,6 @@ if(imgCount>=10){
   $(".fileselect").hide();
 }
 
-$.upload({
-    fileElementId:"uploadfile",
-    callback:function(json){
-       setTimeout(function(){
-
-           $(".imgs").append('<div><img src="'+json.url+'!300x300" class="img-thumbnail"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i>'+
-            '<input type="hidden" name="img" value="'+json.path+'"></div>')
-            // console.log(json);
-            imgCount++;
-            if(imgCount>=10){
-              $(".fileselect").hide();
-          }
-
-        },1000)
-    }
-})
-
 
 $(".imgs").on("click",".glyphicon-trash",function(){
   $(this).parent("div").remove();
@@ -145,7 +181,17 @@ $("form.form-horizontal").on('submit',function(e){
     $(".imgs input[name=img]").each(function(){
       imgs.push($(this).val());
     })
+    if(!imgs.length){
+        alert("image can not be empty");
+        return false;
+    }
+    var imgdesc=[];
+    $("input[name=imgdesc]").each(function(){
+      imgdesc.push(this.value);
+    })
+
     $this.find("input[name=imgs]").val(imgs.join(","));
+    $this.find("input[name=imgdescs]").val(imgdesc.join("_@_"));
     var data=$this.serialize();
     if(!$this.valid()){
         return false;

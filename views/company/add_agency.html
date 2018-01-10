@@ -185,14 +185,14 @@ if($.cookie("locale")=="zh-CH"){
   messages=valid_zh;
 }
 
-jQuery.validator.addMethod("phone", function(value,element) {
-  var length = value.length;
-  var mobile = (length==11&&!isNaN(value));
-  var tel = /^\d{3,4}-?\d{7,9}$/;
-  console.log(mobile)
-  return this.optional(element) || (tel.test(value) || mobile);
+// jQuery.validator.addMethod("phone", function(value,element) {
+//   var length = value.length;
+//   var mobile = (length==11&&!isNaN(value));
+//   var tel = /^\d{3,4}-?\d{7,9}$/;
+//   console.log(mobile)
+//   return this.optional(element) || (tel.test(value) || mobile);
 
-}, "please input a correct phone number");
+// }, "please input a correct phone number");
 
 $("form").validate({
 rules: {
@@ -209,8 +209,7 @@ rules: {
       url: true  
   },
   contact_phone:{
-      required: true,  
-      phone: true  
+      required: true
   },
   phone:{
       required: true

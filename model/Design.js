@@ -29,6 +29,10 @@ module.exports = db.defineModel('design', {
         type: db.STRING(1000),
         allowNull: true
     },
+    summary:{
+        type: db.STRING(1000),
+        allowNull: true
+    },
     //所在地
     area:{
         type: db.STRING(100),

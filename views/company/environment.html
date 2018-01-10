@@ -11,10 +11,10 @@
   <h3>{{__('environment')}}</h3>
   <div class="row env">
     
-          {% for e in bean.imgs %}
+          {% for e in list %}
          
-            <img class="img-thumbnail img" src="{{img_domain}}{{e}}" alt="">
-         
+            <img class="img-thumbnail img" src="{{img_domain}}{{e.img}}" alt="">
+            <p>{{e.content}}</p>
           {% endfor %}
      
   </div>

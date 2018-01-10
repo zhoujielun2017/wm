@@ -1,5 +1,5 @@
 var Factory=require("../model/Factory"),
-    Environment=require("../model/Environment"),
+    FactoryImg=require("../model/FactoryImg"),
     User=require("../model/User"),
     Product=require("../model/Product"),
     City=require("../model/City"),
@@ -75,10 +75,12 @@ var factory_id=async (ctx, next) => {
         var id=ctx.params.id;
         var page=ctx.request.query.page||1;
         var factory = await Factory.findById(id);
-        var env = await Environment.findById(id);
-        if(env&&env.imgs){
-            env.imgs=env.imgs.split(",");
-        }
+        var imgs = await FactoryImg.findAll({
+            where:{
+                factory_id:id
+            }
+        })
+        
         if(factory&&factory.brand){
             factory.brand=factory.brand.split(",");
         }
@@ -125,7 +127,7 @@ var factory_id=async (ctx, next) => {
             factorys:factorys,
             customers:customers,
             pros:pros,
-            env:env,
+            imgs:imgs,
             page:PageUtil.getPage(page, pros.count)
         });
     },
@@ -271,7 +273,7 @@ var factory_id=async (ctx, next) => {
             content: content
         });
         var dbUser = await User.findById(user.id);
-        dbUser.name=name;
+        dbUser.name=custom_service;
         dbUser.save();
         ctx.body = {"code":"success","id":factory.id};
     };
@@ -335,7 +337,7 @@ var factory_id=async (ctx, next) => {
         factory.build_time=build_time;
         await factory.save();
          var dbUser = await User.findById(user.id);
-        dbUser.name=name;
+        dbUser.name=custom_service;
         dbUser.save();
         ctx.body = {"code":"success","id":factory.id};
     },

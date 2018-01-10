@@ -170,7 +170,7 @@ var sellers=async (ctx, next) => {
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
 
-        var user= await UserService.createUser(name,"seller");
+        var user= await UserService.createUser(custom_service,"seller");
         
         var obj={
 
@@ -284,7 +284,7 @@ var sellers=async (ctx, next) => {
        
         var seller = await Seller.findById(id);
         if(!seller.user_id){
-            var user= await UserService.createUser(name,"seller");
+            var user= await UserService.createUser(custom_service,"seller");
             seller.user_id=user.id;
         }
         
@@ -311,7 +311,7 @@ var sellers=async (ctx, next) => {
 
         await seller.save();
          var dbUser = await User.findById(user.id);
-        dbUser.name=name;
+        dbUser.name=custom_service;
         dbUser.save();
         ctx.body = {"code":"success","id":seller.id};
     },

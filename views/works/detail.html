@@ -25,8 +25,9 @@
       </div>
 
       <div class="row">
-        {% for e in bean.imgs %}
-            <p><img src="{{img_domain}}{{e}}"/></p>
+        {% for e in list %}
+            <p><img src="{{img_domain}}{{e.img}}!300x300"/></p>
+            <p>{{e.content}}</p>
           {% endfor %}
           
 

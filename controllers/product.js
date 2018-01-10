@@ -13,7 +13,7 @@ var product_id=async (ctx, next) => {
             bean.price=(bean.price/100).toFixed(2);
         }
         
-        bean.imgs=bean.imgs.split(",");
+        //bean.imgs=bean.imgs.split(",");
         var list = await ProductImg.findAll({where:{
             product_id:id
         }});

@@ -57,19 +57,23 @@
 {% endblock %}
 
 {% block foot %}
+<script src="/js/common.js"></script>
 <script>
 $(".del").click(function(){
   var id=$(this).data("id");
-  $.ajax({
-      type: "DELETE",
-      url: "/api/works/"+id,
-      dataType:"json",
-      success:function(json){
-          if(json.code="success"){
-              location.reload();
-          }
-      }
-  });
+  YY.dialog({content:"are you delete the works",callback:function(){
+    $.ajax({
+        type: "DELETE",
+        url: "/api/works/"+id,
+        dataType:"json",
+        success:function(json){
+            if(json.code="success"){
+                location.reload();
+            }
+        }
+    });
+  }}).confirm();
+  
 })
 </script>  
 {% endblock %}
