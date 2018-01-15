@@ -26,7 +26,9 @@ var FactoryImg=require("../model/FactoryImg"),
         
         }
         var list = await FactoryImg.findAll({
-            factory_id:factory.id
+            where:{
+                factory_id:factory.id
+            }
         });
         
        
@@ -39,9 +41,9 @@ var FactoryImg=require("../model/FactoryImg"),
     environment_id = async (ctx, next) => {
         var id=ctx.params.id;
        
-        var list = await FactoryImg.findAll({
+        var list = await FactoryImg.findAll({where:{
             factory_id:id
-        });
+        }});
         
         ctx.render('./company/environment.html',{
             list:list
