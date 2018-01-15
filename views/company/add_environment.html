@@ -5,12 +5,22 @@
 #uploadForm{
   display: none;
 }
-
+.box{
+  display: inline-block;
+  margin-right: 10px;
+}
+.box img{
+  border: 1px solid #ccc;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  line-height: 200px;
+}
   </style>
 {% endblock %}
 
 {% block main %}
-<div class="col-sm-2"><h3>{{__('environment')}}</h3></div><div class="col-sm-8" style="margin-top: 20px;"><span style="font-size: 12px;color: #999;">(可同时上传多张图片,图片支持jpg、png、gif等常见格式，图片大小不超过2M)</span></div>
+<div class="col-sm-4"><h3>{{__('environment')}}</h3></div><div class="col-sm-8" style="margin-top: 20px;"><span style="font-size: 12px;color: #999;">(可同时上传多张图片,图片支持jpg、png、gif等常见格式，图片大小不超过2M)</span></div>
 <div class="bk30"></div>
 <form class="form-horizontal">
   <input type="hidden" name="id" value="{{bean.id}}">
@@ -21,22 +31,19 @@
          </div>
         <div class="bk30"></div>
           <!-- <div>100%</div> -->
-        <div>
-          {% for e in list %}
-              <div class="col-xs-4" style="padding: 0px; margin-bottom: 20px;">
-                  <div class="col-sm-12">
-                    <div class="img">
-                      <img src="{{img_domain}}{{e.img}}!300x300" class="img-thumbnail"/>
-                      <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                      <input type="hidden" name="img" value="{{e.img}}"/>
-                    </div>
-                  </div>
-                  <div class="col-sm-12">
-                    <input type="text" class="form-control" name="imgdesc" value="{{e.content}}" placeholder="">
-                   </div>
+          <div class="imgs">
+            <!-- <div>100%</div> -->
+            {% for e in list %}
+            <div class="box">
+              <div class="img">
+                <img src="{{img_domain}}{{e.img}}!300x300" class="img-thumbnail"/>
+                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                <input type="hidden" name="img" value="{{e.img}}"/>
               </div>
-         {% endfor %}
-        </div>
+              <input type="text" class="form-control" name="imgdesc" value="{{e.content}}" placeholder="">
+             </div>
+           {% endfor %}
+          </div>
         <div class="imgtip" style="display:none;">the image can not be empty</div>
     </div>
   </div>
@@ -69,7 +76,7 @@ var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
      FileUploaded:function(up,file,result){
        var json = JSON.parse(result.response);
        setTimeout(function(){
-        $('#'+file.id+" .img").html(html.replace("__url",json.url).replace("__path",json.path));
+        $('#'+file.id+" .img").html(html.replace("__url",json.url+"!300x300").replace("__path",json.path));
        },2000)
        
      }
@@ -91,7 +98,7 @@ var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
          return ;
        }
        // origSize:4507297
-       var imgHtml = '<div id="'+file.id+'"><div class="img">0%</div><input type="text" class="form-control" name="imgdesc"></div>';
+       var imgHtml = '<div id="'+file.id+'" class="box"><div class="img">0%</div><input type="text" class="form-control" name="imgdesc"></div>';
        $(".imgs").append(imgHtml);
    }
    uploader.start();
