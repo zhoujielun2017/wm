@@ -16,7 +16,16 @@
                 {{__('name')}}
             </label>
             <div class="col-sm-10">
-                <input class="form-control" name="name" required  placeholder="{{__('name')}}" type="text" value="{{bean.name}}" maxlength="20">
+                <input class="form-control" name="name"   placeholder="{{__('name')}}" type="text" value="{{bean.name}}" maxlength="20">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('age')}}
+            </label>
+            <div class="col-sm-10">
+                <input class="form-control" name="age"   placeholder="{{__('age')}}" type="number" value="{{bean.age}}">
                 </input>
             </div>
         </div>
@@ -110,7 +119,7 @@
             </div>
             <div class="col-sm-10">
                 <input type="hidden" name="expid" value="{{e.id}}">
-                <textarea rows="7" class="form-control" name="work_experience" required  placeholder="{{__('work experience')}}"  maxlength="1000">{{e.experience}}</textarea>
+                <textarea rows="7" class="form-control" name="work_experience"   placeholder="{{__('work experience')}}"  maxlength="1000">{{e.experience}}</textarea>
             </div>
         </div>
          {% else %}
@@ -128,7 +137,7 @@
             </label>
             <div class="col-sm-10">
                 <input type="hidden" name="expid" value="">
-               <textarea rows="7" class="form-control" name="work_experience" required  placeholder="{{__('work experience')}}"  maxlength="1000"></textarea>
+               <textarea rows="7" class="form-control" name="work_experience"   placeholder="{{__('work experience')}}"  maxlength="1000"></textarea>
             </div>
         </div>
         {% endfor %}
@@ -138,7 +147,23 @@
           </div>
         </div>
         -->
-
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('design content')}}
+            </label>
+            <div class="col-sm-10">
+                <textarea class="form-control" name="content"   placeholder="{{__('work experience')}}"  maxlength="1000">{{bean.content}}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('location')}}
+            </label>
+            <div class="col-sm-10">
+                    <input type="text" class="form-control" name="area"   placeholder="{{__('location')}}"  maxlength="100" value="{{bean.area}}"/>                
+            </div>
+            
+        </div>
        
         <!-- <input type="hidden" name="area"> -->
         <div class="form-group">
@@ -198,37 +223,37 @@ jQuery.validator.addMethod("phone", function(value,element) {
 $("form").validate({
   rules: {
     title: {
-      required: true,
+      required: false,
       maxlength: 100
     },
     email: {  
-        required: true,  
+        required: false,  
         email: true  
     },
     offical_website:{
-        required: true,  
+        required: false,  
         url: true  
     },
     contact_phone:{
-        required: true
+        required: false
     },
     phone:{
-        required: true
+        required: false
     },
     build_time2:{
-        required: true,  
+        required: false,  
         range:[1800,3000]
     },
     count_shop:{
-        required: true,  
+        required: false,  
         range:[0,9999999999]
     },
     sale_per_year:{
-        required: true,  
+        required: false,  
         range:[0,9999999999]
     },
     age:{
-        required: true,  
+        required: false,  
         range:[0,200]
     }
   },
