@@ -22,16 +22,16 @@
    <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('create time')}}</label>
     <div class="col-sm-10">
-      <input type="text" name="build_time2" value="{{bean.build_time|formatdate('YYYY')}}" class="form-control" placeholder="YYYY" required>
+      <input type="text" name="build_time2" value="{{bean.build_time|formatdate('YYYY')}}" class="form-control" placeholder="YYYY" >
     </div>
   </div>
  
    <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('company address')}}</label>
-    <div class="col-xs-2 col-sm-2"><input class="form-control" name="city" required  placeholder="{{__('city')}}" maxlength="100" value="{{bean.city}}"></div>
-    <div class="col-xs-2 col-sm-2"><input class="form-control" name="nation" required  placeholder="{{__('nation')}}" maxlength="100" value="{{bean.nation}}"></div>
+    <div class="col-xs-2 col-sm-2"><input class="form-control" name="city"   placeholder="{{__('city')}}" maxlength="100" value="{{bean.city}}"></div>
+    <div class="col-xs-2 col-sm-2"><input class="form-control" name="nation"   placeholder="{{__('nation')}}" maxlength="100" value="{{bean.nation}}"></div>
     <div class="col-sm-6">
-     	<textarea name="address"  class="form-control" placeholder="{{__('company address')}}" maxlength="200" required>{{bean.address}}</textarea>
+     	<textarea name="address"  class="form-control" placeholder="{{__('company address')}}" maxlength="200" >{{bean.address}}</textarea>
     </div>
   </div>
 
@@ -78,7 +78,7 @@
   <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('company summary')}}</label>
     <div class="col-sm-10">
-      <textarea name="content"   cols="30" rows="5" required  class="form-control"  placeholder="请用英文填写资料" maxlength="1000" >{{bean.content}}</textarea>
+      <textarea name="content"   cols="30" rows="5"   class="form-control"  placeholder="请用英文填写资料" maxlength="1000" >{{bean.content}}</textarea>
       
     </div>
   </div>
@@ -139,38 +139,38 @@ if($.cookie("locale")=="zh-CH"){
 $("form").validate({
   rules: {
     title: {
-      required: true,
+      required: false,
       maxlength: 100
     },
     email: {  
-        required: true,  
+        required: false,  
         email: true  
     },
     offical_website:{
-        required: true,  
+        required: false,  
         url: true  
     },
     contact_phone:{
-        required: true,  
+        required: false,  
         phone: true  
     },
     phone:{
-        required: true
+        required: false
     },
     build_time2:{
-        required: true,  
+        required: false,  
         range:[1800,3000]
     },
     count_shop:{
-        required: true,  
+        required: false,  
         range:[0,9999999999]
     },
     sale_per_year:{
-        required: true,  
+        required: false,  
         range:[0,9999999999]
     },
     payment_days:{
-        required: true,  
+        required: false,  
         range:[0,9999999999]
     }
   },
