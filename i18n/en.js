@@ -33,7 +33,7 @@
 	"have acount": "have acount",
 	"please sign in": "please sign in",
 	"sign out": "sign out",
-	"Profile": "company management",
+	"Profile": "Profile",
 	"Info": "base info",
 	"cooperation info": "cooperation info",
 	"product info": "product info",

@@ -76,7 +76,7 @@ html, body {
 .jumbotron{padding-top: 0px;padding-bottom: 0px;}
 .Btext{float: right;color: #676767;line-height: 50px;}
 
-.media-heading{margin-bottom: 20px;float: left;width: 400px;}
+.media-heading{margin-top: 40px;float: left;width: 400px;}
 .rightinfo{float: right;width: 80px;}
 .talk{background: url("../images/talk.png") no-repeat;width: 22px;height: 20px;margin-right: 15px;display: block;float: left;}
 .more{background: url("../images/more.png") no-repeat;width: 27px;height: 16px;display: block;float: left;}
