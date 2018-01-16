@@ -34,7 +34,7 @@
       </button>
         <div class="logo"><a href="/user/center" class="logoM">
         <img src="/images/logoM.png" /></a>
-        <span class="logotext">{{__('user center')}}</span></div>
+        <!--<span class="logotext">{{__('user center')}}</span>--></div>
     </div>
     <div id="navbar" class="navbar-collapse collapse change">
         <ul class="nav navbar-nav">
@@ -42,7 +42,7 @@
         </ul>
       <ul class="nav navbar-nav navbar-right ">
          <li><a href="/" >{{__('index')}}</a></li>
-        <li style="line-height: 53px;padding: 10px 2px;">{{__('hot line')}}</li>
+       <!--<li style="line-height: 53px;padding: 10px 2px;">{{__('hot line')}}</li>-->
         <li><a href="#">{{sessionuser.email}}</a></li>
         {% if  sessionuser  %}
         <li><a href="#" class="loginout">{{__('sign out')}}</a></li>
@@ -69,7 +69,7 @@
             <h3>{% if  sessionuser.type=="design"  %}
               {{__('profile management')}}
             {% else %}
-              {{__('company manage')}}
+              {{__('Profile')}}
             {% endif%}
             </h3>
           </div>
@@ -83,7 +83,7 @@
           {% endif %}
 
           {% if  sessionuser.type=="seller"  %}
-          <a href="/seller" class="list-group-item">{{__('base info')}}</a>
+          <a href="/seller" class="list-group-item">{{__('Info')}}</a>
           {% endif %}
 
            {% if  sessionuser.type=="agency"  %}
@@ -94,11 +94,11 @@
           <a href="/works" class="list-group-item">{{__('works info')}}</a>
           {% endif %}
 
-          <div class="list-group-item"><h3>{{__('message manage')}}</h3></div>
+          <div class="list-group-item"><h3>{{__('Message')}}</h3></div>
            <a href="/messageGroups" class="list-group-item"> <span class="badge unread"></span>{{__('all message')}}</a>
-          <div class="list-group-item"><h3>{{__('user management')}}</h3></div>
-          <a href="/user/buy" class="list-group-item">{{__('to be vip')}}</a>
-          <a href="/ord" class="list-group-item">{{__('buy record')}}</a>
+          <div class="list-group-item"><h3>{{__('User Center')}}</h3></div>
+          <a href="/user/buy" class="list-group-item">{{__('To be VIP')}}</a>
+          <a href="/ord" class="list-group-item">{{__('Buy record')}}</a>
       </div>
       
     </div>

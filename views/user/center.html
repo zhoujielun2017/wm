@@ -47,7 +47,7 @@
     </label>
     
 </div>
-<p style="font-size: 12px;color: #999;padding-top: 10px;">(此处上传公司logo,图片支持jpg、png、gif等常见格式，图片大小不超过2M)</p>
+<p style="font-size: 12px;color: #999;padding-top: 10px;">Upload company logo -jpg、png、gif.etc.(2M)</p>
 <iframe  name="formiframe" id="formiframe" ></iframe>
 <form action="/file" method="post" target="formiframe" enctype="multipart/form-data">
 <input type="file" name="upload" id="uploadfile">
@@ -71,7 +71,7 @@
 	  	{{__('design')}}
 	{% endif %}
  </p>
- <p>{{__('role of user')}}:
+ <p>{{__('User Level')}}:
 {% if user.role==0 %}
   <a href="/user/buy" class="red">{{__('to be vip')}}</a>
 {% endif %}

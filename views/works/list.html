@@ -14,13 +14,15 @@
   width: 100px;
   height: 100px;
 }
-
+h1{float: left;display: block;margin: 0px 20px 0px 0px;}
+.btn-add{display: block;float: left;margin-top: 5px;}
 </style>
 {% endblock %}
 
 {% block main %}
 <h1>{{__('works info')}}</h1> <a href="/works/add" class="btn btn-primary">{{__('add')}}</a>
-
+<div class="bk20"></div>
+<div class="bk20"></div>
   {% for e in result.rows %}
    <div class="row list">
       <div class="col-xs-3 col-md-3 img">

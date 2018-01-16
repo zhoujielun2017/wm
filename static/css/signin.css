@@ -4,7 +4,7 @@ body {
   background-color: #fff;
 }
 form{
-   max-width: 380px;
+   max-width: 400px;
    margin: 0 auto;
    background: #FFF;
   padding: 20px;
@@ -18,3 +18,27 @@ h3{
 .login-logo{margin: 60px auto 50px;text-align: center;}
 .login-logo a{background: url("../images/loginLogo.png") no-repeat;width: 234px;height: 60px;display: block;margin: 0 auto;}
 .btn{padding: 0px;border: none;border-radius: 0px;font-size: 16px;}
+
+.c-auth__main-tabs{width: 32%;margin: 0 auto;}
+.c-auth__main-tabs ul {
+    border-bottom: 1px solid #e7e7e8;
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+.c-auth__main-tabs li.is-active {
+    background-color: #ffffff;
+    border-color: #e7e7e8;
+}
+.c-auth__main-tabs li {
+    border: 1px solid transparent;
+    border-bottom: 0;
+    display: inline-block;
+    padding: 8px 16px;
+    position: relative;
+    top: 1px;
+
+}
+.c-auth__main-tabs li a{font-family: Helvetica, sans-serif;line-height: 1.5;font-size: 16px;}
