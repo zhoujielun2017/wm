@@ -168,7 +168,7 @@ var sellers=async (ctx, next) => {
             sale_per_year = ctx.request.body.sale_per_year||'',
             firsthand = ctx.request.body.firsthand||'',
             payment_days = ctx.request.body.payment_days||'',
-            build_time = ctx.request.body.build_time||Date.now(),
+            build_time = ctx.request.body.build_time||null,
             brands = ctx.request.body.brands||'',
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
@@ -220,7 +220,7 @@ var sellers=async (ctx, next) => {
             sale_per_year = ctx.request.body.sale_per_year||'',
             firsthand = ctx.request.body.firsthand||'',
             payment_days = ctx.request.body.payment_days||'',
-            build_time = ctx.request.body.build_time||Date.now(),
+            build_time = ctx.request.body.build_time||null,
             brands = ctx.request.body.brands||'',
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
@@ -279,7 +279,7 @@ var sellers=async (ctx, next) => {
             sale_per_year = ctx.request.body.sale_per_year||'',
             firsthand = ctx.request.body.firsthand||'',
             payment_days = ctx.request.body.payment_days||'',
-            build_time = ctx.request.body.build_time||Date.now(),
+            build_time = ctx.request.body.build_time||null,
             brands = ctx.request.body.brands||'',
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';

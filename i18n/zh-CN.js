@@ -193,5 +193,7 @@
 	"zink": "zink",
 	"chain": "chain",
 	"environmen": "environmen",
-	"works": "works"
+	"works": "works",
+	"base info": "base info",
+	"to be vip": "to be vip"
 }
