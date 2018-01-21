@@ -57,8 +57,10 @@ html, body {
 .footer, .page-wrap:after {
     height: 70px;
 }
-.logo{margin: 25px 60px 0 0;}
+.logo{margin: 25px 30px 0 0;}
 .navcon{font-size: 16px;}
+.navcon li a,.navcon li a:visited{color: #222;}
+.navcon li a:hover{color: #ffc900;}
 .indexbg{background: url("../images/wmap.png") no-repeat center center;width:1101px;height: 410px;padding-top: 20px;margin:10px auto 0px;}
 .book{background: url("../images/book.png") no-repeat center center;width: 203px;height: 164px;margin: 50px auto 0px;}
 .loginnow{width: 140px;height: 52px;margin: 20px auto;box-shadow:0 6px 20px 0 rgba(255,201,0,.16)}
@@ -86,9 +88,9 @@ html, body {
 .form-inline{margin-top: 15px;}
 .form-width{width: 400px;}
 .change a{float: left;}
-.search a span{display: block;background: url("../images/search.png") no-repeat;width: 22px;height: 22px;margin: 5px auto 3px;}
-.login a span{display: block;background: url("../images/login.png") no-repeat;width: 19px;height: 22px;margin: 5px auto 3px;}
-.registration a span{display: block;background: url("../images/registration.png") no-repeat;width: 21px;height: 22px;margin: 5px auto 3px;}
+.search a span{display: block;background: url("../images/search.png") no-repeat;width: 22px;height: 22px;margin: 17px auto 3px;}
+.login a span{display: block;background: url("../images/login.png") no-repeat;width: 19px;height: 22px;margin: 17px auto 3px;}
+.registration a span{display: block;background: url("../images/registration.png") no-repeat;width: 21px;height: 22px;margin: 17px auto 3px;}
 .search a p,.login a p,.registration a p{margin: 0px;line-height: 20px;}
 a.red{color: #ff0000;}
 .logotext{font-size: 18px;color: #000;margin-left: 10px;}

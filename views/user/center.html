@@ -57,7 +57,7 @@
 
 
  <h3>{{user.name}}</h3>
- <p>{{__('type user')}}:
+ <p>{{__('User Type')}}:
  	{% if user.type=='factory' %}
   		{{__('factory')}}
 	{% endif %}
@@ -73,10 +73,10 @@
  </p>
  <p>{{__('User Level')}}:
 {% if user.role==0 %}
-  <a href="/user/buy" class="red">{{__('to be vip')}}</a>
+  <a href="/user/buy" class="red">{{__('To Be VIP')}}</a>
 {% endif %}
 {% if user.role==1 %}
-  {{__('User vip')}}
+  {{__('User VIP')}}
 {% endif %}
 {% if user.role==9 %}
   {{__('manager')}}

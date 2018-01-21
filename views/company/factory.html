@@ -16,6 +16,7 @@
 {% endblock %}
 
 {% block main %}
+<div class="bk30"></div>
 <div class="container mb100">
   <div class="row">
     <div class="col-xs-3 img">
@@ -27,7 +28,7 @@
     </div>
     <div class="col-xs-9">
       <h3>{{bean.name}}</h3>
-      <span class="talk"></span><a href="/message/{{bean.user_id}}"> {{__('send message')}}</a>
+      <span class="talk"></span><a href="/message/{{bean.user_id}}"> {{__('send a message')}}</a>
      
     </div>
   </div>
@@ -69,16 +70,20 @@
 
   {% if imgs %}
   <!--  公司环境 -->
-  <h3>{{__('environment')}}</h3>
+  <h3 style="margin-bottom: 30px;">{{__('environment')}}</h3>
   <div class="row env">
-    
-          {% for e in imgs %}
+
+       {% for e in imgs %}
+      <div class="col-xs-4">
+          <div class="row list">
+              <div class="col-xs-8 col-md-8">
           <a href="/environment/{{bean.id}}">
-            <img class="img-thumbnail img" src="{{img_domain}}{{e.img}}!300x300" alt="">
+            <img class="img-thumbnail" src="{{img_domain}}{{e.img}}!300x300" alt="">
           </a>
-          <p>{{e.content}}</p>
+          <h3><a href="/environment/{{bean.id}}">{{e.content}}</a></h3>
+              </div></div></div>
           {% endfor %}
-     
+
   </div>
   {% endif %}
 
@@ -105,8 +110,8 @@
                     {{e.title}}
                 </a>
             </h3>
-            <p style="font-size: 16px;font-weight: bold;color: #dc9600;">{{__('price')}}: ${{e.price|fmoney}} </p>
-            <p>{{__('material')}}: {{e.material}}</p>
+            <!--<p style="font-size: 16px;font-weight: bold;color: #dc9600;">{{__('price')}}: ${{e.price|fmoney}} </p>
+            <p>{{__('material')}}: {{e.material}}</p>-->
 
         </div>
     </div>

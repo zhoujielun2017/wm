@@ -50,15 +50,15 @@
       </ul>
       <ul class="nav navbar-nav navbar-right navinfo">
        
-        <li class="search"><a href="/search" ><span></span><p>{{__('search')}}</p></a></li>
+        <li class="search"><a href="/search" ><span></span><!--<p>{{__('search')}}</p>--></a></li>
        
         {% if  sessionuser  %}
         <li><a href="/user/center">{{sessionuser.email}}</a></li>
         <li><a href="#" class="loginout">{{__('sign out')}}</a></li>
         {% endif %}
         {% if  not sessionuser  %}
-        <li class="login"><a href="/login/login"><span></span><p>{{__('sign in')}}</p></a></li>
-        <li class="registration"><a href="/login/reg"><span></span><p>{{__('register')}}</p></a></li>
+        <li class="login"><a href="/login/login"><span></span><!--<p>{{__('sign in')}}</p>--></a></li>
+        <!--<li class="registration"><a href="/login/reg"><span></span><p>{{__('register')}}</p></a></li>-->
         {% endif %}
         <li><a href="#" class="lang" lang="zh-CN">中文</a></li>
          <li style="line-height: 82px;">/</li>

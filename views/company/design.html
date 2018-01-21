@@ -15,47 +15,48 @@
 <div class="bk30"></div>
 <div class="container mb100">
 <div class="row">
-  <div class="col-md-6 col-md-offset-3 text-center">
-      
+
+    <div class="col-xs-3 img">
       {% if bean.head %}
        <img class="img-thumbnail img" src="{{img_domain}}{{bean.head}}!300x300"/>
       {% else %}
         <img class="img-thumbnail img" src="/images/default.png"/>
       {% endif %}
-      
+    </div>
+    <div class="col-xs-9">
       <h3>
           {{bean.name}}
       </h3>
-      <span class="talk" style="display: inline-block;float: none;"></span><a href="/message/{{bean.user_id}}">{{__('send message')}}</a>
-      
-
-  </div>
+      <span class="talk"></span><a href="/message/{{bean.user_id}}">{{__('send a message')}}</a>
+    </div>
 </div>
 
-    <div>
-        <p>
-            <span class="fc999 mr5">{{__('age')}}:</span>{{bean.age}}
-        </p>
-        <p>
-            <span class="fc999 mr5">{{__('gender')}}:</span>
-            {% if bean.gender==0%}女{% endif %}
-            {% if bean.gender==1%}男{% endif %}
-        </p>
-        <p>
-            <span class="fc999 mr5">{{__('status')}}:</span>{{__(bean.status)}}
-        </p>
-        <p><span class="fc999 mr5"></span>{{__('location')}}:</span>
-            {{bean.area}}
-        </p>
-        <p>
-            <span class="fc999 mr5">{{__('major')}}:</span>{{bean.major}}
-        </p>
+    <div class="row">
+        <div class="col-xs-6">
+            <p>
+                <span class="fc999 mr5">{{__('age')}}:</span>{{bean.age}}
+            </p>
+            <p>
+                <span class="fc999 mr5">{{__('gender')}}:</span>
+                {% if bean.gender==0%}女{% endif %}
+                {% if bean.gender==1%}男{% endif %}
+            </p>
+            <p>
+                <span class="fc999 mr5">{{__('status')}}:</span>{{__(bean.status)}}
+            </p>
+            <p><span class="fc999 mr5">{{__('location')}}:</span>
+                {{bean.area}}
+            </p>
+            <p>
+                <span class="fc999 mr5">{{__('major')}}:</span>{{bean.major}}
+            </p>
 
-        {% for d in bean.exps %}
-         <p><span class="fc999 mr5">{{__('work experience')}}:</span> {{d.experience}} </p>
-        {% endfor %}
+            {% for d in bean.exps %}
+             <p><span class="fc999 mr5">{{__('work experience')}}:</span> {{d.experience}} </p>
+            {% endfor %}
 
-        <p><span class="fc999 mr5">{{__('design content')}}:</span>{{e.content}}</p>
+            <p><span class="fc999 mr5">{{__('design content')}}:</span>{{e.content}}</p>
+    </div>
     </div>
 
     <h3>ta的作品</h3>
