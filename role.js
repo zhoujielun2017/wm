@@ -24,7 +24,8 @@ var agency_vip=role_urls;
 var factory=["/sellers","/agencys","/factorys","/designs","/search/seller","/search/agency",
 "/search/factory"];
 //高级供应商可见
-var factory_vip=["/sellers","/agencys","/designs","/search/seller","/search/agency",/\/factory\/*/];
+var factory_vip=["/sellers","/agencys","/designs","/search/seller","/search/agency",
+/\/factory\/*/,/\/seller\/.*/,/\/agency\/.*/];
 
 /**
  * 

@@ -131,6 +131,9 @@ module.exports = {
         });
         for (var i = 0,len=result.count; i < len; i++) {
             var bean=result.rows[i];
+            if(!bean){
+                continue;
+            }
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }
