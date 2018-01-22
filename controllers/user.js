@@ -36,9 +36,10 @@ var manage_user_id=async (ctx, next) => {
         }
         
         var price=setting['price_'+user.type];
+        var price_usd=setting['price_'+user.type];
            
 
-        ctx.render('./user/buy.html',{user:user,price:price});
+        ctx.render('./user/buy.html',{user:user,price:price,price_usd:price_usd});
     },
     users=async (ctx, next) => {
         var user=ctx.session.user;
@@ -142,6 +143,11 @@ var manage_user_id=async (ctx, next) => {
         var user = await User.findById(id);
         user.verified=0;
         user.role=role;
+        if(role==1){
+            //延迟一年
+            user.end_time=new Date().getTime()+365*24*60*60*1000
+           
+        }
         await user.save();
         ctx.body={code:"success"};
     },

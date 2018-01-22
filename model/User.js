@@ -13,6 +13,10 @@ module.exports = db.defineModel('user', {
         type: db.BIGINT,
         allowNull: true
     },
+    end_time:{
+        type: db.BIGINT,
+        allowNull: true
+    },
     head_url:{
         type: db.STRING(1000),
         allowNull: true

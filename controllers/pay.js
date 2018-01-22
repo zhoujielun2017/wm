@@ -12,8 +12,8 @@ module.exports = {
             setting[obj.id]=obj.value;
         }
         var price=setting['price_'+user.type];
-
-        ctx.render('./pay/payment.html',{user:user,price:price});
+        var price_usd=setting['price_usd_'+user.type];
+        ctx.render('./pay/payment.html',{user:user,price:price,price_usd:price_usd});
     },
     'GET /pay/result': async (ctx, next) => {
         

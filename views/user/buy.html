@@ -4,14 +4,15 @@
 
 {% endblock %}
 
-
 {% block main %}
-
- <h3>{{__('buy h1')}}</h3>
+ <p>{{__('buy h1')}}{{price_usd}}</p>
  <p>{{__('buy h2')}}</p>
  <p>{{__('buy h3')}}</p>
- <p>{{__('buy h4')}}：${{price/100}}</p>
- <a href="/pay/payment" class="btn btn-primary">{{__('buy h5')}}</a>
+ <p>{{__('buy h4')}}{{price}}</p>
+ <p>{{__('buy h5')}}</p>
+ <p>{{__('buy h6')}}</p>
+ <p>{{__('buy h7')}}</p>
+ <p>{{__('buy h8')}}</p>
 {% endblock %}
 
 {% block foot %}
