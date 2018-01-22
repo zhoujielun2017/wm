@@ -100,6 +100,7 @@ a.red{color: #ff0000;}
 .mailtext{font-size: 20px;white-space: nowrap;margin: 5px 0 12px;color: #222222;}
 .log-row{margin: 100px auto;display: table;}
 .fa-dh{background: url("../images/phone_icon.png") no-repeat;width: 110px;height: 110px;display: block;margin: 50px auto 0px;}
+.fa-dz{background: url("../images/adress_icon.png") no-repeat;width: 110px;height: 110px;display: block;margin: 50px auto 0px;}
 .about-text{margin: 0px 0px 0px 120px;}
 .about-text p{text-align: left;font-size: 16px;color: #222;}
 .btn-height{height: 40px;line-height: 40px;}

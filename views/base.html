@@ -45,7 +45,7 @@
        <!--<li style="line-height: 53px;padding: 10px 2px;">{{__('hot line')}}</li>-->
         <li><a href="#">{{sessionuser.email}}</a></li>
         {% if  sessionuser  %}
-        <li><a href="#" class="loginout">{{__('sign out')}}</a></li>
+        <li><a href="#" class="loginout">{{__('Sign Out')}}</a></li>
         {% endif %}
         {% if  not sessionuser  %}
         <li><a href="/login/login">{{__('sign in')}}</a></li>
@@ -75,9 +75,9 @@
           </div>
           {% if  sessionuser.type=="factory"  %}
           <a href="/factory" class="list-group-item">{{__('Info')}}</a>
-          <a href="/environment" class="list-group-item">{{__('environment')}}</a>
-          <a href="/cooperation" class="list-group-item">{{__('cooperation info')}}</a>
-          <a href="/product" class="list-group-item">{{__('product info')}}</a>
+          <a href="/cooperation" class="list-group-item">{{__('Business Info')}}</a>
+          <a href="/environment" class="list-group-item">{{__('Environment')}}</a>
+          <a href="/product" class="list-group-item">{{__('Products')}}</a>
           <!--<a href="#" class="list-group-item">公司动态</a>
           <a href="#" class="list-group-item">资质证书</a>-->
           {% endif %}
@@ -95,10 +95,10 @@
           {% endif %}
 
           <div class="list-group-item"><h3>{{__('Message')}}</h3></div>
-           <a href="/messageGroups" class="list-group-item"> <span class="badge unread"></span>{{__('All Message')}}</a>
+           <a href="/messageGroups" class="list-group-item"> <span class="badge unread"></span>{{__('All Messages')}}</a>
           <div class="list-group-item"><h3>{{__('User Center')}}</h3></div>
           <a href="/user/buy" class="list-group-item">{{__('To be VIP')}}</a>
-          <a href="/ord" class="list-group-item">{{__('Buy record')}}</a>
+          <!--<a href="/ord" class="list-group-item">{{__('Buy record')}}</a>-->
       </div>
       
     </div>

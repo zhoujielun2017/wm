@@ -64,7 +64,7 @@
       <input type="email" name="email"  value="{{bean.email}}" class="form-control"   placeholder="{{__('Email')}}" maxlength="50">
     </div>
   </div>
-   <div class="form-group">
+   <!--<div class="form-group">
     <label  class="col-sm-2 control-label">twitter</label>
     <div class="col-sm-10">
       <input type="text" name="twitter" value="{{bean.twitter}}" class="form-control"   placeholder="twitter">
@@ -75,7 +75,7 @@
     <div class="col-sm-10">
       <input type="text" name="facebook" value="{{bean.facebook}}" class="form-control"   placeholder="Facebook">
     </div>
-  </div>
+  </div>-->
   <div class="form-group  {% if loop.last %}brand{% endif %}">
       <label class="col-sm-2 control-label">
           {{__('Cooperative Brands')}}
@@ -93,12 +93,12 @@
   <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('purchase per year')}}</label>
     <div class="col-sm-5">
-    <input type="text" name="purchase_per_year"   value="{{bean.purchase_per_year}}"  class="form-control" placeholder="{{__('purchase per year')}}"/>
+    <input type="text" name="purchase_per_year"   value="{{bean.purchase_per_year}}"  class="form-control" placeholder="$"/>
      
     </div>
-    <div class="col-sm-5">
+    <!--<div class="col-sm-5">
        <p class="form-control-static">{{__('unit money')}}</p>
-    </div>
+    </div>-->
   </div>
 
   <div class="form-group">

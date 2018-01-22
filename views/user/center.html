@@ -76,15 +76,16 @@
   <a href="/user/buy" class="red">{{__('To Be VIP')}}</a>
 {% endif %}
 {% if user.role==1 %}
-  {{__('User VIP')}}
+  {{__('VIP')}}
 {% endif %}
 {% if user.role==9 %}
   {{__('manager')}}
 {% endif %}
 </p>
 
- <p>{{__('all message')}}:(<span class="messageCount">0</span>)</p>
- <p>{{__('last login time')}}:{{user.last_login_time|formatdate("YYYY-MM-DD HH:mm:ss")}}</p>
+ <!--<p>{{__('all message')}}:(<span class="messageCount">0</span>)</p>-->
+ <p>会员到期日：英文为Expiry Date ps:如果他是高级会员才出现</p>
+ <p>{{__('Last Login Time')}}:{{user.last_login_time|formatdate("YYYY-MM-DD HH:mm:ss")}}</p>
 {% endblock %}
 
 {% block foot %}

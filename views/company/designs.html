@@ -7,7 +7,7 @@
 <div class="bk30"></div>
 <div class="container">
     {% for e in result.rows %}
-    <div class="row list">
+    <div class="col-md-6 list">
         <div class="col-xs-3 col-md-3">
             <a href="/design/{{e.id}}">
                 {% if e.head %}
@@ -17,13 +17,13 @@
                 {% endif %}
             </a>
         </div>
-        <div class="col-xs-9 col-md-9">
+        <div class="col-xs-9 col-md-5">
              <h4 class="media-heading">
                 <a href="/design/{{e.id}}">
                     {{e.name}}
                 </a>
             </h4>
-            <div class="rightinfo"><a href="/message/{{e.user_id}}" class="talk"></a> <a href="/design/{{e.id}}" class="more"></a></div>
+            <!--<div class="rightinfo"><a href="/message/{{e.user_id}}" class="talk"></a> <a href="/design/{{e.id}}" class="more"></a></div>-->
             <div class="clear"></div>
             <p><span class="fc999 mr5"></span>{{__('location')}}:</span>{{e.area}}
             </p>
