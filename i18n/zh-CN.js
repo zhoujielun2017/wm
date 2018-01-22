@@ -11,7 +11,7 @@
 	"back": "返回",
 	"Days": "天",
 	"Info": "基本信息",
-	"Buy record": "购买记录",
+	"Buy record": "Buy record",
 	"buy p1": "成为高级会员",
 	"buy p2": "请选择一种付款方式",
 	"buy h1": "年费：美金",
@@ -211,5 +211,5 @@
 	"company phone": "company phone",
 	"company custom service": "company custom service",
 	"company email": "company email",
-	"Buy record": "Buy record"
+	"contact": "contact"
 }
