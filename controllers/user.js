@@ -36,7 +36,7 @@ var manage_user_id=async (ctx, next) => {
         }
         
         var price=setting['price_'+user.type];
-        var price_usd=setting['price_'+user.type];
+        var price_usd=setting['price_usd_'+user.type];
            
 
         ctx.render('./user/buy.html',{user:user,price:price,price_usd:price_usd});
