@@ -1,0 +1,266 @@
+{% extends '../base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+
+<form class="form-horizontal">
+  <input type="hidden" name="id" value="{{bean.id}}">
+
+{% for e in customer %}
+
+ <div class="form-group {% if loop.last %}customer{% endif %}" >
+      <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation customer name')}}</label>
+      <div class="col-sm-9" >
+        <div class="row">
+          <div class="col-xs-6 col-sm-4">
+            <select class="form-control" name="type">
+              <option value="seller" {% if e.type=='seller' %}selected{% endif %}>{{__('seller')}}</option>
+              <option value="agency" {% if e.type=='agency' %}selected{% endif %}>{{__('agency')}}</option>
+            </select>
+          </div>
+          <div class="col-xs-4 col-sm-6">
+             <input type="text" name="customer" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="">
+          </div>
+          <div class="col-xs-2 col-sm-2">
+              {% if not loop.first %}
+              <button class="btn btn-danger">{{__('delete')}}</button>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+  <div class="form-group customer" >
+      <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation customer name')}}</label>
+      <div class="col-sm-9" >
+        <div class="row">
+          <div class="col-xs-6 col-sm-4">
+            <select class="form-control" name="type">
+              <option value="seller">{{__('seller')}}</option>
+              <option value="agency">{{__('agency')}}</option>
+            </select>
+          </div>
+          <div class="col-xs-4 col-sm-6">
+             <input type="text" name="customer" value="" class="form-control" id="inputEmail3" placeholder="">
+          </div>
+          <div class="col-xs-2 col-sm-2">
+              {% if not loop.first %}
+              <button class="btn btn-danger">{{__('delete')}}</button>
+              {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endfor %}
+
+
+     <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <a href="javascript:void(0);" class="btn btn-default addC">{{__('add')}}</a>
+      </div>
+    </div>
+
+
+{% for e in factory %}
+  
+    <div class="form-group {% if loop.last %}factory{% endif %}">
+      <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation factory name')}}</label>
+      <div class="col-sm-7">
+          
+         <input type="text" name="factory" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="{{__('cooperation factory name')}}">
+      </div>
+      <div class="col-sm-2">
+          {% if not loop.first %}
+          <button class="btn btn-danger">{{__('delete')}}</button>
+          {% endif %}
+      </div>
+    </div>
+  {% else %}
+  <div class="form-group factory">
+    <label for="inputEmail3" class="col-sm-3 control-label">{{__('cooperation factory name')}}</label>
+    <div class="col-sm-7">
+        
+       <input type="text" name="factory" value="" class="form-control" id="inputEmail3" placeholder="{{__('cooperation factory name')}}">
+    </div>
+     <div class="col-sm-2">
+          <button class="btn btn-danger">{{__('delete')}}</button>
+      </div>
+  </div>
+{% endfor %}
+ 
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-9">
+        <a href="#" class="btn btn-default addF">{{__('add')}}</a>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-3 control-label">{{__('company acreage')}}</label>
+    <div class="col-sm-7">
+      <input type="text" name="acreage" value="{{bean.acreage}}" class="form-control" id="inputEmail3" placeholder="{{__('company acreage')}}">
+    </div>
+    <div class="col-sm-2">
+       <p class="form-control-static">{{__('square meters')}}</p>
+    </div>
+
+
+  </div>
+
+
+
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-3 control-label">{{__('type per month')}}</label>
+    <div class="col-sm-7">
+      <input type="text" name="type_per_month" value="{{bean.type_per_month}}" class="form-control" id="inputEmail3" placeholder="{{__('type per month')}}">
+    </div>
+     <div class="col-sm-2">
+       <p class="form-control-static">{{__('pcs')}}</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword3" class="col-sm-3 control-label">{{__('produce person')}}</label>
+    <div class="col-sm-7">
+      <input type="text" name="count_person" value="{{bean.count_person}}" class="form-control" placeholder="">
+    </div>
+     <div class="col-sm-2">
+       <p class="form-control-static">{{__('persons')}}</p>
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <label  class="col-sm-3 control-label">{{__('QC person')}}</label>
+    <div class="col-sm-7">
+     	<input name="count_qc"  class="form-control" value="{{bean.count_qc}}" />
+    </div>
+     <div class="col-sm-2">
+       <p class="form-control-static">{{__('persons')}}</p>
+    </div>
+  </div>
+   <div class="form-group">
+    <label  class="col-sm-3 control-label">{{__('produce per month')}}</label>
+    <div class="col-sm-7">
+      <input type="text" name="able_per_month" value="{{bean.able_per_month}}" class="form-control" placeholder="">
+    </div>
+     <div class="col-sm-2">
+       <p class="form-control-static">{{__('pcs')}}</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-3 control-label">{{__('company major')}}</label>
+    <div class="col-sm-9">
+      <div class="btn-group major" role="group">
+
+
+      {% for e in major %}
+
+      <button type="button" class="btn btn-default  {% for d in bean.major %}{% if  e==d  %}btn-primary{% endif %}{% endfor %}" data-code="{{e}}" >{{__('major_'+e)}}</button>
+      {% endfor %}
+        
+
+      </div>
+    </div>
+  </div>
+   <input type="hidden" name="types">
+   <input type="hidden" name="names">
+   <input type="hidden" name="majors">
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" class="btn btn-default">{{__('confirm')}}</button>
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+{% block foot %}
+<script>
+//major click
+$(".major").on("click","button",function(){
+  var len=$(".major .btn-primary").length;
+  var has=$(this).hasClass("btn-primary");
+  // if(len>=3&&!has){
+  //   YY.dialog({content:"three choose most"}).alert();
+  //   return ;
+  // }
+  $(this).toggleClass("btn-primary");
+});
+
+$(".addC").click(function(){
+  var temp=$(".customer");
+  var clone=temp.clone();
+  temp.after(clone);
+  temp.removeClass("customer")
+  clone.find("input").val("");
+});
+$(".addF").click(function(){
+  var temp=$(".factory");
+  var clone=temp.clone();
+  temp.after(clone);
+  temp.removeClass("factory")
+  clone.find("input").val("");
+});
+//删除
+$(".btn-danger").click(function(){
+  $(this).parents(".form-group").remove();
+  return false;
+});
+$("form").on('submit',function(e){
+
+    var $this=$(this)
+
+    //类型
+    var types=[];
+    $("select[name=type]").each(function(){
+      types.push($(this).val())
+    });
+    //名称
+    var names=[];
+    $("input[name=customer]").each(function(){
+      names.push($(this).val())
+    });
+    $("input[name=factory]").each(function(){
+        types.push("factory");
+        names.push($(this).val())
+    })
+    //特长
+    var majors=[];
+    $(".major .btn-primary").each(function(){
+        var code=$(this).data("code");
+        majors.push(code);
+    })
+    $this.find("input[name=types]").val(types.join(","));
+    $this.find("input[name=names]").val(names.join(","));
+    $this.find("input[name=majors]").val(majors.join(","));
+    var data=$this.serialize();
+    $.ajax({
+        type: "put",
+        url: "/api/factorydetail",
+         data:data,
+      //   data:{
+      //     id:fd.get('id'),
+      //     types:types.join(","),
+      //     names:names.join(","),
+	    //     acreage:fd.get('acreage'),
+	    //     type_per_month:fd.get('type_per_month'),
+	    //     count_person:fd.get('count_person'),
+	    //     count_qc:fd.get('count_qc'),
+	    //     able_per_month:fd.get('able_per_month'),
+	    //     majors:majors.join(",")
+    	// },
+        dataType:"json",
+        success:function(json){
+            if(json.code=='success'){
+            	$("input[name=id]").val(json.id);
+            	YY.dialog({content:json.code}).alert();
+            }else{
+            	// location.reload();
+            }
+        }
+    });
+
+    return false;
+});
+</script>  
+{% endblock %}
