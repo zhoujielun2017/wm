@@ -225,6 +225,9 @@ var factory_id=async (ctx, next) => {
             name: name,
             ename:ename,
             address:address,
+            en_city:en_city,
+            en_nation:en_nation,
+            en_address:en_address,
             legal_person:legal_person,
             phone:phone,
             custom_service:custom_service,
@@ -243,10 +246,17 @@ var factory_id=async (ctx, next) => {
             address = ctx.request.body.address||'',
             city = ctx.request.body.city||'',
             nation = ctx.request.body.nation||'',
+            en_city = ctx.request.body.en_city||'',
+            en_nation = ctx.request.body.en_nation||'',
+            en_address = ctx.request.body.en_address||'',
             legal_person = ctx.request.body.legal_person||'',
             phone = ctx.request.body.phone||'',
+            cellphone= ctx.request.body.cellphone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+            sale_manager_phone=ctx.request.body.sale_manager_phone||'',
+            sale_manager_email=ctx.request.body.sale_manager_email||'',
+            sale_manager=ctx.request.body.sale_manager||'',
              build_time = ctx.request.body.build_time||Date.now(),
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
@@ -263,10 +273,17 @@ var factory_id=async (ctx, next) => {
             address:address,
             city:city,
             nation:nation,
+            en_city:en_city,
+            en_nation:en_nation,
+            en_address:en_address,
             legal_person:legal_person,
             phone:phone,
+            cellphone:cellphone,
             custom_service:custom_service,
             email:email,
+            sale_manager:sale_manager,
+            sale_manager_email:sale_manager_email,
+            sale_manager_phone:sale_manager_phone,
             build_time:build_time,
             area:area,
             search:name,
@@ -286,13 +303,20 @@ var factory_id=async (ctx, next) => {
         var id = ctx.request.body.id||'',
             name = ctx.request.body.name||'',
             ename = ctx.request.body.ename||'',
-            address = ctx.request.body.address||'',
             city = ctx.request.body.city||'',
             nation = ctx.request.body.nation||'',
+            address = ctx.request.body.address||'',
+            en_city = ctx.request.body.en_city||'',
+            en_nation = ctx.request.body.en_nation||'',
+            en_address = ctx.request.body.en_address||'',
             legal_person = ctx.request.body.legal_person||'',
             phone = ctx.request.body.phone||'',
+            cellphone= ctx.request.body.cellphone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
+            sale_manager=ctx.request.body.sale_manager||'',
+            sale_manager_email=ctx.request.body.sale_manager_email||'',
+            sale_manager_phone=ctx.request.body.sale_manager_phone||'',
             area = ctx.request.body.area||'',
             build_time = ctx.request.body.build_time||Date.now(),
             content = ctx.request.body.content||'';
@@ -328,10 +352,17 @@ var factory_id=async (ctx, next) => {
         factory.address=address;
         factory.city=city;
         factory.nation=nation;
+        factory.en_city=en_city,
+        factory.en_nation=en_nation,
+        factory.en_address=en_address,
+        factory.cellphone=cellphone,
         factory.legal_person=legal_person;
         factory.phone=phone;
         factory.custom_service=custom_service;
         factory.email=email;
+        factory.sale_manager=sale_manager;
+        factory.sale_manager_email=sale_manager_email;
+        factory.sale_manager_phone=sale_manager_phone;
         factory.area=area;
         factory.content=content;
         factory.build_time=build_time;
@@ -351,6 +382,8 @@ var factory_id=async (ctx, next) => {
             type_per_month = ctx.request.body.type_per_month||'',
             count_person = ctx.request.body.count_person||'',
             count_qc = ctx.request.body.count_qc||'',
+            count_dev=ctx.request.body.count_dev||'',
+            count_trade=ctx.request.body.count_trade||'',
             able_per_month = ctx.request.body.able_per_month||'',
             majors = ctx.request.body.majors||'';
 
@@ -394,6 +427,8 @@ var factory_id=async (ctx, next) => {
         factory.type_per_month=type_per_month;
         factory.count_person=count_person;
         factory.count_qc=count_qc;
+        factory.count_trade=count_trade;
+        factory.count_dev=count_dev;
         factory.able_per_month=able_per_month;
         factory.major=majors;
         await factory.save();

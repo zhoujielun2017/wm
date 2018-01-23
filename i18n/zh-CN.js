@@ -211,5 +211,15 @@
 	"company phone": "company phone",
 	"company custom service": "company custom service",
 	"company email": "company email",
-	"contact": "contact"
+	"contact": "contact",
+	"password": "password",
+	"forget password": "forget password",
+	"city": "city",
+	"nation": "nation",
+	"company acreage": "company acreage",
+	"phone": "phone",
+	"bean.count_person": "bean.count_person",
+	"bean.count_dev": "bean.count_dev",
+	"bean.count_qc": "bean.count_qc",
+	"bean.count_trade": "bean.count_trade"
 }
