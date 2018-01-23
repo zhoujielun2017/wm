@@ -13,14 +13,14 @@
     <input name="id" type="hidden" value="{{bean.id}}">
         <div class="form-group">
             <label class="col-sm-2 control-label">
-                {{__('name')}}
+                {{__('Name')}}
             </label>
             <div class="col-sm-10">
-                <input class="form-control" name="name"   placeholder="{{__('name')}}" type="text" value="{{bean.name}}" maxlength="20">
+                <input class="form-control" name="name"   placeholder="{{__('Name')}}" type="text" value="{{bean.name}}" maxlength="20">
                 </input>
             </div>
         </div>
-        <div class="form-group">
+       <!-- <div class="form-group">
             <label class="col-sm-2 control-label">
                 {{__('age')}}
             </label>
@@ -28,10 +28,10 @@
                 <input class="form-control" name="age"   placeholder="{{__('age')}}" type="number" value="{{bean.age}}">
                 </input>
             </div>
-        </div>
+        </div>-->
         <div class="form-group">
             <label class="col-sm-2 control-label">
-                {{__('gender')}}
+                {{__('Gender')}}
             </label>
             <div class="col-sm-10">
                 <label class="radio-inline">
@@ -46,6 +46,33 @@
                 </label>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                邮箱
+            </label>
+            <div class="col-sm-10">
+                <input class="form-control" name=""   placeholder="邮箱" type="text" value="" maxlength="20">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+               电话
+            </label>
+            <div class="col-sm-10">
+                <input class="form-control" name=""   placeholder="电话" type="text" value="" maxlength="20">
+                </input>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">
+                {{__('Location')}}
+            </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="area"   placeholder="{{__('Location')}}"  maxlength="100" value="{{bean.area}}"/>
+            </div>
+
+        </div>
         <!--<div class="form-group">
             <label class="col-sm-2 control-label">
                 {{__('age')}}
@@ -55,7 +82,7 @@
                 </input>
             </div>
         </div>
-        -->
+
         <div class="form-group">
             <label class="col-sm-2 control-label">
                 {{__('location')}}
@@ -65,10 +92,10 @@
             </div>
 
         </div>
-
+        -->
         <div class="form-group">
             <label class="col-sm-2 control-label">
-                {{__('status')}}
+                {{__('Working Way')}}
             </label>
             <div class="col-sm-10">
               <select class="form-control" name="status"  required >
@@ -79,25 +106,16 @@
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">
-                {{__('design content')}}
+                {{__('Specialities/Skills')}}
             </label>
             <div class="col-sm-10">
-                <textarea class="form-control" name="content" required  placeholder="{{__('design content')}}"  maxlength="1000">{{bean.content}}</textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('major')}}
-            </label>
-            <div class="col-sm-10">
-                <input class="form-control" name="major" required  placeholder="{{__('major')}}" type="text" value="{{bean.major}}"  maxlength="100">
+                <input class="form-control" name="major" required  placeholder="{{__('Specialities/Skills')}}" type="text" value="{{bean.major}}"  maxlength="100">
                 </input>
             </div>
         </div>
-
         <div class="form-group">
             <label class="col-sm-2 control-label">
-                {{__('personal summary')}}
+                {{__('Personal Summary')}}
             </label>
             <div class="col-sm-10">
                 <textarea class="form-control" name="summary" required  placeholder="例如 毕业院校，工作经历，曾参与开发的品牌，曾获荣誉"  maxlength="1000">{{bean.summary}}</textarea>
@@ -147,24 +165,6 @@
           </div>
         </div>
         -->
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('design content')}}
-            </label>
-            <div class="col-sm-10">
-                <textarea class="form-control" name="content"   placeholder="{{__('work experience')}}"  maxlength="1000">{{bean.content}}</textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">
-                {{__('location')}}
-            </label>
-            <div class="col-sm-10">
-                    <input type="text" class="form-control" name="area"   placeholder="{{__('location')}}"  maxlength="100" value="{{bean.area}}"/>                
-            </div>
-            
-        </div>
-       
         <!-- <input type="hidden" name="area"> -->
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

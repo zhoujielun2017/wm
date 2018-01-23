@@ -20,7 +20,7 @@ h1{float: left;display: block;margin: 0px 20px 0px 0px;}
 {% endblock %}
 
 {% block main %}
-<h1>{{__('works info')}}</h1> <a href="/works/add" class="btn btn-primary">{{__('add')}}</a>
+<h1>{{__('Works Info')}}</h1> <a href="/works/add" class="btn btn-primary">{{__('Add')}}</a>
 <div class="bk20"></div>
 <div class="bk20"></div>
   {% for e in result.rows %}
@@ -37,15 +37,15 @@ h1{float: left;display: block;margin: 0px 20px 0px 0px;}
 
           </a>
       </div>
-      <div class="col-xs-7 col-md-7">
-         <h4 class="media-heading">
+      <div class="col-xs-7 col-md-6">
+         <h4>
           <a href="/works/{{e.id}}">{{e.title}}</a>
         </h4>
         <p>{{__('material')}}:{{e.material}}</p>
         <p>{{__('price')}}:{{e.price|fmoney}}</p>
       </div>
-      <div class="col-xs-2 col-md-2">
-        <a href="/works/add?id={{e.id}}">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}" class="del">{{__('delete')}}</a>
+      <div class="col-xs-2 col-md-3">
+        <a href="/works/add?id={{e.id}}" class="btn btn-info">{{__('edit')}}</a> <a href="#" data-id="{{e.id}}" class="btn btn-danger del">{{__('delete')}}</a>
       </div>
   </div>
 

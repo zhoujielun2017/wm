@@ -74,6 +74,7 @@
             </h3>
           </div>
           {% if  sessionuser.type=="factory"  %}
+          <a href="/user/center" class="list-group-item">{{__('User')}}</a>
           <a href="/factory" class="list-group-item">{{__('Info')}}</a>
           <a href="/cooperation" class="list-group-item">{{__('Business Info')}}</a>
           <a href="/environment" class="list-group-item">{{__('Environment')}}</a>
@@ -83,15 +84,18 @@
           {% endif %}
 
           {% if  sessionuser.type=="seller"  %}
+          <a href="/user/center" class="list-group-item">{{__('User')}}</a>
           <a href="/seller" class="list-group-item">{{__('Info')}}</a>
           {% endif %}
 
            {% if  sessionuser.type=="agency"  %}
+          <a href="/user/center" class="list-group-item">{{__('User')}}</a>
           <a href="/agency" class="list-group-item">{{__('Info')}}</a>
           {% endif %}
            {% if  sessionuser.type=="design"  %}
+          <a href="/user/center" class="list-group-item">{{__('User')}}</a>
           <a href="/design" class="list-group-item">{{__('Info')}}</a>
-          <a href="/works" class="list-group-item">{{__('works info')}}</a>
+          <a href="/works" class="list-group-item">{{__('Works Info')}}</a>
           {% endif %}
 
           <div class="list-group-item"><h3>{{__('Message')}}</h3></div>
