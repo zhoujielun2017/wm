@@ -12,8 +12,21 @@ var major=[
 	"acrylic",
 	"pearl",
 	"shall",
-	"wood"
+    "wood",
+    "leather",
+    "fabric" 
 ];
+var products=[
+    "chengren",
+	"ertong",
+	"jichu",
+	"xiongzhen",
+	"fashi",
+	"yaoshi",
+	"chuanci",
+	"qita"
+]
+    
 
 var cooperation=async (ctx, next) => {
         var user=ctx.session.user;
@@ -41,6 +54,9 @@ var cooperation=async (ctx, next) => {
         if(company&&company.major){
             company.major=company.major.split(",");
         }
+        if(company&&company.product){
+            company.product=company.product.split(",");
+        }
         var list = await Cooperation.findAll({
             where: {
                 factory_id: company.id
@@ -62,7 +78,7 @@ var cooperation=async (ctx, next) => {
             list:list,
             customer:customer,
             factory:factory,
-            major:major});
+            major:major,products});
     },
     //添加合作商
     api_cooperation=async (ctx, next) => {

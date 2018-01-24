@@ -23,10 +23,10 @@
           </div>
           -->
           <div class="col-xs-4 col-sm-6">
-             <input type="text" name="customer" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="合作品牌">
+             <input type="text" name="customer" value="{{e.name}}" class="form-control"  placeholder="合作品牌">
           </div>
           <div class="col-xs-6 col-sm-4">
-                <input type="text" name="" value="" class="form-control" id="" placeholder="合作时间">
+                <input type="text" name="co_time" value="{{e.co_time|formatdate('YYYY')}}" class="form-control"  placeholder="合作时间">
           </div>
           <div class="col-xs-2 col-sm-2">
               {% if not loop.first %}
@@ -51,7 +51,7 @@
              <input type="text" name="customer" value="" class="form-control" id="inputEmail3" placeholder="合作品牌">
           </div>
           <div class="col-xs-6 col-sm-4">
-             <input type="text" name="" value="" class="form-control" id="" placeholder="合作时间">
+             <input type="text" name="co_time" value="" class="form-control" id="" placeholder="合作时间">
           </div>
           <div class="col-xs-2 col-sm-2">
               {% if not loop.first %}
@@ -80,7 +80,7 @@
                  <input type="text" name="factory" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="{{__('Audit Approved Brands')}}">
               </div>
                <div class="col-xs-6 col-sm-4">
-                    <input type="text" name="" value="" class="form-control" id="" placeholder="通过验厂的时间">
+                    <input type="text" name="co_time" value="{{e.co_time|formatdate('YYYY')}}" class="form-control" id="" placeholder="通过验厂的时间">
                </div>
               <div class="col-xs-2 col-sm-2">
                   {% if not loop.first %}
@@ -97,10 +97,10 @@
         <div class="row">
             <div class="col-xs-4 col-sm-6">
 
-               <input type="text" name="factory" value="" class="form-control" id="inputEmail3" placeholder="{{__('Audit Approved Brands')}}">
+               <input type="text" name="factory" value="" class="form-control"  placeholder="{{__('Audit Approved Brands')}}">
             </div>
               <div class="col-xs-6 col-sm-4">
-                  <input type="text" name="" value="" class="form-control" id="" placeholder="通过验厂的时间">
+                  <input type="text" name="co_time" value="" class="form-control"  placeholder="通过验厂的时间">
               </div>
              <div class="col-xs-2 col-sm-2">
                   <button class="btn btn-danger">{{__('delete')}}</button>
@@ -129,7 +129,7 @@
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-3 control-label">年销售额</label>
         <div class="col-sm-7">
-            <input type="text" name="" value="" class="form-control" id="" placeholder="年销售额">
+            <input type="text" name="sale_per_year" value="{{bean.sale_per_year}}" class="form-control" id="" placeholder="年销售额">
         </div>
         <div class="col-sm-2">
             <p class="form-control-static">美元</p>
@@ -216,15 +216,10 @@
   <div class="form-group">
       <label  class="col-sm-3 control-label">产品</label>
       <div class="col-sm-9">
-          <div class="btn-group major" role="group">
-              <button type="button" class="btn btn-default  btn-primary" data-code="">成人</button>
-              <button type="button" class="btn btn-default" data-code="">儿童</button>
-              <button type="button" class="btn btn-default  btn-primary" data-code="">基础款</button>
-              <button type="button" class="btn btn-default" data-code="">胸针</button>
-              <button type="button" class="btn btn-default" data-code="">发饰</button>
-              <button type="button" class="btn btn-default" data-code="">钥匙链</button>
-              <button type="button" class="btn btn-default" data-code="">穿刺类</button>
-              <button type="button" class="btn btn-default" data-code="">其他</button>
+          <div class="btn-group product" role="group">
+              {% for e in products %}
+              <button type="button" class="btn btn-default  {% for d in bean.product %}{% if  e==d  %}btn-primary{% endif %}{% endfor %}" data-code="{{e}}" >{{__('product_'+e)}}</button>
+              {% endfor %}
           </div>
       </div>
   </div>
@@ -232,20 +227,17 @@
     <label  class="col-sm-3 control-label">{{__('company major')}}</label>
     <div class="col-sm-9">
       <div class="btn-group major" role="group">
-
-
       {% for e in major %}
-
       <button type="button" class="btn btn-default  {% for d in bean.major %}{% if  e==d  %}btn-primary{% endif %}{% endfor %}" data-code="{{e}}" >{{__('major_'+e)}}</button>
       {% endfor %}
-        
-
       </div>
     </div>
   </div>
    <input type="hidden" name="types">
    <input type="hidden" name="names">
    <input type="hidden" name="majors">
+   <input type="hidden" name="co_times">
+   <input type="hidden" name="products">
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
       <button type="submit" class="btn btn-default">{{__('confirm')}}</button>
@@ -257,7 +249,7 @@
 {% block foot %}
 <script>
 //major click
-$(".major").on("click","button",function(){
+$(".major,.product").on("click","button",function(){
   var len=$(".major .btn-primary").length;
   var has=$(this).hasClass("btn-primary");
   // if(len>=3&&!has){
@@ -290,45 +282,47 @@ $("form").on('submit',function(e){
 
     var $this=$(this)
 
-    //类型
-    var types=[];
-    $("select[name=type]").each(function(){
-      types.push($(this).val())
-    });
     //名称
-    var names=[];
+    var names=[],types=[];
     $("input[name=customer]").each(function(){
+      types.push("customer");
       names.push($(this).val())
     });
     $("input[name=factory]").each(function(){
         types.push("factory");
         names.push($(this).val())
     })
+    //品牌合作时间
+    var co_times=[];
+    $("input[name=co_time]").each(function(){
+      var time=$(this).val()||0;
+      var ms=Date.parse(time)
+      co_times.push(ms)
+    });
+
     //特长
     var majors=[];
     $(".major .btn-primary").each(function(){
         var code=$(this).data("code");
         majors.push(code);
     })
+    //产品
+    var products=[];
+    $(".product .btn-primary").each(function(){
+        var code=$(this).data("code");
+        products.push(code);
+    })
     $this.find("input[name=types]").val(types.join(","));
     $this.find("input[name=names]").val(names.join(","));
+    $this.find("input[name=co_times]").val(co_times.join(","));
     $this.find("input[name=majors]").val(majors.join(","));
+    $this.find("input[name=products]").val(products.join(","));
+
     var data=$this.serialize();
     $.ajax({
         type: "put",
         url: "/api/factorydetail",
          data:data,
-      //   data:{
-      //     id:fd.get('id'),
-      //     types:types.join(","),
-      //     names:names.join(","),
-	    //     acreage:fd.get('acreage'),
-	    //     type_per_month:fd.get('type_per_month'),
-	    //     count_person:fd.get('count_person'),
-	    //     count_qc:fd.get('count_qc'),
-	    //     able_per_month:fd.get('able_per_month'),
-	    //     majors:majors.join(",")
-    	// },
         dataType:"json",
         success:function(json){
             if(json.code=='success'){

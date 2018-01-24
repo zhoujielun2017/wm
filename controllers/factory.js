@@ -20,6 +20,19 @@ var i18n_majors={
 	"shall": "贝壳",
     "wood": "木头"
 }
+
+var i18n_products={
+    "chengren": "成人",
+	"ertong": "儿童",
+	"jichu": "基础款",
+	"xiongzhen": "胸针",
+	"fashi": "发饰",
+	"yaoshi": "钥匙链",
+	"chuanci": "穿刺类",
+	"qita": "其他"
+}
+
+
 var factorys = async (ctx, next) => {
     var page=ctx.request.query.page||1;
     var result = await Factory.findAndCountAll({
@@ -257,7 +270,7 @@ var factory_id=async (ctx, next) => {
             sale_manager_phone=ctx.request.body.sale_manager_phone||'',
             sale_manager_email=ctx.request.body.sale_manager_email||'',
             sale_manager=ctx.request.body.sale_manager||'',
-             build_time = ctx.request.body.build_time||Date.now(),
+            build_time = ctx.request.body.build_time||Date.now(),
             area = ctx.request.body.area||'',
             content = ctx.request.body.content||'';
         if(!user){
@@ -378,6 +391,7 @@ var factory_id=async (ctx, next) => {
          var id = ctx.request.body.id||'',
             types = ctx.request.body.types,
             names = ctx.request.body.names,
+            co_times = ctx.request.body.co_times,
             acreage = ctx.request.body.acreage||'',
             type_per_month = ctx.request.body.type_per_month||'',
             count_person = ctx.request.body.count_person||'',
@@ -385,11 +399,13 @@ var factory_id=async (ctx, next) => {
             count_dev=ctx.request.body.count_dev||'',
             count_trade=ctx.request.body.count_trade||'',
             able_per_month = ctx.request.body.able_per_month||'',
+            sale_per_year= ctx.request.body.sale_per_year||'',
+            products = ctx.request.body.products||'',            
             majors = ctx.request.body.majors||'';
 
         var typearr=types.split(",");
         var namearr=names.split(",");
-
+        var timearr=co_times.split(",");
         //先删除合作信息
         await Cooperation.destroy({
           where: {
@@ -400,12 +416,13 @@ var factory_id=async (ctx, next) => {
         for (var i = 0; i < typearr.length; i++) {
             var type=typearr[i];
             var name=namearr[i];
-           
+            var time=timearr[i]||null;//如果为0
             var cooperation = await Cooperation.create({
                
                 factory_id:id,
                 name: name,
-                type:type
+                type:type,
+                co_time:time
             });
         }
         
@@ -430,7 +447,9 @@ var factory_id=async (ctx, next) => {
         factory.count_trade=count_trade;
         factory.count_dev=count_dev;
         factory.able_per_month=able_per_month;
+        factory.sale_per_year=sale_per_year;
         factory.major=majors;
+        factory.product=products;
         await factory.save();
        
         ctx.body = {"code":"success","id":factory.id};

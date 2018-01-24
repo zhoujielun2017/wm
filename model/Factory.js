@@ -54,8 +54,18 @@ module.exports = db.defineModel('factory', {
         type: db.STRING(20),
         allowNull: true
     },
+     //年销售额
+     sale_per_year:{
+        type: db.STRING(20),
+        allowNull: true
+    },
     //特长
     major:{
+        type: db.STRING(500),
+        allowNull: true
+    },
+    //产品
+    product:{
         type: db.STRING(500),
         allowNull: true
     },

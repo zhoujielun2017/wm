@@ -12,6 +12,10 @@ module.exports = db.defineModel('seller', {
         type: db.STRING(200),
         allowNull: true
     },
+    china:{
+        type: db.STRING(2),
+        allowNull: true
+    },
     china_office:{
         type: db.STRING(200),
         allowNull: true
