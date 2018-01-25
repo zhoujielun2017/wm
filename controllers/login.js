@@ -192,8 +192,9 @@ module.exports = {
             ctx.render('./user/reset_email_fail.html',{msg:"邀请链接已经过期"});
             return;
         }
-        user.update_time = Date.now();
-        await user.save();    
+        //进入这个页面，让练级不失效
+        // user.update_time = Date.now();
+        // await user.save();    
 
         var token=crypto.createHash('md5').update(user.id+user.password).digest('hex');
         ctx.render('./user/reset.html',{bean:user,token:token});

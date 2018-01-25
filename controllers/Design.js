@@ -168,6 +168,8 @@ var designs=async (ctx, next) => {
         var user=ctx.session.user;
         var name = ctx.request.body.name||'',
             gender = ctx.request.body.gender||'',
+            email = ctx.request.body.email||'',
+            phone = ctx.request.body.phone||'',
             age = ctx.request.body.age||'',
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
@@ -178,6 +180,8 @@ var designs=async (ctx, next) => {
         var design = await Design.create({
             user_id:user.id,
             name: name,
+            email:email,
+            phone:phone,
             gender:gender,
             age:age,
             status:status,
@@ -196,6 +200,8 @@ var designs=async (ctx, next) => {
         var user=ctx.session.user;
          var id = ctx.request.body.id||'',
             name = ctx.request.body.name||'',
+            email = ctx.request.body.email||'',
+            phone = ctx.request.body.phone||'',
             gender = ctx.request.body.gender||'',
             age = ctx.request.body.age||'',
             status = ctx.request.body.status||'',
@@ -216,7 +222,8 @@ var designs=async (ctx, next) => {
         design.age=age;
         design.status=status;
         design.major=major;
-
+        design.email=email;
+        design.phone=phone;
         design.area=area;
         design.summary=summary;
         design.content=content;

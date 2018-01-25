@@ -10,6 +10,14 @@ module.exports = db.defineModel('design', {
         type: db.STRING(10),
         allowNull: true
     },
+    email:{
+        type: db.STRING(100),
+        allowNull: true
+    },
+    phone:{
+        type: db.STRING(20),
+        allowNull: true
+    },
     user_id: {
         type: db.STRING(32),
         allowNull: true
