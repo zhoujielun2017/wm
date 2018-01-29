@@ -1,4 +1,5 @@
 var Product=require("../model/Product"),
+    Factory=require("../model/Factory"),
     ProductImg=require("../model/ProductImg"),
     PageUtil=require("../util/PageUtil");
 
@@ -29,27 +30,38 @@ var product_id=async (ctx, next) => {
             ctx.response.redirect('/login/login');
             return ;
         }
-        var result = await Product.findAndCountAll({
-            where: {
-                user_id: user.id
-            },
-             order: [['create_time', 'DESC']],
-            'limit': PageUtil.pageSize,
-            'offset': PageUtil.pageSize*(page-1)
-        });
-       for (var i = 0,len=result.count; i < len; i++) {
-            var bean=result.rows[i];
-            
-            if(bean&&bean.price){
-                bean.price=(bean.price/100).toFixed(2);
+        var factory = await Factory.findOne({
+            where:{
+                user_id:user.id
             }
-           
-            
-            
-       }
-        ctx.render('./product/list.html', {
-            result:result,
-            page:PageUtil.getPage(page,result.count)}
+        });
+        //如果不存在,创建一个空的
+        if(!factory){
+             factory=await Factory.create({
+                user_id:user.id,
+                name: "",
+                ename:"",
+                address:"",
+                legal_person:"",
+                phone:"",
+                custom_service:"",
+                email:"",
+                build_time:null,
+                area:"",
+                content: ""
+            });
+        }
+
+        var list = await Product.findAll({
+            where: {
+                factory_id: factory.id
+            },
+             order: [['sort', 'ASC']]
+        });
+        
+        ctx.render('./product/list2.html', {
+            list:list,
+            bean:factory}
         );
 
     },
@@ -116,6 +128,50 @@ var product_id=async (ctx, next) => {
 
         ctx.body = {"code":"success","id":product.id};
     },
+    api_product_add=async (ctx,next) => {
+        var user=ctx.session.user;
+        var id = ctx.request.body.id,
+        titles = ctx.request.body.titles||'',
+        types = ctx.request.body.types||'',
+        materials = ctx.request.body.materials||'',
+        prices = ctx.request.body.prices||'',
+        descs = ctx.request.body.descs||'',
+        imgs = ctx.request.body.imgs||'';
+        await Product.destroy({
+            where: {
+                factory_id:id
+            }
+        });
+        var imgarr = imgs.split(",");
+        var pricearr = prices.split(",");
+        var descarr = descs.split("_@_");
+        var titlearr = titles.split("_@_")
+        var typearr = types.split("_@_");
+        var materialarr = materials.split("_@_");
+        for (var i=0,len=imgarr.length;i<len;i++) {
+            var img=imgarr[i]||"";
+            var desc=descarr[i]||"";
+            var title=titlearr[i]||"";
+            var material=materialarr[i]||"";
+            var type=typearr[i]||"";
+            var price=pricearr[i]||0;
+            var product = await Product.create({
+                factory_id:id,
+                user_id:user.id,
+                title: "",
+                type: type,
+                price:price*100,//转成分
+                material:material,
+                default_img:img,
+                imgs:img,
+                status:1,
+                sort:i,
+                content: desc
+            });
+        }
+        
+        ctx.body = {"code":"success"};
+    },
     api_product=async (ctx, next) => {
 
         var user=ctx.session.user;
@@ -138,7 +194,6 @@ var product_id=async (ctx, next) => {
         }
        
         var product = await Product.create({
-            
             user_id:user.id,
             title: title,
             price:price*100,
@@ -207,7 +262,7 @@ module.exports = {
     //前台产品列表页
     'GET /product': product,
    
-    'POST /api/product': api_product,
+    'POST /api/product': api_product_add,
     'PUT /api/product': api_product_update,
     
     'DELETE /api/product/:id': api_product_delete

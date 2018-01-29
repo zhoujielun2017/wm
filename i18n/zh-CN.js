@@ -238,5 +238,18 @@
 	"firsthand": "firsthand",
 	"sign out": "sign out",
 	"location": "location",
-	"emial": "emial"
+	"emial": "emial",
+	"sign in": "sign in",
+	"register": "register",
+	"cooperation brand": "cooperation brand",
+	"sale per year": "sale per year",
+	"cooperation factory name": "cooperation factory name",
+	"product info": "product info",
+	"offical website": "offical website",
+	"company legal person": "company legal person",
+	"produce per month": "produce per month",
+	"build time": "build time",
+	"type per month": "type per month",
+	"company summary": "company summary",
+	"environment": "environment"
 }

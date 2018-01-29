@@ -75,6 +75,7 @@ app.use(templating('views', {
              }
            }
        },
+       //数字千分位
        fmoney:function(s, n){   
           if(isNaN(s)){
             return s;
@@ -93,7 +94,6 @@ app.use(templating('views', {
           }else{
             return t.split("").reverse().join("");   
           }
-          
       }
     }
 }));

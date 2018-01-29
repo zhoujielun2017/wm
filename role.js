@@ -5,11 +5,11 @@ var role_urls=["/sellers","/agencys","/factorys","/designs","/search/seller","/s
 // var patt = /\/seller\/*/;
 // var re=patt.test("/seller/5443dcfd3df7450cab2670f6affec227"); 
 //普通会员可以看见
-var visitor=[];
+var visitor=["/sellers","/agencys","/factorys","/designs"];
 //设计师可以看见
-var design=["/designs"];
+var design=["/sellers","/agencys","/factorys","/designs"];
 //高级设计师可以看见
-var design_vip=["/designs"];
+var design_vip=["/sellers","/agencys","/factorys","/designs",/\/design\/.*/];
 //零售商可见
 var seller=["/sellers","/agencys","/factorys","/designs","/search/seller","/search/agency",
 "/search/factory"];

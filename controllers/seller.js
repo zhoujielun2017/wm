@@ -88,9 +88,12 @@ var sellers=async (ctx, next) => {
         for (var i = 0,len=result.count; i < len; i++) {
             // console.log("for");
             var bean=result.rows[i];
-             var user = await User.findById(bean.user_id);
+            if(!bean){
+                continue;
+            }
+            var user = await User.findById(bean.user_id);
             bean.email=user&&user.email;
-             bean.head=user&&user.head_url;
+            bean.head=user&&user.head_url;
             if(bean.brand){
                 bean.brand=bean.brand.split(",");
             }
