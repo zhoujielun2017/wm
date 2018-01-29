@@ -33,7 +33,7 @@
 	"content": "内容",
 	"create time": "创建时间",
 	"Confirm Password": "确认密码",
-	"confirm": "确定",
+	"Confirm": "确定",
 	"Profile": "公司概况",
 	"Company Name": "公司名称",
 	"Company English Name": "公司英文名称",
@@ -107,7 +107,7 @@
 	"major_leather": "皮革",
 	"major_fabric": "针织",
 	"male": "男",
-	"more": "更多",
+	"MORE": "更多",
 	"manager": "管理员",
 	"navigation": "导航",
 	"navigations": "导航",
@@ -223,7 +223,7 @@
 	"company email": "company email",
 	"contact": "contact",
 	"password": "password",
-	"forget password": "forget password",
+	"Forgot Password  ": "Forgot Password  ",
 	"city": "城市",
 	"nation": "国家",
 	"company acreage": "company acreage",
@@ -239,4 +239,5 @@
 	"sign out": "sign out",
 	"location": "location",
 	"emial": "emial"
+
 }

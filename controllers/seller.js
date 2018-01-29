@@ -88,6 +88,9 @@ var sellers=async (ctx, next) => {
         for (var i = 0,len=result.count; i < len; i++) {
             // console.log("for");
             var bean=result.rows[i];
+	    if(!bean){
+                continue;
+            }
              var user = await User.findById(bean.user_id);
             bean.email=user&&user.email;
              bean.head=user&&user.head_url;
