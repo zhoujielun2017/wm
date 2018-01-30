@@ -238,19 +238,17 @@
 	"firsthand": "firsthand",
 	"sign out": "sign out",
 	"location": "location",
-<<<<<<< HEAD
-	"emial": "emial",
-	"sign in": "sign in",
-	"register": "register",
-	"cooperation brand": "cooperation brand",
-	"sale per year": "sale per year",
+	"sign in": "登录",
+	"register": "注册",
+	"cooperation brand": "合作品牌",
+	"sale per year": "年销售额",
 	"cooperation factory name": "cooperation factory name",
-	"product info": "product info",
-	"offical website": "offical website",
-	"company legal person": "company legal person",
+	"product info": "商品信息",
+	"offical website": "官方网站",
+	"company legal person": "法人",
 	"produce per month": "produce per month",
 	"build time": "build time",
 	"type per month": "type per month",
 	"company summary": "company summary",
-	"environment": "environment"
+	"environment": "环境"
 }
