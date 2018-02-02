@@ -23,10 +23,10 @@
           </div>
           -->
           <div class="col-xs-4 col-sm-6">
-             <input type="text" name="customer" value="{{e.name}}" class="form-control"  placeholder="合作品牌">
+             <input type="text" name="customer" value="{{e.name}}" class="form-control"  placeholder="{{__('Brand Name')}}">
           </div>
           <div class="col-xs-6 col-sm-4">
-                <input type="text" name="co_time" value="{{e.co_time|formatdate('YYYY')}}" class="form-control"  placeholder="合作时间">
+                <input type="text" name="co_time" value="{{e.co_time|formatdate('YYYY')}}" class="form-control"  placeholder="{{__('Year-Year')}}">
           </div>
           <div class="col-xs-2 col-sm-2">
               {% if not loop.first %}
@@ -48,10 +48,10 @@
             </select>
           </div>-->
           <div class="col-xs-4 col-sm-6">
-             <input type="text" name="customer" value="" class="form-control" id="inputEmail3" placeholder="合作品牌">
+             <input type="text" name="customer" value="" class="form-control" id="inputEmail3" placeholder="{{__('Brand Name')}}">
           </div>
           <div class="col-xs-6 col-sm-4">
-             <input type="text" name="co_time" value="" class="form-control" id="" placeholder="合作时间">
+             <input type="text" name="co_time" value="" class="form-control" id="" placeholder="{{__('Year-Year')}}">
           </div>
           <div class="col-xs-2 col-sm-2">
               {% if not loop.first %}
@@ -65,7 +65,7 @@
 
      <div class="form-group">
       <div class="col-sm-offset-3 col-sm-9">
-        <a href="javascript:void(0);" class="btn btn-default addC">{{__('add')}}</a>
+        <a href="javascript:void(0);" class="btn btn-default addC">{{__('Add')}}</a>
       </div>
     </div>
 
@@ -80,7 +80,7 @@
                  <input type="text" name="factory" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="{{__('Audit Approved Brands')}}">
               </div>
                <div class="col-xs-6 col-sm-4">
-                    <input type="text" name="co_time" value="{{e.co_time|formatdate('YYYY')}}" class="form-control" id="" placeholder="通过验厂的时间">
+                    <input type="text" name="co_time" value="{{e.co_time|formatdate('YYYY')}}" class="form-control" id="" placeholder="{{__('Audit Time')}}">
                </div>
               <div class="col-xs-2 col-sm-2">
                   {% if not loop.first %}
@@ -100,7 +100,7 @@
                <input type="text" name="factory" value="" class="form-control"  placeholder="{{__('Audit Approved Brands')}}">
             </div>
               <div class="col-xs-6 col-sm-4">
-                  <input type="text" name="co_time" value="" class="form-control"  placeholder="通过验厂的时间">
+                  <input type="text" name="co_time" value="" class="form-control"  placeholder="{{__('Audit Time')}}">
               </div>
              <div class="col-xs-2 col-sm-2">
                   <button class="btn btn-danger">{{__('delete')}}</button>
@@ -112,14 +112,14 @@
  
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-9">
-        <a href="#" class="btn btn-default addF">{{__('add')}}</a>
+        <a href="#" class="btn btn-default addF">{{__('Add')}}</a>
       </div>
     </div>
 
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-3 control-label">{{__('Factory Area')}}</label>
     <div class="col-sm-7">
-      <input type="text" name="acreage" value="{{bean.acreage}}" class="form-control" id="inputEmail3" placeholder="{{__('company acreage')}}">
+      <input type="text" name="acreage" value="{{bean.acreage}}" class="form-control" id="inputEmail3" placeholder="{{__('Factory Area')}}">
     </div>
     <div class="col-sm-2">
        <p class="form-control-static">{{__('square meters')}}</p>
@@ -127,12 +127,12 @@
   </div>
 
     <div class="form-group">
-        <label for="inputEmail3" class="col-sm-3 control-label">年销售额</label>
+        <label for="inputEmail3" class="col-sm-3 control-label">{{__('Annual Sales')}}</label>
         <div class="col-sm-7">
-            <input type="text" name="sale_per_year" value="{{bean.sale_per_year}}" class="form-control" id="" placeholder="年销售额">
+            <input type="text" name="sale_per_year" value="{{bean.sale_per_year}}" class="form-control" id="" placeholder="{{__('Sales Volume/Year')}}">
         </div>
         <div class="col-sm-2">
-            <p class="form-control-static">美元</p>
+            <p class="form-control-static">{{__('Dollars')}}</p>
         </div>
     </div>
 
@@ -141,10 +141,10 @@
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-3 control-label">{{__('Development Capacity(Month)')}}</label>
     <div class="col-sm-7">
-      <input type="text" name="type_per_month" value="{{bean.type_per_month}}" class="form-control" id="inputEmail3" placeholder="{{__('Development Capacity(Month)')}}">
+      <input type="text" name="type_per_month" value="{{bean.type_per_month}}" class="form-control" id="inputEmail3" placeholder="{{__('Styles Per Month')}}">
     </div>
      <div class="col-sm-2">
-       <p class="form-control-static">{{__('pcs')}}</p>
+       <p class="form-control-static">{{__('Styles')}}</p>
     </div>
   </div>
     <!--
@@ -171,50 +171,52 @@
    <div class="form-group">
     <label  class="col-sm-3 control-label">{{__('Production Capacity(Month)')}}</label>
     <div class="col-sm-7">
-      <input type="text" name="able_per_month" value="{{bean.able_per_month}}" class="form-control" placeholder="Production Capacity(Month)">
+      <input type="text" name="able_per_month" value="{{bean.able_per_month}}" class="form-control" placeholder="{{__('Monthly Production')}}">
     </div>
      <div class="col-sm-2">
-       <p class="form-control-static">{{__('pcs')}}</p>
+       <p class="form-control-static">{{__('Units')}}</p>
     </div>
   </div>
   <div class="form-group">
-      <label  class="col-sm-3 control-label">生产部</label>
+      <label  class="col-sm-3 control-label">{{__('Production Line')}}</label>
       <div class="col-sm-7">
-          <input type="text" name="count_person" value="{{bean.count_person}}" class="form-control" placeholder="生产部人数">
+          <input type="text" name="count_person" value="{{bean.count_person}}" class="form-control"
+                 placeholder="{{__('Number of employees')}}">
       </div>
       <div class="col-sm-2">
-          <p class="form-control-static">人</p>
+          <p class="form-control-static">{{__('Persons')}}</p>
       </div>
   </div>
   <div class="form-group">
-      <label  class="col-sm-3 control-label">开发部</label>
+      <label  class="col-sm-3 control-label">{{__('Sampling Dept')}}</label>
       <div class="col-sm-7">
-          <input type="text" name="count_dev" value="{{bean.count_dev}}" class="form-control" placeholder="开发部人数">
+          <input type="text" name="count_dev" value="{{bean.count_dev}}" class="form-control" placeholder="{{__('Number of employees')}}">
       </div>
       <div class="col-sm-2">
-          <p class="form-control-static">人</p>
+          <p class="form-control-static">{{__('Persons')}}</p>
       </div>
   </div>
   <div class="form-group">
-      <label  class="col-sm-3 control-label">质检部</label>
+      <label  class="col-sm-3 control-label">{{__('QC Dept')}}</label>
       <div class="col-sm-7">
-          <input type="text" name="count_qc" value="{{bean.count_qc}}" class="form-control" placeholder="质检部人数">
+          <input type="text" name="count_qc" value="{{bean.count_qc}}" class="form-control" placeholder="{{__('Number of employees')}}">
       </div>
       <div class="col-sm-2">
-          <p class="form-control-static">人</p>
+          <p class="form-control-static">{{__('Persons')}}</p>
       </div>
   </div>
   <div class="form-group">
-      <label  class="col-sm-3 control-label">贸易部</label>
+      <label  class="col-sm-3 control-label">{{__('Trading Dept')}}</label>
       <div class="col-sm-7">
-          <input type="text" name="count_trade" value="{{bean.count_trade}}" class="form-control" placeholder="贸易部人数">
+          <input type="text" name="count_trade" value="{{bean.count_trade}}" class="form-control"
+                 placeholder="{{__('Number of employees')}}">
       </div>
       <div class="col-sm-2">
-          <p class="form-control-static">人</p>
+          <p class="form-control-static">{{__('Persons')}}</p>
       </div>
   </div>
   <div class="form-group">
-      <label  class="col-sm-3 control-label">产品</label>
+      <label  class="col-sm-3 control-label">{{__('Produts')}}</label>
       <div class="col-sm-9">
           <div class="btn-group product" role="group">
               {% for e in products %}
@@ -224,7 +226,7 @@
       </div>
   </div>
   <div class="form-group">
-    <label  class="col-sm-3 control-label">{{__('company major')}}</label>
+    <label  class="col-sm-3 control-label">{{__('Speciality')}}</label>
     <div class="col-sm-9">
       <div class="btn-group major" role="group">
       {% for e in major %}
@@ -240,7 +242,7 @@
    <input type="hidden" name="products">
   <div class="form-group">
     <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-default">{{__('confirm')}}</button>
+      <button type="submit" class="btn btn-default">{{__('Confirm')}}</button>
     </div>
   </div>
 </form>
