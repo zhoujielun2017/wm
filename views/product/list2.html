@@ -106,8 +106,8 @@ var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
          return ;
        }
        var imglen = $(".imgs img").length;
-       if(imglen+len>10){
-         alert("images can not more than 10 ");
+       if(imglen+len>30){
+         alert("images can not more than 30 ");
          return ;
        }
        // origSize:4507297
@@ -142,10 +142,10 @@ $("form.form-horizontal").on('submit',function(e){
    $("input[name=img]").each(function(){
      imgs.push(this.value);
    })
-   if(!imgs.length){
-       alert("image can not be empty");
-       return false;
-   }
+  //  if(!imgs.length){
+  //      alert("image can not be empty");
+  //      return false;
+  //  }
    $this.find("input[name=imgs]").val(imgs.join(","));
 
    //描述

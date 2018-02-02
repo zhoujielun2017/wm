@@ -80,9 +80,10 @@ module.exports = {
             q=ctx.request.query.q;
         var result = await Agency.findAndCountAll({
             where: {
-                name:{
-                    "$like":"%"+q+"%"
-                }
+                $or: [
+                    {name: {"$like":"%"+q+"%"}},
+                    {ename: {"$like":"%"+q+"%"}}
+                ]
             },
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
@@ -122,9 +123,10 @@ module.exports = {
             q=ctx.request.query.q;
         var result = await Seller.findAndCountAll({
             where: {
-                name:{
-                    "$like":"%"+q+"%"
-                }
+                $or: [
+                    {name: {"$like":"%"+q+"%"}},
+                    {ename: {"$like":"%"+q+"%"}}
+                ]
             },
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)

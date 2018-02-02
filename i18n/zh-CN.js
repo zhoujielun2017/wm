@@ -250,5 +250,9 @@
 	"build time": "build time",
 	"type per month": "type per month",
 	"company summary": "company summary",
-	"environment": "环境"
+	"environment": "环境",
+	"Log In": "Log In",
+	"Sign Up": "Sign Up",
+	"forget password": "forget password",
+	"confirm": "confirm"
 }

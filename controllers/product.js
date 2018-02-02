@@ -150,6 +150,9 @@ var product_id=async (ctx, next) => {
         var materialarr = materials.split("_@_");
         for (var i=0,len=imgarr.length;i<len;i++) {
             var img=imgarr[i]||"";
+            if(!img){
+                continue;
+            }
             var desc=descarr[i]||"";
             var title=titlearr[i]||"";
             var material=materialarr[i]||"";

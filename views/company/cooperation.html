@@ -26,7 +26,7 @@
              <input type="text" name="customer" value="{{e.name}}" class="form-control"  placeholder="合作品牌">
           </div>
           <div class="col-xs-6 col-sm-4">
-                <input type="text" name="co_time" value="{{e.co_time|formatdate('YYYY')}}" class="form-control"  placeholder="合作时间">
+                <input type="text" name="co_time" value="{{e.co_time}}" class="form-control"  placeholder="合作时间">
           </div>
           <div class="col-xs-2 col-sm-2">
               {% if not loop.first %}
@@ -295,9 +295,9 @@ $("form").on('submit',function(e){
     //品牌合作时间
     var co_times=[];
     $("input[name=co_time]").each(function(){
-      var time=$(this).val()||0;
-      var ms=Date.parse(time)
-      co_times.push(ms)
+      var time=$(this).val();
+      // var ms=Date.parse(time)
+      co_times.push(time);
     });
 
     //特长
