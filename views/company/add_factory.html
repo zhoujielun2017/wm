@@ -21,25 +21,26 @@
   </div>
     <div class="form-group">
         <label  class="col-sm-2 control-label">{{__('Address')}}</label>
-        <div class="col-xs-2 col-sm-2"><input class="form-control" name="city"   placeholder="{{__('City')}}" maxlength="100" value="{{bean.city}}"></div>
-        <div class="col-xs-2 col-sm-2"><input class="form-control" name="nation"   placeholder="{{__('Nation')}}" maxlength="100" value="{{bean.nation}}"></div>
         <div class="col-sm-6">
             <textarea name="address"  class="form-control" placeholder="{{__('Address')}}" maxlength="200" >{{bean.address}}</textarea>
         </div>
+        <div class="col-xs-2 col-sm-2"><input class="form-control" name="city"   placeholder="{{__('City')}}" maxlength="100" value="{{bean.city}}"></div>
+        <div class="col-xs-2 col-sm-2"><input class="form-control" name="nation"   placeholder="{{__('Nation')}}" maxlength="100" value="{{bean.nation}}"></div>
     </div>
     <div class="form-group">
-        <label  class="col-sm-2 control-label">Address English</label>
-        <div class="col-xs-2 col-sm-2"><input class="form-control" name="en_city"   placeholder="City" maxlength="100" value="{{bean.en_city}}"></div>
-        <div class="col-xs-2 col-sm-2"><input class="form-control" name="en_nation"   placeholder="Nation" maxlength="100" value="{{bean.en_nation}}"></div>
+        <label  class="col-sm-2 control-label">{{__('Address English')}}</label>
         <div class="col-sm-6">
             <textarea name="en_address"  class="form-control" placeholder="Address" maxlength="200" >{{bean.en_address}}</textarea>
         </div>
+        <div class="col-xs-2 col-sm-2"><input class="form-control" name="en_city"   placeholder="City" maxlength="100" value="{{bean.en_city}}"></div>
+        <div class="col-xs-2 col-sm-2"><input class="form-control" name="en_nation"   placeholder="Nation" maxlength="100" value="{{bean.en_nation}}"></div>
+
     </div>
 
     <div class="form-group">
-        <label  class="col-sm-2 control-label">{{__('Company Phone')}}</label>
+        <label  class="col-sm-2 control-label">{{__('Telephone')}}</label>
         <div class="col-sm-10">
-            <input type="text" name="phone" value="{{bean.phone}}" required  class="form-control" placeholder="{{__('Company Phone')}}" maxlength="100">
+            <input type="text" name="phone" value="{{bean.phone}}" required  class="form-control" placeholder="{{__('Telephone')}}" maxlength="100">
         </div>
     </div>
    <div class="form-group">
@@ -49,39 +50,39 @@
     </div>
   </div>
     <div class="form-group">
-        <label  class="col-sm-2 control-label">{{__('Ower Name')}}</label>
+        <label  class="col-sm-2 control-label">{{__('Owner Name')}}</label>
         <div class="col-sm-10">
-            <input type="text" name="legal_person" value="{{bean.legal_person}}" class="form-control" placeholder="{{__('Ower Name')}}" maxlength="20" required/>
+            <input type="text" name="legal_person" value="{{bean.legal_person}}" class="form-control" placeholder="{{__('Owner Name')}}" maxlength="20" required/>
         </div>
     </div>
     <div class="form-group">
-        <label  class="col-sm-2 control-label">Cellphone(电话)</label>
+        <label  class="col-sm-2 control-label">{{__('Cellphone')}}</label>
         <div class="col-sm-10">
-            <input type="text" name="cellphone" value="{{bean.cellphone}}" class="form-control" placeholder="Cellphone" maxlength="20" required/>
+            <input type="text" name="cellphone" value="{{bean.cellphone}}" class="form-control" placeholder="{{__('Cellphone')}}" maxlength="20" required/>
         </div>
     </div>
     <div class="form-group">
-        <label  class="col-sm-2 control-label">邮箱</label>
+        <label  class="col-sm-2 control-label">{{__('Email')}}</label>
         <div class="col-sm-10">
-            <input type="text" name="email" value="{{bean.email}}" class="form-control" placeholder="{{__('email')}}" maxlength="50" required/>
+            <input type="text" name="email" value="{{bean.email}}" class="form-control" placeholder="{{__('Email')}}" maxlength="50" required/>
         </div>
     </div>
     <div class="form-group">
-        <label  class="col-sm-2 control-label">贸易主管Sales Manager</label>
+        <label  class="col-sm-2 control-label">{{__('Sales Manager')}}</label>
         <div class="col-sm-10">
-            <input type="text" name="sale_manager" value="{{bean.sale_manager}}" class="form-control" placeholder="贸易主管Sales Manager" maxlength="20" required/>
+            <input type="text" name="sale_manager" value="{{bean.sale_manager}}" class="form-control" placeholder="{{__('Sales Manager')}}" maxlength="20" required/>
         </div>
     </div>
     <div class="form-group">
-        <label  class="col-sm-2 control-label">{{__('phone')}}</label>
+        <label  class="col-sm-2 control-label">{{__('Cellphone')}}</label>
         <div class="col-sm-10">
-            <input type="text" name="sale_manager_phone" value="{{bean.sale_manager_phone}}" class="form-control" placeholder="{{__('phone')}}" maxlength="20" required/>
+            <input type="text" name="sale_manager_phone" value="{{bean.sale_manager_phone}}" class="form-control" placeholder="{{__('Cellphone')}}" maxlength="20" required/>
         </div>
     </div>
     <div class="form-group">
-        <label  class="col-sm-2 control-label">{{__('email')}}</label>
+        <label  class="col-sm-2 control-label">{{__('Email')}}</label>
         <div class="col-sm-10">
-            <input type="text" name="sale_manager_email" value="{{bean.sale_manager_email}}" class="form-control" placeholder="{{__('email')}}" maxlength="50" required/>
+            <input type="text" name="sale_manager_email" value="{{bean.sale_manager_email}}" class="form-control" placeholder="{{__('Email')}}" maxlength="50" required/>
         </div>
     </div>
 
@@ -119,7 +120,7 @@
   <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('Company Instruction')}}</label>
     <div class="col-sm-10">
-      <textarea name="content"   cols="30" rows="5"   class="form-control"  placeholder="Company Instruction" maxlength="1000" >{{bean.content}}</textarea>
+      <textarea name="content"   cols="30" rows="5"   class="form-control"  placeholder="{{__('Company Instruction(In English)')}}" maxlength="1000" >{{bean.content}}</textarea>
       
     </div>
   </div>
@@ -128,7 +129,7 @@
    
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">{{__('confirm')}}</button>
+      <button type="submit" class="btn btn-default">{{__('Confirm')}}</button>
     </div>
   </div>
 </form>
