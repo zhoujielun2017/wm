@@ -14,7 +14,9 @@ var major=[
 	"shall",
     "wood",
     "leather",
-    "fabric" 
+    "fabric",
+    "cz_stone",
+    "composite_stone"
 ];
 var products=[
     "chengren",
