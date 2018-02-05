@@ -206,11 +206,5 @@
 	"Styles Per Month": "Styles Per Month",
 	"Monthly Production": "Monthly Production",
 	"Produts": "Produts",
-	"major_zink": "major_zink",
-	"major_chain": "major_chain",
-	"major_ribbon": "major_ribbon",
-	"major_semi": "major_semi",
-	"major_shall": "major_shall",
-	"major_cz_stone": "major_cz_stone",
-	"major_composite_stone": "major_composite_stone"
+	"major_ceramics": "major_ceramics"
 }
