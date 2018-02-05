@@ -138,7 +138,7 @@
 	"major_acrylic": "Acrylic",
 	"major_cz_stone": "CZ Stone",
 	"major_composite_stone": "Composite Stone",
-	"major_geramics": "Ceramics",
+	"major_Ceramics": "Ceramics",
 	"major_shell": "Shell",
 	"major_wood": "Wood",
 	"major_leather": "Leather",
@@ -205,6 +205,5 @@
 	"Dollars": "Dollars",
 	"Styles Per Month": "Styles Per Month",
 	"Monthly Production": "Monthly Production",
-	"Produts": "Produts",
-	"major_ceramics": "major_ceramics"
+	"Produts": "Produts"
 }
