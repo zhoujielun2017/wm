@@ -48,7 +48,7 @@ height: inherit;
                 <input type="hidden" name="img" value="{{e.default_img}}"/>
               </div>
               <input type="text" class="form-control" name="desc" value="{{e.content}}" placeholder="Description">
-              <input type="text" class="form-control" name="type" value="{{e.type}}" placeholder="Type">
+              <!--<input type="text" class="form-control" name="type" value="{{e.type}}" placeholder="Type">-->
               <input type="text" class="form-control" name="price" value="{{(e.price/100)|fmoney}}" placeholder="Price">
               <input type="text" class="form-control" name="material" value="{{e.material}}" placeholder="Material">
              </div>
@@ -59,7 +59,7 @@ height: inherit;
   </div>
    <input type="hidden" name="imgs">
    <input type="hidden" name="descs">
-   <input type="hidden" name="types">
+   <!--<input type="hidden" name="types">-->
    <input type="hidden" name="prices">
    <input type="hidden" name="materials">
   <div class="form-group">
@@ -113,7 +113,7 @@ var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
        // origSize:4507297
        var imgHtml = '<div id="'+file.id+'" class="box"><div class="img">0%</div>'+
        '<input type="text" class="form-control" name="desc" value="" placeholder="Description">'+
-              '<input type="text" class="form-control" name="type" value="" placeholder="Type">'+
+      
               '<input type="text" class="form-control" name="price" value="" placeholder="Price">'+
               '<input type="text" class="form-control" name="material" value="" placeholder="Material">'+
        '</div>';
