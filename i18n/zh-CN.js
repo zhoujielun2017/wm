@@ -144,14 +144,13 @@
 	"profile": "个人资料",
 	"Password": "密码",
 	"produce person": "生产人数",
-	"Products": "产品信息",
+	"Products": "产品",
 	"Production Capacity(Month)": "生产能力(月)",
 	"Monthly Production": "生产能力(月)",
 	"Production Line": "生产部",
 	"Sampling Dept": "开发部",
 	"QC Dept": "质检部",
 	"Trading Dept": "贸易部",
-	"Products": "产品",
 	"Persons": "人",
 	"Number of employees": "部门人数",
 	"purchase per year": "年采购额",
@@ -276,5 +275,6 @@
 	"Log In": "Log In",
 	"Sign Up": "Sign Up",
 	"forget password": "forget password",
-	"confirm": "confirm"
+	"confirm": "confirm",
+	"Produts": "Produts"
 }
