@@ -3,20 +3,20 @@ var Factory=require("../model/Factory");
 
 var major=[
     "brass",
-	"zink",
-	"chain",
-	"ribbon",
-	"semi",
-	"glass",
-	"resin",
-	"acrylic",
-	"pearl",
-	"shall",
+    "steel",
+    "alloy",
+    "glass",
+    "pearl",
+    "semi_precious",
+    "resin",
+    "acrylic",
+    "cz_stone",
+    "composite_stone",
+    "ceramics",
+    "shell",
     "wood",
     "leather",
-    "fabric",
-    "cz_stone",
-    "composite_stone"
+    "fabric"
 ];
 var products=[
     "chengren",

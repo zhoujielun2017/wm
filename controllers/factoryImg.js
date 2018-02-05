@@ -42,7 +42,8 @@ var FactoryImg=require("../model/FactoryImg"),
         var id=ctx.params.id;
        
         var list = await FactoryImg.findAll({where:{
-            factory_id:id
+            factory_id:id,
+            order: [['sort', 'ASC']]
         }});
         
         ctx.render('./company/environment.html',{
@@ -63,12 +64,15 @@ var FactoryImg=require("../model/FactoryImg"),
         var descarr = imgdescs.split("_@_");
         for (var i=0,len=imgarr.length;i<len;i++) {
             var img=imgarr[i];
+            if(!img){
+                break;
+            }
             var imgdesc=descarr[i];
             var img=await FactoryImg.create({
                 factory_id:id,
                 img:img,
                 content:imgdesc,
-                sort:0
+                sort:i
             });
         }
         

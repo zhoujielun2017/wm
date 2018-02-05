@@ -101,10 +101,10 @@ var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
  uploader.bind('FilesAdded',function(uploader,files){
    for(var i = 0, len = files.length; i<len; i++){
        var file=files[i];
-       if(file.origSize>2012340){
-         alert("image can not larger than 2M");
-         return ;
-       }
+       if(file.origSize>307200){
+          alert("image can not larger than 300K");
+          return ;
+        }
        var imglen = $(".imgs img").length;
        if(imglen+len>30){
          alert("images can not more than 30 ");

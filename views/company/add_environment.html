@@ -128,10 +128,10 @@ $("form.form-horizontal").on('submit',function(e){
    $("input[name=img]").each(function(){
      imgs.push(this.value);
    })
-   if(!imgs.length){
-       alert("image can not be empty");
-       return false;
-   }
+  //  if(!imgs.length){
+  //      alert("image can not be empty");
+  //      return false;
+  //  }
    var imgdesc=[];
     $("input[name=imgdesc]").each(function(){
       imgdesc.push(this.value);
