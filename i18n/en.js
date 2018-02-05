@@ -138,7 +138,7 @@
 	"major_acrylic": "Acrylic",
 	"major_cz_stone": "CZ Stone",
 	"major_composite_stone": "Composite Stone",
-	"major_Ceramics": "Ceramics",
+	"major_ceramics": "Ceramics",
 	"major_shell": "Shell",
 	"major_wood": "Wood",
 	"major_leather": "Leather",
