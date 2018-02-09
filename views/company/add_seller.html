@@ -111,7 +111,7 @@
             </div>
             <div class="col-sm-2">
                 {% if not loop.first %}
-                <button class="btn btn-danger">{{__('delete')}}</button>
+                <button class="btn btn-danger">{{__('Delete')}}</button>
                 {% endif %}
             </div>
         </div>
@@ -126,14 +126,14 @@
             </div>
             <div class="col-sm-2">
                 {% if not loop.first %}
-                <button class="btn btn-danger">{{__('delete')}}</button>
+                <button class="btn btn-danger">{{__('Delete')}}</button>
                 {% endif %}
             </div>
         </div>
         {% endfor %}
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <a href="javascript:void(0);" class="btn btn-default addC">{{__('add')}}</a>
+            <a href="javascript:void(0);" class="btn btn-default addC">{{__('Add')}}</a>
           </div>
         </div>
         <div class="form-group">
@@ -141,7 +141,7 @@
                 {{__('count of shop')}}
             </label>
             <div class="col-sm-5">
-                <input class="form-control" name="count_shop"   placeholder="How many stores?" type="number" value="{{bean.count_shop}}">
+                <input class="form-control" name="count_shop"   placeholder="{{__('How many stores?')}}" type="text" value="{{bean.count_shop}}">
                 </input>
             </div>
             <!--<div class="col-sm-5">
@@ -153,7 +153,7 @@
                 {{__('Annual Procurement')}}
             </label>
             <div class="col-sm-5">
-                <input class="form-control" name="sale_per_year"   placeholder="$" type="number" value="{{bean.sale_per_year}}">
+                <input class="form-control" name="sale_per_year"   placeholder="$" type="text" value="{{bean.sale_per_year}}">
                 </input>
             </div>
             <!--
@@ -183,7 +183,7 @@
                 {{__('Payment Term')}}
             </label>
             <div class="col-sm-5">
-            <input class="form-control" name="payment_days"   placeholder="{{__('Payment Term')}}" type="text" value="{{bean.payment_days}}"></input>
+            <input class="form-control" name="payment_days"   placeholder="{{__('Payment Term')}}" type="text" value="{{bean.payment_days}}">
             </div>
             <div class="col-sm-5">
                 <p class="form-control-static">{{__('unit day')}}</p>
@@ -209,8 +209,8 @@
                 </label>
     
                 <div class="col-sm-10">
-                    <div class="input-group">
-                        <input class="form-control" name="china_office"   placeholder="{{__('China Office')}}" type="text" value="{{bean.china_office}}"/>
+                    <div class="input-group" style="display: inline;width: 50%;">
+                        <input class="form-control" name="china_office"   placeholder="{{__('China Office Contact Info')}}" type="text" value="{{bean.china_office}}"/>
                       </div><!-- /input-group -->
                 </div>
             </div>
@@ -220,7 +220,7 @@
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button class="btn btn-default" type="submit">
-                    {{__('confirm')}}
+                    {{__('Confirm')}}
                 </button>
             </div>
         </div>
