@@ -422,7 +422,8 @@ var factory_id=async (ctx, next) => {
                 factory_id:id,
                 name: name,
                 type:type,
-                co_time:time
+                co_time:time,
+                version:i
             });
         }
         

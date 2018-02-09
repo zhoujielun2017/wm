@@ -28,7 +28,8 @@ var FactoryImg=require("../model/FactoryImg"),
         var list = await FactoryImg.findAll({
             where:{
                 factory_id:factory.id
-            }
+            },
+            order: [['sort', 'ASC']]
         });
         
        

@@ -209,5 +209,21 @@
 	"Dollars": "Dollars",
 	"Styles Per Month": "Styles Per Month",
 	"Monthly Production": "Monthly Production",
-	"Produts": "Produts"
+	"Produts": "Produts",
+	"sign in": "sign in",
+	"register": "register",
+	"Name": "Name",
+	"Freelance": "Freelance",
+	"Personal Summary": "Personal Summary",
+	"save": "save",
+	"delete": "delete",
+	"add": "add",
+	"company name": "company name",
+	"Cooperative Brands": "Cooperative Brands",
+	"cooperation brand": "cooperation brand",
+	"send a message": "send a message",
+	"Company phone": "Company phone",
+	"firsthand": "firsthand",
+	"days": "days",
+	"How many stores?": "How many stores?"
 }

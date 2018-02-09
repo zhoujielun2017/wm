@@ -280,7 +280,7 @@ var messages=valid_en;
 // }
 
 //删除
-$(".btn-danger").click(function(){
+$("body").on("click",".btn-danger",function(){
   $(this).parents(".form-group").remove();
   return false;
 });

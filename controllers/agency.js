@@ -185,11 +185,13 @@ var agencys=async (ctx, next) => {
             address = ctx.request.body.address||'',
             legal_person = ctx.request.body.legal_person||'',
             phone = ctx.request.body.phone||'',
+            company_phone = ctx.request.body.company_phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
              twitter = ctx.request.body.twitter||'',
               facebook = ctx.request.body.facebook||'',
             offical_website = ctx.request.body.offical_website||'',
+            china = ctx.request.body.china||'',
             china_office = ctx.request.body.china_office||'',
             position = ctx.request.body.position||'',
             count_shop = ctx.request.body.count_shop||'',
@@ -213,6 +215,7 @@ var agencys=async (ctx, next) => {
             ename:ename,
             address:address,
             phone:phone,
+            company_phone:company_phone,
             custom_service:custom_service,
             email:email,
             twitter:twitter,
@@ -223,6 +226,7 @@ var agencys=async (ctx, next) => {
             purchase_per_year:purchase_per_year,
             firsthand:firsthand,
             offical_website:offical_website,
+            china:china,
             china_office:china_office,
             brand:brands,
             area:area,
@@ -245,11 +249,13 @@ var agencys=async (ctx, next) => {
             address = ctx.request.body.address||'',
             legal_person = ctx.request.body.legal_person||'',
             phone = ctx.request.body.phone||'',
+            company_phone = ctx.request.body.company_phone||'',
             custom_service = ctx.request.body.custom_service||'',
             email = ctx.request.body.email||'',
-             twitter = ctx.request.body.twitter||'',
-              facebook = ctx.request.body.facebook||'',
+            twitter = ctx.request.body.twitter||'',
+            facebook = ctx.request.body.facebook||'',
             offical_website = ctx.request.body.offical_website||'',
+            china = ctx.request.body.china||'',
             china_office = ctx.request.body.china_office||'',
             
             position = ctx.request.body.position||'',
@@ -273,11 +279,13 @@ var agencys=async (ctx, next) => {
         agency.address=address;
         agency.legal_person=legal_person;
         agency.phone=phone;
+        agency.company_phone=company_phone;
         agency.custom_service=custom_service;
         agency.email=email;
          agency.twitter=twitter;
           agency.facebook=facebook;
         agency.offical_website=offical_website;
+        agency.china=china;
         agency.china_office=china_office;
         agency.position=position;
         agency.count_shop=count_shop;

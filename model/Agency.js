@@ -6,10 +6,15 @@ module.exports = db.defineModel('agency', {
     address: db.STRING(500),
     user_id: db.STRING(32),
     phone: db.STRING(20),
+    company_phone: db.STRING(20),
     custom_service: db.STRING(100),
     email: db.STRING(100),
     offical_website:{
         type: db.STRING(200),
+        allowNull: true
+    },
+    china:{
+        type: db.STRING(2),
         allowNull: true
     },
     china_office:{

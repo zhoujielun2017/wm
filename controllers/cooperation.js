@@ -35,7 +35,8 @@ var cooperation=async (ctx, next) => {
         var company = await Factory.findOne({
             where:{
                 user_id:user.id
-            }
+            },
+            order: [['version', 'ASC']]
         });
         //如果不存在,创建一个空的
         if(!company){

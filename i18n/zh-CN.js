@@ -284,6 +284,10 @@
 	"Sign Up": "Sign Up",
 	"forget password": "forget password",
 	"confirm": "confirm",
-	"Produts": "产品"
-	
+	"Produts": "产品",
+	"Freelance": "自由职业",
+	"add": "add",
+	"send a message": "send a message",
+	"Company phone": "Company phone",
+	"days": "days"
 }
