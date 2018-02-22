@@ -475,6 +475,7 @@ var factory_id=async (ctx, next) => {
              }
             
             factory.search=search.join(",");
+            factory.save();
         }
        ctx.body = {"code":"success"};
    };
