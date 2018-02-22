@@ -161,7 +161,7 @@ var product_id=async (ctx, next) => {
             var product = await Product.create({
                 factory_id:id,
                 user_id:user.id,
-                title: "",
+                title: title,
                 type: type,
                 price:price*100,//转成分
                 material:material,

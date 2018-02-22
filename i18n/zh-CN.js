@@ -289,5 +289,14 @@
 	"add": "add",
 	"send a message": "send a message",
 	"Company phone": "Company phone",
-	"days": "days"
+	"days": "days",
+	"Works info": "Works info",
+	"glass": "glass",
+	"pearl": "pearl",
+	"acrylic": "acrylic",
+	"cz_stone": "cz_stone",
+	"wood": "wood",
+	"leather": "leather",
+	"fabric": "fabric",
+	"brass": "brass"
 }

@@ -7,32 +7,6 @@ var Factory=require("../model/Factory"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
    
-var i18n_majors={
-    "brass": "铜",
-	"zink": "锌",
-	"chain": "链条",
-	"ribbon": "丝带和绳子",
-	"semi": "天然石",
-	"glass": "玻璃",
-	"resin": "树脂",
-	"acrylic": "亚克力",
-	"pearl": "珍珠",
-	"shall": "贝壳",
-    "wood": "木头"
-}
-
-var i18n_products={
-    "chengren": "成人",
-	"ertong": "儿童",
-	"jichu": "基础款",
-	"xiongzhen": "胸针",
-	"fashi": "发饰",
-	"yaoshi": "钥匙链",
-	"chuanci": "穿刺类",
-	"qita": "其他"
-}
-
-
 var factorys = async (ctx, next) => {
     var page=ctx.request.query.page||1;
     var result = await Factory.findAndCountAll({
@@ -351,8 +325,8 @@ var factory_id=async (ctx, next) => {
             search.push(factory.major?factory.major.replace(","," "):"");
             var majors = factory.major.split(",");
             for (var i = 0,len1=majors.length; i < len1; i++) {
-                var m=majors[i];
-                search.push(i18n_majors[m]);
+                var key=majors[i];
+                search.push(ctx.i18n.__(key));
             }
         }
 
@@ -467,7 +441,43 @@ var factory_id=async (ctx, next) => {
         });
        
         ctx.body = {"code":"success"};
-    };
+    },
+    factory_search_init=async (ctx, next) => {
+
+        var factorys = await Factory.findAll({});
+
+        for (var f = 0,lenf=factorys.length; f < lenf; f++) {
+            
+            var factory = factorys[f];
+
+            var search=[];
+            if(factory.major){
+                //英文
+                search.push(factory.major?factory.major.replace(","," "):"");
+                //中文
+                var majors = factory.major.split(",");
+                for (var i = 0,len1=majors.length; i < len1; i++) {
+                    var key=majors[i];
+                    search.push(ctx.i18n.__(key));
+                }
+            }
+            
+            //合作伙伴
+            var cops = await Cooperation.findAll({
+                where:{
+                    factory_id:factory.id,
+                }
+             });
+             
+             var len=cops?cops.length:0;
+             for (var i = 0; i < len; i++) {
+                 search.push(cops[i].name.replace(","," "));
+             }
+            
+            factory.search=search.join(",");
+        }
+       ctx.body = {"code":"success"};
+   };
 module.exports = {
     //前台列表
     'GET /factorys': factorys,
@@ -481,6 +491,8 @@ module.exports = {
     'POST /manage/factory':manage_factory_add,
     //前台编辑页
     'GET /factory':factory ,
+    //重置搜索字段
+    'GET /factory/search/init':factory_search_init ,
     //添加供应商
     'POST /api/factory': api_factory,
     //更新供应商

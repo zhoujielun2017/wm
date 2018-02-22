@@ -22,26 +22,67 @@ var works_id=async (ctx, next) => {
     },
     works=async (ctx, next) => {
         var user=ctx.session.user;
-        var page=ctx.request.query.page||1;
         
         if(!user){
             ctx.response.redirect('/login/login');
             return ;
         }
-        var result = await Works.findAndCountAll({
+
+        var list = await Works.findAll({
             where: {
                 user_id: user.id
             },
-            'limit': PageUtil.pageSize,
-            'offset': PageUtil.pageSize*(page-1),
-            order: [['create_time', 'DESC']]
+             order: [['sort', 'ASC']]
         });
-      
+        
         ctx.render('./works/list.html', {
-            result:result,
-            page:PageUtil.getPage(page,result.count)}
-        );
+            list:list});
 
+    },
+    api_works_add=async (ctx,next) => {
+        var user=ctx.session.user;
+        var titles = ctx.request.body.titles||'',
+        types = ctx.request.body.types||'',
+        materials = ctx.request.body.materials||'',
+        prices = ctx.request.body.prices||'',
+        descs = ctx.request.body.descs||'',
+        imgs = ctx.request.body.imgs||'';
+        await Works.destroy({
+            where: {
+                user_id:user.id
+            }
+        });
+        var imgarr = imgs.split(",");
+        var pricearr = prices.split(",");
+        var descarr = descs.split("_@_");
+        var titlearr = titles.split("_@_")
+        var typearr = types.split("_@_");
+        var materialarr = materials.split("_@_");
+        for (var i=0,len=imgarr.length;i<len;i++) {
+            var img=imgarr[i]||"";
+            if(!img){
+                continue;
+            }
+            var desc=descarr[i]||"";
+            var title=titlearr[i]||"";
+            var material=materialarr[i]||"";
+            var type=typearr[i]||"";
+            var price=pricearr[i]||0;
+            var work = await Works.create({
+                user_id:user.id,
+                title: title,
+                type: type,
+                price:price*100,//转成分
+                material:material,
+                default_img:img,
+                imgs:img,
+                status:1,
+                sort:i,
+                content: desc
+            });
+        }
+        
+        ctx.body = {"code":"success"};
     },
     works_add=async (ctx, next) => {
         var user=ctx.session.user;
@@ -60,46 +101,6 @@ var works_id=async (ctx, next) => {
             }})
         }
         ctx.render('./works/add.html',{bean:works,list:list});
-    },
-    api_works_add=async (ctx, next) => {
-
-        var user=ctx.session.user;
-        var title = ctx.request.body.title||'',
-            material = ctx.request.body.material||'',
-            price = ctx.request.body.price||0,
-            imgs = ctx.request.body.imgs,
-            imgdescs = ctx.request.body.imgdescs,
-            content = ctx.request.body.content||'';
-        if(!user){
-            ctx.body = {"code":"not_login"};
-            return;
-        }
-        
-        var works = await Works.create({
-            user_id:user.id,
-            title: title,
-            price:price,
-            material:material,
-            default_img:imgs.split(",")[0],
-            imgs:imgs,
-            status:1,
-            content: content
-        });
-        
-        var imgarr=imgs.split(",");
-        var descarr=imgdescs.split("_@_");
-        for (var i=0,len=imgarr.length;i<len;i++) {
-            var img=imgarr[i];
-            var imgdesc=descarr[i];
-            var img=await DesignImg.create({
-                design_id:works.id,
-                img:img,
-                content:imgdesc,
-                sort:0
-            });
-        }
-
-        ctx.body = {"code":"success","id":works.id};
     },
     api_works_update=async (ctx, next) => {
          

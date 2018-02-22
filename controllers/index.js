@@ -4,7 +4,7 @@ module.exports = {
     'GET /': async (ctx, next) => {
 
         var page=ctx.request.query.page||1,
-        pageSize=5;
+        pageSize=8;
 
         Article.findAndCountAll
         var articles = await Article.findAll({

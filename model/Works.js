@@ -10,6 +10,7 @@ module.exports = db.defineModel('works', {
     },
     user_id: db.STRING(32),
     status: db.INTEGER,
+    sort: db.INTEGER,
     imgs: {
     	type: db.STRING(2000),
     	allowNull: true
