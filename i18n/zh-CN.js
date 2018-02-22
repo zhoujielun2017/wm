@@ -298,5 +298,7 @@
 	"wood": "wood",
 	"leather": "leather",
 	"fabric": "fabric",
-	"brass": "brass"
+	"brass": "brass",
+	"major_zink": "major_zink",
+	"major_chain": "major_chain"
 }

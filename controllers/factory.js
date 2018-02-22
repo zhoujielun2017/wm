@@ -326,7 +326,8 @@ var factory_id=async (ctx, next) => {
             var majors = factory.major.split(",");
             for (var i = 0,len1=majors.length; i < len1; i++) {
                 var key=majors[i];
-                search.push(ctx.i18n.__(key));
+                ctx.i18n.setLocale('zh-CN');
+                search.push(ctx.i18n.__("major_"+key));
             }
         }
 
@@ -411,8 +412,9 @@ var factory_id=async (ctx, next) => {
         search.push(majors);
         var majorArr = majors.split(",");
         for (var i = 0,len1=majorArr.length; i < len1; i++) {
-            var m=majorArr[i];
-            search.push(i18n_majors[m]);
+            var key=majorArr[i];
+            ctx.i18n.setLocale('zh-CN');
+            search.push(ctx.i18n.__("major_"+key));
         }
         search.push(namearr);
 
@@ -444,6 +446,9 @@ var factory_id=async (ctx, next) => {
     },
     factory_search_init=async (ctx, next) => {
 
+        console.log(process.env.LANG);
+        ctx.i18n.setLocale('zh-CN');
+        console.log(process.env.LANG);
         var factorys = await Factory.findAll({});
 
         for (var f = 0,lenf=factorys.length; f < lenf; f++) {
@@ -458,7 +463,8 @@ var factory_id=async (ctx, next) => {
                 var majors = factory.major.split(",");
                 for (var i = 0,len1=majors.length; i < len1; i++) {
                     var key=majors[i];
-                    search.push(ctx.i18n.__(key));
+                    ctx.i18n.setLocale('zh-CN');
+                    search.push(ctx.i18n.__("major_"+key));
                 }
             }
             

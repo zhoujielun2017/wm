@@ -225,5 +225,11 @@
 	"Company phone": "Company phone",
 	"firsthand": "firsthand",
 	"days": "days",
-	"How many stores?": "How many stores?"
+	"How many stores?": "How many stores?",
+	"cz_stone": "cz_stone",
+	"leather": "leather",
+	"fabric": "fabric",
+	"brass": "brass",
+	"major_zink": "major_zink",
+	"major_chain": "major_chain"
 }
