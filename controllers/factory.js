@@ -44,7 +44,9 @@ var factorys = async (ctx, next) => {
     });
     for (var i = 0; i < result.count; i++) {
         var bean=result.rows[i];
-
+        if(!bean){
+            break;
+        }
         if(bean.major){
             bean.major=bean.major.split(",");
             //console.log("bean.major",bean.major);
