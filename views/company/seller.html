@@ -24,32 +24,31 @@
     </div>
     <div class="col-xs-9">
       <h3>{{bean.ename}}</h3>
-      <span class="talk"></span><a href="/message/{{bean.user_id}}">{{__('send a message')}}</a>
+      <span class="talk"></span><a href="/message/{{bean.user_id}}">{{__('Send a message')}}</a>
       
     </div>
   </div>
    <div class="row">
     <div class="col-xs-6">
-      <p><span class="fc999 mr5">{{__('Contacter')}}:</span>{{bean.custom_service}}   {{bean.position}}</p>
-
+      <p><span class="fc999 mr5">{{__('Contacter')}}:</span>{{bean.custom_service}}</p>
+      <p><span class="fc999 mr5">{{__('Position')}}:</span>{{bean.position}}</p>
       <p><span class="fc999 mr5">{{__('Contact Number')}}:</span>{{bean.contact_phone}}</p>
       <p><span class="fc999 mr5">{{__('Offical Website')}}:</span>{{bean.offical_website}}</p>
       <p><span class="fc999 mr5">{{__('Email')}}:</span>{{bean.email}}</p>
       <p><span class="fc999 mr5">{{__('Address')}}:</span>{{bean.address}}</p>
       <p><span class="fc999 mr5">{{__('Company Phone')}}:</span>{{bean.phone}}</p>
-      <p><span class="fc999 mr5">{{__('China Office')}}:</span>{{bean.china_office}}</p>
+      <p><span class="fc999 mr5" style="display: block;float: left;height: 35px;">{{__('China Office')}}:</span><span style="display: block">{{bean.china_office}}</span></p>
     </div>
     <div class="col-xs-6">
-      <p><span class="fc999 mr5">{{__('Established In')}}:</span>{{bean.build_time|formatdate("YYYY-MM-DD")}}</p>
-      <p><span class="fc999 mr5">{{__('count of shop')}}:</span>{{bean.count_shop}}{{__('unit shop')}}</p>
-      <p><span class="fc999 mr5">{{__('Cooperative Brands')}}:</span>{% for d in bean.brand %}{{d}} {% endfor %}
-       </p>
-      <p><span class="fc999 mr5">{{__('Annual Procurement')}}:</span>{{bean.sale_per_year}}{{__('unit money')}}</p>
+      <p><span class="fc999 mr5">{{__('Established In')}}:</span>{{bean.build_time|formatdate("YYYY")}}</p>
+      <p><span class="fc999 mr5">{{__('count of shop')}}:</span>{{bean.count_shop}} {{__('Stores')}}</p>
+      <p><span class="fc999 mr5" style="display: block;float: left;height: 35px;">{{__('Cooperative Brands')}}:</span><span style="display: block;">{% for d in bean.brand %}{{d}} {% endfor %}</span></p>
+      <p><span class="fc999 mr5">{{__('Annual Procurement')}}:</span>{{bean.sale_per_year}} {{__('USD')}}</p>
       <p><span class="fc999 mr5">{{__('Firsthand')}}:</span>
-      {% if bean.firsthand==1 %}{{__('yes')}}{% endif%}
-      {% if bean.firsthand==0 %}{{__('no')}}{% endif%}
+      {% if bean.firsthand==1 %}{{__('Yes')}}{% endif%}
+      {% if bean.firsthand==0 %}{{__('No')}}{% endif%}
       </p>
-      <p><span class="fc999 mr5">{{__('Payment Term')}}:</span>{{bean.payment_days}}{{__('days')}}</p>
+      <p><span class="fc999 mr5">{{__('Payment Term')}}:</span>{{bean.payment_days}} {{__('Days')}}</p>
     </div>
   </div>
 </div>

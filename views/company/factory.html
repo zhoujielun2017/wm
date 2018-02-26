@@ -19,16 +19,18 @@
 <div class="bk30"></div>
 <div class="container mb100">
   <div class="row">
-    <div class="col-xs-3 img">
+      <div class="col-xs-3" style="width: 190px;">
+          <div class="allimg">
       {% if bean.head %}
-       <img class="img-thumbnail" src="{{img_domain}}{{bean.head}}!300x300"/>
+       <img class="pic-link-img" src="{{img_domain}}{{bean.head}}"/>
       {% else %}
-        <img class="img-thumbnail" src="/images/default.png"/>
+        <img class="pic-link-img" src="/images/default.png"/>
       {% endif %}
+          </div>
     </div>
     <div class="col-xs-9">
       <h3>{{bean.name}}</h3>
-      <span class="talk"></span><a href="/message/{{bean.user_id}}"> {{__('send a message')}}</a>
+      <span class="talk"></span><a href="/message/{{bean.user_id}}"> {{__('Send a message')}}</a>
      
     </div>
   </div>
