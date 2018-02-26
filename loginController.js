@@ -1,4 +1,4 @@
-
+var User=require("./model/User");
 var loginUrl=["/user/center","/manage/user","/manage/users",
 "/cooperation","/api/cooperation","/user/buy","/environment","/design"];
 function contains(arr, obj) {  
@@ -28,6 +28,26 @@ function loginController() {
                 
             }
         }
+        if(~url.indexOf("manage")){
+            var factoryCount = await User.count({
+                where:{type:"factory"}
+            });
+            var sellerCount = await User.count({
+                where:{type:"seller"}
+            });
+            var agencyCount = await User.count({
+                where:{type:"agency"}
+            });
+            var designCount = await User.count({
+                where:{type:"design"}
+            });
+            ctx.request.factoryCount=factoryCount;
+            ctx.request.sellerCount=sellerCount;
+            ctx.request.agencyCount=agencyCount;
+            ctx.request.designCount=designCount;
+        }
+       
+       
         console.log("登陆判断通过",url);
         await next();
     };

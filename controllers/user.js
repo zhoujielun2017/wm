@@ -103,6 +103,7 @@ var manage_user_id=async (ctx, next) => {
         if(id){
             result = await User.findById(id);
         }
+        
         ctx.render('./manage/user/add.html', {bean:result});
     },
     manage_users=async (ctx, next) => {
@@ -113,7 +114,7 @@ var manage_user_id=async (ctx, next) => {
             'offset': PageUtil.pageSize*(page-1)
         });
        
-
+        
         ctx.render('./manage/user/list.html', {
             result:result,
             page:PageUtil.getPage(page,result.count)}

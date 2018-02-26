@@ -303,5 +303,6 @@
 	"brass": "brass",
 	"major_zink": "major_zink",
 	"major_chain": "major_chain",
-	"company major": "company major"
+	"company major": "company major",
+	"email": "email"
 }
