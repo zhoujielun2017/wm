@@ -36,6 +36,7 @@ background: #eee;
 top: initial;
 bottom: 5px;
 right: 5px;
+cursor: pointer;
 }
 /* end upload */
 .unread,.error{
@@ -83,7 +84,7 @@ html, body {
 .talk{background: url("../images/talk.png") no-repeat;width: 22px;height: 20px;margin-right: 15px;display: block;float: left;}
 .more{background: url("../images/more.png") no-repeat;width: 27px;height: 16px;display: block;float: left;}
 .list{margin-bottom: 30px;}
-.list .col-md-3:first-child{width: 150px;}
+.list .col-md-3:first-child{width: 150px;padding: 0px;}
 .search-bt{border: none;text-align: center;height: 44px;line-height: 44px;background: #ef8201;color: #222;width: 75px;vertical-align: middle;}
 .form-inline{margin-top: 15px;}
 .form-width{width: 400px;}
@@ -110,4 +111,8 @@ a.red{color: #ff0000;}
 .fc999{color: #999;}
 .mr5{margin-right: 5px;}
 .indexC{width: 800px;margin: 0 auto;}
-
+.pic-link a{display: table-cell;width: 150px;height: 150px;border: 1px solid #ddd;vertical-align: middle;text-align: center;overflow: hidden;border-radius:4px;}
+.allimg{display: table-cell;width: 150px;height: 150px;border: 1px solid #ddd;vertical-align: middle;text-align: center;overflow: hidden;border-radius:4px;padding: 0px;}
+.head_img{display: table-cell;width: 150px;height: 150px;border: 1px solid #ddd;vertical-align: middle;text-align: center;overflow: hidden;border-radius:4px;}
+.pic-link-img {width:100%;height:auto;background-color:#fff;-webkit-transition:all .2s ease-in-out;
+-o-transition:all .2s ease-in-out;transition:all .2s ease-in-out}

@@ -9,13 +9,13 @@
 <div class="container">
     {% for e in result.rows %}
     <div class="col-md-6 list">
-        <div class="col-xs-3 col-md-3">
+        <div class="col-xs-3 col-md-3 pic-link">
             <a href="/seller/{{e.id}}">
                
                 {% if e.head %}
-                 <img class="img-thumbnail" src="{{img_domain}}{{e.head}}!300x300"/>
+                 <img class="pic-link-img" src="{{img_domain}}{{e.head}}"/>
                  {% else %}
-                  <img alt="" class="img-thumbnail" src="/images/default.png"/>
+                  <img alt="" class="pic-link-img" src="/images/default.png"/>
                 {% endif %}
             </a>
         </div>
