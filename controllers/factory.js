@@ -98,11 +98,12 @@ var factory_id=async (ctx, next) => {
         
         var pros = await Product.findAndCountAll({
             where: {
-                user_id:factory.user_id
+                factory_id:factory.id
             },
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
+     
         for(var i=0,len=pros.rows.length;i<len;i++){
             var bean=pros.rows[i];
           
@@ -132,6 +133,9 @@ var factory_id=async (ctx, next) => {
         });
         for (var i = 0; i < result.count; i++) {
             var bean=result.rows[i];
+            if(!bean){
+                break;
+            }
             var user = await User.findById(bean.user_id);
             bean.email=user&&user.email;
              bean.head=user&&user.head_url;

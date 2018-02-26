@@ -3,11 +3,11 @@ const crypto = require('crypto'),
     config = require('../config'),
     User=require("../model/User");
 
-var regContent="<h3>亲爱的用户，欢迎加入全球饰品网！</h3>";
-    regContent+="<p>为了保证您正常体验全球饰品网的服务，请在24小时内激活账号。</p>";
-    regContent+="<p>请点击下面的地址进行邮箱确认:</p>";
+var regContent="<h3>Dear Account, Welcome to acclist.com!</h3>";
+    regContent+="<p>To guarantee you can experience the service of acclist.com, please activate your account within 24 hours.</p>";
+    regContent+="<p>Please click on below link. You will be prompt to login.</p>";
     regContent+="<p><a href='__url' target='_blank'>__url</a></p>";
-    regContent+="<p>如果你不能点击上面地址，请把上述地址复制到浏览器地址栏进行确认。</p>";
+    regContent+="<p>If you fail to click the above link, please copy it to your browser and confirm.</p>";
 
 var forgetContent="<h3>重置密码</h3>";
     forgetContent+="<p>重置密码请点击下面的地址:</p>";

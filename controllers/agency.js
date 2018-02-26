@@ -67,6 +67,9 @@ var agencys=async (ctx, next) => {
         });
         for (var i = 0,len=result.count; i < len; i++) {
             var bean=result.rows[i];
+            if(!bean){
+                break;
+            }
              var user = await User.findById(bean.user_id);
             bean.email=user&&user.email;
             bean.head=user&&user.head_url;

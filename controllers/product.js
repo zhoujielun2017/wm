@@ -15,11 +15,11 @@ var product_id=async (ctx, next) => {
         }
         
         //bean.imgs=bean.imgs.split(",");
-        var list = await ProductImg.findAll({where:{
-            product_id:id
-        }});
+        // var list = await ProductImg.findAll({where:{
+        //     product_id:id
+        // }});
 
-        ctx.render('./product/detail.html', {bean:bean,list:list});
+        ctx.render('./product/detail.html', {bean:bean});
     },
 
     product=async (ctx, next) => {

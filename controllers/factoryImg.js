@@ -43,9 +43,10 @@ var FactoryImg=require("../model/FactoryImg"),
         var id=ctx.params.id;
        
         var list = await FactoryImg.findAll({where:{
-            factory_id:id,
-            order: [['sort', 'ASC']]
-        }});
+            factory_id:id
+            },
+            order: [['sort', 'ASC']]  
+        });
         
         ctx.render('./company/environment.html',{
             list:list
