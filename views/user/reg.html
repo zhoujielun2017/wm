@@ -109,15 +109,15 @@
       required: "Please provide a password",
       minlength: "Your password must be at least 5 characters long"
     },
-    _password2: {
+    password2: {
       required: "Please provide a password",
       minlength: "Your password must be at least 5 characters long",
-      equalTo: "Please enter the same password as above"
+      equalTo: "Password does not match previously entered string"
     },
     email: {
         required:"Please enter a valid email address",
         email:"Please enter a valid email address",
-        remote:"email address already exits"
+        remote:"Email address already exists"
     }
   },
   errorElement: "em"

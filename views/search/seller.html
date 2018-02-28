@@ -12,56 +12,89 @@
             <div class="logo"><a href="/"><img src="/images/logo.png" /></a></div>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav navcon">
+
+                <li {% if  nav=="index"  %}class="active"{% endif %}><a href="/">{{__('index')}}</a></li>
+                <li {% if  nav=="sellers"  %}class="active"{% endif %}><a href="/sellers">{{__('seller')}}</a></li>
+                <li {% if  nav=="agencys"  %}class="active"{% endif %}><a href="/agencys">{{__('agency')}}</a></li>
+                {% if  sessionuser or sessionuser.type!='factory' %}
+                <li {% if  nav=="factorys"  %}class="active"{% endif %}><a href="/factorys">{{__('factory')}}</a></li>
+                {% endif %}
+                <li {% if  nav=="designs"  %}class="active"{% endif %}><a href="/designs">{{__('design')}}</a></li>
+                <li {% if  nav=="contact"  %}class="active"{% endif %}><a href="/contact">{{__('ABOUT')}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navinfo">
+
+                <li class="search"><a href="/search" ><span></span><!--<p>{{__('search')}}</p>--></a></li>
+
+                {% if  sessionuser  %}
+                <li><a href="/user/center">{{sessionuser.email}}</a></li>
+                <li><a href="#" class="loginout">{{__('Sign Out')}}</a></li>
+                {% endif %}
+                {% if  not sessionuser  %}
+                <li class="login"><a href="/login/login"><span></span><!--<p>{{__('sign in')}}</p>--></a></li>
+                <!--<li class="registration"><a href="/login/reg"><span></span><p>{{__('register')}}</p></a></li>-->
+                {% endif %}
+                <li><a href="#" class="lang" lang="zh-CN">中文</a></li>
+                <li style="line-height: 82px;">/</li>
+                <li><a href="#" class="lang" lang="en">EN</a></li>
+            </ul>
             
-            <form action="/search/result" class="form-inline" method="get">
-                <div class="form-group">
-                    <select class="form-control" name="type">
-                        <option value="seller" selected>
-                            {{__('seller')}}
-                        </option>
-                        <option value="agency">
-                            {{__('agency')}}
-                        </option>
-                        <option value="factory">
-                            {{__('factory')}}
-                        </option>
-                        <option value="design">
-                            {{__('design')}}
-                        </option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input class="form-width form-control" name="q" placeholder="{{__('keyword')}}" type="text" value="{{q}}"/>
-                </div>
-                <button class="search-bt" type="submit">
-                    {{__('search')}}
-                </button>
-            </form>
+
         </div>
         <!--/.nav-collapse -->
     </div>
 </nav>
 <div class="bk30"></div>
 <div class="container">
+    <form action="/search/result" class="form-horizontal" method="get">
+        <div class="form-group">
+            <div class="col-sm-2">
+                <select class="form-control" name="type">
+                    <option value="seller" selected>
+                        {{__('seller')}}
+                    </option>
+                    <option value="agency">
+                        {{__('agency')}}
+                    </option>
+                    <option value="factory">
+                        {{__('factory')}}
+                    </option>
+                    <option value="design">
+                        {{__('design')}}
+                    </option>
+                </select>
+            </div>
+        <div class="col-sm-8">
+            <input class="form-control" name="q" placeholder="{{__('keyword')}}" type="text" value="{{q}}"/>
+        </div>
+        <div class="col-sm-2">
+        <button class="search-bt" type="submit">
+            {{__('search')}}
+        </button>
+        </div>
+        </div>
+    </form>
+    <div class="bk30"></div>
    {% for e in result.rows %}
     <div class="row list">
-        <div class="col-xs-3 col-md-3">
+        <div class="col-xs-3 col-md-3 pic-link">
             <a href="/seller/{{e.id}}">
                 {% if e.head %}
-                 <img class="img-thumbnail" src="{{img_domain}}{{e.head}}!300x300"/>
+                 <img class="pic-link-img" src="{{img_domain}}{{e.head}}"/>
                  {% else %}
-                  <img alt="" class="img-thumbnail" src="/images/default.png"/>
+                  <img alt="" class="pic-link-img" src="/images/default.png"/>
                 {% endif %}
             </a>
         </div>
         <div class="col-xs-7 col-md-10">
              <h4 class="media-heading">
                 <a href="/seller/{{e.id}}">
-                    {{e.name}}
+                    {{e.ename}}
                 </a>
             </h4>
            
-            <div class="rightinfo"><a href="" class="talk"></a> <a href="/seller/{{e.id}}" class="more"></a></div>
+            <!--<div class="rightinfo"><a href="" class="talk"></a> <a href="/seller/{{e.id}}" class="more"></a></div>
             <div class="clear"></div>
             <div class="row">
                 <div class="col-xs-6">
@@ -80,7 +113,7 @@
                     <p>店面数量:{{e.count_shop}}</p>
                     <p>年销售额:{{e.sale_per_year}}万元</p>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="col-xs-2 col-md-2">
             

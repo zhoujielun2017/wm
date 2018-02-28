@@ -27,39 +27,39 @@
       <h3>
           {{bean.name}}
       </h3>
-      <span class="talk"></span><a href="/message/{{bean.user_id}}">{{__('send a message')}}</a>
+      <span class="talk"></span><a href="/message/{{bean.user_id}}">{{__('Send a message')}}</a>
     </div>
 </div>
 
     <div class="row">
         <div class="col-xs-6">
-            <p>
+            <!--<p>
                 <span class="fc999 mr5">{{__('age')}}:</span>{{bean.age}}
-            </p>
+            </p>-->
             <p>
-                <span class="fc999 mr5">{{__('gender')}}:</span>
+                <span class="fc999 mr5">{{__('Gender')}}:</span>
                 {% if bean.gender==0%}女{% endif %}
                 {% if bean.gender==1%}男{% endif %}
             </p>
             <p>
-                <span class="fc999 mr5">{{__('status')}}:</span>{{__(bean.status)}}
+                <span class="fc999 mr5">{{__('Working Way')}}:</span>{{__(bean.status)}}
             </p>
-            <p><span class="fc999 mr5">{{__('location')}}:</span>
+            <p><span class="fc999 mr5">{{__('Location')}}:</span>
                 {{bean.area}}
             </p>
             <p>
-                <span class="fc999 mr5">{{__('major')}}:</span>{{bean.major}}
+                <span class="fc999 mr5">{{__('Specialities/Skills')}}:</span>{{bean.major}}
             </p>
 
             {% for d in bean.exps %}
              <p><span class="fc999 mr5">{{__('work experience')}}:</span> {{d.experience}} </p>
             {% endfor %}
 
-            <p><span class="fc999 mr5">{{__('design content')}}:</span>{{e.content}}</p>
+            <p><span class="fc999 mr5">{{__('Personal Summary')}}:</span>{{bean.summary}}</p>
     </div>
     </div>
 
-    <h3>ta的作品</h3>
+    <h3>{{__('Works')}}</h3>
     {% for e in workses.rows %}
     {% if loop.index0%3==0 %}
     <div class="row">
@@ -81,8 +81,8 @@
                         {{e.title}}
                     </a>
                 </h4>
-                <p style="font-size: 16px;font-weight: bold;color: #dc9600;">{{__('price')}}: ${{e.price|fmoney}} </p>
-                <p>{{__('material')}}: {{e.material}}</p>
+                <!--<p style="font-size: 16px;font-weight: bold;color: #dc9600;">{{__('price')}}: ${{e.price|fmoney}} </p>
+                <p>{{__('material')}}: {{e.material}}</p>-->
             </div>
         </div>
     </div>
