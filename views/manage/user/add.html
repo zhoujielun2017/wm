@@ -57,6 +57,22 @@
             </p>
         </div>
     </div>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label">公司名称</label>
+        <div class="col-sm-10">
+            <p class="form-control-static">
+               {{bean.name}}
+            </p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label">最后登录时间</label>
+        <div class="col-sm-10">
+            <p class="form-control-static">
+                    {{bean.last_login_time|formatdate("YYYY-MM-DD HH:mm:ss")}}
+            </p>
+        </div>
+    </div>
     {% if bean.role==0 %}
     <div class="form-group"> 
         <div class="col-sm-offset-2 col-sm-10">      
