@@ -305,5 +305,9 @@
 	"major_zink": "major_zink",
 	"major_chain": "major_chain",
 	"company major": "company major",
-	"email": "email"
+	"email": "email",
+	"company position": "company position",
+	"contact phone": "contact phone",
+	"firsthand": "firsthand",
+	"payment days": "payment days"
 }
