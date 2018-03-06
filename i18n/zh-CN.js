@@ -176,7 +176,7 @@
 	"product_jichu": "基础款",
 	"product_xiongzhen": "胸针",
 	"product_fashi": "发饰",
-	"product_yaoshi": "钥匙",
+	"product_yaoshi": "钥匙链",
 	"product_chuanci": "穿刺",
 	"product_qita": "其他",
 	"QC person": "QC人数",
@@ -308,5 +308,7 @@
 	"company position": "company position",
 	"contact phone": "contact phone",
 	"firsthand": "firsthand",
-	"payment days": "payment days"
+	"payment days": "payment days",
+	"Forgot Password": "Forgot Password",
+	"E-mail": "E-mail"
 }

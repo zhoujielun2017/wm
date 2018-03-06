@@ -9,11 +9,11 @@ var regContent="<h3>Dear Account, Welcome to acclist.com!</h3>";
     regContent+="<p><a href='__url' target='_blank'>__url</a></p>";
     regContent+="<p>If you fail to click the above link, please copy it to your browser and confirm.</p>";
 
-var forgetContent="<h3>重置密码</h3>";
+var forgetContent="<h3>Reset Password</h3>";
     forgetContent+="<p>重置密码请点击下面的地址:</p>";
-    forgetContent+="<p>请点击下面的地址进行邮箱确认:</p>";
+    forgetContent+="<p>Please click on below link to reset your password.</p>";
     forgetContent+="<p><a href='__url' target='_blank'>__url</a></p>";
-    forgetContent+="<p>如果你不能点击上面地址，请把上述地址复制到浏览器地址栏进行确认。</p>";
+    forgetContent+="<p>If you fail to click the above link, please copy it to your browser and confirm.</p>";
 
 module.exports = {
     'GET /login/login': async (ctx, next) => {
@@ -139,6 +139,15 @@ module.exports = {
         var email=user.email;
         user.email=email.substring(email.indexOf("@")+1,email.length);
         ctx.render('./user/email_send_sucess.html',{bean:user,token:token});
+    },
+    'GET /login/sendforgetemail': async (ctx, next) => {
+        var id = ctx.request.query.id;
+        var user = await User.findById(id);
+        // login/fromemail?email=11@22&pass=2222&time=1502549978197
+        var token=crypto.createHash('md5').update(id+user.password).digest('hex');
+        var email=user.email;
+        user.email=email.substring(email.indexOf("@")+1,email.length);
+        ctx.render('./user/forget_email_send_sucess.html',{bean:user,token:token});
     },
     //忘记密码页面
     'GET /login/forget': async (ctx, next) => {

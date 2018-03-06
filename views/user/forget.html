@@ -27,6 +27,7 @@
 {% endblock %}
 
 {% block foot %}
+<script src="/js/common.js?v={{js_version}}"></script>
 <script type="text/javascript">
 
 $("form").on("submit",function(){
@@ -39,8 +40,11 @@ $("form").on("submit",function(){
          data:data,
         dataType:"json",
         success:function(json){
-            if(json.code="success"){
+            if(json.code=="success"){
                 location.href="/login/sendemail?id="+json.id;
+            }
+            if(json.code=="not_exist"){
+              YY.dialog({content:"the user not exist"}).alert();
             }
         }
     });

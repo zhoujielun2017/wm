@@ -1,0 +1,43 @@
+{% extends '../empty.html' %}
+
+{% block head %}
+<link href="/css/signin.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+
+{% block main %}
+
+<div class="container">
+    <p class="text-right">
+        <a class="lang" href="#" lang="zh-CH">
+            中文
+        </a>
+        &nbsp;/&nbsp;
+        <a class="lang" href="#" lang="en">
+            EN
+        </a>
+    </p>
+    <div class="login-logo"><a href="/"></a></div>
+    <div class="log-row">
+        <div class="fg-mail"></div>
+        <p class="mailtext yahei">邮件已经发送,点击登录邮箱找回密码</p>
+        <span class="loginEmail"><a href="http://mail.{{bean.email}}" target="_blank">找回密码</a></span>
+    </div>
+</div>
+<!-- <p class="text-center">
+	<a href="/login/fromemail?email={{bean.email}}&pass={{bean.password}}&time={{bean.update_time}}">注册是邮件接收的链接</a>
+</p>
+
+<p class="text-center">
+	<a href="/login/reset?email={{bean.email}}&pass={{bean.password}}&time={{bean.update_time}}">忘记密码时邮件接收的链接</a>
+</p> -->
+
+{% endblock %}
+
+{% block foot %}
+<script type="text/javascript">
+
+</script>  
+{% endblock %}
+
+
