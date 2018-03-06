@@ -30,49 +30,50 @@
     </div>
     <div class="col-xs-9">
       <h3>{{bean.name}}</h3>
+      <P>{{bean.ename}}</P>
       <span class="talk"></span><a href="/message/{{bean.user_id}}"> {{__('Send a message')}}</a>
-     
     </div>
   </div>
    <div class="row">
     <div class="col-xs-6">
-      <p><span class="fc999 mr5">{{__('company custom service')}}:</span>{{bean.custom_service}}   {{bean.position}}</p>
+      <p><span class="fc999 mr5">{{__('Established In')}}:</span>{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
+      <!--<p><span class="fc999 mr5">{{__('company custom service')}}:</span>{{bean.custom_service}}   {{bean.position}}</p>
       <p><span class="fc999 mr5">{{__('company phone')}}:</span>{{bean.phone}}</p>
-     <!--  <p>{{__('offical website')}}:{{bean.offical_website}}</p> -->
-      <p><span class="fc999 mr5">{{__('company email')}}:</span>{{bean.email}}</p>
-      <p><span class="fc999 mr5">{{__('company legal person')}}:</span>{{bean.legal_person}}</p>
-      <p><span class="fc999 mr5">{{__('company address')}}:</span>{{bean.nation}}{{bean.city}}{{bean.address}}</p>
-      <p><span class="fc999 mr5">{{__('company major')}}:</span>
+      <p>{{__('offical website')}}:{{bean.offical_website}}</p>
+      <p><span class="fc999 mr5">{{__('company email')}}:</span>{{bean.email}}</p>-->
+      <p><span class="fc999 mr5">{{__('Owner Name')}}:</span>{{bean.legal_person}}</p>
+      <p><span class="fc999 mr5">{{__('Address')}}:</span>{{bean.nation}}{{bean.city}}{{bean.address}}</p>
+      <p><span class="fc999 mr5">{{__('Speciality')}}:</span>
  {% for d in bean.major %}{{__('major_'+d)}} {% endfor %}
       </p>
-      <p><span class="fc999 mr5">{{__('produce per month')}}:</span>{{bean.able_per_month|fmoney(0)}} {{__('pcs')}}</p>
+      <p><span class="fc999 mr5">{{__('Production Capacity(Month)')}}:</span>{{bean.able_per_month|fmoney(0)}} {{__('pcs')}}</p>
     </div>
+
     <div class="col-xs-6">
-      <p><span class="fc999 mr5">{{__('build time')}}:</span>{{bean.create_time|formatdate("YYYY-MM-DD")}}</p>
-      <p><span class="fc999 mr5">{{__('cooperation customer name')}}:</span>
+      <p><span class="fc999 mr5">{{__('Brands')}}:</span>
       {% for d in customers %}
       <span class="mr5">{{d.name}} </span>
       {% endfor %}
       </p>
-      <p><span class="fc999 mr5">{{__('cooperation factory name')}}:</span>
+      <p><span class="fc999 mr5">{{__('Audit Approved Brands')}}:</span>
         {% for d in factorys %}
         <span class="mr5">{{d.name}} </span>
         {% endfor %}
        </p>
-       <p><span class="fc999 mr5">{{__('company acreage')}}:</span>{{bean.acreage|fmoney(0)}} {{__('square meters')}}</p>
-      <p><span class="fc999 mr5">{{__('type per month')}}:</span>{{bean.type_per_month|fmoney(0)}} {{__('pcs')}}</p>
-      <p><span class="fc999 mr5">{{__('produce person')}}:</span>{{bean.count_person|fmoney(0)}} {{__('persons')}}</p>
-      <p><span class="fc999 mr5">{{__('QC person')}}:</span>{{bean.count_qc|fmoney(0)}} {{__('persons')}}</p>
+       <p><span class="fc999 mr5">{{__('Factory Area')}}:</span>{{bean.acreage|fmoney(0)}} {{__('square meters')}}</p>
+      <p><span class="fc999 mr5">{{__('Development Capacity(Month)')}}:</span>{{bean.type_per_month|fmoney(0)}} {{__('pcs')}}</p>
+      <p><span class="fc999 mr5">{{__('Production Line')}}:</span>{{bean.count_person|fmoney(0)}} {{__('persons')}}</p>
+      <p><span class="fc999 mr5">{{__('QC Dept')}}:</span>{{bean.count_qc|fmoney(0)}} {{__('persons')}}</p>
 
     </div>
   </div>
   <div>
-    <span class="fc999 mr5">{{__('company summary')}}:</span>{{bean.content}}
+    <span class="fc999 mr5">{{__('Company Instruction')}}:</span>{{bean.content}}
   </div>
 
   {% if imgs %}
   <!--  公司环境 -->
-  <h3 style="margin-bottom: 30px;">{{__('environment')}}</h3>
+  <h3 style="margin-bottom: 30px;">{{__('Environment')}}</h3>
   <div class="row env">
 
        {% for e in imgs %}
@@ -89,7 +90,7 @@
   </div>
   {% endif %}
 
-  <h3 style="margin-bottom: 30px;">{{__('product')}}</h3>
+  <h3 style="margin-bottom: 30px;">{{__('Product')}}</h3>
   {% for e in pros.rows %}
   
   {% if loop.index0%3==0 %}

@@ -9,52 +9,82 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <!-- <a class="navbar-brand" href="#"> -->
-            <img src="/images/logo.png">
-                <!-- </a> -->
-            </img>
+            <div class="logo"><a href="/"><img src="/images/logo.png" /></a></div>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
-            
-            <form action="/search/result" class="form-inline" method="get">
-                <div class="form-group">
-                    <select class="form-control" name="type">
-                        <option value="design" selected>
-                            {{__('design')}}
-                        </option>
-                        <option value="seller">
-                            {{__('seller')}}
-                        </option>
-                        <option value="agency">
-                            {{__('agency')}}
-                        </option>
-                        <option value="factory">
-                            {{__('factory')}}
-                        </option>
-                       
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input class="form-width form-control" name="q" placeholder="{{__('keyword')}}" type="text" value="{{q}}">
-                    </input>
-                </div>
-                <button class="search-bt" type="submit">
-                    {{__('search')}}
-                </button>
-            </form>
+            <ul class="nav navbar-nav navcon">
+
+                <li {% if  nav=="index"  %}class="active"{% endif %}><a href="/">{{__('index')}}</a></li>
+                <li {% if  nav=="sellers"  %}class="active"{% endif %}><a href="/sellers">{{__('seller')}}</a></li>
+                <li {% if  nav=="agencys"  %}class="active"{% endif %}><a href="/agencys">{{__('agency')}}</a></li>
+                {% if  sessionuser or sessionuser.type!='factory' %}
+                <li {% if  nav=="factorys"  %}class="active"{% endif %}><a href="/factorys">{{__('factory')}}</a></li>
+                {% endif %}
+                <li {% if  nav=="designs"  %}class="active"{% endif %}><a href="/designs">{{__('design')}}</a></li>
+                <li {% if  nav=="contact"  %}class="active"{% endif %}><a href="/contact">{{__('ABOUT')}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navinfo">
+
+                <li class="search"><a href="/search" ><span></span><!--<p>{{__('search')}}</p>--></a></li>
+
+                {% if  sessionuser  %}
+                <li><a href="/user/center">{{sessionuser.email}}</a></li>
+                <li><a href="#" class="loginout">{{__('Sign Out')}}</a></li>
+                {% endif %}
+                {% if  not sessionuser  %}
+                <li class="login"><a href="/login/login"><span></span><!--<p>{{__('sign in')}}</p>--></a></li>
+                <!--<li class="registration"><a href="/login/reg"><span></span><p>{{__('register')}}</p></a></li>-->
+                {% endif %}
+                <li><a href="#" class="lang" lang="zh-CN">中文</a></li>
+                <li style="line-height: 82px;">/</li>
+                <li><a href="#" class="lang" lang="en">EN</a></li>
+            </ul>
+
         </div>
         <!--/.nav-collapse -->
     </div>
 </nav>
+    <div class="bk30"></div>
 <div class="container">
+    <form action="/search/result" class="form-horizontal" method="get">
+        <div class="form-group">
+            <div class="col-sm-2">
+            <select class="form-control" name="type">
+                <option value="design" selected>
+                    {{__('design')}}
+                </option>
+                <option value="seller">
+                    {{__('seller')}}
+                </option>
+                <option value="agency">
+                    {{__('agency')}}
+                </option>
+                <option value="factory">
+                    {{__('factory')}}
+                </option>
+
+            </select>
+        </div>
+        <div class="col-sm-8">
+            <input class="form-control" name="q" placeholder="{{__('keyword')}}" type="text" value="{{q}}">
+            </input>
+        </div>
+         <div class="col-sm-2">
+        <button class="search-bt" type="submit">
+            {{__('search')}}
+        </button>
+        </div>
+        </div>
+    </form>
+    <div class="bk30"></div>
    {% for e in result.rows %}
     <div class="row list">
-        <div class="col-xs-3 col-md-3">
+        <div class="col-xs-3 col-md-3 pic-link">
             <a href="/design/{{e.id}}">
                 {% if e.head %}
-                 <img class="img-thumbnail" src="{{img_domain}}{{e.head}}!300x300"/>
+                 <img class="pic-link-img" src="{{img_domain}}{{e.head}}"/>
                  {% else %}
-                  <img alt="" class="img-thumbnail" src="/images/default.png"/>
+                  <img alt="" class="pic-link-img" src="/images/default.png"/>
                 {% endif %}
             </a>
         </div>
@@ -65,17 +95,15 @@
                 </a>
             </h4>
             <p>{{__('location')}}:
-               {% for d in e.areas %}
-            {{d.name}}
-            {% endfor %}
+                {{e.area}}
             </p>
-            
+            <!--
             <p>{{__('work experience')}}:
             {% for d in e.work_experience %}
             {{d}}
             {% endfor %}
             </p>
-            <p>{{__('design content')}}:{{e.content}}</p>      
+            <p>{{__('design content')}}:{{e.content}}</p>-->
         </div>
     </div>
     {% endfor %}

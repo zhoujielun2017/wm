@@ -10,21 +10,59 @@
 
 {% block main %}
 
-<div class="login-logo"><a href="/"></a></div>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="logo"><a href="/"><img src="/images/logo.png" /></a></div>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav navcon">
 
+                <li {% if  nav=="index"  %}class="active"{% endif %}><a href="/">{{__('index')}}</a></li>
+                <li {% if  nav=="sellers"  %}class="active"{% endif %}><a href="/sellers">{{__('seller')}}</a></li>
+                <li {% if  nav=="agencys"  %}class="active"{% endif %}><a href="/agencys">{{__('agency')}}</a></li>
+                {% if  sessionuser or sessionuser.type!='factory' %}
+                <li {% if  nav=="factorys"  %}class="active"{% endif %}><a href="/factorys">{{__('factory')}}</a></li>
+                {% endif %}
+                <li {% if  nav=="designs"  %}class="active"{% endif %}><a href="/designs">{{__('design')}}</a></li>
+                <li {% if  nav=="contact"  %}class="active"{% endif %}><a href="/contact">{{__('ABOUT')}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right navinfo">
+
+                <li class="search"><a href="/search" ><span></span><!--<p>{{__('search')}}</p>--></a></li>
+
+                {% if  sessionuser  %}
+                <li><a href="/user/center">{{sessionuser.email}}</a></li>
+                <li><a href="#" class="loginout">{{__('Sign Out')}}</a></li>
+                {% endif %}
+                {% if  not sessionuser  %}
+                <li class="login"><a href="/login/login"><span></span><!--<p>{{__('sign in')}}</p>--></a></li>
+                <!--<li class="registration"><a href="/login/reg"><span></span><p>{{__('register')}}</p></a></li>-->
+                {% endif %}
+                <li><a href="#" class="lang" lang="zh-CN">中文</a></li>
+                <li style="line-height: 82px;">/</li>
+                <li><a href="#" class="lang" lang="en">EN</a></li>
+            </ul>
+
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="bk20"></div>
+<div class="container">
 <form class="form-horizontal">
 <input type="hidden" name="id" value="{{bean.id}}">
 <input type="hidden" name="token" value="{{token}}">
   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">{{__('password')}}</label>
+    <label for="inputPassword3" class="col-sm-2 control-label">{{__('Password')}}</label>
     <div class="col-sm-10">
-      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
+      <input type="password" name="password" class="form-control form-width" id="inputPassword3" placeholder="{{__('Password')}}">
     </div>
   </div>
   <div class="form-group">
-    <label for="inputPassword3" class="col-sm-2 control-label">{{__('confirm password')}}</label>
+    <label for="inputPassword3" class="col-sm-2 control-label">{{__('Confirm Password')}}</label>
     <div class="col-sm-10">
-      <input type="password" name="password2" class="form-control" id="inputPassword3" placeholder="Password2">
+      <input type="password" name="password2" class="form-control form-width" id="inputPassword3" placeholder="{{__('Confirm Password')}}">
     </div>
   </div>
   <div class="form-group">
@@ -33,6 +71,7 @@
     </div>
   </div>
 </form>
+</div>
 {% endblock %}
 
 {% block foot %}

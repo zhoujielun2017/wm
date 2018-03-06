@@ -141,7 +141,7 @@
                 {{__('count of shop')}}
             </label>
             <div class="col-sm-5">
-                <input class="form-control" name="count_shop"   placeholder="{{__('How many stores?')}}" type="text" value="{{bean.count_shop}}">
+                <input class="form-control divide" name="count_shop"   placeholder="{{__('How many stores?')}}" type="text" value="{{bean.count_shop}}">
                 </input>
             </div>
             <!--<div class="col-sm-5">
@@ -153,7 +153,7 @@
                 {{__('Annual Procurement')}}
             </label>
             <div class="col-sm-5">
-                <input class="form-control" name="sale_per_year"   placeholder="$" type="text" value="{{bean.sale_per_year}}">
+                <input class="form-control divide" name="sale_per_year"   placeholder="$" type="text" value="{{bean.sale_per_year}}">
                 </input>
             </div>
 
@@ -377,5 +377,16 @@ $("form").on('submit',function(e){
 
     return false;
 });
+</script>
+<script type="text/javascript" src="js/number-divider.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var input = $('#input');
+        $('.divide').divide();
+
+        $('#range_input').on("input change", function() {
+            rangeLabel.val(this.value);
+        });
+    })
 </script>
 {% endblock %}

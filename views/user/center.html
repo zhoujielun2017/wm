@@ -40,7 +40,20 @@
     </label>
     
 </div>
-<p style="font-size: 12px;color: #999;padding-top: 10px;">{{__('logoimg info')}}</p>
+<p style="font-size: 12px;color: #999;padding-top: 10px;">
+    {% if user.type=='factory' %}
+        {{__('logoimg info')}}
+    {% endif %}
+    {% if user.type=='agency' %}
+        {{__('logoimg info')}}
+    {% endif %}
+    {% if user.type=='seller' %}
+        {{__('logoimg info')}}
+    {% endif %}
+    {% if user.type=='design' %}
+        {{__('sheji info')}}
+    {% endif %}
+</p>
 <iframe  name="formiframe" id="formiframe" ></iframe>
 <form action="/file" method="post" target="formiframe" enctype="multipart/form-data">
 <input type="file" name="upload" id="uploadfile">
