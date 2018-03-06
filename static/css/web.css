@@ -21,6 +21,19 @@ color: #ccc;
 .fn{ float:none; }
 .overflow,.oh{ overflow:hidden; zoom:1; }
 .clearBoth{clear: both;}
+.clear,.clearfix:after {
+    clear:both;
+    height:0;
+    overflow:hidden;
+    display:block
+}
+.clearfix:after {
+    visibility:hidden;
+    content:"."
+}
+.clearfix {
+    *zoom:1
+}
 .imgs img{
 width: 100px;
 height: 100px;
@@ -98,7 +111,7 @@ a.red{color: #ff0000;}
 .fg-mail{float: left;background: url("../images/fg-mail.png") no-repeat;width: 95px;height: 95px;margin-right: 25px;}
 .reg-ok{float: left;background: url("../images/reg-ok.png") no-repeat;width: 95px;height: 130px;margin-right: 25px;}
 .loginEmail a{display: inline-block;text-align: center;height: 50px;line-height: 50px;background: #ef8201;color: #222;font-size: 16px;width: 160px;}
-.mailtext{font-size: 20px;white-space: nowrap;margin: 5px 0 12px;color: #222222;display: inline-block;}
+.mailtext{font-size: 20px;white-space: nowrap;margin: 5px 0 12px;color: #222222;}
 .log-row{margin: 100px auto;display: table;}
 .fa-dh{background: url("../images/phone_icon.png") no-repeat;width: 110px;height: 110px;display: block;margin: 50px auto 0px;}
 .fa-dz{background: url("../images/adress_icon.png") no-repeat;width: 110px;height: 110px;display: block;margin: 50px auto 0px;}
@@ -116,3 +129,5 @@ a.red{color: #ff0000;}
 .head_img{display: table-cell;width: 150px;height: 150px;border: 1px solid #ddd;vertical-align: middle;text-align: center;overflow: hidden;border-radius:4px;}
 .pic-link-img {width:100%;height:auto;background-color:#fff;-webkit-transition:all .2s ease-in-out;
 -o-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
+.info-list label{float: left;width: 15%;font-weight: normal;color: #999;}
+.info-list span{width: 84%;float: right;margin-left: 1%;}

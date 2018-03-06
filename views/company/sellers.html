@@ -6,9 +6,9 @@
 
 {% block main %}
 <div class="bk30"></div>
-<div class="container">
+<div class="container clearfix">
     {% for e in result.rows %}
-    <div class="col-md-6 list">
+    <div class="col-md-6 list clearfix">
         <div class="col-xs-3 col-md-3 pic-link">
             <a href="/seller/{{e.id}}">
                
@@ -46,9 +46,6 @@
                 </div>
             </div>
             -->
-        </div>
-        <div class="col-xs-2 col-md-2">
-            
         </div>
     </div>
     {% endfor %}

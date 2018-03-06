@@ -8,6 +8,7 @@
   .img{
       width: 150px;
   }
+
 </style>
 {% endblock %}
 
@@ -33,23 +34,22 @@
       <!--<p><span class="fc999 mr5">{{__('Contacter')}}:</span>{{bean.custom_service}}</p>
       <p><span class="fc999 mr5">{{__('Position')}}:</span>{{bean.position}}</p>
       <p><span class="fc999 mr5">{{__('Contact Number')}}:</span>{{bean.contact_phone}}</p>-->
-        <p><span class="fc999 mr5">{{__('Established In')}}:</span>{{bean.build_time|formatdate("YYYY")}}</p>
-        <p><span class="fc999 mr5">{{__('count of shop')}}:</span>{{bean.count_shop}} {{__('Stores')}}</p>
-      <p><span class="fc999 mr5">{{__('Offical Website')}}:</span>{{bean.offical_website}}</p>
+        <div class="clearfix info-list"><label>{{__('Established In')}}:</label><span>{{bean.build_time|formatdate("YYYY")}}</span></div>
+        <div class="clearfix info-list"><label>{{__('count of shop')}}:</label><span>{{bean.count_shop}} {{__('Stores')}}</span></div>
+        <div class="clearfix info-list"><label>{{__('Offical Website')}}:</label><span>{{bean.offical_website}}</span></div>
       <!--<p><span class="fc999 mr5">{{__('Email')}}:</span>{{bean.email}}</p>-->
-      <p><span class="fc999 mr5">{{__('Address')}}:</span>{{bean.address}}</p>
+      <div class="clearfix info-list"><label>{{__('Address')}}:</label><span>{{bean.address}}</span></div>
         <!--<p><span class="fc999 mr5">{{__('Company Phone')}}:</span>{{bean.phone}}</p>-->
-        <p><span class="fc999 mr5" style="display: block;float: left;height: 35px;">{{__('China Office')}}:</span><span style="display: block">{{bean.china_office}}</span></p>
+      <div class="clearfix info-list"><label>{{__('China Office')}}:</label><span>{{bean.china_office}}</span></div>
       </div>
       <div class="col-xs-6">
-        <p><span class="fc999 mr5" style="display: block;float: left;height: 35px;">{{__('Cooperative Brands')}}:</span><span style="display: block;">{% for d in bean.brand %}{{d}} {% endfor %}</span></p>
-          <div class="clear"></div>
-        <p><span class="fc999 mr5">{{__('Annual Procurement')}}:</span>{{bean.sale_per_year}} {{__('USD')}}</p>
-        <p><span class="fc999 mr5">{{__('Firsthand')}}:</span>
-        {% if bean.firsthand==1 %}{{__('Yes')}}{% endif%}
+         <div class="clearfix info-list"><label>{{__('Cooperative Brands')}}:</label><span>{% for d in bean.brand %}{{d}} {% endfor %}</span></div>
+         <div class="clearfix info-list"><label>{{__('Annual Procurement')}}:</label><span>{{bean.sale_per_year}} {{__('USD')}}</span></div>
+         <div class="clearfix info-list"><label>{{__('Firsthand')}}:</label>
+        <span>{% if bean.firsthand==1 %}{{__('Yes')}}{% endif%}
         {% if bean.firsthand==0 %}{{__('No')}}{% endif%}
-        </p>
-        <p><span class="fc999 mr5">{{__('Payment Term')}}:</span>{{bean.payment_days}} {{__('Days')}}</p>
+        </span></div>
+         <div class="clearfix info-list"><label>{{__('Payment Term')}}:</label><span>{{bean.payment_days}} {{__('Days')}}</span></div>
       </div>
     </div>
   </div>

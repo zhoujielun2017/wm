@@ -38,8 +38,8 @@
             </p>-->
             <p>
                 <span class="fc999 mr5">{{__('Gender')}}:</span>
-                {% if bean.gender==0%}女{% endif %}
-                {% if bean.gender==1%}男{% endif %}
+                {% if bean.gender==0%}{{__('female')}}{% endif %}
+                {% if bean.gender==1%}{{__('male')}}{% endif %}
             </p>
             <p>
                 <span class="fc999 mr5">{{__('Working Way')}}:</span>{{__(bean.status)}}

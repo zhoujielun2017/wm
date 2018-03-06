@@ -77,7 +77,7 @@
       <div class="col-sm-9" >
           <div class="row">
               <div class="col-xs-4 col-sm-6">
-                 <input type="text" name="factory" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="{{__('Audit Approved Brands')}}">
+                 <input type="text" name="factory" value="{{e.name}}" class="form-control" id="inputEmail3" placeholder="{{__('Brand Name')}}">
               </div>
                <div class="col-xs-6 col-sm-4">
                     <input type="text" name="co_time" value="{{e.co_time}}" class="form-control" id="" placeholder="{{__('Audit Time')}}">
@@ -97,7 +97,7 @@
         <div class="row">
             <div class="col-xs-4 col-sm-6">
 
-               <input type="text" name="factory" value="" class="form-control"  placeholder="{{__('Audit Approved Brands')}}">
+               <input type="text" name="factory" value="" class="form-control"  placeholder="{{__('Brand Name')}}">
             </div>
               <div class="col-xs-6 col-sm-4">
                   <input type="text" name="co_time" value="" class="form-control"  placeholder="{{__('Audit Time')}}">
@@ -119,7 +119,7 @@
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-3 control-label">{{__('Factory Area')}}</label>
     <div class="col-sm-7">
-      <input type="text" name="acreage" value="{{bean.acreage}}" class="form-control" id="inputEmail3" placeholder="{{__('Factory Area')}}">
+      <input type="text" name="acreage" value="{{bean.acreage}}" class="form-control divide" id="inputEmail3" placeholder="{{__('Factory Area')}}">
     </div>
     <div class="col-sm-2">
        <p class="form-control-static">{{__('square meters')}}</p>
@@ -129,7 +129,7 @@
     <div class="form-group">
         <label for="inputEmail3" class="col-sm-3 control-label">{{__('Annual Sales')}}</label>
         <div class="col-sm-7">
-            <input type="text" name="sale_per_year" value="{{bean.sale_per_year}}" class="form-control" id="" placeholder="{{__('Sales Volume/Year')}}">
+            <input type="text" name="sale_per_year" value="{{bean.sale_per_year}}" class="form-control divide" id="" placeholder="{{__('Sales Volume/Year')}}">
         </div>
         <div class="col-sm-2">
             <p class="form-control-static">{{__('Dollars')}}</p>
@@ -141,7 +141,7 @@
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-3 control-label">{{__('Development Capacity(Month)')}}</label>
     <div class="col-sm-7">
-      <input type="text" name="type_per_month" value="{{bean.type_per_month}}" class="form-control" id="inputEmail3" placeholder="{{__('Styles Per Month')}}">
+      <input type="text" name="type_per_month" value="{{bean.type_per_month}}" class="form-control divide" id="inputEmail3" placeholder="{{__('Styles Per Month')}}">
     </div>
      <div class="col-sm-2">
        <p class="form-control-static">{{__('Styles')}}</p>
@@ -171,7 +171,7 @@
    <div class="form-group">
     <label  class="col-sm-3 control-label">{{__('Production Capacity(Month)')}}</label>
     <div class="col-sm-7">
-      <input type="text" name="able_per_month" value="{{bean.able_per_month}}" class="form-control" placeholder="{{__('Monthly Production')}}">
+      <input type="text" name="able_per_month" value="{{bean.able_per_month}}" class="form-control divide" placeholder="{{__('Monthly Production')}}">
     </div>
      <div class="col-sm-2">
        <p class="form-control-static">{{__('Units')}}</p>
@@ -338,5 +338,17 @@ $("form").on('submit',function(e){
 
     return false;
 });
-</script>  
+</script>
+
+<script type="text/javascript" src="js/number-divider.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var input = $('#input');
+        $('.divide').divide();
+
+        $('#range_input').on("input change", function() {
+            rangeLabel.val(this.value);
+        });
+    })
+</script>
 {% endblock %}
