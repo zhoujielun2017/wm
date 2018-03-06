@@ -41,7 +41,7 @@ $("form").on("submit",function(){
         dataType:"json",
         success:function(json){
             if(json.code=="success"){
-                location.href="/login/sendemail?id="+json.id;
+                location.href="/login/sendforgetemail?id="+json.id;
             }
             if(json.code=="not_exist"){
               YY.dialog({content:"the user not exist"}).alert();
