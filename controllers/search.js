@@ -11,7 +11,7 @@ var search_facotry=async (ctx, next) => {
         var page=ctx.request.query.page||1,
             q=ctx.request.query.q;
             if(q){
-                q=q.trim();
+                q=q.trim().replace(" ","_").replace("-","_");
             }
         var result = await Factory.findAndCountAll({
             where: {
@@ -26,7 +26,9 @@ var search_facotry=async (ctx, next) => {
         });
         for (var i = 0; i < result.count; i++) {
             var bean=result.rows[i];
-
+            if(!bean){
+                break;
+            }
             if(bean.major){
                 bean.major=bean.major.split(",");
                
