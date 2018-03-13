@@ -31,22 +31,21 @@
     </div>
   </div>
    <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-6" style="margin-left: -2%;">
       <!--<p><span class="fc999 mr5">{{__('Contacter')}}:</span>{{bean.custom_service}}   {{bean.position}}</p>
       <p><span class="fc999 mr5">{{__('Contact Number')}}:</span>{{bean.phone}}</p>
       <p><span class="fc999 mr5">{{__('Company Phone')}}:</span>{{bean.company_phone}}</p>-->
-      <p><span class="fc999 mr5">{{__('Offical Website')}}:</span>{{bean.offical_website}}</p>
+        <div class="clearfix info-list"><label>{{__('Offical Website')}}:</label><span>{{bean.offical_website}}</span></div>
       <!--<p><span class="fc999 mr5">{{__('Email')}}:</span>{{bean.email}}</p>-->
-      <p><span class="fc999 mr5">{{__('Address')}}:</span>{{bean.address}}</p>
-      <p><span class="fc999 mr5">{{__('China Office')}}:</span>{{bean.china_office}}</p>
-      <p><span class="fc999 mr5">{{__('Payment Term')}}:</span>{{bean.payment_days}} {{__('Days')}}</p>
+        <div class="clearfix info-list"><label>{{__('Address')}}:</label><span>{{bean.address}}</span></div>
+        <div class="clearfix info-list"><label>{{__('China Office')}}:</label><span>{{bean.china_office}}</span></div>
+        <div class="clearfix info-list"><label>{{__('Payment Term')}}:</label><span>{{bean.payment_days}} {{__('Days')}}</span></div>
     </div>
     <div class="col-xs-6">
-      <p><span class="fc999 mr5">{{__('Established In')}}:</span>{{bean.create_time|formatdate("YYYY")}}</p>
+        <div class="clearfix info-list"><label>{{__('Established In')}}:</label><span>{{bean.create_time|formatdate("YYYY")}}</span></div>
      <!--  <p>{{__('count of shop')}}:{{bean.count_shop}}</p> -->
-      <p><span class="fc999 mr5">{{__('Cooperative Brands')}}:</span>{{bean.brand}}
-       </p>
-      <p><span class="fc999 mr5">{{__('purchase per year')}}:</span>{{bean.purchase_per_year}} {{__('USD')}}</p>
+        <div class="clearfix info-list"><label>{{__('Cooperative Brands')}}:</label><span>{{bean.brand}}</span></div>
+        <div class="clearfix info-list"><label>{{__('purchase per year')}}:</label><span>{{bean.purchase_per_year|fmoney(0)}} {{__('USD')}}</span></div>
       <!-- <p>{{__('firsthand')}}:{{bean.firsthand}}</p> -->
     </div>
   </div>
