@@ -52,9 +52,9 @@ app.use(i18n(app, {
 
 // static file support:
 // app.use(staticFiles('/static/', __dirname + '/static'));
-// app.use(koastatic('./static', {maxAge: 60 * 60* 24 * 7}));
+ app.use(koastatic('./static', {maxAge: 60 * 60* 24 * 7}));
 
-app.use(koastatic('./static', {maxAge: 0,buffer:false,dynamic:true}));
+//app.use(koastatic('./static', {maxAge: 0,buffer:false,dynamic:true}));
 // parse request body:
 app.use(bodyParser());
 
