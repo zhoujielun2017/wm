@@ -185,7 +185,7 @@
 	"shall": "shall",
 	"wood": "wood",
 	"only show vip": "Only Show to VIP",
-	"Send a message": "Send A Message",
+	"Send a message": "Send a Message",
 	"Send": "Send",
 	"Environment": "Environment",
 	"Days": "Days",

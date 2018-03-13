@@ -52,12 +52,12 @@
     <div class="col-xs-6">
       <p><span class="fc999 mr5">{{__('Brands')}}:</span>
       {% for d in customers %}
-      <span class="mr5">{{d.name}} </span>
+      <span class="mr5">{{d.name}},</span>
       {% endfor %}
       </p>
       <p><span class="fc999 mr5">{{__('Audit Approved Brands')}}:</span>
         {% for d in factorys %}
-        <span class="mr5">{{d.name}} </span>
+        <span class="mr5">{{d.name}},</span>
         {% endfor %}
        </p>
        <p><span class="fc999 mr5">{{__('Factory Area')}}:</span>{{bean.acreage|fmoney(0)}} {{__('square meters')}}</p>
