@@ -384,8 +384,8 @@ var factory_id=async (ctx, next) => {
             products = ctx.request.body.products||'',            
             majors = ctx.request.body.majors||'';
 
-        var typearr=types.split(",");
-        var namearr=names.split(",");
+        var typearr=types.split("_@_");
+        var namearr=names.split("_@_");
         var timearr=co_times.split(",");
         //先删除合作信息
         await Cooperation.destroy({

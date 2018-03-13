@@ -314,8 +314,8 @@ $("form").on('submit',function(e){
         var code=$(this).data("code");
         products.push(code);
     })
-    $this.find("input[name=types]").val(types.join(","));
-    $this.find("input[name=names]").val(names.join(","));
+    $this.find("input[name=types]").val(types.join("_@_"));
+    $this.find("input[name=names]").val(names.join("_@_"));
     $this.find("input[name=co_times]").val(co_times.join(","));
     $this.find("input[name=majors]").val(majors.join(","));
     $this.find("input[name=products]").val(products.join(","));
