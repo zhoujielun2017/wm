@@ -1,6 +1,7 @@
 var Message=require("../model/Message"),
     MessageGroup=require("../model/MessageGroup"),
     User=require("../model/User"),
+    UserService=require("../service/UserService"),
     PageUtil=require("../util/PageUtil");
 module.exports = {
     //列表页
@@ -36,8 +37,9 @@ module.exports = {
                 continue;
             }
             bean.another_head=user.head_url;
-            bean.name=user.name;
-            //console.log("bean.another_head",bean.another_head)
+            // bean.name=user.name;
+            bean.another_type=user.type;
+            bean.name=await UserService.getUserNameById(bean.another_id);
         }
 
         ctx.render('./message/list.html', {

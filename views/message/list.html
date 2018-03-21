@@ -14,11 +14,13 @@
   <div class="row list">
 
     <div class="col-xs-3 col-sm-3">
-      {% if e.another_head %}
-      <img src="{{img_domain}}{{e.another_head}}!300x300" alt="" class="img-circle">
-      {% endif %}
-        
-      
+      <a href="/{{e.another_type}}/{{e.another_id}}">
+        {% if e.another_head %}
+        <img src="{{img_domain}}{{e.another_head}}!300x300" alt="" class="img-circle">
+        {%else%}
+        <img src="/static/images/unUpload.png" alt="">
+        {% endif %}
+      </a>
     </div>
     <div class="col-xs-6 col-sm-6">
       <h4 >

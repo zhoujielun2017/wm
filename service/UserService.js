@@ -1,6 +1,10 @@
 var User=require("../model/User"),
     crypto = require('crypto'),
-    Setting=require("../model/Setting");
+    Setting=require("../model/Setting"),
+    Factory=require("../model/Factory"),
+    Agency=require("../model/Agency"),
+    Seller=require("../model/Seller"),
+    Design=require("../model/Design");
 
 var UserService={};
 
@@ -25,5 +29,45 @@ async function createUser(name,type){
         return user;
 }
 
+async function getUserNameById(id){
+    
+    
+    var user = await User.findById(id);
+    if(user.type=='factory'){
+        var factory = await Factory.findOne({
+            where:{
+                user_id,id
+            }
+        });
+        return factory.name||factory.ename;
+    }
+    if(user.type=='seller'){
+        var seller = await Seller.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        return seller.name||seller.ename;
+    }
+    if(user.type=='agency'){
+        var agency = await Agency.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        return agency.name||agency.ename;
+    }
+    if(user.type=='design'){
+        var design = await Design.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        return design.name;
+    }
+    return user.name;
+}
+
 UserService.createUser=createUser;
+UserService.getUserNameById=getUserNameById;
 module.exports = UserService;

@@ -412,14 +412,27 @@ var factory_id=async (ctx, next) => {
         var factory = await Factory.findById(id);
         //处理搜索字段
         var search=[];
+        //供应商名字
         search.push(factory.name.replace(","," "));
+        //英文特长
         search.push(majors);
         var majorArr = majors.split(",");
+        //中文特长
         for (var i = 0,len1=majorArr.length; i < len1; i++) {
             var key=majorArr[i];
             ctx.i18n.setLocale('zh-CN');
             search.push(ctx.i18n.__("major_"+key));
         }
+        //英文产品
+        search.push(products);
+        //中文产品
+        var productArr = products.split(",");
+        for (var i = 0,len2=productArr.length; i < len2; i++) {
+            var key=productArr[i];
+            ctx.i18n.setLocale('zh-CN');
+            search.push(ctx.i18n.__("major_"+key));
+        }
+        //合作厂商
         search.push(namearr);
 
         factory.search=search.join(",");

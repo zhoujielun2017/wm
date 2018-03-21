@@ -13,6 +13,7 @@
 	"Info": "基本信息",
 	"Buy record": "Buy record",
 	"Change Password": "修改密码",
+	"can not visit the module": "你无权访问此板块信息内容，请前往其他板块。",
 	"buy p1": "成为高级会员",
 	"buy p2": "请选择一种付款方式",
 	"buy h1": "年费：美金",
@@ -84,7 +85,7 @@
 	"sheji info": "上传您的头像-jpg、png、gif等(≤300K)",
 	"Simg": "Upload ≤300K jpg,png,gif,etc.(less than 15 images)",
 	"edit": "编辑",
-	"Environment": "公司环境",
+	"Environment": "环境",
 	"Semail": "邮箱",
 	"Expiry Date": "会员到期日",
 	"Direct Purchase": "是否直采",
@@ -257,7 +258,7 @@
 	"company email": "company email",
 	"contact": "contact",
 	"password": "Password",
-	"Forgot Password": "Change Password",
+	"Forgot Password": "Forgot Password",
 	"city": "城市",
 	"nation": "国家",
 	"company acreage": "company acreage",
@@ -284,7 +285,6 @@
 	"build time": "build time",
 	"type per month": "type per month",
 	"company summary": "company summary",
-	"Environment": "环境",
 	"Log In": "Log In",
 	"Sign Up": "Sign Up",
 	"forget password": "forget password",
@@ -312,6 +312,7 @@
 	"contact phone": "contact phone",
 	"firsthand": "firsthand",
 	"payment days": "payment days",
-	"Forgot Password": "Forgot Password",
-	"E-mail": "E-mail"
+	"E-mail": "E-mail",
+	"major_chengren": "成人",
+	"major_ertong": "儿童"
 }

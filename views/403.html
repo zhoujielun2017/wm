@@ -16,9 +16,17 @@
 
 {% block main %}
 <div class="container content yahei">
- <h3 class="text-center">{{__('only show vip')}}</h3>
+    <h3 class="text-center">
+        {% if user.status==0 %}
+         {{__('only show vip')}}
+         {% else %}
+         {{__('can not visit the module')}}
+         {% endif %}
+    </h3>
  <div class="bk20"></div>
+ {% if user.status==0 %}
  <p class="text-center loginEmail"><a href="/user/buy">{{__('To Be VIP')}}</a></p>
+ {% endif %}
 </div>
 </div>
 {% endblock %}

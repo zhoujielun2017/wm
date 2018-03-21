@@ -119,14 +119,14 @@ function roleController() {
         }else{
             //根据不同的用户获取可以进入的url
             var allowUrls=getRoleUrls(user);
-             //seller agency facoty 普通会员
+            //seller agency facoty 普通会员
             if(contains(allowUrls,url)){
                 allow=true;
             }           
         }
         
         if(!allow){
-            ctx.render('403.html', {});
+            ctx.render('403.html', {user,user});
         }else{
             await next();
         }
