@@ -97,7 +97,7 @@ html, body {
 .talk{background: url("../images/talk.png") no-repeat;width: 22px;height: 20px;margin-right: 15px;display: block;float: left;}
 .more{background: url("../images/more.png") no-repeat;width: 27px;height: 16px;display: block;float: left;}
 .list{margin-bottom: 30px;}
-.list .col-md-3:first-child{width: 150px;padding: 0px;}
+.list .col-md-3:first-child{width: 150px;padding: 0px;height: 150px;}
 .search-bt{border: none;text-align: center;height: 44px;line-height: 44px;background: #ef8201;color: #222;width: 75px;vertical-align: middle;}
 .form-inline{margin-top: 15px;}
 .form-width{width: 400px;}

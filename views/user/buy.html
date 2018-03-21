@@ -5,9 +5,37 @@
 {% endblock %}
 
 {% block main %}
-<h3>{{__('buy p1')}}</h3>
-<h4>{{__('buy p2')}}</h4>
 
+
+{% if user.type=='seller' %}
+<h3>{{__('buy p1')}}</h3>
+<p> &nbsp;</p>
+<p> &nbsp;</p>
+<p>{{__('commen p1')}}</p>
+<p>{{__('sellerbuy p2')}}</p>
+<p>{{__('commen p3')}}</p>
+{% endif %}
+{% if user.type=='agency' %}
+<h3>{{__('buy p1')}}</h3>
+<p> &nbsp;</p>
+<p> &nbsp;</p>
+<p>{{__('commen p1')}}</p>
+<p>{{__('agency p2')}}</p>
+<p>{{__('commen p3')}}</p>
+{% endif %}
+{% if user.type=='factory' %}
+<h3>{{__('buy p1')}}</h3>
+<p> &nbsp;</p>
+<p> &nbsp;</p>
+<p>{{__('factory p1')}}</p>
+<p>{{__('factory p2')}}</p>
+<p>{{__('factory p3')}}</p>
+{% endif %}
+{% if user.type=='design' %}
+<p>{{__('design p1')}}</p>
+<p>{{__('design p2')}}</p>
+{% endif %}
+<!--
 <p> &nbsp;</p>
  <p>{{__('buy h1')}}{{price_usd}}</p>
  <p>{{__('buy h2')}}</p>
@@ -19,7 +47,7 @@
  <p>{{__('buy h6')}}</p>
  <p>{{__('buy h7')}}</p>
  <p>{{__('buy h8')}}</p>
- <p> &nbsp;</p>
+ <p> &nbsp;</p>-->
  <span class="talk"></span><a href="/message/dc91d27092f540ac92e4587ce65b893e"> {{__('Send a message')}}</a>
 
 {% endblock %}
