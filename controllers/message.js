@@ -32,6 +32,9 @@ module.exports = {
         for (i; i < len; i++) {
             bean=result.rows[i];
             var user=await User.findById(bean.another_id);
+            if(!user){
+                continue;
+            }
             bean.another_head=user.head_url;
             bean.name=user.name;
             //console.log("bean.another_head",bean.another_head)
