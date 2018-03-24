@@ -68,6 +68,47 @@ async function getUserNameById(id){
     return user.name;
 }
 
+//获取英文名称
+async function getUserEnNameById(id){
+    
+    
+    var user = await User.findById(id);
+    if(user.type=='factory'){
+        var factory = await Factory.findOne({
+            where:{
+                user_id,id
+            }
+        });
+        return factory.ename||factory.name;
+    }
+    if(user.type=='seller'){
+        var seller = await Seller.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        return seller.ename||seller.name;
+    }
+    if(user.type=='agency'){
+        var agency = await Agency.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        return agency.ename||agency.name;
+    }
+    if(user.type=='design'){
+        var design = await Design.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        return design.name;
+    }
+    return user.name;
+}
+
 UserService.createUser=createUser;
 UserService.getUserNameById=getUserNameById;
+UserService.getUserEnNameById=getUserEnNameById;
 module.exports = UserService;
