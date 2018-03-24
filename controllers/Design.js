@@ -174,6 +174,7 @@ var designs=async (ctx, next) => {
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
             area = ctx.request.body.area||'',
+            familiar = ctx.request.body.familiar||'',
             summary = ctx.request.body.summary||'';
             content = ctx.request.body.content||'';
 
@@ -187,6 +188,7 @@ var designs=async (ctx, next) => {
             status:status,
             major:major,
             area:area,
+            familiar:familiar,
             summary:summary,
             content:content
         });
@@ -207,6 +209,7 @@ var designs=async (ctx, next) => {
             status = ctx.request.body.status||'',
             major = ctx.request.body.major||'',
             area = ctx.request.body.area||'',
+             familiar=ctx.request.body.familiar||'',
             summary = ctx.request.body.summary||'';
             content = ctx.request.body.content||'';
 
