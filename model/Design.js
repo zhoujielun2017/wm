@@ -41,6 +41,11 @@ module.exports = db.defineModel('design', {
         type: db.STRING(1000),
         allowNull: true
     },
+    //熟悉的品牌
+    familiar:{
+        type: db.STRING(512),
+        allowNull: true
+    },
     //所在地
     area:{
         type: db.STRING(100),
