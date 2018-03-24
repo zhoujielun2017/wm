@@ -173,9 +173,10 @@ module.exports = {
             q=ctx.request.query.q;
         var result = await Design.findAndCountAll({
             where: {
-                name:{
-                    "$like":"%"+q+"%"
-                }
+                $or: [
+                    {name: {"$like":"%"+q+"%"}},
+                    {familiar: {"$like":"%"+q+"%"}}
+                ]
             },
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
