@@ -111,7 +111,11 @@ var manage_user_id=async (ctx, next) => {
     },
     manage_users=async (ctx, next) => {
         var page=ctx.request.query.page||1;
+         var name=ctx.request.query.name||1;
         var result = await User.findAndCountAll({
+             where:{
+                  name:name
+             },
              order: [['create_time', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
