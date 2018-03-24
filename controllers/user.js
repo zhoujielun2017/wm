@@ -4,6 +4,7 @@ const crypto = require('crypto'),
      Seller=require("../model/Seller"),
      Agency=require("../model/Agency"),
      Design=require("../model/Design"),
+     UserService=require("../service/UserService"),
      Setting=require("../model/Setting"),
      PageUtil=require("../util/PageUtil");
 
@@ -20,6 +21,8 @@ var manage_user_id=async (ctx, next) => {
         var user=ctx.session.user;
         user = await User.findById(user.id);
         // console.log("user",user);
+          var ename=await UserService.getUserEnNameById(id);
+          user.name=ename;
         ctx.render('./user/center.html',{user:user});
     },
      user_buy=async (ctx, next) => {
