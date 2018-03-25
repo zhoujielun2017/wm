@@ -5,8 +5,11 @@ var Factory=require("../model/Factory"),
     City=require("../model/City"),
     UserService=require("../service/UserService"),
     Cooperation=require("../model/Cooperation"),
+    RegUtil=require("../util/RegUtil"),
     PageUtil=require("../util/PageUtil");
-   
+
+
+
 var factorys = async (ctx, next) => {
     var page=ctx.request.query.page||1;
     var result = await Factory.findAndCountAll({
@@ -76,7 +79,8 @@ var factory_id=async (ctx, next) => {
         if(factory&&factory.major){
             factory.major=factory.major.split(",");
         }
-
+        //过滤电话和邮箱
+        factory.content=RegUtil.replaceMobile(RegUtil.replaceEmail(factory.content));
         var list = await Cooperation.findAll({
             where: {
                 factory_id: factory.id
@@ -106,9 +110,7 @@ var factory_id=async (ctx, next) => {
      
         for(var i=0,len=pros.rows.length;i<len;i++){
             var bean=pros.rows[i];
-          
             bean.price=(bean.price/100).toFixed(2);
-           
         }
         
 

@@ -5,6 +5,7 @@ var Design=require("../model/Design"),
     City=require("../model/City"),
     Cooperation=require("../model/Cooperation"),
     UserService=require("../service/UserService"),
+    RegUtil=require("../util/RegUtil"),
     PageUtil=require("../util/PageUtil");
 
 var designs=async (ctx, next) => {
@@ -58,9 +59,13 @@ var designs=async (ctx, next) => {
         var id=ctx.params.id;
         var page=ctx.request.query.page||1;
         var design = await Design.findById(id);
+        if(!design){
+            return ;
+        }
         if(design&&design.brand){
             design.brand=design.brand.split(",");
         }
+        design.summary=RegUtil.replaceMobile(RegUtil.replaceEmail(design.summary));
         
         // if(design.area){
         //     design.area=design.area.split("_");

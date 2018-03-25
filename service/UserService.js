@@ -76,7 +76,7 @@ async function getUserEnNameById(id){
     if(user.type=='factory'){
         var factory = await Factory.findOne({
             where:{
-                user_id,id
+                user_id:id
             }
         });
         return factory.ename||factory.name;

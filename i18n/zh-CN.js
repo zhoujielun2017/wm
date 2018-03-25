@@ -324,5 +324,6 @@
 	"payment days": "payment days",
 	"E-mail": "E-mail",
 	"major_chengren": "成人",
-	"major_ertong": "儿童"
+	"major_ertong": "儿童",
+	"Works": "Works"
 }
