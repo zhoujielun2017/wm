@@ -2,7 +2,7 @@
 
 {% block head %} 
 <style>
-    .imglist img{
+    .imgs img{
         height: 100px;
         width:100%;
         margin-bottom: 10px;
@@ -15,24 +15,33 @@
 {% block main %}
 <h3>首页轮播图管理</h3>
 <form class="form-horizontal">
-    <div class="form-group">
+  <div class="form-group">
     <label  class="col-sm-2 control-label">{{__('image')}}</label>
-    <div class="col-sm-10">
-        <div class="fileselect">
-            <label for="uploadfile" class="glyphicon glyphicon-plus" id="browse"></label>
-         </div>
-        <div class="imglist">
-          <!-- <div>100%</div> -->
-          {% for e in list %}
-            <div class="img">
-              <img src="{{img_domain}}{{e.img}}!300x300"/>
-              <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-            </div>          
-         {% endfor %}
-        </div>
-        <div class="imgtip" style="display:none;">the image can not be empty</div>
-    </div>
+      <div class="col-sm-10">
+          <div class="fileselect">
+              <label for="uploadfile" class="glyphicon glyphicon-plus" id="browse"></label>
+          </div>
+          <p>图片大小:宽*高=1440px*328px</p>
+          <div class="imgs">
+            <!-- <div>100%</div> -->
+            {% for e in list %}
+              <div class="img">
+                <img src="{{img_domain}}{{e.img}}"/>
+                <input type="hidden" name="img" value="{{e.img}}">
+                <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+              </div>          
+          {% endfor %}
+          </div>
+          <div class="imgtip" style="display:none;">the image can not be empty</div>
+      </div>
+      
   </div>
+  <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <input type="hidden" name="imgs">
+        <button type="submit" class="btn btn-default">{{__('Save')}}</button>
+      </div>
+    </div>
 </form>
 
 
@@ -41,7 +50,10 @@
 <script src="/js/upload.js"></script>
 <script src="/pupload/plupload.full.min.js"></script>
 <script>
-var html='<img src="__url" />'+
+  $("body").on("click",".glyphicon-trash",function(){
+    $(this).parent().remove();
+  });
+var html='<img src="__url" /><input type="hidden" name="img" value="__path">'+
 '<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>';
 var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browse',
@@ -86,5 +98,36 @@ var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
 		$('#'+file.id).text(file.percent + '%');//控制进度条
   });
     
+  //保存
+  $("form.form-horizontal").on('submit',function(e){
+
+    var $this=$(this);
+  
+    var imgs=[];
+    $("input[name=img]").each(function(){
+      imgs.push(this.value);
+    })
+    if(!imgs.length){
+        alert("image can not be empty");
+        return false;
+    }
+
+    $this.find("input[name=imgs]").val(imgs.join(","));
+    var data=$this.serialize();
+
+    $.ajax({
+        type: "PUT",
+        url: "/api/navImg",
+        data:data,
+        dataType:"json",
+        success:function(json){
+            if(json.code=='success'){
+              YY.dialog({content:json.code}).alert();
+            }
+        }
+    });
+
+    return false;
+});
 </script>
 {% endblock %}

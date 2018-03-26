@@ -111,12 +111,12 @@ var manage_user_id=async (ctx, next) => {
     },
     manage_users=async (ctx, next) => {
         var page=ctx.request.query.page||1;
-         var name=ctx.request.query.name||"";
+         var email=ctx.request.query.email||"";
          var where={};
-         if(name){
+         if(email){
               where= {
                      $or: [
-                         {name: {"$like":"%"+name+"%"}}
+                         {email: {"$like":"%"+email+"%"}}
                      ]
               }
          }
@@ -130,6 +130,7 @@ var manage_user_id=async (ctx, next) => {
         
         ctx.render('./manage/user/list.html', {
             result:result,
+            email:email,
             page:PageUtil.getPage(page,result.count)}
         );
     },

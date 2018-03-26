@@ -233,6 +233,7 @@ var designs=async (ctx, next) => {
         design.email=email;
         design.phone=phone;
         design.area=area;
+        design.familiar=familiar;
         design.summary=summary;
         design.content=content;
 

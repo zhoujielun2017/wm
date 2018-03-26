@@ -1,4 +1,5 @@
-var Article=require("../model/Article");
+var Article=require("../model/Article"),
+    NavImg=require("../model/NavImg");
 
 module.exports = {
     'GET /': async (ctx, next) => {
@@ -13,12 +14,12 @@ module.exports = {
              order: 'create_time DESC'
         });
 
-        //console.log(articles);
-
+        var imgs = await NavImg.findAll();
         ctx.render('index.html', {
             
             nav:"index",
-            articles:articles
+            articles:articles,
+            imgs:imgs
         });
     },
     'GET /contact': async (ctx, next) => {

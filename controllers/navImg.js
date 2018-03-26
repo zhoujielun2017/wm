@@ -23,17 +23,21 @@ module.exports = {
     'PUT /api/navImg': async (ctx, next) => {
          
          var id = ctx.request.body.id || '',
-            title = ctx.request.body.title || '',
-            content = ctx.request.body.content || '';
+            imgs = ctx.request.body.imgs || '';
 
-        var data={id:id,title:title,content:content};
-         var navImg = await NavImg.findById(id);
-        navImg.visit++;
-        navImg.title=title;
-        navImg.content=content;
-        await navImg.save();
-
-        ctx.response.body = JSON.stringify(data);
+       var imgArr=imgs.split(",");
+       await NavImg.destroy({where:{}});
+       for(var i=0,len=imgArr.length;i<len;i++){
+           var img=imgArr[i];
+            var navImg = await NavImg.create({
+                name: "",
+                img: img,
+                sort:i,
+                url: ""
+            });
+       }
+       
+       ctx.response.body = {code:"success"};
     },
     'DELETE /api/navImg': async (ctx, next) => {
          

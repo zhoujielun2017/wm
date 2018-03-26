@@ -11,7 +11,7 @@ var search_facotry=async (ctx, next) => {
         var page=ctx.request.query.page||1,
             q=ctx.request.query.q;
             if(q){
-                q=q.trim().replace(" ","_").replace("-","_");
+                q=q.trim().toLowerCase().replace(" ","_").replace("-","_");
             }
         var result = await Factory.findAndCountAll({
             where: {

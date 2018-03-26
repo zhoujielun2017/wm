@@ -19,16 +19,15 @@ var major=[
     "fabric"
 ];
 var products=[
-    "chengren",
-	"ertong",
-	"jichu",
-	"xiongzhen",
-	"fashi",
-	"yaoshi",
-	"chuanci",
-	"qita"
-]
-    
+    "adult",
+	"children",
+	"regular_jewelry",
+	"brooch",
+	"hair_accessories",
+	"key_chains",
+	"body_piercing",
+	"others"
+];
 
 var cooperation=async (ctx, next) => {
         var user=ctx.session.user;

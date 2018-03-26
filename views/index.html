@@ -16,10 +16,9 @@ footer{
 <script type="text/javascript" src="js/yxmobileslider.js"></script>
 <div class="slider">
     <ul>
-        <li><a href="" target="_blank"><img src="images/1.jpg" alt=""></a></li>
-        <li><a href="" target="_blank"><img src="images/2.jpg" alt=""></a></li>
-        <li><a href="" target="_blank"><img src="images/3.jpg" alt=""></a></li>
-        <li><a href="" target="_blank"><img src="images/4.jpg" alt=""></a></li>
+        {% for e in imgs %}
+        <li><a href="" target="_blank"><img src="{{img_domain}}{{e.img}}" alt=""></a></li>    
+        {% endfor %}
     </ul>
 </div>
 <script>
