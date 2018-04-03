@@ -79,6 +79,9 @@ async function getUserEnNameById(id){
                 user_id:id
             }
         });
+        if(!factory){
+            return user.name;
+        }
         return factory.ename||factory.name;
     }
     if(user.type=='seller'){
@@ -87,6 +90,9 @@ async function getUserEnNameById(id){
                 user_id:id
             }
         });
+        if(!seller){
+            return user.name;
+        }
         return seller.ename||seller.name;
     }
     if(user.type=='agency'){
@@ -95,6 +101,9 @@ async function getUserEnNameById(id){
                 user_id:id
             }
         });
+        if(!agency){
+            return user.name;
+        }
         return agency.ename||agency.name;
     }
     if(user.type=='design'){
@@ -103,6 +112,9 @@ async function getUserEnNameById(id){
                 user_id:id
             }
         });
+        if(!design){
+            return user.name;
+        }
         return design.name;
     }
     return user.name;

@@ -91,7 +91,7 @@
           {{__('Cooperative Brands')}}
       </label>
       <div class="col-sm-8">
-          <input class="form-control" name="brand"   placeholder="{{__('Cooperative Brands')}}" type="text" value="{{bean.brand}}">
+          <input class="form-control" name="brand"   placeholder="{{__('Cooperative Brands')}}" type="text" value="{{e}}">
           </input>
       </div>
       <div class="col-sm-2">
@@ -106,7 +106,7 @@
             {{__('Cooperative Brands')}}
         </label>
         <div class="col-sm-8">
-            <input class="form-control" name="brand"   placeholder="{{__('Cooperative Brands')}}" type="text" value="{{bean.brand}}">
+            <input class="form-control" name="brand"   placeholder="{{__('Cooperative Brands')}}" type="text" value="{{e}}">
             </input>
         </div>
         <div class="col-sm-2">
@@ -202,6 +202,11 @@
         }
    });
 
+//删除
+$(".btn-danger").click(function(){
+  $(this).parents(".form-group").remove();
+  return false;
+});
 
 // var locale=$.cookie('locale')||'en'; 
 //    $('[name=build_time2]').datetimepicker({
