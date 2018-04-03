@@ -50,6 +50,9 @@ async function getUserNameById(id){
                 user_id:id
             }
         });
+        if(!seller){
+            return user.name;
+        }
         return seller.name||seller.ename;
     }
     if(user.type=='agency'){
@@ -58,6 +61,9 @@ async function getUserNameById(id){
                 user_id:id
             }
         });
+        if(!agency){
+            return user.name;
+        }
         return agency.name||agency.ename;
     }
     if(user.type=='design'){
@@ -66,6 +72,9 @@ async function getUserNameById(id){
                 user_id:id
             }
         });
+        if(!design){
+            return user.name;
+        }
         return design.name;
     }
     return user.name;
