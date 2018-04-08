@@ -10,7 +10,7 @@
 
 {% block main %}
 <div class="container sendbox">
- {{bean.role}}
+
   {%if bean.role==0%}
   <h2>该会员为普通会员，无法接收站内信。</h2>
   {%else%}
@@ -25,7 +25,12 @@
   {% endif %}
   
     <div class="form-group">
-      <div class="col-sm-12">
+        {%if bean.role==0%}
+        <div class="col-sm-6">
+          请联系网站客服
+        </div>
+        {% endif %}
+      <div class="col-sm-6">
         <textarea name="content" class="form-control" maxlength="200"></textarea>
       </div>
       <!-- <div class="col-sm-6"></div> -->
