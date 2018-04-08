@@ -68,7 +68,7 @@ var factory_id=async (ctx, next) => {
         var page=ctx.request.query.page||1;
         var factory = await Factory.findById(id);
         if(!factory){
-            ctx.render('.404.html',{}); 
+            ctx.render('./404.html',{}); 
             return ;
         }
         var imgs = await FactoryImg.findAll({
