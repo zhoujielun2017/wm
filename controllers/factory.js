@@ -67,6 +67,10 @@ var factory_id=async (ctx, next) => {
         var id=ctx.params.id;
         var page=ctx.request.query.page||1;
         var factory = await Factory.findById(id);
+        if(!factory){
+            ctx.render('.404.html',{}); 
+            return ;
+        }
         var imgs = await FactoryImg.findAll({
             where:{
                 factory_id:id
@@ -80,7 +84,7 @@ var factory_id=async (ctx, next) => {
             factory.major=factory.major.split(",");
         }
         //过滤电话和邮箱
-        factory.content=RegUtil.replaceMobile(RegUtil.replaceEmail(factory.content||""));
+        factory.content=RegUtil.replaceMobile(RegUtil.replaceEmail(factory.content));
         var list = await Cooperation.findAll({
             where: {
                 factory_id: factory.id
