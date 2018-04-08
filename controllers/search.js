@@ -6,7 +6,7 @@ var Agency=require("../model/Agency"),
     City=require("../model/City"),
     Cooperation=require("../model/Cooperation"),
     PageUtil=require("../util/PageUtil");
-
+//select * from  factory f LEFT JOIN  user u on  f.user_id = u.id order by u.role desc,f.ename asc;
 var search_facotry=async (ctx, next) => {
         var page=ctx.request.query.page||1,
             q=ctx.request.query.q;

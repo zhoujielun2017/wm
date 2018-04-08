@@ -158,6 +158,7 @@
 	"major_wood": "Wood",
 	"major_leather": "Leather",
 	"major_fabric": "Fabric",
+	"member": "member",
 	"keyword": "keyword",
 	"search": "SEARCH",
 	"MORE": "MORE",

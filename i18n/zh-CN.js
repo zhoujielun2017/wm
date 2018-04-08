@@ -2,6 +2,7 @@
 	"all": "所有",
 	"Add": "添加",
 	"add brand": "添加品牌",
+	
 	"article": "文章",
 	"agency": "中间商",
 	"age": "年龄",
@@ -120,6 +121,7 @@
 	"Message": "信息",
 	"material": "材质",
 	"Specialities/Skills": "专长与技能",
+	"member": "普通会员",
 	"major_brass": "铜",
 	"major_steel": "铁",
 	"major_alloy": "合金",
