@@ -51,6 +51,9 @@ var agencys=async (ctx, next) => {
         // if(bean&&bean.brand){
         //     bean.brand=bean.brand.split(",");
         // }
+        if(!bean){
+            return ctx.render('./404.html',{});
+        }
         var user = await User.findById(bean.user_id);
         bean.head=user&&user.head_url;
         ctx.render('./company/agency.html',{bean:bean});
