@@ -35,6 +35,7 @@
 	"commen p3": "填写资料后请发站内信或邮件info@acclist.com给客服，我们将审核信息并为您开通高级会员。",
 	"factory p3": "填写资料后请发站内信或邮件info@acclist.com给客服，我们将审核信息并确认付款方式。",
 	"Established In": "成立时间",
+	"contact customer message":"请联系网站客服：该会员为普通会员，无法接收站内信。",
 	"City": "城市",
 	"cancel": "取消",
 	"China Office": "中国办事处",

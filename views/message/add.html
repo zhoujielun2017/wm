@@ -10,9 +10,20 @@
 
 {% block main %}
 <div class="container sendbox">
+ {{bean.role}}
+  {%if bean.role==0%}
+  <h2>该会员为普通会员，无法接收站内信。</h2>
+  {%else%}
   <h2>{{__('Send a message')}}</h2>
+  {% endif %}
   <form class="form-horizontal">
+  {%if bean.role==0%}
+  <!-- 普通会员给管理员发送信息 -->
+  <input type="hidden" name="receiver_id" value="dc91d27092f540ac92e4587ce65b893e">
+  {%else%}
   <input type="hidden" name="receiver_id" value="{{bean.id}}">
+  {% endif %}
+  
     <div class="form-group">
       <div class="col-sm-12">
         <textarea name="content" class="form-control" maxlength="200"></textarea>
