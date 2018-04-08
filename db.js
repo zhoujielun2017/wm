@@ -128,6 +128,12 @@ for (let type of TYPES) {
     exp[type] = Sequelize[type];
 }
 
+// sequelize.query('SELECT *, "text with literal $$1 and literal $$status" as t FROM projects WHERE status = $1',
+// { bind: ['active'], type: sequelize.QueryTypes.SELECT }
+// ).then(projects => {
+// console.log(projects)
+// })
+
 exp.ID = ID_TYPE;
 exp.generateId = generateId;
 

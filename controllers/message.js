@@ -40,6 +40,8 @@ module.exports = {
             // bean.name=user.name;
             bean.another_type=user.type;
             bean.name=await UserService.getUserNameById(bean.another_id);
+            var relObj=await UserService.getUserRelObjById(bean.another_id);
+            bean.anotherRelId=relObj.id;
         }
 
         ctx.render('./message/list.html', {

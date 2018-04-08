@@ -132,7 +132,55 @@ async function getUserEnNameById(id){
     return user.name;
 }
 
+/**
+ * 获取用户关联的对象
+ * @param {*用户id} id 
+ */
+async function getUserRelObjById(id){
+    
+    var user = await User.findById(id);
+    if(user.type=='factory'){
+        var factory = await Factory.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        return factory;
+        
+    }
+    if(user.type=='seller'){
+        var seller = await Seller.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        
+        return seller;
+        
+    }
+    if(user.type=='agency'){
+        var agency = await Agency.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        
+        return agency;
+    }
+    if(user.type=='design'){
+        var design = await Design.findOne({
+            where:{
+                user_id:id
+            }
+        });
+        
+        return design;
+    }
+    return user.name;
+}
+
 UserService.createUser=createUser;
 UserService.getUserNameById=getUserNameById;
 UserService.getUserEnNameById=getUserEnNameById;
+UserService.getUserRelObjById=getUserRelObjById;
 module.exports = UserService;
