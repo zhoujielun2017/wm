@@ -41,7 +41,7 @@ module.exports = {
             bean.another_type=user.type;
             bean.name=await UserService.getUserNameById(bean.another_id);
             var relObj=await UserService.getUserRelObjById(bean.another_id);
-            bean.anotherRelId=relObj.id;
+            bean.anotherRelId=relObj&&relObj.id;
         }
 
         ctx.render('./message/list.html', {
