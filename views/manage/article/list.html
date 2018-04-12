@@ -7,6 +7,7 @@
     <thead>
     <tr>
         <th>Name</th>
+        <th>Type</th>
         <th>operation</th>
     </tr>
     </thead>
@@ -15,7 +16,10 @@
     <tr>
         <td>
             <a href="/article/{{e.id}}" target="_blank">{{e.title}}</a>
-            
+        </td>
+        <td>
+            {% if e.type=='index'%}首页{% endif %}
+            {% if e.type=='flash'%}焦点图{% endif %}
         </td>
         <td>
         <a href="/manage/article?id={{e.id}}" class="btn btn-primary" role="button">update</a>
