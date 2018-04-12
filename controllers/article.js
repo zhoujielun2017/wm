@@ -52,12 +52,14 @@ var articles=async (ctx, next) =>{
     },
     api_article=async (ctx, next) => {
          var title = ctx.request.body.title || '',
+             type = ctx.request.body.type || '',
             content = ctx.request.body.content || '';
 
         var data={title:title,content:content};
         var article = await Article.create({
             visit:0,
             title: title,
+            type:type,
             tag:"",
             content: content
         });
@@ -68,6 +70,7 @@ var articles=async (ctx, next) =>{
          
          var id = ctx.request.body.id || '',
             title = ctx.request.body.title || '',
+            type = ctx.request.body.type || '',
             content = ctx.request.body.content || '';
 
 
@@ -75,6 +78,7 @@ var articles=async (ctx, next) =>{
          var article = await Article.findById(id);
         article.visit++;
         article.title=title;
+        article.type=type;
         article.content=content;
         await article.save();
 
