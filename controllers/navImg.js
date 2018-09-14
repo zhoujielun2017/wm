@@ -35,7 +35,9 @@ module.exports = {
 
        var imgArr=imgs.split(",");
        var urlArr=urls.split(",");
-       await NavImg.destroy({where:{}});
+       await NavImg.destroy({where:{
+           type:type
+       }});
        for(var i=0,len=imgArr.length;i<len;i++){
            var img=imgArr[i];
            var url=urlArr[i];
