@@ -56,5 +56,6 @@ module.exports = db.defineModel('agency', {
      build_time:{
         type: db.BIGINT,
         allowNull: true
-    }
+    },
+    sort: db.BIGINT
 });

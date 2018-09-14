@@ -16,6 +16,7 @@
         <tr>
            <th>{{'correlation account'}}</th>
             <th>{{'name'}}</th>
+            <th>{{'sort'}}</th>
             <th>{{'operation'}}</th>
         </tr>
         </thead>
@@ -24,6 +25,9 @@
         <tr>
              <td>{{e.email}}</td>
             <td>{{e.name}}</td>
+            <td> <input type="number" class="form-control" size="3" value="{{e.sort}}" style="width:60px;display: inline-block;"  min="-999999999" max="999999999" >
+                <button  class="btn btn-primary sort" data-id="{{e.id}}">sort</button></td>
+            <td>
             <td>
             <a href="/manage/design?id={{e.id}}" class="btn btn-primary" role="button">update</a>
             <a href="/api/design/{{e.id}}" class="btn btn-danger" role="button">del</a>
@@ -44,7 +48,26 @@
 
 {% block foot %}
 <script>
-   
+    $(".sort").on("click",function(){
+        var id=this.dataset.id;
+        var parent = $(this).parent();
+        var sort = parent.find("input").val();
+        var data={
+            id:id,
+            sort:sort
+        }
+        $.ajax({
+            type: "PUT",
+            url: "/api/design/sort",
+            data:data,
+            dataType:"json",
+            success:function(json){
+                if(json.code="success"){
+                    YY.dialog({content:json.code}).alert();  
+                }
+            }
+        });
+    });
      $(".btn-danger").on("click",function () {
         var thiz=$(this);
         var href=this.href;

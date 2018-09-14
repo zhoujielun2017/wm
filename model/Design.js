@@ -50,5 +50,6 @@ module.exports = db.defineModel('design', {
     area:{
         type: db.STRING(100),
         allowNull: true
-    }
+    },
+    sort: db.BIGINT
 });

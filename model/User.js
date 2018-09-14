@@ -20,5 +20,6 @@ module.exports = db.defineModel('user', {
     head_url:{
         type: db.STRING(1000),
         allowNull: true
-    } 
+    },
+    sort: db.BIGINT
 });

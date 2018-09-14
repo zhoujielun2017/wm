@@ -13,6 +13,7 @@ var agencys=async (ctx, next) => {
             where: {
                 
             },
+            order: [['sort', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -64,7 +65,7 @@ var agencys=async (ctx, next) => {
             where: {
                 
             },
-            order: [['create_time', 'DESC']],
+            order: [['sort', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -319,6 +320,20 @@ var agencys=async (ctx, next) => {
        
         ctx.body = {"code":"success"};
     };
+    var api_agency_update_sort=async (ctx, next) => {
+        var user=ctx.session.user;
+        if(!user){
+            ctx.body = {"code":"not_login"};
+            return;
+        }
+        var id = ctx.request.body.id||'',
+            sort = ctx.request.body.sort||1;
+        var bean = await Agency.findById(id);
+        bean.sort=sort;
+        await bean.save();
+        ctx.body = {"code":"success"};
+    };
+    
 module.exports = {
     //前台列表
     'GET /agencys': agencys,
@@ -336,6 +351,7 @@ module.exports = {
     'POST /api/agency': api_agency,
     //更新接口
     'PUT /api/agency': api_agency_update,
+    'PUT /api/agency/sort': api_agency_update_sort,
     //删除接口
     'DELETE /api/agency/:id': api_agency_delete
     

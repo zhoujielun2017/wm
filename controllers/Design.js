@@ -14,7 +14,7 @@ var designs=async (ctx, next) => {
             where: {
                 
             },
-            order: [['create_time', 'DESC']],
+            order: [['sort', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -259,7 +259,7 @@ var designs=async (ctx, next) => {
             where: {
                 
             },
-            order: [['create_time', 'DESC']],
+            order: [['sort', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -339,7 +339,20 @@ var designs=async (ctx, next) => {
        
         await bean.destroy();
         ctx.body = {"code":"success"};
-    }
+    };
+    var api_design_update_sort=async (ctx, next) => {
+        var user=ctx.session.user;
+        if(!user){
+            ctx.body = {"code":"not_login"};
+            return;
+        }
+        var id = ctx.request.body.id||'',
+            sort = ctx.request.body.sort||1;
+        var bean = await Design.findById(id);
+        bean.sort=sort;
+        await bean.save();
+        ctx.body = {"code":"success"};
+    };
 module.exports = {
     //前台列表
     'GET /designs': designs,
@@ -356,6 +369,8 @@ module.exports = {
     'POST /api/design': api_design,
     //更新设计师
     'PUT /api/design': api_design_update,
+    //更新设计师
+    'PUT /api/design/sort': api_design_update_sort,
     //删除设计师
     'DELETE /api/design/:id': api_design_delete,
     //增加工作经验

@@ -1,11 +1,11 @@
 var config = {
     dialect: 'mysql',
-    database: 'bootstrap',
+    database: 'es',
     username: 'root',
-    password: 'xxx',
+    password: '123456',
     host: 'localhost',
     port: 3306,
-    
+    debug:true,
     web:{
     	domain:"www.acclist.com",
         paydomain:"pay.acclist.com",

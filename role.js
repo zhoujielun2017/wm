@@ -1,9 +1,8 @@
+const config = require('./config');
 //需要角色判断的url
 var role_urls=["/sellers","/agencys","/factorys","/designs","/search/seller","/search/agency",
 "/search/factory",/\/seller\/.*/,/\/factory\/.*/,/\/agency\/.*/,/\/design\/.*/];
 
-// var patt = /\/seller\/*/;
-// var re=patt.test("/seller/5443dcfd3df7450cab2670f6affec227"); 
 //普通会员可以看见
 var visitor=["/sellers","/agencys","/factorys","/designs"];
 //设计师可以看见
@@ -97,7 +96,7 @@ function getRoleUrls(user) {
 function roleController() {
    
     return async (ctx, next) => {
-        
+
         var url=ctx.request.url;
         //去掉问号后面的参数
         if(~url.indexOf("?")){

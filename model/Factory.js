@@ -96,5 +96,6 @@ module.exports = db.defineModel('factory', {
      build_time:{
         type: db.BIGINT,
         allowNull: true
-    }
+    },
+    sort: db.BIGINT
 });

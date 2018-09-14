@@ -16,6 +16,7 @@ var factorys = async (ctx, next) => {
         where: {
             
         },
+        order: [['sort', 'DESC']],
         'limit': PageUtil.pageSize,
         'offset': PageUtil.pageSize*(page-1)
     });
@@ -133,7 +134,7 @@ var factory_id=async (ctx, next) => {
             where: {
                 
             },
-            order: [['create_time', 'DESC']],
+            order: [['sort', 'DESC']],
             'limit': PageUtil.pageSize,
             'offset': PageUtil.pageSize*(page-1)
         });
@@ -232,6 +233,7 @@ var factory_id=async (ctx, next) => {
             custom_service:custom_service,
             email:email,
             area:area,
+            sort:0,
             content: content
         });
       
@@ -292,6 +294,19 @@ var factory_id=async (ctx, next) => {
         dbUser.name=custom_service;
         dbUser.save();
         ctx.body = {"code":"success","id":factory.id};
+    };
+    var api_factory_update_sort=async (ctx, next) => {
+        var user=ctx.session.user;
+        if(!user){
+            ctx.body = {"code":"not_login"};
+            return;
+        }
+        var id = ctx.request.body.id||'',
+            sort = ctx.request.body.sort||1;
+        var factory = await Factory.findById(id);
+        factory.sort=sort;
+        await factory.save();
+        ctx.body = {"code":"success"};
     };
     var api_factory_update=async (ctx, next) => {
         var user=ctx.session.user;
@@ -527,6 +542,7 @@ module.exports = {
     'POST /api/factory': api_factory,
     //更新供应商
     'PUT /api/factory': api_factory_update,
+    'PUT /api/factory/sort': api_factory_update_sort,
     'DELETE /api/factory/:id': api_factory_delete,
     //更新供应商详情
     'PUT /api/factorydetail': api_factorydetail,

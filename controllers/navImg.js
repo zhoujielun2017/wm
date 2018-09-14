@@ -16,7 +16,6 @@ module.exports = {
             sort:0,
             url: url
         });
-        //console.log('created: ' + JSON.stringify(navImg));
         ctx.response.type = 'application/json';
         ctx.response.body = JSON.stringify({code:"success"});
     },

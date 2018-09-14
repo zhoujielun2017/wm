@@ -22,7 +22,7 @@ function addMapping(router, mapping) {
         } else if (url.startsWith('PUT ')) {
             var path = url.substring(4);
             router.put(path, mapping[url]);
-            // console.log(`register URL mapping: PUT ${path}`);
+            console.log(`register URL mapping: PUT ${path}`);
         } else if (url.startsWith('DELETE ')) {
             var path = url.substring(7);
             router.del(path, mapping[url]);
