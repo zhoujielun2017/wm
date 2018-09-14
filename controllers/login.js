@@ -86,6 +86,7 @@ module.exports = {
             type:type,
             password:password,
             verified:0,
+            sort:0,
             head_url: "",
             last_login_time:Date.now()
         });
