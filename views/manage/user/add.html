@@ -7,8 +7,8 @@
         <label class="col-sm-2 control-label">email</label>
         <div class="col-sm-10">
              <p class="form-control-static">{{bean.email}}</p>
-             <button type="submit" class="btn btn-primary email">修改邮箱</button>    
-             <!--<button type="submit" class="btn btn-primary password">重置密码</button>    -->
+             <button  class="btn btn-primary email">修改邮箱</button>    
+             <!--<button  class="btn btn-primary password">重置密码</button>    -->
         </div>
     </div>
     <div class="form-group">
@@ -76,22 +76,28 @@
     {% if bean.role==0 %}
     <div class="form-group"> 
         <div class="col-sm-offset-2 col-sm-10">      
-              <button type="submit" class="btn btn-primary verify1">审核为高级会员</button>       
+              <button  class="btn btn-primary verify1">审核为高级会员</button>       
         </div>
     </div>
      {% endif %}
-     
+     {% if bean.role==1 %}
+     <div class="form-group"> 
+         <div class="col-sm-offset-2 col-sm-10">      
+               <button  class="btn btn-primary verify2">取消高级会员</button>       
+         </div>
+     </div>
+      {% endif %}
      {% if bean.role==0  %}
        <div class="form-group"> 
         <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary verify9">审核为管理员</button>
+              <button  class="btn btn-primary verify9">审核为管理员</button>
         </div> 
     </div>
     {% endif %}
      {% if bean.status==0  %}
        <div class="form-group"> 
         <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-primary status1">激活</button>
+              <button  class="btn btn-primary status1">激活</button>
         </div> 
     </div>
     {% endif %}
@@ -120,7 +126,23 @@
             });
         }}).alert();
     })
-    
+    $(".verify2").on("click",function(){
+        YY.dialog({content:"你确定取消该会员的高级会员级别吗?",callback:function(){
+            $.ajax({
+                type: "PUT",
+                url: "/user/"+id+"/role",
+                data:{
+                    role:0
+                },
+                dataType:"json",
+                success:function(json){
+                    if(json.code="success"){
+                       location.reload();
+                    }
+                }
+            });
+        }}).alert();
+    })
     $(".verify9").on("click",function(){
         YY.dialog({content:"你确定通过该会员为管理员吗?",callback:function(){
             $.ajax({
