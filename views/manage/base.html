@@ -31,19 +31,7 @@
       <a class="navbar-brand" href="/">{{__('admin manager')}}</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-      <!--<ul class="nav navbar-nav">
-        <li class="active"><a href="/user/center">user center</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            
-          </ul>
-        </li>
-      </ul>-->
+      
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/" target="_blank">网站首页</a></li>
         <li><a href="#">{{sessionuser.email}}</a></li>
@@ -74,7 +62,8 @@
                <a href="/manage/articles" class="list-group-item">文章列表</a>
                 <a href="/manage/ords" class="list-group-item">订单列表</a>
                 <a href="/manage/setting" class="list-group-item">配置管理</a>
-                <a href="/manage/navImg" class="list-group-item">焦点图管理</a>
+                <a href="/manage/navImg?type=indextop" class="list-group-item">首页焦点图管理</a>
+                <a href="/manage/navImg?type=indexbuttom" class="list-group-item">首页底部图片管理</a>
             </div>
         </div>
         <div class="col-xs-12 col-md-9" >

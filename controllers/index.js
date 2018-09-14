@@ -14,12 +14,22 @@ module.exports = {
              order: 'create_time DESC'
         });
 
-        var imgs = await NavImg.findAll();
+        var imgs = await NavImg.findAll({
+            where: {
+                type: "indextop"
+            }
+        });
+        var buttomimgs = await NavImg.findAll({
+            where: {
+                type: "indexbuttom"
+            }
+        });
         ctx.render('index.html', {
             
             nav:"index",
             articles:articles,
-            imgs:imgs
+            imgs:imgs,
+            buttomimgs:buttomimgs
         });
     },
     'GET /contact': async (ctx, next) => {
