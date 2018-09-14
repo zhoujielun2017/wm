@@ -12,7 +12,7 @@
 <div class="container sendbox">
 
   {%if bean.role==0%}
-  <h2>该会员为普通会员，无法接收站内信。</h2>
+  <h2>{{__('message p1')}}</h2>
   {%else%}
   <h2>{{__('Send a message')}}</h2>
   {% endif %}
@@ -27,7 +27,7 @@
     <div class="form-group">
         {%if bean.role==0%}
         <div class="col-sm-3">
-          请联系网站客服
+            {{__('message p2')}}
         </div>
         {% endif %}
       <div class="col-sm-9">

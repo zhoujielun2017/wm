@@ -131,3 +131,9 @@ a.red{color: #ff0000;}
 -o-transition:all .2s ease-in-out;transition:all .2s ease-in-out}
 .info-list label{float: left;width: 28%;font-weight: normal;color: #999;text-align: right;}
 .info-list span{width: 70%;float: right;margin-bottom: 10px;}
+
+.adarea{width: 1440px;margin: 0 auto;}
+.adarea ul,.adarea li{list-style: none;}
+.adarea li{width: 466px;height: 98px;margin-right: 21px;margin-bottom: 10px;float: left;}
+.adarea li.last{margin-right: 0px;}
+.adarea li img{width: 466px;height: 98px;}
