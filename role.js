@@ -20,9 +20,9 @@ var agency=["/sellers","/agencys","/factorys","/designs","/search/seller","/sear
 //高级中间商可见
 var agency_vip=role_urls;
 //供应商可见
-var factory=["/sellers","/agencys","/designs","/search/seller","/search/agency"];
+var factory=["/sellers","/agencys","/designs","/factorys","/search/seller","/search/agency"];
 //高级供应商可见
-var factory_vip=["/sellers","/agencys","/designs","/search/seller","/search/agency",/\/seller\/.*/,/\/agency\/.*/];
+var factory_vip=["/sellers","/agencys","/designs","/factorys","/search/seller","/search/agency",/\/seller\/.*/,/\/agency\/.*/];
 
 /**
  * 
