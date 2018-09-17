@@ -44,7 +44,27 @@
 
 {% block foot %}
 <script>
-   
+     $(".sort").on("click",function(){
+        var id=this.dataset.id;
+        var parent = $(this).parent();
+        var sort = parent.find("input").val();
+        var data={
+            id:id,
+            sort:sort
+        }
+        $.ajax({
+            type: "PUT",
+            url: "/api/factory/sort",
+            data:data,
+            dataType:"json",
+            success:function(json){
+                if(json.code="success"){
+                    YY.dialog({content:json.code}).alert();  
+                }
+            }
+        });
+    });
+    
      $(".btn-danger").on("click",function () {
         var thiz=$(this);
         var href=this.href;

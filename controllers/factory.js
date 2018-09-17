@@ -288,6 +288,7 @@ var factory_id=async (ctx, next) => {
             build_time:build_time,
             area:area,
             search:name,
+            sort:0,
             content: content
         });
         var dbUser = await User.findById(user.id);

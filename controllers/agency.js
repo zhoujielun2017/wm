@@ -237,6 +237,7 @@ var agencys=async (ctx, next) => {
             china_office:china_office,
             brand:brands,
             area:area,
+            sort:0,
             create_time:create_time
         });
         var dbUser = await User.findById(user.id);

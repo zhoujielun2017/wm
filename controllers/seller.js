@@ -254,7 +254,8 @@ var sellers=async (ctx, next) => {
             china:china,
             china_office:china_office,
             area:area,
-            build_time:build_time
+            build_time:build_time,
+            sort:0
         });
         var dbUser = await User.findById(user.id);
         dbUser.name=name;
