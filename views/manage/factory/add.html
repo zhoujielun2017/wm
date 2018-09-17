@@ -7,94 +7,103 @@
 {% block main %}
 <h3>添加供应商</h3>
 <form class="form-horizontal">
-<input type="hidden" name="id" value="{{bean.id}}"/>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company name')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="name" value="{{bean.name}}" class="form-control" placeholder="{{__('company name')}}" maxlength="100">
+  <input type="hidden" name="id" value="{{bean.id}}"/>
+    <div class="form-group">
+      <label  class="col-sm-2 control-label">{{__('Company Name')}}</label>
+      <div class="col-sm-10">
+        <input type="text" name="name" value="{{bean.name}}" class="form-control" placeholder="{{__('Company Name')}}" maxlength="100">
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company english name')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="ename" value="{{bean.ename}}" class="form-control" placeholder="{{__('company english name')}}" maxlength="100">
+    <div class="form-group">
+      <label  class="col-sm-2 control-label">{{__('Company English Name')}}</label>
+      <div class="col-sm-10">
+        <input type="text" name="ename" value="{{bean.ename}}" class="form-control" placeholder="{{__('Company English Name')}}" maxlength="100">
+      </div>
     </div>
-  </div>
-   <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('create time')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="build_time2" value="{{bean.build_time|formatdate('YYYY-MM-DD')}}" class="form-control" placeholder="{{__('create time')}}">
-    </div>
-  </div>
- 
-   <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company address')}}</label>
-    <div class="col-sm-10">
-     	<textarea name="address"  class="form-control" placeholder="{{__('company address')}}" maxlength="200">{{bean.address}}</textarea>
-    </div>
-  </div>
-   <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company legal person')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="legal_person" value="{{bean.legal_person}}" class="form-control" placeholder="{{__('company legal person')}}" maxlength="20"/>
-    </div>
-  </div>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company phone')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="phone" value="{{bean.phone}}"  class="form-control" placeholder="{{__('company phone')}}" maxlength="15">
-    </div>
-  </div>
-   <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company custom service')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="custom_service" value="{{bean.custom_service}}" class="form-control" placeholder="{{__('company custom service')}}" maxlength="20">
-    </div>
-  </div>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company email')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="email"  value="{{bean.email}}" class="form-control" placeholder="{{__('company email')}}"  maxlength="50">
-    </div>
-  </div>
-  <div class="form-group">
-    <label  class="col-sm-2 control-label">{{__('company summary')}}</label>
-    <div class="col-sm-10">
-      <input type="text" name="content"  value="{{bean.content}}" class="form-control" placeholder="{{__('company summary')}}" maxlength="100" />
-    </div>
-  </div>
-  <div class="form-group">
-        <label class="col-sm-2 control-label">
-            {{__('location')}}
-        </label>
-        <div class="col-sm-10">
-          <div class="row city" data-area="{{bean.area}}">
-            <div class="col-xs-4 col-sm-4">
-              <select name="area1" class="form-control">
-                
-              </select>
-            </div>
-            <div class="col-xs-4 col-sm-4">
-             <select name="area2" class="form-control">
-             
-            </select>
-             </div>
-            <div class="col-xs-4 col-sm-4">
-             <select name="area3" class="form-control">
-            </select>
-            
-             </div>
+      <div class="form-group">
+          <label  class="col-sm-2 control-label">{{__('Address')}}</label>
+          <div class="col-sm-6">
+              <textarea name="address"  class="form-control" placeholder="{{__('Address')}}" maxlength="200" >{{bean.address}}</textarea>
           </div>
-        </div>
+          <div class="col-xs-2 col-sm-2"><input class="form-control" name="city"   placeholder="{{__('City')}}" maxlength="100" value="{{bean.city}}"></div>
+          <div class="col-xs-2 col-sm-2"><input class="form-control" name="nation"   placeholder="{{__('Nation')}}" maxlength="100" value="{{bean.nation}}"></div>
+      </div>
+      <div class="form-group">
+          <label  class="col-sm-2 control-label">{{__('Address English')}}</label>
+          <div class="col-sm-6">
+              <textarea name="en_address"  class="form-control" placeholder="{{__('Address English')}}" maxlength="200" >{{bean.en_address}}</textarea>
+          </div>
+          <div class="col-xs-2 col-sm-2"><input class="form-control" name="en_city"   placeholder="{{__('City')}}" maxlength="100" value="{{bean.en_city}}"></div>
+          <div class="col-xs-2 col-sm-2"><input class="form-control" name="en_nation"   placeholder="{{__('Nation')}}" maxlength="100" value="{{bean.en_nation}}"></div>
+  
+      </div>
+  
+      <div class="form-group">
+          <label  class="col-sm-2 control-label">{{__('Telephone')}}</label>
+          <div class="col-sm-10">
+              <input type="text" name="phone" value="{{bean.phone}}" required  class="form-control" placeholder="{{__('Telephone')}}" maxlength="100">
+          </div>
+      </div>
+     <div class="form-group">
+      <label  class="col-sm-2 control-label">{{__('Established In')}}</label>
+      <div class="col-sm-10">
+        <input type="text" name="build_time2" value="{{bean.build_time|formatdate('YYYY')}}" class="form-control" placeholder="YYYY" >
+      </div>
     </div>
-    <input type="hidden" name="build_time">
-    <input type="hidden" name="area">
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">{{__('confirm')}}</button>
+      <div class="form-group">
+          <label  class="col-sm-2 control-label">{{__('Owner Name')}}</label>
+          <div class="col-sm-10">
+              <input type="text" name="legal_person" value="{{bean.legal_person}}" class="form-control" placeholder="{{__('Owner Name')}}" maxlength="50" required/>
+          </div>
+      </div>
+      <div class="form-group">
+          <label  class="col-sm-2 control-label">{{__('Cellphone')}}</label>
+          <div class="col-sm-10">
+              <input type="text" name="cellphone" value="{{bean.cellphone}}" class="form-control" placeholder="{{__('Cellphone')}}" maxlength="20" required/>
+          </div>
+      </div>
+      <div class="form-group">
+          <label  class="col-sm-2 control-label">{{__('Email')}}</label>
+          <div class="col-sm-10">
+              <input type="text" name="email" value="{{bean.email}}" class="form-control" placeholder="{{__('Email')}}" maxlength="80" required/>
+          </div>
+      </div>
+      <div class="form-group">
+          <label  class="col-sm-2 control-label">{{__('Sales Manager')}}</label>
+          <div class="col-sm-10">
+              <input type="text" name="sale_manager" value="{{bean.sale_manager}}" class="form-control" placeholder="{{__('Sales Manager')}}" maxlength="50" required/>
+          </div>
+      </div>
+      <div class="form-group">
+          <label  class="col-sm-2 control-label">{{__('Cellphone')}}</label>
+          <div class="col-sm-10">
+              <input type="text" name="sale_manager_phone" value="{{bean.sale_manager_phone}}" class="form-control" placeholder="{{__('Cellphone')}}" maxlength="20" required/>
+          </div>
+      </div>
+      <div class="form-group">
+          <label  class="col-sm-2 control-label">{{__('Email')}}</label>
+          <div class="col-sm-10">
+              <input type="text" name="sale_manager_email" value="{{bean.sale_manager_email}}" class="form-control" placeholder="{{__('Email')}}" maxlength="80" required/>
+          </div>
+      </div>
+  
+    <div class="form-group">
+      <label  class="col-sm-2 control-label">{{__('Company Instruction')}}</label>
+      <div class="col-sm-10">
+        <textarea name="content"   cols="30" rows="5"   class="form-control"  placeholder="{{__('Company Instruction(In English)')}}" maxlength="1500" >{{bean.content}}</textarea>
+        
+      </div>
     </div>
-  </div>
-</form>
+    
+       <input type="hidden" name="build_time">
+     
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">{{__('Confirm')}}</button>
+      </div>
+    </div>
+    
+  </form>
 {% endblock %}
 
 {% block foot %}
@@ -102,19 +111,6 @@
 </script>
 <script>
 var city=$(".city").city();  
-
-var locale=$.cookie('locale')||'en'; 
-   $('[name=build_time2]').datetimepicker({
-        language:  locale,
-        format: 'yyyy-mm-dd',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		minView: 2,
-		forceParse: 0
-    });
 
 var valid_en={  
     name: {
@@ -124,8 +120,7 @@ var valid_en={
     ename: {
       required: "Please provide ename",
       maxlength: "ename can not more than 100 characters long"
-    },
-    price: "Please enter a valid price"
+    }
   }
 var valid_zh={
     
@@ -147,15 +142,40 @@ if($.cookie("locale")=="zh-CH"){
 
 $("form").validate({
   rules: {
-    name: {
-      required: true,
+    title: {
+      required: false,
       maxlength: 100
     },
-    ename: {
-      required: true
+    email: {  
+        required: false,  
+        email: true  
     },
-    build_time2: {
-      required: true
+    offical_website:{
+        required: false,  
+        url: true  
+    },
+    contact_phone:{
+        required: false,  
+        phone: true  
+    },
+    phone:{
+        required: false
+    },
+    build_time2:{
+        required: false,  
+        range:[1800,3000]
+    },
+    count_shop:{
+        required: false,  
+        range:[0,9999999999]
+    },
+    sale_per_year:{
+        required: false,  
+        range:[0,9999999999]
+    },
+    payment_days:{
+        required: false,  
+        range:[0,9999999999]
     }
   },
   messages: messages,
@@ -164,8 +184,9 @@ $("form").validate({
 
 $("form").on('submit',function(e){
 
-     var $this=$(this);
-     if(!$this.valid()){
+   
+    var $this=$(this);
+    if(!$this.valid()){
        return false;
      }
     var id=$this.find("input[name=id]").val();
@@ -176,28 +197,20 @@ $("form").on('submit',function(e){
       area.push(this.value);
     });
     var build_time2=$this.find("input[name=build_time2]").val();
-    var build_time=Date.parse(build_time2);
+    var build_time=Date.parse(build_time2)||'';
     $this.find("input[name=build_time]").val(build_time);
     $this.find("input[name=area]").val("_"+area.join("_")+"_");
     var data=$this.serialize();
-     var url="/manage/factory";
-    if(method.toLowerCase()=="put"){
-      url="/api/factory";
-    }
-  
     $.ajax({
         type: method,
-        url: url,
-         data:data,
+        url: "/api/factory",
+        data:data,
+
         dataType:"json",
         success:function(json){
             if(json.code=='success'){
             	$("input[name=id]").val(json.id);
-              // YY.dialog({content:json.code}).alert();
-            	
-               YY.dialog({content:json.code,callback:function(){
-                location.href="/manage/factorys";
-              }}).alert();  
+            	YY.dialog({content:json.code}).alert();
             }else{
             	// location.reload();
             }
